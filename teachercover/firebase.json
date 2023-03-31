@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site":"teachercoverpage",
+    "public": "dist/teachercover",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
