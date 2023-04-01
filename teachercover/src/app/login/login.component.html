@@ -1,29 +1,31 @@
 
 
-<div class="fondo p-0 d-flex justify-content-center">
+ <div class="fondo p-0 d-flex justify-content-center">
 
-    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-      <div class="card fondoLogin mt-3" style="border-radius: 1rem;">
-        <div class="card-body p-3 text-center">
-          <div class="pb-1">
-            <h2 class="fw-bold mb-2" style="color: rgb(255, 182, 23)">Teacher<span style="color: rgba(72, 33, 113, 0.912)" >Cover</span></h2>
-            <p class="text-black-50 mb-5">Introduzca sus datos!</p>
-            <div class="form-outline form-white m-4 mt-0">
-              <input type="email" id="typeEmailX" class="form-control form-control-lg" />
-              <label class="form-label" for="typeEmailX">Email</label>
-            </div>
-            <div class="form-outline form-white m-4 mt-0">
-              <input type="password" id="typePasswordX" class="form-control form-control-lg" />
-              <label class="form-label" for="typePasswordX">Contraseña</label>
-            </div>
-            <p class="small mb-5 pb-lg-2"><a class="text-black-50" href="#!">¿Has olvidado tu contraseña?</a></p>
-            <button class="btn botonLogin btn-lg px-5" type="submit">Entrar</button>
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card fondoLogin mt-3" style="border-radius: 1rem;">
+          <div class="card-body p-3 text-center">
+            <div class="pb-1">
+              <h2 class="fw-bold mb-2" style="color: rgb(255, 182, 23)">Teacher<span style="color: rgba(72, 33, 113, 0.912)" >Cover</span></h2>
+              <p class="text-black-50 mb-5">Introduzca sus datos!</p>
+              <div class="form-outline form-white m-4 mt-0">
+                <input type="email" id="typeEmailX" class="form-control form-control-lg" />
+                <label class="form-label" for="typeEmailX">Email</label>
+              </div>
+              <div class="form-outline form-white m-4 mt-0">
+                <input type="password" id="typePasswordX" class="form-control form-control-lg" />
+                <label class="form-label" for="typePasswordX">Contraseña</label>
+              </div>
+              <p class="small mb-5 pb-lg-2"><a class="text-black-50" href="#!">¿Has olvidado tu contraseña?</a></p>
+                <button class="btn botonLogin btn-lg px-5" type="submit" (ngSubmit)="onSubmit()">Entrar</button>
+              
+                <button type="button" (click)="onSubmit()">click</button>
 
-          </div>
-        
+            </div>
+          
+      </div>
+     
     </div>
-   
-  </div>
 
 
 

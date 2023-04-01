@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "teachercover-e3352"
+  },
+  "targets": {
+    "teachercover-e3352": {
+      "hosting": {
+        "teachercover": [
+          "teachercoverpage"
+        ]
+      }
+    }
   }
 }
