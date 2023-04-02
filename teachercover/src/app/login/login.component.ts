@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfesorService } from '../services/profesor.service';
 
 @Component({
@@ -9,25 +9,23 @@ import { ProfesorService } from '../services/profesor.service';
 })
 export class LoginComponent implements OnInit {
 
-  formulario: FormGroup;
-
-  constructor(private profesorService: ProfesorService) {
-    this.formulario = new FormGroup({
-      nombre: new FormControl(),
-      password: new FormControl()
-      
-    })
-      
-    }
-  ngOnInit(): void {
-  }
+  formLogin: FormGroup;
   
-  async onSubmit(){
-    console.log("prueba");
-    const response = await this.profesorService.addProfesor(this.formulario.value);
-    console.log(response);
+  ngOnInit(): void {
+    this.formLogin = new FormGroup({
+      name: new FormControl("",Validators.required),
+      password: new FormControl("",Validators.required)
+    }, {updateOn: "submit"})
+      
+  }
+
+  onSubmit(){
+    if(this.formLogin.controls["name"].value.length > 1 && this.formLogin.controls["password"].value.length > 1){
+      console.log("intento de login")
+        //comprobar base de datos
+    }else{
+      console.log("ha estao mal el login")
+    }
   }
 
   }
-
-
