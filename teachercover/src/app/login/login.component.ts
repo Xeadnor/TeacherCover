@@ -22,15 +22,33 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit(){
-    if(this.formLogin.controls["name"].value.length > 0 && this.formLogin.controls["password"].value.length > 0){
-       let profesor = new Profesor(this.formLogin.controls["name"].value, this.formLogin.controls["password"].value);
+    let name = this.formLogin.controls["name"].value;
+    let password = this.formLogin.controls["password"].value;
+
+    if(name.length > 0 && password.length > 0){
+      // let profesor = new Profesor(name, password);
       //intento de login
-      
+      var mensaje = "Cuenta NO encontrada"
+      const mensajeError = document.getElementById('mensajeErrorLogin');
+      if(mensajeError!.textContent != "Cuenta NO encontrada" && mensajeError!.textContent != "Cuenta encontrada" )
+      mensajeError!.textContent = mensaje;
+
+      let prueba = this.profesorService.Login(name,password);
+      (await prueba).forEach((doc) => {
+       if(doc.data()["name"] == name && doc.data()["password"] == password){
+         var mensaje = "Cuenta encontrada"
+         const mensajeError = document.getElementById('mensajeErrorLogin');
+         mensajeError!.textContent = mensaje;
+       }
+     });
+      // prueba.then( res => console.log(res));
       
      // const response = await this.profesorService.addProfesor(profesor);
-      const response = await this.profesorService.getProfesors().subscribe(profesores =>{
-        console.log(profesores)
-      });
+     // const response = await this.profesorService.getProfesors().subscribe(profesores =>{
+     //   console.log(profesores)
+     // });
+      // const response = await this.profesorService.addProfesor(profesor); 
+    
         //comprobar base de datos
         //var mensaje = "Error al encontrar una cuenta"
         //const mensajeError = document.getElementById('mensajeErrorLogin');
