@@ -29,9 +29,7 @@ export class ProfesorService {
     let array!: Profesor[];
     const profesorRef = collection(this.firestore,"profesores");
     const populationQuery = query(profesorRef, where("name", "==", name), where("password","==", pass));
-    const querySnapshot = await getDocs(populationQuery);
-    return querySnapshot.docs;
-
+    return collectionData(populationQuery, {idField:"idFIeld"});
   }
 }
 
