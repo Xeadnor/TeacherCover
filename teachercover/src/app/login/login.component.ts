@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfesorService } from '../services/profesor.service';
 import { Profesor } from '../interfaces/profesor.interface';
+import { RouterLink, Router,  } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { Profesor } from '../interfaces/profesor.interface';
 export class LoginComponent implements OnInit {
 
   formLogin: FormGroup;
-  constructor(private profesorService: ProfesorService) {};
+  constructor(private profesorService: ProfesorService, private router: Router) {};
   
   ngOnInit(): void {
     this.formLogin = new FormGroup({
@@ -30,8 +31,7 @@ export class LoginComponent implements OnInit {
       const prueba = (await this.profesorService.Login(name,password)).subscribe(profesor =>{
         if(profesor.length > 0){
           var mensaje = "Logueado"
-            const mensajeError = document.getElementById('mensajeErrorLogin');
-            mensajeError!.textContent = mensaje;
+          this.router.navigate(['/pagina']);
         }else{
             var mensaje = "Los datos de ingreso no coinciden"
             const mensajeError = document.getElementById('mensajeErrorLogin');
