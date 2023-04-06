@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ProfesorService } from '../services/profesor.service';
 import { Profesor } from '../interfaces/profesor.interface';
 import { RouterLink, Router,  } from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit {
 
       const prueba = (await this.profesorService.Login(name,password)).subscribe(profesor =>{
         if(profesor.length > 0){
-          var mensaje = "Logueado"
+          let header = new HeaderComponent;
+          header.mostrarNombre(profesor[0]["name"]);
           this.router.navigate(['/pagina']);
         }else{
             var mensaje = "Los datos de ingreso no coinciden"
