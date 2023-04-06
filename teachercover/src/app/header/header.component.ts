@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+
+
+
+  mostrarNombre(nombre: string){
+    const nombreUser = document.getElementById('nombreUser');
+    nombreUser!.textContent = nombre;
+  }
 }
