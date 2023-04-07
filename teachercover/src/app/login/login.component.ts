@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
       const prueba = (await this.profesorService.Login(name,password)).subscribe(profesor =>{
         if(profesor.length > 0){
-          let header = new HeaderComponent;
+          let header = new HeaderComponent(this.router);
           header.mostrarNombre(profesor[0]["name"]);
           this.router.navigate(['/pagina']);
         }else{
