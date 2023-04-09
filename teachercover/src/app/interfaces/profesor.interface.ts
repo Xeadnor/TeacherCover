@@ -5,10 +5,7 @@ export class Profesor {
 
 
 
-    constructor(name: String, password : String){
-        this.idProfesor = 1;
-        this.name = name;
-        this.password = password;
+    constructor(){
     }
 
     getIdProfesor(){
@@ -16,6 +13,19 @@ export class Profesor {
     }
     getName(){
         return this.name;
+    }
+    getId(){
+        return this.idProfesor;
+    }
+
+    setName(name : String){
+        this.name = name;
+    }
+    setPassword(password : String){
+        this.password = password;
+    }
+    setId(Id : Number){
+        this.idProfesor = Id;
     }
 
     getPassword(){

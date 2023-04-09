@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private profesorService: ProfesorService, private router: Router) {};
   
   ngOnInit(): void {
+    console.log("prueab");
     this.formLogin = new FormGroup({
       name: new FormControl("",Validators.required),
       password: new FormControl("",Validators.required)
@@ -31,8 +32,14 @@ export class LoginComponent implements OnInit {
 
       const prueba = (await this.profesorService.Login(name,password)).subscribe(profesor =>{
         if(profesor.length > 0){
+          let newProf = new Profesor();
+          newProf.setId(profesor[0]["id"]);
+          newProf.setName(profesor[0]["name"]);
+          newProf.setPassword(profesor[0]["password"]);
+
           let header = new HeaderComponent(this.router);
-          header.mostrarNombre(profesor[0]["name"]);
+          localStorage.setItem('profesor', JSON.stringify(newProf))
+          header.mostrarNombre();
           this.router.navigate(['/pagina']);
         }else{
             var mensaje = "Los datos de ingreso no coinciden"

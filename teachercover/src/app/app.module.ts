@@ -29,7 +29,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    RouterModule.forRoot(appRoutes,{enableTracing: true})
+    RouterModule.forRoot(appRoutes,{enableTracing: false})
   ],
   providers: [],
   bootstrap: [AppComponent]
