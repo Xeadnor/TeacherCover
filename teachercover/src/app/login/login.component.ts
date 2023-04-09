@@ -16,11 +16,17 @@ export class LoginComponent implements OnInit {
   constructor(private profesorService: ProfesorService, private router: Router) {};
   
   ngOnInit(): void {
-    console.log("prueab");
+
+    if(localStorage.length > 0){
+      this.router.navigate(['/pagina']);
+  }else{
     this.formLogin = new FormGroup({
       name: new FormControl("",Validators.required),
       password: new FormControl("",Validators.required)
     }, {updateOn: "submit"})
+
+  }
+
       
   }
 
