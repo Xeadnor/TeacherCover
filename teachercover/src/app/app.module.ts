@@ -10,6 +10,7 @@ import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PaginaComponent } from './pagina/pagina.component';
 import { Router, RouterModule, Routes} from "@angular/router";
+import { FooterComponent } from './footer/footer.component';
 
 
 const appRoutes: Routes = [
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
     HeaderComponent,
     LoginComponent,
     PaginaComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
