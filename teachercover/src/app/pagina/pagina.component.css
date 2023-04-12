@@ -8,8 +8,19 @@
 }
 
 
+.colorcito{
+    background-color: #e7e0ff;
+    border-width:2px;
+border-style:solid;
+    border-color: #897eaa;
+}
+.bordes{
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+
+}
 .dividor{
-    height: 10px;
+    height: 20px;
     background-color:white;
 }
 

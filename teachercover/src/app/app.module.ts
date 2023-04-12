@@ -16,6 +16,8 @@ import { FooterComponent } from './footer/footer.component';
 const appRoutes: Routes = [
   {path:"",component: LoginComponent},
   {path:"pagina",component : PaginaComponent},
+  //{ path: "contacts", component: PaginaComponent, outlet: "pagina" },
+
 ];
 @NgModule({
   declarations: [
