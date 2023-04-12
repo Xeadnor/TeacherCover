@@ -1,32 +1,100 @@
 <app-header></app-header>
-<div class="container-fluid">
-    <div class="row">
+<div class="dividor"></div>
+<div class="container-fluid p-0">
 
+    <div class="row p-0 m-0">
 
-        <div class="d-none d-md-block col-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <div class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+        <div class="flex-shrink-0 p-3 bg-secondary min-vh-100 col-2">
+            <p class="d-flex align-items-center pb-3 mb-3 mt-3 text-decoration-none border-bottom">
+              <img class="bi me-2" width="30" height="24" src="favicon.ico"/>
+              <span class="fs-5 fw-semibold">Menu</span>
+            </p>
+            <ul class="list-unstyled ps-0">
+              <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                  Home
+                </button>
+                <div class="collapse show" id="home-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="#" class="link-dark rounded">Overview</a></li>
+                    <li><a href="#" class="link-dark rounded">Updates</a></li>
+                    <li><a href="#" class="link-dark rounded">Reports</a></li>
+                  </ul>
                 </div>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
-                        <span class="ms-1 d-none d-sm-inline" style="color:#4E94FD">Perfil</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
-                        <span class="ms-1 d-none d-sm-inline" style="color:#4E94FD">Editar</span>
-                        </a>
-                    </li>
-                </ul>
+              </li>
+              <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                  Dashboard
+                </button>
+                <div class="collapse" id="dashboard-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="#" class="link-dark rounded">Overview</a></li>
+                    <li><a href="#" class="link-dark rounded">Weekly</a></li>
+                    <li><a href="#" class="link-dark rounded">Monthly</a></li>
+                    <li><a href="#" class="link-dark rounded">Annually</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                  Orders
+                </button>
+                <div class="collapse" id="orders-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="#" class="link-dark rounded">New</a></li>
+                    <li><a href="#" class="link-dark rounded">Processed</a></li>
+                    <li><a href="#" class="link-dark rounded">Shipped</a></li>
+                    <li><a href="#" class="link-dark rounded">Returned</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="border-top my-3"></li>
+              <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                  Account
+                </button>
+                <div class="collapse" id="account-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="#" class="link-dark rounded">New...</a></li>
+                    <li><a href="#" class="link-dark rounded">Profile</a></li>
+                    <li><a href="#" class="link-dark rounded">Settings</a></li>
+                    <li><a href="#" class="link-dark rounded">Sign out</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-danger col-10">
+            <div class="row bg-light mt-3 border border-3 border-success p-2 m-3 rounded-datos">
+                   <p class="border-bottom">Bienvenido Pablo</p>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Handle</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                          </tr>
+                        </tbody>
+                      </table>
             </div>
-        </div>
 
-        <div class="d-md-none row bg-dark p-0 m-0 justify-content-center text-center">
-            <div class="col-3 text-light">Perfil</div>
-            <div class="col-3 text-light">Editar</div>
-        </div>
 
+            <div class="row bg-light mt-3 border border-3 border-success p-2 m-3 rounded-datos" style="height:700px">
+         </div>
+
+
+
+          </div>
     </div>
+
 </div>
