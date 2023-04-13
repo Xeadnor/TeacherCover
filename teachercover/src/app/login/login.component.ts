@@ -39,9 +39,12 @@ export class LoginComponent implements OnInit {
       const prueba = (await this.profesorService.Login(name,password)).subscribe(profesor =>{
         if(profesor.length > 0){
           let newProf = new Profesor();
-          newProf.setId(profesor[0]["id"]);
+          newProf.setIdProfesor(profesor[0]["id"]);
           newProf.setName(profesor[0]["name"]);
           newProf.setPassword(profesor[0]["password"]);
+          newProf.setEmail(profesor[0]["email"]);
+          newProf.setHorasGuardais(profesor[0]["horasGuardias"]);
+          newProf.setDiaGuardia(profesor[0]["diaGuardia"]);
 
           let header = new HeaderComponent(this.router);
           localStorage.setItem('profesor', JSON.stringify(newProf))
