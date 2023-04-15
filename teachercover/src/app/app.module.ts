@@ -11,12 +11,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PaginaComponent } from './pagina/pagina.component';
 import { Router, RouterModule, Routes} from "@angular/router";
 import { FooterComponent } from './footer/footer.component';
+import { CalendarioComponent } from './calendario/calendario.component';
 
 
 const appRoutes: Routes = [
   {path:"",component: LoginComponent},
-  {path:"pagina",component : PaginaComponent},
-  //{ path: "contacts", component: PaginaComponent, outlet: "pagina" },
+  {
+    path:"pagina",component : PaginaComponent,
+    children : [
+      { path: "calendario", component: CalendarioComponent},
+    ]
+  },
+  
 
 ];
 @NgModule({
@@ -26,6 +32,7 @@ const appRoutes: Routes = [
     LoginComponent,
     PaginaComponent,
     FooterComponent,
+    CalendarioComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,13 +11,15 @@ export class PaginaComponent implements OnInit {
   constructor( private router: Router) {};
 
   horasGuardias = "";
-  diaGuardia = "";
+  diaGuardia = "----";
   nombreUsuario = "";
 
   ngOnInit(): void {
     if(localStorage.length == 0){
       this.router.navigate(['']);
     }
+    console.log("prueba");
+    this.router.navigate(['/pagina/calendario']);
     let userJson = localStorage.getItem('profesor');
     let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
     this.horasGuardias = profesor["horasGuardias"]
