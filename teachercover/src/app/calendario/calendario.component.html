@@ -1,11 +1,16 @@
 <div fxLayout fxLayoutAlign="space-between">
     <div *ngFor="let date of datesInWeek; let indexDay = index" fxLayout="column" class="date">
-      <div class="title"> {{getDateFormat(date)}}</div>
+      <div class="title" style="font-size:14px"> {{getDateFormat(date)}}</div>
       <div class="item" *ngFor="let hour of hours; let indexHour = index" fxLayout [ngClass]="{selected: existsMeeting(indexDay + 1, indexHour + 8 )}">
-        <div class="hour" fxFlex="1 1 20%">
+       
+        <div class="col-12 text-center d-lg-none">
+            <p class="m-0" style="font-size:15px">{{hour}}</p>
+            <p class="m-0" style="font-size:13px;">{{getMeeting(indexDay + 1, indexHour + 8 )}}</p>
+        </div>
+        <div class="hour d-none d-lg-block" style="font-size:15px" fxFlex="1 1 20%">
         {{hour}}
       </div>
-      <div class="meeting" fxFlex="1 1 80%">
+      <div class="meeting d-none d-lg-block text-center" style="font-size:13px" fxFlex="1 1 80%">
         {{getMeeting(indexDay + 1, indexHour + 8 )}}
       </div>
       </div>

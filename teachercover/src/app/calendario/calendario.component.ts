@@ -67,7 +67,7 @@ export class CalendarioComponent {
       (el: Guardia) => el.dayWeek === day && el.hour === hour
     );
       console.log(meeting);
-    return meeting ? meeting.description : ' prueba';
+    return meeting ? meeting.description : ' ';
   }
 
   existsMeeting(day: number, hour: number): boolean {

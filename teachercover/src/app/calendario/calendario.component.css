@@ -1,6 +1,18 @@
 .date {
-    width: 15%;
+    width: 17%;
   }
+  @media (max-width: 750px) {
+    .date {
+        width: 18%;
+      }
+  }
+
+  @media (max-width: 550px) {
+    .date {
+        width: 20%;
+      }
+  }
+
   
   .title {
     background-color: rgb(13, 124, 209);

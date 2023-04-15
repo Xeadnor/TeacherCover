@@ -149,7 +149,7 @@
                    <h5 class="border border-2 border-dark border-top-0 border-end-0 border-start-0">Panel de informacion de : {{ nombreUsuario }}</h5>
                     <table class="table">
                         <thead>
-                          <tr>
+                          <tr class="text-center">
                             <th class="col-2">#Id</th>
                             <th class="col-2">Guardias Realizadas</th>
                             <th class="col-2">Dia de guardia</th>
@@ -157,7 +157,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          <tr class="text-center">
                             <th>1</th>
                             <td>{{ horasGuardias }} horas</td>
                             <td>{{ diaGuardia }}</td>
@@ -168,7 +168,7 @@
             </div>
 
 
-            <div class="row colorcito mt-4 p-2 m-2 rounded-datos mb-0">
+            <div class="row colorcito mt-4 p-0 m-2 p-lg-2 rounded-datos mb-0">
               <router-outlet ></router-outlet>
          </div>
 
