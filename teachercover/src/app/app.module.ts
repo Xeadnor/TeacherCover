@@ -12,6 +12,11 @@ import { PaginaComponent } from './pagina/pagina.component';
 import { Router, RouterModule, Routes} from "@angular/router";
 import { FooterComponent } from './footer/footer.component';
 import { CalendarioComponent } from './calendario/calendario.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 
 const appRoutes: Routes = [
@@ -35,12 +40,15 @@ const appRoutes: Routes = [
     CalendarioComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
+    FlexLayoutModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    RouterModule.forRoot(appRoutes,{enableTracing: false})
+    RouterModule.forRoot(appRoutes,{enableTracing: false}),
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [],
   bootstrap: [AppComponent]
