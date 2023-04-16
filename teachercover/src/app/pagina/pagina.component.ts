@@ -15,15 +15,22 @@ export class PaginaComponent implements OnInit {
   nombreUsuario = "";
 
   ngOnInit(): void {
-    if(localStorage.length == 0){
+    console.log("prueba");
+    if(sessionStorage.length == 0){
       this.router.navigate(['']);
+    }else{
+      let userJson = sessionStorage.getItem('profesor');
+      let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
+      this.horasGuardias = profesor["horasGuardias"]
+      this.diaGuardia = profesor["diaGuardia"]
+      this.nombreUsuario = profesor["name"]
+    // console.log(profesor["name"]);
+    const divlog = document.getElementById("divLog");
+    divlog!.classList.remove("d-none")
+    const nombreUser = document.getElementById('nombreUser');
+    nombreUser!.textContent = profesor["name"];
+
     }
-    this.router.navigate(['/pagina/calendario']);
-    let userJson = localStorage.getItem('profesor');
-    let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
-    this.horasGuardias = profesor["horasGuardias"]
-    this.diaGuardia = profesor["diaGuardia"]
-    this.nombreUsuario = profesor["name"]
   }
 
 }

@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   
   ngOnInit(): void {
 
-    if(localStorage.length > 0){
-      this.router.navigate(['/pagina']);
+    if(sessionStorage.length > 0){
+      this.router.navigate(['/pagina/calendario']);
   }else{
     this.formLogin = new FormGroup({
       name: new FormControl("",Validators.required),
@@ -45,11 +45,8 @@ export class LoginComponent implements OnInit {
           newProf.setEmail(profesor[0]["email"]);
           newProf.setHorasGuardais(profesor[0]["horasGuardias"]);
           newProf.setDiaGuardia(profesor[0]["diaGuardia"]);
-
-          let header = new HeaderComponent(this.router);
-          localStorage.setItem('profesor', JSON.stringify(newProf))
-          header.mostrarNombre();
-          this.router.navigate(['/pagina']);
+          sessionStorage.setItem('profesor', JSON.stringify(newProf))
+          this.router.navigate(['/pagina/calendario']);
         }else{
             var mensaje = "Los datos de ingreso no coinciden"
             const mensajeError = document.getElementById('mensajeErrorLogin');

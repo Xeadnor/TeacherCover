@@ -9,10 +9,10 @@ import { UtilsService } from '../services/utils.service';
 })
 export class CalendarioComponent {
   meetings : Guardia[] = [
-    {dayWeek: 1, hour: 11, description: "Guardia B-02"},
-    {dayWeek: 3, hour: 8, description: "Guardia A-21"},
-    {dayWeek: 4, hour: 13, description: "Guardia B-12"},
-    {dayWeek: 4, hour: 12, description: "Guardia A-04"},
+    {dayWeek: 1, hour: 11, description: "Guardia B-02",estado: "finished"},
+    {dayWeek: 3, hour: 8, description: "Guardia A-21",estado: "to do"},
+    {dayWeek: 4, hour: 13, description: "Guardia B-12",estado: "to do"},
+    {dayWeek: 4, hour: 12, description: "Guardia A-04",estado: "selectable"},
   ]
   datesInWeek : Date[] = [];
   daysWeek = [
@@ -66,7 +66,7 @@ export class CalendarioComponent {
     const meeting = this.meetings.find(
       (el: Guardia) => el.dayWeek === day && el.hour === hour
     );
-      console.log(meeting);
+
     return meeting ? meeting.description : ' ';
   }
 
@@ -75,5 +75,23 @@ export class CalendarioComponent {
       (el: Guardia) => el.dayWeek === day && el.hour === hour
     );
     return meeting ? true : false;
+  }
+
+  someFunction(day: number, hour: number){
+    const meeting = this.meetings.find(
+      (el: Guardia) => el.dayWeek === day && el.hour === hour
+    )?.estado;
+
+    if(meeting){
+      if(meeting == "finished"){
+          return "rgb(47, 224, 83)";
+      }else if(meeting == "to do"){
+        return "rgb(255, 251, 10)"
+      }else{
+        return "lightblue";
+      }
+    }else{
+      return "";
+    }
   }
 }
