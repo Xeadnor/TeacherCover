@@ -16,7 +16,7 @@ export class UtilsService {
   getDaysOfWeek(date: Date) {
     const currentDayInWeek = date.getDay();
     const diffToStartWeek =
-      date.getDate() - currentDayInWeek + (currentDayInWeek == 0 ? -6 : 1);
+      date.getDate() - currentDayInWeek + (currentDayInWeek == 0 ? -7 : 1);
 
     const dateInLocalDateTime = this.convertUTCDateToLocalDate(
       new Date(date.setDate(diffToStartWeek))

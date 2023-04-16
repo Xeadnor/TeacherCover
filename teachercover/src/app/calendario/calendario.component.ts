@@ -12,15 +12,17 @@ export class CalendarioComponent {
     {dayWeek: 1, hour: 11, description: "Guardia B-02",estado: "finished"},
     {dayWeek: 3, hour: 8, description: "Guardia A-21",estado: "to do"},
     {dayWeek: 4, hour: 13, description: "Guardia B-12",estado: "to do"},
-    {dayWeek: 4, hour: 12, description: "Guardia A-04",estado: "selectable"},
+    {dayWeek: 5, hour: 12, description: "Guardia A-04",estado: "selectable"},
   ]
   datesInWeek : Date[] = [];
   daysWeek = [
-    "Lunes",
-    "Martes",
-    "Miércoles",
-    "Jueves",
-    "Viernes",
+    'Domingo',
+    'Lunes',
+    'Martes',
+    'Miércoles',
+    'Jueves',
+    'Viernes',
+    'Sábado',
   ];
 
   months = [
@@ -56,7 +58,7 @@ export class CalendarioComponent {
   }
 
   getDateFormat(date: Date): string {
-    const dayInWeek = this.daysWeek[date.getDay() - 1];
+    const dayInWeek = this.daysWeek[date.getDay()];
     const numberDate = date.getDate();
     const monthName = this.months[date.getMonth()];
     return `${dayInWeek} ${numberDate} ${monthName}`;
