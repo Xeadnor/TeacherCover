@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Guardia } from '../interfaces/guardia.interface';
+import { Guardia } from '../models/guardia.model';
 import { UtilsService } from '../services/utils.service';
+import { GuardiaService } from '../services/guardia.service';
 
 @Component({
   selector: 'app-calendario-semanal',
@@ -9,10 +10,7 @@ import { UtilsService } from '../services/utils.service';
 })
 export class CalendarioSemanalComponent {
  meetings : Guardia[] = [
-    {dayWeek: 1, hour: 11, description: "Guardia B-02",estado: "finished"},
-    {dayWeek: 3, hour: 8, description: "Guardia A-21",estado: "to do"},
-    {dayWeek: 2, hour: 13, description: "Guardia B-12",estado: "to do"},
-    {dayWeek: 4, hour: 12, description: "Guardia A-04",estado: "selectable"},
+
   ]
   datesInWeek : Date[] = [];
   daysWeek = [
@@ -42,7 +40,7 @@ export class CalendarioSemanalComponent {
   day : Date;
   hours : string[] = [];
 
-  constructor(private utilsService: UtilsService) {}
+  constructor(private utilsService: UtilsService, private guardiaService: GuardiaService) {}
 
   ngOnInit() {
     this.datesInWeek = this.utilsService.getDaysOfWeek(new Date());
@@ -57,6 +55,9 @@ export class CalendarioSemanalComponent {
       '12:20',
       '13:15',
     ]
+    this.guardiaService.getGuardias().subscribe(guardias => {
+      guardias.forEach(element => this.meetings.push(new Guardia(element["diaSemana"],element["hora"],element["descripcion"],element["estado"],element["idGuardia"])));
+     });
   }
 
   getDateFormat(date: Date): string {
@@ -65,17 +66,17 @@ export class CalendarioSemanalComponent {
     const monthName = this.months[date.getMonth()];
     return `${dayInWeek} ${numberDate} ${monthName}`;
   }
-  getMeeting(day: number, hour: number): string {
+  getMeeting(day: number, hora: number): string {
     const meeting = this.meetings.find(
-      (el: Guardia) => el.dayWeek === day && el.hour === hour
+      (el: Guardia) => el.diaSemana === day && el.hora === hora
     );
 
-    return meeting ? meeting.description : '';
+    return meeting ? meeting.descripcion : '';
   }
 
-  existsMeeting(day: number, hour: number): boolean {
+  existsMeeting(day: number, hora: number): boolean {
     const meeting = this.meetings.find(
-      (el: Guardia) => el.dayWeek === day && el.hour === hour
+      (el: Guardia) => el.diaSemana === day && el.hora === hora
     );
     return meeting ? true : false;
   }

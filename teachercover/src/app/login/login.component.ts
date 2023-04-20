@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfesorService } from '../services/profesor.service';
-import { Profesor } from '../interfaces/profesor.interface';
+import { Profesor } from '../models/profesor.model';
 import { RouterLink, Router,  } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 

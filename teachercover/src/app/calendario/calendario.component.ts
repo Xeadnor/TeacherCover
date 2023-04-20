@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Guardia } from '../interfaces/guardia.interface';
+import { Guardia } from '../models/guardia.model';
 import { UtilsService } from '../services/utils.service';
+import { GuardiaService } from '../services/guardia.service';
 
 @Component({
   selector: 'app-calendario',
@@ -8,12 +9,9 @@ import { UtilsService } from '../services/utils.service';
   styleUrls: ['./calendario.component.css']
 })
 export class CalendarioComponent {
-  meetings : Guardia[] = [
-    {dayWeek: 1, hour: 11, description: "Guardia B-02",estado: "finished"},
-    {dayWeek: 3, hour: 8, description: "Guardia A-21",estado: "to do"},
-    {dayWeek: 2, hour: 13, description: "Guardia B-12",estado: "to do"},
-    {dayWeek: 4, hour: 12, description: "Guardia A-04",estado: "selectable"},
-  ]
+    meetings : Guardia[] = [
+
+    ]
   datesInWeek : Date[] = [];
   daysWeek = [
     'Domingo',
@@ -41,8 +39,7 @@ export class CalendarioComponent {
   ];
   day : Date;
   hours : string[] = [];
-
-  constructor(private utilsService: UtilsService) {}
+  constructor(private utilsService: UtilsService, private guardiaService: GuardiaService) {}
 
   ngOnInit() {
     this.datesInWeek = this.utilsService.getDay(new Date());
@@ -56,6 +53,9 @@ export class CalendarioComponent {
       '12:20',
       '13:15',
     ]
+     this.guardiaService.getGuardias().subscribe(guardias => {
+      guardias.forEach(element => this.meetings.push(new Guardia(element["diaSemana"],element["hora"],element["descripcion"],element["estado"],element["idGuardia"])));
+     });
   }
 
   getDateFormat(date: Date): string {
@@ -65,33 +65,33 @@ export class CalendarioComponent {
     return `${dayInWeek} ${numberDate} ${monthName}`;
   }
 
-  getMeeting( hour: number): string {
+  getMeeting( hora: number): string {
     let thisDay = this.day.getDay();
     const meeting = this.meetings.find(
-      (el: Guardia) => el.dayWeek === thisDay && el.hour === hour
+      (el: Guardia) => el.diaSemana === thisDay && el.hora === hora
     );
 
-    return meeting ? meeting.description : ' ';
+    return meeting ? meeting.descripcion : ' ';
   }
 
-  existsMeeting( hour: number): boolean {
+  existsMeeting( hora: number): boolean {
     let thisDay = this.day.getDay();
     const meeting = this.meetings.find(
-      (el: Guardia) => el.dayWeek === thisDay && el.hour === hour
+      (el: Guardia) => el.diaSemana === thisDay && el.hora === hora
     );
     console.log(meeting);
     return meeting ? true : false;
   }
 
-  someFunction( hour: number){
+  someFunction( hora: number){
     let thisDay = this.day.getDay();
     const meeting = this.meetings.find(
-      (el: Guardia) => el.dayWeek === thisDay && el.hour === hour
+      (el: Guardia) => el.diaSemana === thisDay && el.hora === hora
     )?.estado;
     if(meeting){
-      if(meeting == "finished"){
+      if(meeting == "Finalizada"){
           return "rgb(47, 224, 83)";
-      }else if(meeting == "to do"){
+      }else if(meeting == "Pendiente"){
         return "rgb(255, 251, 10)"
       }else{
         return "lightblue";

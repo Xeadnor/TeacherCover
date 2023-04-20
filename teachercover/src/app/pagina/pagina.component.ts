@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Profesor } from '../interfaces/profesor.interface';
+import { Profesor } from '../models/profesor.model';
 
 @Component({
   selector: 'app-pagina',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collection, collectionData } from '@angular/fire/firestore';
-import { Profesor } from '../interfaces/profesor.interface';
+import { Profesor } from '../models/profesor.model';
 import { Observable } from 'rxjs';
 import { query, where, getDocs } from "firebase/firestore";
 
