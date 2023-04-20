@@ -16,9 +16,9 @@
                 </button>
                 <div class="collapse show" id="home-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-dark rounded">Overview</a></li>
-                    <li><a href="#" class="link-dark rounded">Updates</a></li>
-                    <li><a href="#" class="link-dark rounded">Reports</a></li>
+                    <li><a href="#" [routerLink]="['./calendario']" class="link-dark rounded">Día actual</a></li>
+                    <li><a href="#" [routerLink]="['./historial']" class="link-dark rounded">Historial</a></li>
+                    <li><a href="#" [routerLink]="['./calendarioSemanal']" class="link-dark rounded">Calendario semanal</a></li>
                   </ul>
                 </div>
               </li>
@@ -83,9 +83,9 @@
               </button>
               <div class="collapse" id="home-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                  <li><a href="#" class="link-dark rounded">Overview</a></li>
-                  <li><a href="#" class="link-dark rounded">Updates</a></li>
-                  <li><a href="#" class="link-dark rounded">Reports</a></li>
+                  <li><a href="#" [routerLink]="['./calendario']" class="link-dark rounded">Día actual</a></li>
+                  <li><a href="#" [routerLink]="['./historial']" class="link-dark rounded">Historial</a></li>
+                  <li><a href="#" [routerLink]="['./calendarioSemanal']" class="link-dark rounded">Calendario semanal</a></li>
                 </ul>
               </div>
 
@@ -152,7 +152,7 @@
                           <tr class="text-center">
                             <th class="col-2">#Id</th>
                             <th class="col-2">Guardias Realizadas</th>
-                            <th class="col-2">Dia de guardia</th>
+                            <th class="col-2">-----</th>
                             <th class="col-2">Notificaciones</th>
                           </tr>
                         </thead>
@@ -160,7 +160,7 @@
                           <tr class="text-center">
                             <th>1</th>
                             <td>{{ horasGuardias }} horas</td>
-                            <td>{{ diaGuardia }}</td>
+                            <td>------</td>
                             <td>Ninguna</td>
                           </tr>
                         </tbody>

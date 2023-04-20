@@ -11,7 +11,6 @@ export class HeaderComponent implements OnInit  {
   constructor( private router: Router) {};
 
   ngOnInit(): void {
-    console.log("mensaje " + sessionStorage.length);
     if(sessionStorage.length > 0){
         this.mostrarNombre();
       }

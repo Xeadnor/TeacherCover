@@ -1,5 +1,7 @@
 
-
+.date {
+    width: 20%;
+  }
   
   .title {
     background-color: rgb(13, 124, 209);
@@ -18,4 +20,10 @@
     margin: 3px 0;
     border: solid thin;
     border-color: rgb(13, 124, 209)
+  }
+
+  .selected {
+    background-color: lightblue;
+    border-radius: 5px;
+    border: 1px solid rgb(91, 91, 248);
   }

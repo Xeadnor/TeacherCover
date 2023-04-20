@@ -15,7 +15,6 @@ export class PaginaComponent implements OnInit {
   nombreUsuario = "";
 
   ngOnInit(): void {
-    console.log("prueba");
     if(sessionStorage.length == 0){
       this.router.navigate(['']);
     }else{
