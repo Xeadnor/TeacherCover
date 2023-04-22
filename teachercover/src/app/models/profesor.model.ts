@@ -5,14 +5,26 @@ export class Profesor {
     email: String;
     diaGuardia: String;
     horasGuardias: Number
+    role: String
+    validate: Number
+    idField: String
 
 
 
     constructor() {
     }
 
+    getIdField(){
+        return this.idField;
+    }
     getIdProfesor() {
         return this.idProfesor;
+    }
+    getRole(){
+        return this.role;
+    }
+    getValidate(){
+        return this.validate;
     }
     getName() {
         return this.name;
@@ -47,5 +59,14 @@ export class Profesor {
     }
     setDiaGuardia(diaGuardia: String) {
         this.diaGuardia = diaGuardia;
+    }
+    setRole(Role: String) {
+        this.role = Role;
+    }
+    setValidate(validate: Number) {
+        this.validate = validate;
+    }
+    setIdField(idField: String){
+        this.idField = idField;
     }
 }
