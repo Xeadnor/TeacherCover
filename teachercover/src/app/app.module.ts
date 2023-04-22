@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HistorialGuardiasComponent } from './historial-guardias/historial-guardias.component';
 import { CalendarioSemanalComponent } from './calendario-semanal/calendario-semanal.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -47,6 +48,10 @@ const appRoutes: Routes = [
     CalendarioSemanalComponent,
   ],
   imports: [
+    ToastrModule.forRoot({
+      maxOpened:5,
+      preventDuplicates:true
+    }),
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,

@@ -4,6 +4,7 @@ import { ProfesorService } from '../services/profesor.service';
 import { Profesor } from '../models/profesor.model';
 import { RouterLink, Router,  } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import { HeaderComponent } from '../header/header.component';
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
   formNewUser: FormGroup;
-  constructor(private profesorService: ProfesorService, private router: Router) {};
+  constructor(private profesorService: ProfesorService, private router: Router, private toastr: ToastrService) {};
   changepassword : boolean;
   nuevaPassword : String;
   idFieldProfesor: String;
@@ -63,15 +64,20 @@ export class LoginComponent implements OnInit {
             this.changepassword = true;
             this.nombreProfesor = newProf.getName();
             this.idFieldProfesor = newProf.getIdField();
+            this.toastr.info("Para continuar debe configurar ahora su nueva contraseña","Cambio de contraseña",{timeOut:5000,closeButton:true,positionClass:"toast-bottom-center"})
+
 
           }else{
                       sessionStorage.setItem('profesor', JSON.stringify(newProf))
                       this.router.navigate(['/pagina/calendario']);
+                      this.toastr.success("Bienvenido " + newProf.getName(),"Inicio de sesión correcto",{timeOut:3000,closeButton:true,positionClass:"toast-top-right",})
           }
         }else{
-            var mensaje = "Los datos de ingreso no coinciden"
-            const mensajeError = document.getElementById('mensajeErrorLogin');
-            mensajeError!.textContent = mensaje;
+           // var mensaje = "Los datos de ingreso no coinciden"
+           // const mensajeError = document.getElementById('mensajeErrorLogin');
+           // mensajeError!.textContent = mensaje;
+            this.toastr.error("Los datos introducidos no coindicen con ninguna cuenta","Datos incorrectos",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
+
         }
       }); 
     }
@@ -82,9 +88,11 @@ export class LoginComponent implements OnInit {
     let newPassword = this.formNewUser.controls["newPassword"].value;
     let repeatPassword = this.formNewUser.controls["repeatPassword"].value;
     if(newPassword != repeatPassword){
-      var mensaje = "Las contraseñas no coinciden"
-      const mensajeError = document.getElementById('mensajeErrorNewUser');
-      mensajeError!.textContent = mensaje;
+     // var mensaje = "Las contraseñas no coinciden"
+      //const mensajeError = document.getElementById('mensajeErrorNewUser');
+     // mensajeError!.textContent = mensaje;
+     this.toastr.error("Las contraseñas deben ser iguales","Datos incorrectos",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
+
     }else{
       this.profesorService.updateUserPassword(this.idFieldProfesor,newPassword);
       this.changepassword = false;
