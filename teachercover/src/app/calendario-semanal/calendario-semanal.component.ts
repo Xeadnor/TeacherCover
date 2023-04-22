@@ -44,7 +44,6 @@ export class CalendarioSemanalComponent {
 
   ngOnInit() {
     this.datesInWeek = this.utilsService.getDaysOfWeek(new Date());
-    console.log(this.datesInWeek)
     this.day = new Date();
     this.hours = [
       '8:25',
