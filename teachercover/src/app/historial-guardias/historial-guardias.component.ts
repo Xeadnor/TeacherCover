@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-historial-guardias',
@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class HistorialGuardiasComponent {
 
+  
+
 }
+
+
