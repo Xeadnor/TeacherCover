@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit  {
   mostrarNombre(){
     let userJson = sessionStorage.getItem('profesor');
     let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
-    // console.log(profesor["name"]);
+   
     const divlog = document.getElementById("divLog");
     divlog!.classList.remove("d-none")
     const nombreUser = document.getElementById('nombreUser');

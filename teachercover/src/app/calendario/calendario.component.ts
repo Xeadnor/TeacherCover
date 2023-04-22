@@ -79,7 +79,6 @@ export class CalendarioComponent {
     const meeting = this.meetings.find(
       (el: Guardia) => el.diaSemana === thisDay && el.hora === hora
     );
-    console.log(meeting);
     return meeting ? true : false;
   }
 

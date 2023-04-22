@@ -58,15 +58,14 @@ export class LoginComponent implements OnInit {
           newProf.setRole(profesor[0]["role"]);
           newProf.setValidate(profesor[0]["validate"]);
           newProf.setIdField(profesor[0]["idFIeld"]);
-          console.log(newProf.getIdField());
+  
 
           if(newProf.getPassword() == "IESinfanta23" && newProf.getValidate() == 0){
             this.changepassword = true;
             this.nombreProfesor = newProf.getName();
             this.idFieldProfesor = newProf.getIdField();
             this.toastr.info("Para continuar debe configurar ahora su nueva contraseña","Cambio de contraseña",{timeOut:5000,closeButton:true,positionClass:"toast-bottom-center"})
-
-
+            return;
           }else{
                       sessionStorage.setItem('profesor', JSON.stringify(newProf))
                       this.router.navigate(['/pagina/calendario']);
@@ -76,7 +75,12 @@ export class LoginComponent implements OnInit {
            // var mensaje = "Los datos de ingreso no coinciden"
            // const mensajeError = document.getElementById('mensajeErrorLogin');
            // mensajeError!.textContent = mensaje;
-            this.toastr.error("Los datos introducidos no coindicen con ninguna cuenta","Datos incorrectos",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
+           if(password == "IESinfanta23"){
+
+           }else{
+             
+             this.toastr.error("Los datos introducidos no coindicen con ninguna cuenta","Datos incorrectos",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
+          }
 
         }
       }); 
@@ -85,6 +89,7 @@ export class LoginComponent implements OnInit {
 
 
    onNewUser(){
+    var regexPassword = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})");
     let newPassword = this.formNewUser.controls["newPassword"].value;
     let repeatPassword = this.formNewUser.controls["repeatPassword"].value;
     if(newPassword != repeatPassword){
@@ -94,8 +99,16 @@ export class LoginComponent implements OnInit {
      this.toastr.error("Las contraseñas deben ser iguales","Datos incorrectos",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
 
     }else{
-      this.profesorService.updateUserPassword(this.idFieldProfesor,newPassword);
-      this.changepassword = false;
+      if(regexPassword.test(newPassword)){
+        this.profesorService.updateUserPassword(this.idFieldProfesor,newPassword);
+        this.changepassword = false;
+        this.formLogin.controls['password'].setValue(newPassword);
+        this.toastr.success("Ya puede acceder con su nueva contraseña","Cambio de contraseña completado",{timeOut:3000,closeButton:true,positionClass:"toast-top-right",})
+
+
+      }else{
+     this.toastr.error("La contraseña debe contener minimo 6 caracteres, y almenos una mayuscula, una minuscula y un numero","Contraseña invalida",{timeOut:10000,closeButton:true,positionClass:"toast-bottom-center"})
+      }
     }
     
   }
@@ -105,6 +118,5 @@ export class LoginComponent implements OnInit {
       
      // const response = await this.profesorService.addProfesor(profesor);
      // const response = await this.profesorService.getProfesors().subscribe(profesores =>{
-     //   console.log(profesores)
      // });
       // const response = await this.profesorService.addProfesor(profesor); 

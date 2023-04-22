@@ -23,7 +23,6 @@ export class PaginaComponent implements OnInit {
       this.horasGuardias = profesor["horasGuardias"]
       this.diaGuardia = profesor["diaGuardia"]
       this.nombreUsuario = profesor["name"]
-    // console.log(profesor["name"]);
     const divlog = document.getElementById("divLog");
     divlog!.classList.remove("d-none")
     const nombreUser = document.getElementById('nombreUser');

@@ -35,6 +35,7 @@ export class UtilsService {
     );
 
     const datesInWeek = [dateInLocalDateTime];
+
     for (let index = 1; index < 5; index++) {
       const dateInLocalDateTime = this.convertUTCDateToLocalDate(
         new Date(date.setDate(diffToStartWeek + index))
