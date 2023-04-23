@@ -1,0 +1,21 @@
+
+
+/* .mat-mdc-table-sticky{
+    background-color:#e7e0ff !important;
+} */
+
+:host {
+    display: flex;
+    flex-direction: column;
+  }
+
+  mat-accordion {
+    flex-grow: 1;
+  
+}
+
+td , th {
+    white-space: nowrap;
+    word-wrap: break-word;
+    max-width: 200px;
+}
