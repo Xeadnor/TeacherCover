@@ -11,10 +11,10 @@
             </p>
             <ul class="list-unstyled ps-0">
               <li class="mb-1">
-                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
                   Home
                 </button>
-                <div class="collapse show" id="home-collapse">
+                <div class="collapse" id="home-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="#" [routerLink]="['./calendario']" class="link-dark rounded">Día actual</a></li>
                     <li><a href="#" [routerLink]="['./historial']" class="link-dark rounded">Historial</a></li>
@@ -24,40 +24,25 @@
               </li>
               <li class="mb-1">
                 <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                  Dashboard
+                  Proximamente...
                 </button>
                 <div class="collapse" id="dashboard-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-dark rounded">Overview</a></li>
-                    <li><a href="#" class="link-dark rounded">Weekly</a></li>
-                    <li><a href="#" class="link-dark rounded">Monthly</a></li>
-                    <li><a href="#" class="link-dark rounded">Annually</a></li>
+                    <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
+                    <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
+                    <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
+                    <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
                   </ul>
                 </div>
               </li>
-              <li class="mb-1">
-                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                  Orders
-                </button>
-                <div class="collapse" id="orders-collapse">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-dark rounded">New</a></li>
-                    <li><a href="#" class="link-dark rounded">Processed</a></li>
-                    <li><a href="#" class="link-dark rounded">Shipped</a></li>
-                    <li><a href="#" class="link-dark rounded">Returned</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li class="mb-1">
+             <!-- OPCIONES DEL ADMINISTRADOR -->
+              <li class="mb-1" *ngIf="rolAdmin">
                 <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                  Account
+                  Admin
                 </button>
                 <div class="collapse" id="account-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-dark rounded">New...</a></li>
-                    <li><a href="#" class="link-dark rounded">Profile</a></li>
-                    <li><a href="#" class="link-dark rounded">Settings</a></li>
-                    <li><a href="#" class="link-dark rounded">Sign out</a></li>
+                    <li><a href="#" [routerLink]="['./crearProfesor']" class="link-dark rounded">Crear profesor</a></li>
                   </ul>
                 </div>
               </li>
@@ -78,7 +63,7 @@
             </div>
 
             <div class="col-3 text-center p-0">
-              <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 p-0 pt-1" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+              <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 p-0 pt-1" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
                 Home
               </button>
               <div class="collapse" id="home-collapse">
@@ -91,15 +76,15 @@
 
             </div>
             <div class="col-3 text-center p-0">
-              <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 pt-1" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                Dashboard
+              <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 pt-1" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
+                Proximamente...
               </button>
               <div class="collapse" id="dashboard-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                  <li><a href="#" class="link-dark rounded">Overview</a></li>
-                  <li><a href="#" class="link-dark rounded">Weekly</a></li>
-                  <li><a href="#" class="link-dark rounded">Monthly</a></li>
-                  <li><a href="#" class="link-dark rounded">Annually</a></li>
+                  <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
+                  <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
+                  <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
+                  <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
                 </ul>
               </div>
               
@@ -107,18 +92,15 @@
 
 
             <!-- OPCIONES DEL ADMINISTRADOR -->
-            <div class="col-3 text-center p-0">
+            <div class="col-3 text-center p-0" *ngIf="rolAdmin" >
               
            
-                   <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 pt-1" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                     Account
+                   <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 pt-1" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="true">
+                     Admin
                    </button>
                    <div class="collapse" id="account-collapse">
                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                       <li><a href="#" class="link-dark rounded">New...</a></li>
-                       <li><a href="#" class="link-dark rounded">Profile</a></li>
-                       <li><a href="#" class="link-dark rounded">Settings</a></li>
-                       <li><a href="#" class="link-dark rounded">Sign out</a></li>
+                       <li><a href="#" [routerLink]="['./crearProfesor']" class="link-dark rounded">Crear Profesor</a></li>
                      </ul>
                    </div>
 
@@ -147,13 +129,13 @@
 
 
 
-          <div class="bg-light col-12 col-lg-10">
-            <div class="row colorcito mt-0  p-2 m-2 rounded-datos">
+          <div class="col-12 col-lg-10 ">
+            <div class="row colorcito mt-0  p-2 m-0 m-lg-2 rounded-datos">
                    <h5 class="border border-2 border-dark border-top-0 border-end-0 border-start-0">Panel de informacion de : {{ nombreUsuario }}</h5>
                     <table class="table">
                         <thead>
                           <tr class="text-center">
-                            <th class="col-2">------</th>
+                            <th class="col-2">Rol</th>
                             <th class="col-2">Guardias Realizadas</th>
                             <th class="col-2">------</th>
                             <th class="col-2">Notificaciones</th>
@@ -161,7 +143,7 @@
                         </thead>
                         <tbody>
                           <tr class="text-center">
-                            <th>------</th>
+                            <th>{{ rol }}</th>
                             <td>{{ horasGuardias }} horas</td>
                             <td>------</td>
                             <td>Ninguna</td>
@@ -171,7 +153,7 @@
             </div>
 
 
-            <div class="row colorcito mt-4 p-0 m-2 p-lg-2 rounded-datos mb-0">
+            <div class="row colorcito mt-4 p-0 m-0 m-lg-2 p-lg-2 rounded-datos mb-0">
               <router-outlet ></router-outlet>
          </div>
 

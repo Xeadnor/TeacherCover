@@ -10,9 +10,11 @@ import { Profesor } from '../models/profesor.model';
 export class PaginaComponent implements OnInit {
   constructor( private router: Router) {};
 
+  rolAdmin: boolean
   horasGuardias = "";
   diaGuardia = "----";
   nombreUsuario = "";
+  rol = "";
 
   ngOnInit(): void {
     if(sessionStorage.length == 0){
@@ -21,8 +23,14 @@ export class PaginaComponent implements OnInit {
       let userJson = sessionStorage.getItem('profesor');
       let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
       this.horasGuardias = profesor["horasGuardias"]
+      this.rol = profesor["role"]
       this.diaGuardia = profesor["diaGuardia"]
       this.nombreUsuario = profesor["name"]
+      if(profesor["role"] == "User"){
+        this.rolAdmin = false;
+      }else{
+        this.rolAdmin = true;
+      }
     const divlog = document.getElementById("divLog");
     divlog!.classList.remove("d-none")
     const nombreUser = document.getElementById('nombreUser');
