@@ -61,6 +61,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 // Material Data tables
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { CrearProfesorComponent } from './crear-profesor/crear-profesor.component';
 
 
 const appRoutes: Routes = [
@@ -71,7 +72,7 @@ const appRoutes: Routes = [
       { path: "calendario", component: CalendarioComponent},
       { path: "historial", component: HistorialGuardiasComponent},
       { path: "calendarioSemanal", component: CalendarioSemanalComponent},
-
+      { path: "crearProfesor", component: CrearProfesorComponent},
     ]
   },
   
@@ -87,6 +88,7 @@ const appRoutes: Routes = [
     CalendarioComponent,
     HistorialGuardiasComponent,
     CalendarioSemanalComponent,
+    CrearProfesorComponent,
   ],
   imports: [
     MatTableModule,
