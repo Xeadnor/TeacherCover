@@ -28,6 +28,7 @@
     "@fullcalendar/timegrid": "^6.1.5",
     "@ng-bootstrap/ng-bootstrap": "^14.1.0",
     "angular-calendar": "^0.31.0",
+    "cloudmailin": "^0.0.3",
     "crypto-js": "^4.1.1",
     "date-fns": "^2.29.3",
     "firebase": "^9.19.0",

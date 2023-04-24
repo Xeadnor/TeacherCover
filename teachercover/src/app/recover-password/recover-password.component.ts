@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProfesorService } from '../services/profesor.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { MessageClient } from "cloudmailin"
 
 @Component({
   selector: 'app-recover-password',
@@ -16,6 +17,9 @@ export class RecoverPasswordComponent {
   constructor(private profesorService: ProfesorService, private router: Router, private toastr: ToastrService) {};
 
   ngOnInit(): void {
+
+
+
     this.codigoPass = false;
     if(sessionStorage.length > 0){
       this.router.navigate(['/pagina/calendario']);
@@ -41,6 +45,7 @@ export class RecoverPasswordComponent {
           let code = (Math.random() + 1).toString(36).substring(4).toUpperCase();
           this.profesorService.updateCode(idField,code);
           // send email
+          
           this.toastr.success("Compruebe su correo electronico y introduzca el codigo con su nueva contraseña","Codigo enviado",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
         }
     })
