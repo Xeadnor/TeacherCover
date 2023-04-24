@@ -76,6 +76,7 @@ const appRoutes: Routes = [
       { path: "crearProfesor", component: CrearProfesorComponent},
     ]
   },
+  {path:"recover-password",component: RecoverPasswordComponent},
   
 
 ];

@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/pagina/calendario']);
   }else{
     this.formLogin = new FormGroup({
-      name: new FormControl("",Validators.required),
+      emailLogin: new FormControl("",Validators.required),
       password: new FormControl("",Validators.required)
     }, {updateOn: "submit"})
     this.formNewUser = new FormGroup({
@@ -40,50 +40,59 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit(){
-    let name = this.formLogin.controls["name"].value;
-    let password = window.btoa(this.formLogin.controls["password"].value);
+    let emailLogin = this.formLogin.controls["emailLogin"].value;
+    let password = this.formLogin.controls["password"].value;
+    if(password == "IESinfanta23"){
 
-    if(name.length > 0 && password.length > 0){
+    }else{
+      password = window.btoa(this.formLogin.controls["password"].value);
 
-      const prueba = (await this.profesorService.Login(name,password)).subscribe(profesor =>{
-        if(profesor.length > 0){
-
-          let newProf = new Profesor();
-          newProf.setIdProfesor(profesor[0]["id"]);
-          newProf.setName(profesor[0]["name"]);
-          newProf.setPassword(profesor[0]["password"]);
-          newProf.setEmail(profesor[0]["email"]);
-          newProf.setHorasGuardais(profesor[0]["horasGuardias"]);
-          newProf.setDiaGuardia(profesor[0]["diaGuardia"]);
-          newProf.setRole(profesor[0]["role"]);
-          newProf.setValidate(profesor[0]["validate"]);
-          newProf.setIdField(profesor[0]["idFIeld"]);
+    }
+     let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+    if(emailLogin.length > 0 && password.length > 0){
+      if(regex.test(this.formLogin.controls["emailLogin"].value)){
+        const prueba = (await this.profesorService.Login(emailLogin,password)).subscribe(profesor =>{
+          if(profesor.length > 0){
   
-
-          if(newProf.getPassword() == "IESinfanta23" && newProf.getValidate() == 0){
-            this.changepassword = true;
-            this.nombreProfesor = newProf.getName();
-            this.idFieldProfesor = newProf.getIdField();
-            this.toastr.info("Para continuar debe configurar ahora su nueva contraseña","Cambio de contraseña",{timeOut:5000,closeButton:true,positionClass:"toast-bottom-center"})
-            return;
+            let newProf = new Profesor();
+            newProf.setIdProfesor(profesor[0]["id"]);
+            newProf.setName(profesor[0]["name"]);
+            newProf.setPassword(profesor[0]["password"]);
+            newProf.setEmail(profesor[0]["email"]);
+            newProf.setHorasGuardais(profesor[0]["horasGuardias"]);
+            newProf.setDiaGuardia(profesor[0]["diaGuardia"]);
+            newProf.setRole(profesor[0]["role"]);
+            newProf.setValidate(profesor[0]["validate"]);
+            newProf.setIdField(profesor[0]["idFIeld"]);
+            if(newProf.getPassword() == "IESinfanta23" && newProf.getValidate() == 0){
+              this.changepassword = true;
+              this.nombreProfesor = newProf.getName();
+              this.idFieldProfesor = newProf.getIdField();
+              this.toastr.info("Para continuar debe configurar ahora su nueva contraseña","Cambio de contraseña",{timeOut:5000,closeButton:true,positionClass:"toast-bottom-center"})
+              return;
+            }else{
+                        sessionStorage.setItem('profesor', JSON.stringify(newProf))
+                        this.router.navigate(['/pagina/calendario']);
+                        this.toastr.success("Bienvenido " + newProf.getName(),"Inicio de sesión correcto",{timeOut:3000,closeButton:true,positionClass:"toast-top-right",})
+            }
           }else{
-                      sessionStorage.setItem('profesor', JSON.stringify(newProf))
-                      this.router.navigate(['/pagina/calendario']);
-                      this.toastr.success("Bienvenido " + newProf.getName(),"Inicio de sesión correcto",{timeOut:3000,closeButton:true,positionClass:"toast-top-right",})
+             // var mensaje = "Los datos de ingreso no coinciden"
+             // const mensajeError = document.getElementById('mensajeErrorLogin');
+             // mensajeError!.textContent = mensaje;
+             if(password == "IESinfanta23"){
+  
+             }else{
+               
+               this.toastr.error("Los datos introducidos no coindicen con ninguna cuenta","Datos incorrectos",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
+            }
+  
           }
-        }else{
-           // var mensaje = "Los datos de ingreso no coinciden"
-           // const mensajeError = document.getElementById('mensajeErrorLogin');
-           // mensajeError!.textContent = mensaje;
-           if(password == "IESinfanta23"){
+        }); 
+      }else{
+    this.toastr.error("El campo correo tiene un formato incorrecto","Datos incorrectos",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
 
-           }else{
-             
-             this.toastr.error("Los datos introducidos no coindicen con ninguna cuenta","Datos incorrectos",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
-          }
+      }
 
-        }
-      }); 
     }
   }
 

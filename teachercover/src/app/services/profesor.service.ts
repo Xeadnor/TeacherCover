@@ -27,11 +27,18 @@ export class ProfesorService {
     
   }
 
-   async Login(name: String, pass: String){
+   async Login(email: String, pass: String){
     let array!: Profesor[];
     const profesorRef = collection(this.firestore,"profesores");
-    const populationQuery = query(profesorRef, where("name", "==", name), where("password","==", pass));
+    const populationQuery = query(profesorRef, where("email", "==", email), where("password","==", pass));
     return collectionData(populationQuery, {idField:"idFIeld"});
+  }
+
+  async confirmEmail(){
+    const db = getFirestore();
+    const profesorRef = collection(db,"profesores");
+    const docsSnap = await getDocs(profesorRef);
+    return docsSnap;
   }
 
   updateUserPassword(idField: String, password: String) {
@@ -51,6 +58,23 @@ export class ProfesorService {
     })
 
     }
+
+
+    updateCode(idField: String, code : String) {
+      const db = getFirestore();
+      const profesorRef = doc(db,"profesores",idField.toString());
+  
+      const data = {
+        code: code,
+      }
+      
+      setDoc(profesorRef,data, { merge:true})
+      .then(docRef => {
+      })
+      .catch(error =>{
+      })
+  
+      }
 }
 
 
