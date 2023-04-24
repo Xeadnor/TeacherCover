@@ -36,11 +36,19 @@ export class HistorialGuardiasComponent implements OnInit, AfterViewInit {
     }
     this.dataSource = new MatTableDataSource<Articulo>(this.datos);
     this.dataSource.paginator = this.paginator;
+ 
   }
   
   public doFilter = (event: Event) => {
     this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLocaleLowerCase();
   }
+  filterTable() {
+    this.dataSource.filterPredicate = (data: Articulo, filter: string): boolean => {
+      return (
+        data.descripcion.toLocaleLowerCase().includes(filter)
+      )
+    }
+  } 
 
 }
 export class Articulo {

@@ -6,6 +6,7 @@
           <input matInput type="text" (keyup)="doFilter($event)" placeholder="Filter">
         </mat-form-field>
       </div>
+      
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" #tabla1 style="background-color:#e7e0ff" matSort>
           <ng-container matColumnDef="codigo" sticky>
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>

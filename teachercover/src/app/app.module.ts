@@ -62,6 +62,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { CrearProfesorComponent } from './crear-profesor/crear-profesor.component';
+import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 
 
 const appRoutes: Routes = [
@@ -89,6 +90,7 @@ const appRoutes: Routes = [
     HistorialGuardiasComponent,
     CalendarioSemanalComponent,
     CrearProfesorComponent,
+    RecoverPasswordComponent,
   ],
   imports: [
     MatTableModule,

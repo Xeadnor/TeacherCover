@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   async onSubmit(){
     let name = this.formLogin.controls["name"].value;
-    let password = this.formLogin.controls["password"].value;
+    let password = window.btoa(this.formLogin.controls["password"].value);
 
     if(name.length > 0 && password.length > 0){
 
@@ -100,7 +100,8 @@ export class LoginComponent implements OnInit {
 
     }else{
       if(regexPassword.test(newPassword)){
-        this.profesorService.updateUserPassword(this.idFieldProfesor,newPassword);
+        var passwordCodified = window.btoa(newPassword);
+        this.profesorService.updateUserPassword(this.idFieldProfesor,passwordCodified);
         this.changepassword = false;
         this.formLogin.controls['password'].setValue(newPassword);
         this.toastr.success("Ya puede acceder con su nueva contraseña","Cambio de contraseña completado",{timeOut:3000,closeButton:true,positionClass:"toast-top-right",})
