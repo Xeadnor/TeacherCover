@@ -2,11 +2,38 @@
     <div style="overflow-x:auto;">
     
       <div fxLayout fxLayoutAlign="center center">
-        <mat-form-field fxFlex="40%">
-          <input matInput type="text" (keyup)="doFilter($event)" placeholder="Filter">
-        </mat-form-field>
+        <form [formGroup]="searchForm" class="search__form">
+
+          <mat-form-field class="search__form_field" appearance="outline">
+            <mat-label>Descripcion</mat-label>
+            <input type="text"
+                   aria-label="descripcion"
+                   matInput
+                   formControlName="descripcion"
+                   (keyup)="applyFilter()"
+            >
+          </mat-form-field>
+      
+          <mat-form-field class="search__form_field" appearance="outline">
+            <mat-label>Test</mat-label>
+            <input type="text"
+                   aria-label="Test"
+                   matInput
+                   formControlName="test"
+                   (keyup)="applyFilter()"
+            >
+          </mat-form-field>
+
+        </form>
       </div>
       
+
+
+
+
+
+
+
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" #tabla1 style="background-color:#e7e0ff" matSort>
           <ng-container matColumnDef="codigo" sticky>
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>

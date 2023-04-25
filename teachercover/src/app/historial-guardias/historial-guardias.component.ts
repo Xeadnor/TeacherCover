@@ -5,6 +5,11 @@ import {OnInit,AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomPaginator } from './CustomPaginator';
 import { MatSort } from '@angular/material/sort';
+import { FormGroup } from '@angular/forms';
+import {ChangeDetectionStrategy} from '@angular/core';
+import {FormControl,Validators} from '@angular/forms';
+import {from, Observable} from 'rxjs';
+import {distinct, map, mergeMap, startWith, toArray} from 'rxjs/operators';
 
 @Component({
 
@@ -23,6 +28,9 @@ export class HistorialGuardiasComponent implements OnInit, AfterViewInit {
 
   datos: Articulo[] = [];
   dataSource:any;
+  public searchForm: FormGroup;
+  public descripcion = '';
+  public test = '';
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -36,19 +44,62 @@ export class HistorialGuardiasComponent implements OnInit, AfterViewInit {
     }
     this.dataSource = new MatTableDataSource<Articulo>(this.datos);
     this.dataSource.paginator = this.paginator;
+
+    this.searchFormInit();
+    /* Filter predicate used for filtering table per different columns
+    *  */
+    this.dataSource.filterPredicate = this.getFilterPredicate()
  
+  }
+  searchFormInit() {
+    this.searchForm = new FormGroup({
+      descripcion: new FormControl(''),
+      test: new FormControl(''),
+    });
+  }
+  getFilterPredicate() {
+    return (row: Articulo, filters: string) => {
+      // split string per '$' to array
+      const filterArray = filters.split('$');
+      const descripcion = filterArray[0];
+      const test = filterArray[1];
+
+      const matchFilter = [];
+
+      // Fetch data from row
+
+      const columnDescripcion = row.descripcion;
+      const columnTest = row.test;
+
+      // verify fetching data by our searching values
+      const customFilterDS = columnDescripcion.toLowerCase().includes(descripcion);
+      const customFilterAS = columnTest.toLowerCase().includes(test);
+
+      // push boolean values into array
+      matchFilter.push(customFilterDS);
+      matchFilter.push(customFilterAS);
+
+      // return true if all values in array is true
+      // else return false
+      return matchFilter.every(Boolean);
+    };
   }
   
   public doFilter = (event: Event) => {
     this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLocaleLowerCase();
   }
-  filterTable() {
-    this.dataSource.filterPredicate = (data: Articulo, filter: string): boolean => {
-      return (
-        data.descripcion.toLocaleLowerCase().includes(filter)
-      )
-    }
-  } 
+
+  applyFilter() {
+    const as = this.searchForm.get('descripcion')!.value;
+    const ds = this.searchForm.get('test')!.value;
+
+    this.descripcion = as === null ? '' : as;
+    this.test = ds === null ? '' : ds;
+
+    // create string of our searching values and split if by '$'
+    const filterValue = this.descripcion + '$' + this.test;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
 }
 export class Articulo {
