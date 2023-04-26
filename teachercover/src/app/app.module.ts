@@ -65,6 +65,16 @@ import { CrearProfesorComponent } from './crear-profesor/crear-profesor.componen
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+
+
+
+
+
 const appRoutes: Routes = [
   {path:"",component: LoginComponent},
   {
@@ -77,7 +87,7 @@ const appRoutes: Routes = [
     ]
   },
   {path:"recover-password",component: RecoverPasswordComponent},
-  
+
 
 ];
 @NgModule({
@@ -144,7 +154,13 @@ const appRoutes: Routes = [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     RouterModule.forRoot(appRoutes,{enableTracing: false}),
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

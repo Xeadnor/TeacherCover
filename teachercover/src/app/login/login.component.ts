@@ -5,6 +5,7 @@ import { Profesor } from '../models/profesor.model';
 import { RouterLink, Router,  } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
   formNewUser: FormGroup;
-  constructor(private profesorService: ProfesorService, private router: Router, private toastr: ToastrService) {};
+  constructor(private profesorService: ProfesorService, private router: Router, private toastr: ToastrService, private auth: AuthService) {};
   changepassword : boolean;
   nuevaPassword : String;
   idFieldProfesor: String;
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
     this.formLogin = new FormGroup({
       emailLogin: new FormControl("",Validators.required),
       password: new FormControl("",Validators.required)
+
     }, {updateOn: "submit"})
     this.formNewUser = new FormGroup({
       newPassword: new FormControl("",Validators.required),
@@ -36,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-      
+
   }
 
   async onSubmit(){
@@ -51,9 +53,16 @@ export class LoginComponent implements OnInit {
      let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
     if(emailLogin.length > 0 && password.length > 0){
       if(regex.test(this.formLogin.controls["emailLogin"].value)){
-        const prueba = (await this.profesorService.Login(emailLogin,password)).subscribe(profesor =>{
+
+
+       // aquí metería esto
+            // await this.auth.login(emailLogin,password);
+       // y comentaría el Login de profesorService y lo gestionaría en auth
+       //pero me pierdo con el subscribe
+
+      const prueba = (await this.profesorService.Login(emailLogin,password)).subscribe(profesor =>{
           if(profesor.length > 0){
-  
+
             let newProf = new Profesor();
             newProf.setIdProfesor(profesor[0]["id"]);
             newProf.setName(profesor[0]["name"]);
@@ -80,14 +89,14 @@ export class LoginComponent implements OnInit {
              // const mensajeError = document.getElementById('mensajeErrorLogin');
              // mensajeError!.textContent = mensaje;
              if(password == "IESinfanta23"){
-  
+
              }else{
-               
+
                this.toastr.error("Los datos introducidos no coindicen con ninguna cuenta","Datos incorrectos",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
             }
-  
+
           }
-        }); 
+        });
       }else{
     this.toastr.error("El campo correo tiene un formato incorrecto","Datos incorrectos",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
 
@@ -120,13 +129,13 @@ export class LoginComponent implements OnInit {
      this.toastr.error("La contraseña debe contener minimo 6 caracteres, y almenos una mayuscula, una minuscula y un numero","Contraseña invalida",{timeOut:10000,closeButton:true,positionClass:"toast-bottom-center"})
       }
     }
-    
+
   }
 
   }
-      
-      
+
+
      // const response = await this.profesorService.addProfesor(profesor);
      // const response = await this.profesorService.getProfesors().subscribe(profesores =>{
      // });
-      // const response = await this.profesorService.addProfesor(profesor); 
+      // const response = await this.profesorService.addProfesor(profesor);
