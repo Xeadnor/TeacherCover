@@ -55,7 +55,12 @@ try {
 
 
 
-
+//                                    !!!!!!!!!!!!!!!!!!!!!!!!!!ATENCION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//? Ahora mismo esta de tal manera que el auth.login comprueba los datos, en caso de que sean correctos, se ejecuta el profesorService
+//? el cual se encarga de guardar todos los datos asociados a ese profesor, ¿como? pues al final, el email tanto del auth, como el de 
+//? la base de datos es unique, entonces podemos relacionar la base de datos de esta manera, entonces ya estaria hecho el login, a partir
+//?  de aqui seguimos usando el localstorage para trabajar con los datos, pero el login va mediante firebase, que ahora gracias a esto
+//? podemos meterle mierdas como entrar con google, o reestablecer contraseñas o cosas asi. Tristeza.
 
 await this.auth.login(emailLogin,password)
 
