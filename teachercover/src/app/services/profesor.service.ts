@@ -27,10 +27,10 @@ export class ProfesorService {
     
   }
 
-   async Login(email: String, pass: String){
+   async getDataFromEmail(email: String){
     let array!: Profesor[];
     const profesorRef = collection(this.firestore,"profesores");
-    const populationQuery = query(profesorRef, where("email", "==", email), where("password","==", pass));
+    const populationQuery = query(profesorRef, where("email", "==", email));
     return collectionData(populationQuery, {idField:"idFIeld"});
   }
 

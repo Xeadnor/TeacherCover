@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Profesor } from '../models/profesor.model';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { Profesor } from '../models/profesor.model';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit  {
-  constructor( private router: Router) {};
+  constructor( private router: Router, private auth: AuthService) {};
 
   ngOnInit(): void {
     if(sessionStorage.length > 0){
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit  {
     const divlog = document.getElementById("divLog");
     divlog!.classList.add("d-none")
     sessionStorage.clear();
+      this.auth.logOut();
   }
   
   mostrarNombre(){
