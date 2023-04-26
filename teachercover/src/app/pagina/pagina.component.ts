@@ -15,6 +15,7 @@ export class PaginaComponent implements OnInit {
   diaGuardia = "----";
   nombreUsuario = "";
   rol = "";
+  mostrarDatos : boolean
 
   ngOnInit(): void {
     if(sessionStorage.length == 0){
@@ -26,6 +27,7 @@ export class PaginaComponent implements OnInit {
       this.rol = profesor["role"]
       this.diaGuardia = profesor["diaGuardia"]
       this.nombreUsuario = profesor["name"]
+      this.mostrarDatos = true;
       if(profesor["role"] == "User"){
         this.rolAdmin = false;
       }else{
@@ -37,6 +39,10 @@ export class PaginaComponent implements OnInit {
     nombreUser!.textContent = profesor["name"];
 
     }
+  }
+
+  ocultarDatos(){
+    this.mostrarDatos = false;
   }
 
 }

@@ -43,6 +43,7 @@
                 <div class="collapse" id="account-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="#" [routerLink]="['./crearProfesor']" class="link-dark rounded">Crear profesor</a></li>
+                    <li><a href="#" [routerLink]="['./crearGuardia']" class="link-dark rounded">Crear Guardia</a></li>
                   </ul>
                 </div>
               </li>
@@ -101,6 +102,8 @@
                    <div class="collapse" id="account-collapse">
                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                        <li><a href="#" [routerLink]="['./crearProfesor']" class="link-dark rounded">Crear Profesor</a></li>
+                       <li><a href="#" [routerLink]="['./crearGuardia']" class="link-dark rounded">Crear Guardia</a></li>
+
                      </ul>
                    </div>
 
@@ -128,10 +131,23 @@
 
 
 
-
           <div class="col-12 col-lg-10 ">
-            <div class="row colorcito mt-0  p-2 m-0 m-lg-2 rounded-datos">
-                   <h5 class="border border-2 border-dark border-top-0 border-end-0 border-start-0">Panel de informacion de : {{ nombreUsuario }}</h5>
+            <div class="row">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+            </div>
+            <div *ngIf="mostrarDatos" class="row colorcito mt-0  p-2 m-0 m-lg-2 rounded-datos">
+              <div   class="row justify-content-around pe-0">
+                <div class="col pe-0 border border-2 border-dark border-top-0 border-end-0 border-start-0">
+                  <h5 class="">Panel de informacion de : {{ nombreUsuario }}</h5>
+
+                </div>
+                <div class="col ps-0 pe-0 border border-2 border-dark border-top-0 border-end-0 border-start-0">
+                  <button type="button" class="p-1 btn-close float-end border border-1 border-danger btn-danger text-danger bg-danger rounded-circle" (click)="ocultarDatos()" aria-label="Close"></button>
+
+                </div>
+              </div>
                     <table class="table">
                         <thead>
                           <tr class="text-center">
