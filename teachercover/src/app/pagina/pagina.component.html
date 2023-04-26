@@ -132,10 +132,19 @@
 
 
           <div class="col-12 col-lg-10 ">
-            <div class="row">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-              </svg>
+            <div class="row" *ngIf="!mostrarDatos">
+              <div class="col">
+              <div class="row float-end ">
+                <button class="border border-dark rounded-datos2 colorcito" (click)="showDatos()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                    <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                  </svg>
+
+                </button>
+
+              </div>
+
+              </div>
             </div>
             <div *ngIf="mostrarDatos" class="row colorcito mt-0  p-2 m-0 m-lg-2 rounded-datos">
               <div   class="row justify-content-around pe-0">
@@ -144,7 +153,7 @@
 
                 </div>
                 <div class="col ps-0 pe-0 border border-2 border-dark border-top-0 border-end-0 border-start-0">
-                  <button type="button" class="p-1 btn-close float-end border border-1 border-danger btn-danger text-danger bg-danger rounded-circle" (click)="ocultarDatos()" aria-label="Close"></button>
+                  <button type="button" class="p-1 btn-close float-end border border-1 border-danger btn-danger text-danger bg-danger rounded-circle" (click)="hideDatos()" aria-label="Close"></button>
 
                 </div>
               </div>
