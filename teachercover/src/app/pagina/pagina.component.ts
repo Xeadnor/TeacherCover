@@ -41,8 +41,12 @@ export class PaginaComponent implements OnInit {
     }
   }
 
-  ocultarDatos(){
+  hideDatos(){
     this.mostrarDatos = false;
+  }
+
+  showDatos(){
+    this.mostrarDatos = true;
   }
 
 }

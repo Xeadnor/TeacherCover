@@ -28,6 +28,11 @@ border-style:solid;
     border-radius: 25px;
 }
 
+.rounded-datos2{
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
