@@ -132,7 +132,7 @@ const prueba = (await this.profesorService.getDataFromEmail(emailLogin)).subscri
         this.profesorService.updateUserValidate(this.idFieldProfesor)
         
         this.changepassword = false;
-        this.formLogin.controls['password'].setValue(newPassword);
+        this.formLogin.controls['password'].setValue("");
         this.toastr.success("Ya puede acceder con su nueva contraseña","Cambio de contraseña completado",{timeOut:3000,closeButton:true,positionClass:"toast-top-right",})
 
 

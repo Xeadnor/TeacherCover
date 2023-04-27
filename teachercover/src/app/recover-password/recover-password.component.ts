@@ -4,6 +4,7 @@ import { ProfesorService } from '../services/profesor.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MessageClient } from "cloudmailin"
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-recover-password',
@@ -14,7 +15,7 @@ export class RecoverPasswordComponent {
   codigoPass: boolean;
   formLogin: FormGroup;
   formNewUser: FormGroup;
-  constructor(private profesorService: ProfesorService, private router: Router, private toastr: ToastrService) {};
+  constructor(private profesorService: ProfesorService, private router: Router, private toastr: ToastrService,private auth: AuthService) {};
 
   ngOnInit(): void {
 
@@ -41,12 +42,10 @@ export class RecoverPasswordComponent {
       let prueba = this.profesorService.confirmEmail();
       (await prueba).forEach(doc => {
         if(doc.data()["email"] == email){
-          idField = doc.id;
-          let code = (Math.random() + 1).toString(36).substring(4).toUpperCase();
-          this.profesorService.updateCode(idField,code);
           // send email
-          
-          this.toastr.success("Compruebe su correo electronico y introduzca el codigo con su nueva contraseña","Codigo enviado",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
+          this.auth.sendResetPassword(email)
+          this.router.navigate(['']);
+          this.toastr.success("Compruebe su correo electronico para reestablecer su contraseña","Codigo enviado",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
         }
     })
 
