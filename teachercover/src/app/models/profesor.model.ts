@@ -1,7 +1,6 @@
 export class Profesor {
     idProfesor: Number;
     name: String;
-    password: String;
     email: String;
     diaGuardia: String;
     horasGuardias: Number
@@ -29,9 +28,6 @@ export class Profesor {
     getName() {
         return this.name;
     }
-    getPassword() {
-        return this.password;
-    }
     getdiaGuardias() {
         return this.diaGuardia;
     }
@@ -44,9 +40,6 @@ export class Profesor {
 
     setName(name: String) {
         this.name = name;
-    }
-    setPassword(password: String) {
-        this.password = password;
     }
     setIdProfesor(Id: Number) {
         this.idProfesor = Id;

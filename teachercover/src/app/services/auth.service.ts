@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { getAuth, updatePassword } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -7,14 +8,24 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class AuthService {
 
   constructor(private auth: AngularFireAuth) { 
-    auth.authState.subscribe(user =>{
-      console.log(user);
-    })
+
   }
 
 
   login (user:string, pass:string){
     return this.auth.signInWithEmailAndPassword(user, pass);
+  }
+
+  changePassword(pass:string){
+    const auth = getAuth();
+
+    const user = auth.currentUser
+    updatePassword(user!, pass).then(() => {
+      // Update successful.
+    }).catch((error) => {
+      // An error ocurred
+      // ...
+    });
   }
 
   getEmail(){

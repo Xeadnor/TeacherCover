@@ -6,6 +6,7 @@ import { RouterLink, Router,  } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'app/services/auth.service';
+import { getAuth, updatePassword } from "firebase/auth";
 
 @Component({
   selector: 'app-login',
@@ -68,23 +69,28 @@ const prueba = (await this.profesorService.getDataFromEmail(emailLogin)).subscri
   let newProf = new Profesor();
   newProf.setIdProfesor(profesor[0]["id"]);
   newProf.setName(profesor[0]["name"]);
-  newProf.setPassword(profesor[0]["password"]);
   newProf.setEmail(profesor[0]["email"]);
   newProf.setHorasGuardais(profesor[0]["horasGuardias"]);
   newProf.setDiaGuardia(profesor[0]["diaGuardia"]);
   newProf.setRole(profesor[0]["role"]);
   newProf.setValidate(profesor[0]["validate"]);
   newProf.setIdField(profesor[0]["idFIeld"]);
-  if(newProf.getPassword() == "IESinfanta23" && newProf.getValidate() == 0){
+  if(newProf.getValidate() == 0){
     this.changepassword = true;
     this.nombreProfesor = newProf.getName();
     this.idFieldProfesor = newProf.getIdField();
     this.toastr.info("Para continuar debe configurar ahora su nueva contraseña","Cambio de contraseña",{timeOut:5000,closeButton:true,positionClass:"toast-bottom-center"})
     return;
   }else{
-              sessionStorage.setItem('profesor', JSON.stringify(newProf))
-              this.router.navigate(['/pagina/calendario']);
-              this.toastr.success("Bienvenido " + newProf.getName(),"Inicio de sesión correcto",{timeOut:3000,closeButton:true,positionClass:"toast-top-right",})
+    if(this.formLogin.controls["password"].value.length == 0){
+
+    }else{
+      sessionStorage.setItem('profesor', JSON.stringify(newProf))
+      this.formLogin.controls['password'].setValue("");
+      this.router.navigate(['/pagina/calendario']);
+      this.toastr.success("Bienvenido " + newProf.getName(),"Inicio de sesión correcto",{timeOut:3000,closeButton:true,positionClass:"toast-top-right",})
+
+    }
   }
 
 
@@ -122,8 +128,9 @@ const prueba = (await this.profesorService.getDataFromEmail(emailLogin)).subscri
 
     }else{
       if(regexPassword.test(newPassword)){
-        var passwordCodified = window.btoa(newPassword);
-        this.profesorService.updateUserPassword(this.idFieldProfesor,passwordCodified);
+        this.auth.changePassword(newPassword)
+        this.profesorService.updateUserValidate(this.idFieldProfesor)
+        
         this.changepassword = false;
         this.formLogin.controls['password'].setValue(newPassword);
         this.toastr.success("Ya puede acceder con su nueva contraseña","Cambio de contraseña completado",{timeOut:3000,closeButton:true,positionClass:"toast-top-right",})

@@ -13,14 +13,7 @@ export class ProfesorService {
   
   constructor(private firestore: Firestore) { }
 
-  addProfesor(profesor: Profesor){
-    const profesorRef = collection(this.firestore,"profesores");
-    return addDoc(profesorRef,{
-      id: profesor.getIdProfesor(),
-      name: profesor.getName(),
-      password: profesor.getPassword(),
-    });
-  }
+
   getProfesors(): Observable<Profesor[]>{
     const profesorRef = collection(this.firestore,"profesores");
     return collectionData(profesorRef, {idField:"idField"}) as Observable<Profesor[]>;
@@ -41,14 +34,12 @@ export class ProfesorService {
     return docsSnap;
   }
 
-  updateUserPassword(idField: String, password: String) {
+  updateUserValidate(idField: String) {
     const db = getFirestore();
     const profesorRef = doc(db,"profesores",idField.toString());
 
     const data = {
       validate : 1,
-      password: password,
-      
     }
     
     setDoc(profesorRef,data, { merge:true})
