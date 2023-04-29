@@ -9,10 +9,10 @@ import { GuardiaService } from '../services/guardia.service';
   styleUrls: ['./calendario.component.css']
 })
 export class CalendarioComponent {
-    meetings : Guardia[] = [
+  meetings: Guardia[] = [
 
-    ]
-  datesInWeek : Date[] = [];
+  ]
+  datesInWeek: Date[] = [];
   daysWeek = [
     'Domingo',
     'Lunes',
@@ -37,9 +37,9 @@ export class CalendarioComponent {
     'Noviembre',
     'Diciembre',
   ];
-  day : Date;
-  hours : string[] = [];
-  constructor(private utilsService: UtilsService, private guardiaService: GuardiaService) {}
+  day: Date;
+  hours: string[] = [];
+  constructor(private utilsService: UtilsService, private guardiaService: GuardiaService) { }
 
   ngOnInit() {
     this.datesInWeek = this.utilsService.getDay(new Date());
@@ -53,9 +53,9 @@ export class CalendarioComponent {
       '12:20',
       '13:15',
     ]
-     this.guardiaService.getGuardias().subscribe(guardias => {
-      guardias.forEach(element => this.meetings.push(new Guardia(element["diaSemana"],element["hora"],element["descripcion"],element["estado"],element["idGuardia"])));
-     });
+    this.guardiaService.getGuardias().subscribe(guardias => {
+      guardias.forEach(element => this.meetings.push(new Guardia(element["diaSemana"], element["hora"], element["descripcion"], element["estado"], element["idGuardia"])));
+    });
   }
 
   getDateFormat(date: Date): string {
@@ -65,7 +65,7 @@ export class CalendarioComponent {
     return `${dayInWeek} ${numberDate} ${monthName}`;
   }
 
-  getMeeting( hora: number): string {
+  getMeeting(hora: number): string {
     let thisDay = this.day.getDay();
     const meeting = this.meetings.find(
       (el: Guardia) => el.diaSemana === thisDay && el.hora === hora
@@ -74,7 +74,7 @@ export class CalendarioComponent {
     return meeting ? meeting.descripcion : ' ';
   }
 
-  existsMeeting( hora: number): boolean {
+  existsMeeting(hora: number): boolean {
     let thisDay = this.day.getDay();
     const meeting = this.meetings.find(
       (el: Guardia) => el.diaSemana === thisDay && el.hora === hora
@@ -82,21 +82,60 @@ export class CalendarioComponent {
     return meeting ? true : false;
   }
 
-  someFunction( hora: number){
+  someFunction(hora: number) {
     let thisDay = this.day.getDay();
     const meeting = this.meetings.find(
       (el: Guardia) => el.diaSemana === thisDay && el.hora === hora
     )?.estado;
-    if(meeting){
-      if(meeting == "Finalizada"){
-          return "rgb(47, 224, 83)";
-      }else if(meeting == "Pendiente"){
+    if (meeting) {
+      if (meeting == "Finalizada") {
+        return "rgb(47, 224, 83)";
+      } else if (meeting == "Pendiente") {
         return "rgb(255, 251, 10)"
-      }else{
+      } else {
         return "lightblue";
       }
-    }else{
+    } else {
       return "";
     }
   }
+  getActualHour(hora: number) {
+    let thisHour = this.day.getHours();
+    let thisMinutes = this.day.getMinutes();
+      if(thisHour == 8 && thisMinutes <25){
+        thisHour = 7;
+      }
+      if(thisHour == 9 && thisMinutes < 20){
+        thisHour = 8;
+      }
+      if(thisHour == 10 && thisMinutes <15){
+        thisHour = 9;
+      }
+      if(thisHour == 11 && thisMinutes <5){
+        thisHour = 10;
+      }
+      if(thisHour == 11 && thisMinutes >30){
+        thisHour = 12;
+      }
+      if(thisHour == 12 && thisMinutes >20){
+        thisHour = 13;
+      }
+      if(thisHour == 13 && thisMinutes >15){
+        thisHour = 14;
+      }
+      if(thisHour == 14 && thisMinutes >5){
+        thisHour = 15;
+      }
+
+    if(thisHour == hora){
+      return {"border-color":"orange","border-width":"2.5px"};
+
+    }else{
+      return {"border-color":"grey"};
+      
+    }
+  
+
+  }
+
 }

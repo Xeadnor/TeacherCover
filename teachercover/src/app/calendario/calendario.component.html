@@ -25,13 +25,13 @@
   <div class="row">
     <div *ngFor="let date of datesInWeek; let indexDay = index" fxLayout="column" class="date col-6 col-md-4">
       <div class="title" style="font-size:14px"> {{getDateFormat(date)}}</div>
-      <div class="item" *ngFor="let hour of hours; let indexHour = index" fxLayout [style.background]="someFunction( indexHour + 8)" >
+      <div class="item" *ngFor="let hour of hours; let indexHour = index" fxLayout [style.background]="someFunction( indexHour + 8)" [ngStyle]="getActualHour(indexHour + 8)" >
        
-        <div class="col-12 text-center ">
-            <p class="m-0" style="font-size:15px">{{hour}}</p>
+        <div class="col-12 text-center ms-1">
+            <p class="m-0" style="font-size:16px">{{hour}}</p>
             <p class="m-0" style="font-size:13px;">{{getMeeting( indexHour + 8 )}}</p>
+            
         </div>
-
       </div>
     </div>
 
