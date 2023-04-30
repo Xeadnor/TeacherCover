@@ -1,26 +1,36 @@
 export class Guardia {
   diaSemana: number
+  dia: string;
   hora: number;
   descripcion: string
   estado: string;
   idGuardia: number;
   aula: string;
   curso: string;
+  nombreProfesor: string;
   profesor: number;
 
-  constructor(diaSemana?: number, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, profesor?: number) {
-    if (diaSemana && hora && descripcion && estado && idGuardia && aula && profesor && curso) {
+  constructor(diaSemana?: number, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number) {
+    if (diaSemana && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor) {
       this.idGuardia = idGuardia
       this.estado = estado
       this.hora = hora
       this.diaSemana = diaSemana
+      this.dia = dia
       this.descripcion = descripcion
       this.aula = aula
       this.profesor = profesor
+      this.nombreProfesor = nombreProfesor
       this.curso = curso
     }
   }
 
+  getDia() {
+    return this.dia
+  }
+  getNombreProfesor() {
+    return this.nombreProfesor
+  }
   getProfesor() {
     return this.profesor
   }
@@ -47,11 +57,17 @@ export class Guardia {
   }
 
 
-  setProfesor(profesor:number){
+  setDia(dia: string) {
+    this.dia = dia
+  }
+  setProfesor(profesor: number) {
     this.profesor = profesor
   }
-  setCurso(curso:string){
+  setCurso(curso: string) {
     this.curso = curso
+  }
+  setNombreProfesor(nombreProfesor: string) {
+    this.nombreProfesor = nombreProfesor
   }
   setAula(aula: string) {
     this.aula = aula

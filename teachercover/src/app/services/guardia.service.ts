@@ -11,12 +11,7 @@ export class GuardiaService {
 
   constructor(private firestore: Firestore) { }
 
-   async getAllGuardias(){
-    const db = getFirestore();
-    const guardiaRef = collection(db,"guardias");
-    const docsSnap = await getDocs(guardiaRef);
-    return docsSnap;
-  }
+
   getGuardias(): Observable<Guardia[]>{
     const guardiaref = collection(this.firestore,"guardias");
     return collectionData(guardiaref, {idField:"idField"}) as Observable<Guardia[]>;

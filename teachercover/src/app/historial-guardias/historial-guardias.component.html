@@ -1,79 +1,98 @@
+<div style="overflow-x:auto;">
 
-<div style="overflow-x:auto;" >
-    
-  <form [formGroup]="searchForm" class="search__form">      
+  <form [formGroup]="searchForm" class="search__form">
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="mostrarTabla" #tabla1 style="background-color:#e7e0ff" matSort>
-    
-    <ng-container matColumnDef="idGuardia" sticky >
-      
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> idGuardia </th>
-      <td mat-cell *matCellDef="let guardia"> {{guardia.idGuardia}} </td>
-      
-    </ng-container>
-    <ng-container matColumnDef="profesor">
-          <th mat-header-cell *matHeaderCellDef >
-            <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;"  appearance="outline">
-              <input type="text"
-                     aria-label="profesor"
-                     matInput
-                     formControlName="profesor"
-                     (keyup)="applyFilter()"
-                     placeholder="Buscar por profesor"
-              >
-            </mat-form-field>
-            <p mat-sort-header >profesor</p>
-          </th>
-      <td mat-cell *matCellDef="let guardia"> {{guardia.profesor}} </td>
-    </ng-container>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="mostrarTabla" #tabla1
+      style="background-color:#e7e0ff" matSort>
 
-    <ng-container matColumnDef="curso">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
-              <input type="text"
-                     aria-label="curso"
-                     matInput
-                     formControlName="curso"
-                     (keyup)="applyFilter()"
-                     placeholder="Buscar por curso"
+      <ng-container matColumnDef="idGuardia" sticky>
 
-              >
-            </mat-form-field>
-            <p mat-sort-header>curso</p>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> idGuardia </th>
+        <td mat-cell *matCellDef="let guardia"> {{guardia.idGuardia}} </td>
 
-          </th>
-      <td mat-cell *matCellDef="let guardia"> {{guardia.curso}} </td>
-    </ng-container>
+      </ng-container>
+      <ng-container matColumnDef="nombreProfesor">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+            <input type="text" aria-label="nombreProfesor" matInput formControlName="nombreProfesor"
+              (keyup)="applyFilter()" placeholder="Buscar por Profesor">
+          </mat-form-field>
+          <p mat-sort-header>Profesor</p>
+        </th>
+        <td mat-cell *matCellDef="let guardia"> {{guardia.nombreProfesor}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="aula">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> aula </th>
-      <td mat-cell *matCellDef="let guardia"> {{guardia.aula}} </td>
-    </ng-container>
+      <ng-container matColumnDef="curso">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+            <input type="text" aria-label="curso" matInput formControlName="curso" (keyup)="applyFilter()"
+              placeholder="Buscar por curso">
+          </mat-form-field>
+          <p mat-sort-header>Curso</p>
 
-    <ng-container matColumnDef="descripcion">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> descripcion </th>
-      <td mat-cell *matCellDef="let guardia"> {{guardia.descripcion}} </td>
-    </ng-container>
+        </th>
+        <td mat-cell *matCellDef="let guardia"> {{guardia.curso}} </td>
 
-    <ng-container matColumnDef="diaSemana">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> diaSemana </th>
-      <td mat-cell *matCellDef="let guardia"> {{guardia.diaSemana}} </td>
-    </ng-container>
+      </ng-container>
 
-    <ng-container matColumnDef="estado">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> estado </th>
-      <td mat-cell *matCellDef="let guardia"> {{guardia.estado}} </td>
-    </ng-container>
+      <ng-container matColumnDef="aula">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+            <input type="text" aria-label="aula" matInput formControlName="aula" (keyup)="applyFilter()"
+              placeholder="Buscar por aula">
+          </mat-form-field>
+          <p mat-sort-header>Aula</p>
 
-    
-    
-    
-    <tr mat-header-row *matHeaderRowDef="columnas; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnas;" style="background-color:#e7e0ff;"></tr>
-  </table>
-  <div class="footer">
-    
-  </div>
-</form>
+        </th>
+        <td mat-cell *matCellDef="let guardia"> {{guardia.aula}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+            <input type="text" aria-label="descripcion" matInput formControlName="descripcion" (keyup)="applyFilter()"
+              placeholder="Buscar por descripcion">
+          </mat-form-field>
+          <p mat-sort-header>Descripción</p>
+
+        </th>
+        <td mat-cell *matCellDef="let guardia"> {{guardia.descripcion}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dia">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+            <input type="text" aria-label="dia" matInput formControlName="dia" (keyup)="applyFilter()"
+              placeholder="Buscar por día">
+          </mat-form-field>
+          <p mat-sort-header>Día</p>
+
+        </th>
+        <td mat-cell *matCellDef="let guardia" > {{guardia.dia}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+            <input type="text" aria-label="estado" matInput formControlName="estado" (keyup)="applyFilter()"
+              placeholder="Buscar por estado">
+          </mat-form-field>
+          <p mat-sort-header>Estado</p>
+
+        </th>
+        <td mat-cell *matCellDef="let guardia"> {{guardia.estado}} </td>
+      </ng-container>
+
+
+
+
+      <tr mat-header-row *matHeaderRowDef="columnas; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas;" style="background-color:#e7e0ff;"></tr>
+    </table>
+    <div class="footer">
+
+    </div>
+  </form>
 </div>
-<mat-paginator class="mat-elevation-z8 fixed" [pageSizeOptions]="[10, 20, 50]" style="background-color:#e7e0ff;" ></mat-paginator>
+<mat-paginator class="mat-elevation-z8 fixed" [pageSizeOptions]="[10, 20, 50]"
+  style="background-color:#e7e0ff;"></mat-paginator>

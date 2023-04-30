@@ -54,7 +54,7 @@ export class CalendarioComponent {
       '13:15',
     ]
     this.guardiaService.getGuardias().subscribe(guardias => {
-      guardias.forEach(element => this.meetings.push(new Guardia(element["diaSemana"], element["hora"], element["descripcion"], element["estado"], element["idGuardia"])));
+      guardias.forEach(guardia => this.meetings.push(new Guardia(guardia["diaSemana"],guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["nombreProfesor"],guardia["profesor"])));
     });
   }
 

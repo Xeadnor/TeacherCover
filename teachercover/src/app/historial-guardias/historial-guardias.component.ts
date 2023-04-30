@@ -24,7 +24,7 @@ import { Guardia } from 'app/models/guardia.model';
 })
 export class HistorialGuardiasComponent implements OnInit {
 
-  columnas: string[] = ['idGuardia', 'profesor', 'curso',"aula","descripcion","diaSemana","estado"];
+  columnas: string[] = ['idGuardia', 'nombreProfesor', 'curso',"aula","descripcion","dia","estado"];
   constructor( private guardiaService: GuardiaService) { }
 
   
@@ -32,17 +32,20 @@ export class HistorialGuardiasComponent implements OnInit {
   dataSource:any;
   mostrarTabla: boolean;
   public searchForm: FormGroup;
-  public profesor = '';
+  public nombreProfesor = '';
   public curso = '';
-  
+  public aula = '';
+  public descripcion = '';
+  public dia = '';
+  public estado = '';
+
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   ngOnInit() {
     this.mostrarTabla = true;
     this.guardiaService.getGuardias().subscribe(guardias => {
       guardias.forEach((guardia) => {
-
-        this.datos.push(new Guardia(guardia["diaSemana"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["profesor"]));
+        this.datos.push(new Guardia(guardia["diaSemana"],guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["nombreProfesor"],guardia["profesor"]));
       })
     this.dataSource = new MatTableDataSource<Guardia>(this.datos);
     this.dataSource.sort = this.sort;
@@ -65,31 +68,61 @@ export class HistorialGuardiasComponent implements OnInit {
   }
   searchFormInit() {
     this.searchForm = new FormGroup({
-      profesor: new FormControl(''),
+      nombreProfesor: new FormControl(''),
       curso: new FormControl(''),
+      aula: new FormControl(''),
+      descripcion: new FormControl(''),
+      dia: new FormControl(''),
+      estado: new FormControl(''),
+
+
     });
   }
   getFilterPredicate() {
     return (row: Guardia, filters: string) => {
       // split string per '$' to array
       const filterArray = filters.split('$');
-      const profesor = filterArray[0];
+      const nombreProfesor = filterArray[0];
       const curso = filterArray[1];
+      const aula = filterArray[2];
+      const descripcion = filterArray[3];
+      const dia = filterArray[4];
+      const estado = filterArray[5];
+
+
 
       const matchFilter = [];
 
       // Fetch data from row
 
-      const columnProfesor = row.profesor;
+      const columnProfesor = row.nombreProfesor;
       const columnCurso = row.curso;
+      const columnAula = row.aula;
+      const columnDescripcion = row.descripcion;
+      const columnDia = row.dia;
+      const columnEstado = row.estado;
+
+
 
       // verify fetching data by our searching values
-      const customFilterDS = columnProfesor.toString().toLowerCase().includes(profesor);
-      const customFilterAS = columnCurso.toLowerCase().includes(curso);
+      const customFilterPR = columnProfesor.toString().toLowerCase().includes(nombreProfesor);
+      const customFilterCU = columnCurso.toLowerCase().includes(curso);
+      const customFilterAU = columnAula.toLowerCase().includes(aula);
+      const customFilterDE = columnDescripcion.toLowerCase().includes(descripcion);
+      const customFilterDI = columnDia.toString().toLowerCase().includes(dia);
+      const customFilterES = columnEstado.toLowerCase().includes(estado);
+
+
 
       // push boolean values into array
-      matchFilter.push(customFilterDS);
-      matchFilter.push(customFilterAS);
+      matchFilter.push(customFilterPR);
+      matchFilter.push(customFilterCU);
+      matchFilter.push(customFilterAU);
+      matchFilter.push(customFilterDE);
+      matchFilter.push(customFilterDI);
+      matchFilter.push(customFilterES);
+
+
 
       // return true if all values in array is true
       // else return false
@@ -102,14 +135,26 @@ export class HistorialGuardiasComponent implements OnInit {
   }
 
   applyFilter() {
-    const as = this.searchForm.get('profesor')!.value;
-    const ds = this.searchForm.get('curso')!.value;
+    const pr = this.searchForm.get('nombreProfesor')!.value;
+    const cu = this.searchForm.get('curso')!.value;
+    const au = this.searchForm.get('aula')!.value;
+    const de = this.searchForm.get('descripcion')!.value;
+    const di = this.searchForm.get('dia')!.value;
+    const es = this.searchForm.get('estado')!.value;
 
-    this.profesor = as === null ? '' : as;
-    this.curso = ds === null ? '' : ds;
+
+
+    this.nombreProfesor = pr === null ? '' : pr;
+    this.curso = cu === null ? '' : cu;
+    this.aula = au === null ? '' : au;
+    this.descripcion = de === null ? '' : de;
+    this.dia = di === null ? '' : di;
+    this.estado = es === null ? '' : es;
+
+
 
     // create string of our searching values and split if by '$'
-    const filterValue = this.profesor + '$' + this.curso;
+    const filterValue = this.nombreProfesor + '$' + this.curso + '$' + this.aula + '$' + this.descripcion + '$' + this.dia + '$' + this.estado;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
