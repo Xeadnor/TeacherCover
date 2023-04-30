@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit  {
     const divlog = document.getElementById("divLog");
     divlog!.classList.add("d-none")
     sessionStorage.clear();
-      this.auth.logOut();
+    this.auth.logOut();
   }
   
   mostrarNombre(){
