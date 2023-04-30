@@ -1,52 +1,47 @@
 
     <div style="overflow-x:auto;">
     
-      <div fxLayout fxLayoutAlign="center center">
-        <form [formGroup]="searchForm" class="search__form">
-
-          <mat-form-field class="search__form_field" appearance="outline">
-            <mat-label>Descripcion</mat-label>
-            <input type="text"
-                   aria-label="descripcion"
-                   matInput
-                   formControlName="descripcion"
-                   (keyup)="applyFilter()"
-            >
-          </mat-form-field>
-      
-          <mat-form-field class="search__form_field" appearance="outline">
-            <mat-label>Test</mat-label>
-            <input type="text"
-                   aria-label="Test"
-                   matInput
-                   formControlName="test"
-                   (keyup)="applyFilter()"
-            >
-          </mat-form-field>
-
-        </form>
-      </div>
-      
-
-
-
-
-
-
+        <form [formGroup]="searchForm" class="search__form">      
 
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" #tabla1 style="background-color:#e7e0ff" matSort>
-          <ng-container matColumnDef="codigo" sticky>
+          
+          <ng-container matColumnDef="codigo" sticky >
+            
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
             <td mat-cell *matCellDef="let articulo"> {{articulo.codigo}} </td>
+            
           </ng-container>
-      
           <ng-container matColumnDef="descripcion">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+                <th mat-header-cell *matHeaderCellDef >
+                  <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;"  appearance="outline">
+                    <input type="text"
+                           aria-label="descripcion"
+                           matInput
+                           formControlName="descripcion"
+                           (keyup)="applyFilter()"
+                           placeholder="Buscar por descripcion"
+                    >
+                  </mat-form-field>
+                  <p mat-sort-header >Descripcion</p>
+                </th>
             <td mat-cell *matCellDef="let articulo"> {{articulo.descripcion}} </td>
           </ng-container>
       
           <ng-container matColumnDef="test">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Test </th>
+                <th mat-header-cell *matHeaderCellDef>
+                  <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+                    <input type="text"
+                           aria-label="Test"
+                           matInput
+                           formControlName="test"
+                           (keyup)="applyFilter()"
+                           placeholder="Buscar por test"
+
+                    >
+                  </mat-form-field>
+                  <p mat-sort-header>Test</p>
+
+                </th>
             <td mat-cell *matCellDef="let articulo"> {{articulo.test}} </td>
           </ng-container>
 
@@ -65,14 +60,16 @@
             <td mat-cell *matCellDef="let articulo"> {{articulo.prueba3}} </td>
           </ng-container>
 
-
-
-      
+          
+          
+          
           <tr mat-header-row *matHeaderRowDef="columnas; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: columnas;" style="background-color:#e7e0ff;"></tr>
         </table>
+        <div class="footer">
+          
+        </div>
+      </form>
     </div>
-    <mat-paginator 
-    [pageSizeOptions]="[10, 20, 50]" style="background-color:#e7e0ff"></mat-paginator>
-
+    <mat-paginator class="mat-elevation-z8 fixed" [pageSizeOptions]="[10, 20, 50]" style="background-color:#e7e0ff;" ></mat-paginator>
 

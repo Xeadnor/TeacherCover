@@ -104,26 +104,25 @@ export class CalendarioComponent {
     let thisMinutes = this.day.getMinutes();
       if(thisHour == 8 && thisMinutes <25){
         thisHour = 7;
-      }
-      if(thisHour == 9 && thisMinutes < 20){
+      }else if(thisHour == 9 && thisMinutes < 20){
         thisHour = 8;
       }
-      if(thisHour == 10 && thisMinutes <15){
+      else if(thisHour == 10 && thisMinutes <15){
         thisHour = 9;
       }
-      if(thisHour == 11 && thisMinutes <5){
+      else if(thisHour == 11 && thisMinutes <5){
         thisHour = 10;
       }
-      if(thisHour == 11 && thisMinutes >30){
+      else if(thisHour == 11 && thisMinutes >30){
         thisHour = 12;
       }
-      if(thisHour == 12 && thisMinutes >20){
+      else if(thisHour == 12 && thisMinutes >20){
         thisHour = 13;
       }
-      if(thisHour == 13 && thisMinutes >15){
+      else if(thisHour == 13 && thisMinutes >15){
         thisHour = 14;
       }
-      if(thisHour == 14 && thisMinutes >5){
+      else if(thisHour == 14 && thisMinutes >5){
         thisHour = 15;
       }
 

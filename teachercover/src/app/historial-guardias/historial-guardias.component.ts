@@ -10,6 +10,7 @@ import {ChangeDetectionStrategy} from '@angular/core';
 import {FormControl,Validators} from '@angular/forms';
 import {from, Observable} from 'rxjs';
 import {distinct, map, mergeMap, startWith, toArray} from 'rxjs/operators';
+import { GuardiaService } from 'app/services/guardia.service';
 
 @Component({
 
@@ -24,6 +25,7 @@ export class HistorialGuardiasComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
   }
+ guardiaService: GuardiaService
   columnas: string[] = ['codigo', 'descripcion', 'test',"prueba","prueba2","prueba3"];
 
   datos: Articulo[] = [];
@@ -42,6 +44,7 @@ export class HistorialGuardiasComponent implements OnInit, AfterViewInit {
       this.datos.push(new Articulo(x, `test ${x}`, "Jueves","test","test2","test3"));
 
     }
+    
     this.dataSource = new MatTableDataSource<Articulo>(this.datos);
     this.dataSource.paginator = this.paginator;
 
