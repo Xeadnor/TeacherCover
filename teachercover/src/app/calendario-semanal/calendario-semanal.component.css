@@ -4,7 +4,7 @@
   }
   
   .title {
-    background-color: rgb(13, 124, 209);
+    background-color: grey;
     color: white;
     border-radius: 5px;
     font-size: 12px;
@@ -19,11 +19,6 @@
     font-size: 11px;
     margin: 3px 0;
     border: solid thin;
-    border-color: rgb(13, 124, 209)
+    border-color:grey;
   }
 
-  .selected {
-    background-color: lightblue;
-    border-radius: 5px;
-    border: 1px solid rgb(91, 91, 248);
-  }

@@ -7,7 +7,13 @@
 
       <ng-container matColumnDef="idGuardia" sticky>
 
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> idGuardia </th>
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+            <input type="text" aria-label="idGuardia" matInput formControlName="idGuardia"
+              (keyup)="applyFilter()" placeholder="Buscar por id">
+          </mat-form-field>
+          <p mat-sort-header>idGuardia</p>
+        </th>
         <td mat-cell *matCellDef="let guardia"> {{guardia.idGuardia}} </td>
 
       </ng-container>

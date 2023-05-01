@@ -2,34 +2,35 @@ export class Profesor {
     idProfesor: Number;
     name: String;
     email: String;
-    diaGuardia: String;
     horasGuardias: Number
     role: String
     validate: Number
     idField: String
-
-
-
+    horarioGuardias: Map<String, Number>
+    horarioGuardiasApoyo: Map<String, Number>
     constructor() {
     }
 
-    getIdField(){
+    getHorarioGuardias() {
+        return this.horarioGuardias;
+    }
+    getHorarioGuardiasApoyo() {
+        return this.horarioGuardiasApoyo;
+    }
+    getIdField() {
         return this.idField;
     }
     getIdProfesor() {
         return this.idProfesor;
     }
-    getRole(){
+    getRole() {
         return this.role;
     }
-    getValidate(){
+    getValidate() {
         return this.validate;
     }
     getName() {
         return this.name;
-    }
-    getdiaGuardias() {
-        return this.diaGuardia;
     }
     gethorasGuardias() {
         return this.horasGuardias;
@@ -38,6 +39,13 @@ export class Profesor {
         return this.email;
     }
 
+
+    setHorarioGuardia(horarioGuardias: Map<String, Number>) {
+        this.horarioGuardias = horarioGuardias
+    }
+    setHorarioGuardiaApoyo(horarioGuardiasApoyo: Map<String, Number>) {
+        this.horarioGuardiasApoyo = horarioGuardiasApoyo
+    }
     setName(name: String) {
         this.name = name;
     }
@@ -50,16 +58,13 @@ export class Profesor {
     setEmail(email: String) {
         this.email = email;
     }
-    setDiaGuardia(diaGuardia: String) {
-        this.diaGuardia = diaGuardia;
-    }
     setRole(Role: String) {
         this.role = Role;
     }
     setValidate(validate: Number) {
         this.validate = validate;
     }
-    setIdField(idField: String){
+    setIdField(idField: String) {
         this.idField = idField;
     }
 }

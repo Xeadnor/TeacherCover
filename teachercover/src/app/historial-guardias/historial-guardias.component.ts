@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 import {ChangeDetectionStrategy} from '@angular/core';
 import {FormControl,Validators} from '@angular/forms';
 import {from, Observable} from 'rxjs';
-import {distinct, map, mergeMap, startWith, toArray} from 'rxjs/operators';
+import {distinct, filter, map, mergeMap, startWith, toArray} from 'rxjs/operators';
 import { GuardiaService } from 'app/services/guardia.service';
 import { Guardia } from 'app/models/guardia.model';
 
@@ -32,6 +32,7 @@ export class HistorialGuardiasComponent implements OnInit {
   dataSource:any;
   mostrarTabla: boolean;
   public searchForm: FormGroup;
+  public idGuardia = '';
   public nombreProfesor = '';
   public curso = '';
   public aula = '';
@@ -42,9 +43,12 @@ export class HistorialGuardiasComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   ngOnInit() {
+
+
     this.mostrarTabla = true;
     this.guardiaService.getGuardias().subscribe(guardias => {
       guardias.forEach((guardia) => {
+        console.log(guardia);
         this.datos.push(new Guardia(guardia["diaSemana"],guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["nombreProfesor"],guardia["profesor"]));
       })
     this.dataSource = new MatTableDataSource<Guardia>(this.datos);
@@ -68,6 +72,7 @@ export class HistorialGuardiasComponent implements OnInit {
   }
   searchFormInit() {
     this.searchForm = new FormGroup({
+      idGuardia: new FormControl(''),
       nombreProfesor: new FormControl(''),
       curso: new FormControl(''),
       aula: new FormControl(''),
@@ -82,19 +87,20 @@ export class HistorialGuardiasComponent implements OnInit {
     return (row: Guardia, filters: string) => {
       // split string per '$' to array
       const filterArray = filters.split('$');
-      const nombreProfesor = filterArray[0];
-      const curso = filterArray[1];
-      const aula = filterArray[2];
-      const descripcion = filterArray[3];
-      const dia = filterArray[4];
-      const estado = filterArray[5];
+      const idGuardia = filterArray[0];
+      const nombreProfesor = filterArray[1];
+      const curso = filterArray[2];
+      const aula = filterArray[3];
+      const descripcion = filterArray[4];
+      const dia = filterArray[5];
+      const estado = filterArray[6];
 
 
 
       const matchFilter = [];
 
       // Fetch data from row
-
+      const columnIdGuardia = row.idGuardia;
       const columnProfesor = row.nombreProfesor;
       const columnCurso = row.curso;
       const columnAula = row.aula;
@@ -105,6 +111,7 @@ export class HistorialGuardiasComponent implements OnInit {
 
 
       // verify fetching data by our searching values
+      const customFilterGU = columnIdGuardia.toString().toLowerCase().includes(idGuardia);
       const customFilterPR = columnProfesor.toString().toLowerCase().includes(nombreProfesor);
       const customFilterCU = columnCurso.toLowerCase().includes(curso);
       const customFilterAU = columnAula.toLowerCase().includes(aula);
@@ -115,6 +122,7 @@ export class HistorialGuardiasComponent implements OnInit {
 
 
       // push boolean values into array
+      matchFilter.push(customFilterGU);
       matchFilter.push(customFilterPR);
       matchFilter.push(customFilterCU);
       matchFilter.push(customFilterAU);
@@ -135,6 +143,7 @@ export class HistorialGuardiasComponent implements OnInit {
   }
 
   applyFilter() {
+    const gu = this.searchForm.get('idGuardia')!.value;
     const pr = this.searchForm.get('nombreProfesor')!.value;
     const cu = this.searchForm.get('curso')!.value;
     const au = this.searchForm.get('aula')!.value;
@@ -143,7 +152,7 @@ export class HistorialGuardiasComponent implements OnInit {
     const es = this.searchForm.get('estado')!.value;
 
 
-
+    this.idGuardia = gu === null ? '' : gu;
     this.nombreProfesor = pr === null ? '' : pr;
     this.curso = cu === null ? '' : cu;
     this.aula = au === null ? '' : au;
@@ -154,7 +163,7 @@ export class HistorialGuardiasComponent implements OnInit {
 
 
     // create string of our searching values and split if by '$'
-    const filterValue = this.nombreProfesor + '$' + this.curso + '$' + this.aula + '$' + this.descripcion + '$' + this.dia + '$' + this.estado;
+    const filterValue =this.idGuardia + '$' + this.nombreProfesor + '$' + this.curso + '$' + this.aula + '$' + this.descripcion + '$' + this.dia + '$' + this.estado;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

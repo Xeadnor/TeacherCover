@@ -34,6 +34,14 @@ export class ProfesorService {
     return docsSnap;
   }
 
+  async getATeacherFromId(idField : String){
+    const db = getFirestore();
+    const profesorRef = collection(db,"profesores", idField.toString());
+    const docSnap = await getDocs(profesorRef);
+    return docSnap;
+
+  }
+
   updateUserValidate(idField: String) {
     const db = getFirestore();
     const profesorRef = doc(db,"profesores",idField.toString());

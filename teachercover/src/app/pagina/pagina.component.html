@@ -4,7 +4,7 @@
 
     <div class="row p-0 m-0 mb-3">
 
-        <div class="d-none d-lg-block flex-shrink-0 p-3 colorcito col-2 bordes" style="min-height: 800px;">
+        <div class="d-none d-lg-block flex-shrink-0 p-3 colorcito col-2 bordes" style="min-height: 850px;">
             <p class="d-flex align-items-center pb-3 mb-3 mt-3 text-decoration-none border-bottom">
               <img class="bi me-2" width="30" height="24" src="favicon.ico"/>
               <span class="fs-5 fw-semibold">Menú</span>
@@ -28,10 +28,10 @@
                 </button>
                 <div class="collapse" id="dashboard-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
-                    <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
-                    <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
-                    <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
+                    <li><a href="#" class="link-dark rounded">Prox...</a></li>
+                    <li><a href="#" class="link-dark rounded">Prox...</a></li>
+                    <li><a href="#" class="link-dark rounded">Prox...</a></li>
+                    <li><a href="#" class="link-dark rounded">Prox...</a></li>
                   </ul>
                 </div>
               </li>
@@ -78,14 +78,14 @@
             </div>
             <div class="col-3 text-center p-0">
               <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 pt-1" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
-                Proximamente...
+                Prox...
               </button>
               <div class="collapse" id="dashboard-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                  <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
-                  <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
-                  <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
-                  <li><a href="#" class="link-dark rounded">Proximamente...</a></li>
+                  <li><a href="#" class="link-dark rounded">Prox...</a></li>
+                  <li><a href="#" class="link-dark rounded">Prox...</a></li>
+                  <li><a href="#" class="link-dark rounded">Prox...</a></li>
+                  <li><a href="#" class="link-dark rounded">Prox...</a></li>
                 </ul>
               </div>
               
@@ -148,11 +148,11 @@
             </div>
             <div *ngIf="mostrarDatos" class="row colorcito mt-0  p-2 m-0 m-lg-2 rounded-datos">
               <div   class="row justify-content-around pe-0">
-                <div class="col pe-0 border border-2 border-dark border-top-0 border-end-0 border-start-0">
+                <div class="col-11 pe-0 border border-2 border-dark border-top-0 border-end-0 border-start-0">
                   <h5 class="">Panel de informacion de : {{ nombreUsuario }}</h5>
 
                 </div>
-                <div class="col ps-0 pe-0 border border-2 border-dark border-top-0 border-end-0 border-start-0">
+                <div class="col-1 ps-0 pe-0 border border-2 border-dark border-top-0 border-end-0 border-start-0">
                   <button type="button" class="p-1 btn-close float-end border border-1 border-danger btn-danger text-danger bg-danger rounded-circle" (click)="hideDatos()" aria-label="Close"></button>
 
                 </div>
@@ -162,7 +162,7 @@
                           <tr class="text-center">
                             <th class="col-2">Rol</th>
                             <th class="col-2">Guardias Realizadas</th>
-                            <th class="col-2">------</th>
+                            <th class="col-2">-</th>
                             <th class="col-2">Notificaciones</th>
                           </tr>
                         </thead>
@@ -170,7 +170,7 @@
                           <tr class="text-center">
                             <th>{{ rol }}</th>
                             <td>{{ horasGuardias }} horas</td>
-                            <td>------</td>
+                            <td>-</td>
                             <td>Ninguna</td>
                           </tr>
                         </tbody>

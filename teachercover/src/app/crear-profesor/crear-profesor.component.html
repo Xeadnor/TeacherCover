@@ -3,15 +3,15 @@
 
     <form [formGroup]="createTeacherForm" (ngSubmit)="createTeacher()" #localForm="ngForm">
         <div class="form-outline form-white m-4 me-5 ms-5 mt-0">
-          <label class="form-label" for="newPassword">Nueva Password</label>
-          <input type="password" id="newPassword" class="form-control form-control-lg" formControlName="newPassword" [class.is-invalid]="localForm.submitted && createTeacherForm.get('newPassword')?.invalid" />
+          <label class="form-label" for="newPassword">Nombre del profesor</label>
+          <input type="text" id="newPassword" class="form-control form-control-lg" formControlName="emailLogin" [class.is-invalid]="localForm.submitted && createTeacherForm.get('newPassword')?.invalid" />
           <div class="invalid-feedback">
             Nueva password es un campo obligatorio
           </div>
         </div>
         <div class="form-outline form-white m-4 mt-0 me-5 ms-5">
-          <label class="form-label" for="repeatPassword">Repetir Password</label>
-          <input type="password" id="repeatPassword" class="form-control form-control-lg" formControlName="repeatPassword" [class.is-invalid]="localForm.submitted && createTeacherForm.get('repeatPassword')?.invalid" />
+          <label class="form-label" for="repeatPassword">Email</label>
+          <input type="password" id="repeatPassword" class="form-control form-control-lg" formControlName="password" [class.is-invalid]="localForm.submitted && createTeacherForm.get('repeatPassword')?.invalid" />
           <div class="invalid-feedback">
             Repetir password es un campo obligatorio
           </div>
