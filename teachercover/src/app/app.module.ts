@@ -70,6 +70,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 
 
@@ -87,6 +88,7 @@ const appRoutes: Routes = [
     ]
   },
   {path:"recover-password",component: RecoverPasswordComponent},
+  {path:"**",component : PagenotfoundComponent}
 
 
 ];
@@ -102,6 +104,7 @@ const appRoutes: Routes = [
     CalendarioSemanalComponent,
     CrearProfesorComponent,
     RecoverPasswordComponent,
+    PagenotfoundComponent,
   ],
   imports: [
     MatTableModule,
