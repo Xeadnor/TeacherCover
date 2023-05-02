@@ -1,5 +1,6 @@
 export class Guardia {
   diaSemana: number
+  fecha: Date;
   dia: string;
   hora: number;
   descripcion: string
@@ -10,10 +11,11 @@ export class Guardia {
   nombreProfesor: string;
   profesor: number;
 
-  constructor(diaSemana?: number, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number) {
-    if (diaSemana && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor) {
+  constructor(diaSemana?: number,fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number) {
+    if (diaSemana && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor && fecha) {
       this.idGuardia = idGuardia
       this.estado = estado
+      this.fecha = fecha;
       this.hora = hora
       this.diaSemana = diaSemana
       this.dia = dia
@@ -25,6 +27,9 @@ export class Guardia {
     }
   }
 
+  getFecha(){
+    return this.fecha;
+  }
   getDia() {
     return this.dia
   }
@@ -57,6 +62,9 @@ export class Guardia {
   }
 
 
+  setFecha(fecha:Date){
+    this.fecha = fecha;
+  }
   setDia(dia: string) {
     this.dia = dia
   }

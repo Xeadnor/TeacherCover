@@ -12,6 +12,8 @@ import {from, Observable} from 'rxjs';
 import {distinct, filter, map, mergeMap, startWith, toArray} from 'rxjs/operators';
 import { GuardiaService } from 'app/services/guardia.service';
 import { Guardia } from 'app/models/guardia.model';
+import { DateAdapter } from '@angular/material/core';
+
 
 @Component({
 
@@ -24,15 +26,27 @@ import { Guardia } from 'app/models/guardia.model';
 })
 export class HistorialGuardiasComponent implements OnInit {
 
-  columnas: string[] = ['idGuardia', 'nombreProfesor', 'curso',"aula","descripcion","dia","estado"];
-  constructor( private guardiaService: GuardiaService) { }
+  columnas: string[] = ['idGuardia','fecha', 'nombreProfesor', 'curso',"aula","descripcion","dia","estado"];
+  constructor( private guardiaService: GuardiaService,private dateAdapter: DateAdapter<Date>) {
+    this.dateAdapter.setLocale('es'); 
+    this.dateAdapter.getFirstDayOfWeek()
+    
+   }
+   getDateFormat(guardia : Guardia): String{
 
-  
+    var month = guardia.getFecha().getUTCMonth() + 1; //months from 1-12
+var day = guardia.getFecha().getUTCDate() + 1;
+var year = guardia.getFecha().getUTCFullYear();
+
+    return day + "/" + month +"/" + year;
+   }
+
   datos: Guardia[] = [];
   dataSource:any;
   mostrarTabla: boolean;
   public searchForm: FormGroup;
   public idGuardia = '';
+  public fecha = '';
   public nombreProfesor = '';
   public curso = '';
   public aula = '';
@@ -49,7 +63,7 @@ export class HistorialGuardiasComponent implements OnInit {
     this.guardiaService.getGuardias().subscribe(guardias => {
       guardias.forEach((guardia) => {
         console.log(guardia);
-        this.datos.push(new Guardia(guardia["diaSemana"],guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["nombreProfesor"],guardia["profesor"]));
+        this.datos.push(new Guardia(guardia["diaSemana"],new Date(guardia["fecha"]),guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["nombreProfesor"],guardia["profesor"]));
       })
     this.dataSource = new MatTableDataSource<Guardia>(this.datos);
     this.dataSource.sort = this.sort;
@@ -73,6 +87,7 @@ export class HistorialGuardiasComponent implements OnInit {
   searchFormInit() {
     this.searchForm = new FormGroup({
       idGuardia: new FormControl(''),
+      fecha: new FormControl(''),
       nombreProfesor: new FormControl(''),
       curso: new FormControl(''),
       aula: new FormControl(''),
@@ -88,12 +103,13 @@ export class HistorialGuardiasComponent implements OnInit {
       // split string per '$' to array
       const filterArray = filters.split('$');
       const idGuardia = filterArray[0];
-      const nombreProfesor = filterArray[1];
-      const curso = filterArray[2];
-      const aula = filterArray[3];
-      const descripcion = filterArray[4];
-      const dia = filterArray[5];
-      const estado = filterArray[6];
+      const fecha = filterArray[1];
+      const nombreProfesor = filterArray[2];
+      const curso = filterArray[3];
+      const aula = filterArray[4];
+      const descripcion = filterArray[5];
+      const dia = filterArray[6];
+      const estado = filterArray[7];
 
 
 
@@ -101,6 +117,7 @@ export class HistorialGuardiasComponent implements OnInit {
 
       // Fetch data from row
       const columnIdGuardia = row.idGuardia;
+      const columnFecha= row.fecha;
       const columnProfesor = row.nombreProfesor;
       const columnCurso = row.curso;
       const columnAula = row.aula;
@@ -112,6 +129,7 @@ export class HistorialGuardiasComponent implements OnInit {
 
       // verify fetching data by our searching values
       const customFilterGU = columnIdGuardia.toString().toLowerCase().includes(idGuardia);
+      const customFilterFE = columnFecha.toString().toLowerCase().includes(fecha);
       const customFilterPR = columnProfesor.toString().toLowerCase().includes(nombreProfesor);
       const customFilterCU = columnCurso.toLowerCase().includes(curso);
       const customFilterAU = columnAula.toLowerCase().includes(aula);
@@ -123,6 +141,7 @@ export class HistorialGuardiasComponent implements OnInit {
 
       // push boolean values into array
       matchFilter.push(customFilterGU);
+      matchFilter.push(customFilterFE);
       matchFilter.push(customFilterPR);
       matchFilter.push(customFilterCU);
       matchFilter.push(customFilterAU);
@@ -144,6 +163,7 @@ export class HistorialGuardiasComponent implements OnInit {
 
   applyFilter() {
     const gu = this.searchForm.get('idGuardia')!.value;
+    const fe = this.searchForm.get('fecha')!.value;
     const pr = this.searchForm.get('nombreProfesor')!.value;
     const cu = this.searchForm.get('curso')!.value;
     const au = this.searchForm.get('aula')!.value;
@@ -153,6 +173,7 @@ export class HistorialGuardiasComponent implements OnInit {
 
 
     this.idGuardia = gu === null ? '' : gu;
+    this.fecha = (fe === null || fe === '') ? '' : fe.toString();
     this.nombreProfesor = pr === null ? '' : pr;
     this.curso = cu === null ? '' : cu;
     this.aula = au === null ? '' : au;
@@ -163,7 +184,7 @@ export class HistorialGuardiasComponent implements OnInit {
 
 
     // create string of our searching values and split if by '$'
-    const filterValue =this.idGuardia + '$' + this.nombreProfesor + '$' + this.curso + '$' + this.aula + '$' + this.descripcion + '$' + this.dia + '$' + this.estado;
+    const filterValue =this.idGuardia + '$' + this.fecha +'$'+ this.nombreProfesor + '$' + this.curso + '$' + this.aula + '$' + this.descripcion + '$' + this.dia + '$' + this.estado;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

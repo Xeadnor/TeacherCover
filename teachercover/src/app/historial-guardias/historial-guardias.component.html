@@ -17,6 +17,25 @@
         <td mat-cell *matCellDef="let guardia"> {{guardia.idGuardia}} </td>
 
       </ng-container>
+      
+      <ng-container matColumnDef="fecha">
+
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+            <input matInput
+            formControlName="fecha"
+            [matDatepicker]="picker"
+            (dateInput)="applyFilter()"
+            placeholder="Buscar por fecha">
+     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+     <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <p mat-sort-header>Fecha</p>
+        </th>
+        <td mat-cell *matCellDef="let guardia"> {{ getDateFormat(guardia) }} </td>
+
+      </ng-container>
+
       <ng-container matColumnDef="nombreProfesor">
         <th mat-header-cell *matHeaderCellDef>
           <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">

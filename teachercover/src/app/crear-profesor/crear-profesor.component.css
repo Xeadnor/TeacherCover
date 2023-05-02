@@ -1,7 +1,20 @@
 .mat-stepper-horizontal {
-    margin-top: 8px;
-  }
-  
-  .mat-mdc-form-field {
-    margin-top: 16px;
-  }
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+.botonLogin {
+  background-color: rgb(255, 182, 23);
+  color: rgb(72, 33, 113);
+  border-color: rgb(72, 33, 113);
+
+}
+
+.botonLogin:hover {
+  background-color: rgb(72, 33, 113);
+  color: rgb(255, 182, 23);
+  border-color: rgb(255, 182, 23);
+}

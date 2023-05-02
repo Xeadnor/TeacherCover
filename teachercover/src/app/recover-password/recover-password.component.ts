@@ -46,6 +46,9 @@ export class RecoverPasswordComponent {
           this.auth.sendResetPassword(email)
           this.router.navigate(['']);
           this.toastr.success("Compruebe su correo electronico para reestablecer su contraseña","Codigo enviado",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
+        }else{
+          this.toastr.error("El correo introducido no existe, comprueba que esta bien escrito","No existe ningun correo asi",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
+
         }
     })
 

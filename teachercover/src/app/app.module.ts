@@ -71,6 +71,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 
 
@@ -113,6 +114,7 @@ const appRoutes: Routes = [
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatMomentDateModule,
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
@@ -165,7 +167,7 @@ const appRoutes: Routes = [
     AngularFireDatabaseModule,
 
   ],
-  providers: [],
+  providers: [MatDatepickerModule ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
