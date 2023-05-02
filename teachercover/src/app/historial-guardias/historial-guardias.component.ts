@@ -33,10 +33,10 @@ export class HistorialGuardiasComponent implements OnInit {
     
    }
    getDateFormat(guardia : Guardia): String{
-
-    var month = guardia.getFecha().getUTCMonth() + 1; //months from 1-12
-var day = guardia.getFecha().getUTCDate() + 1;
-var year = guardia.getFecha().getUTCFullYear();
+    console.log(guardia.getFecha())
+    var month = guardia.getFecha().getMonth() +1; //months from 1-12
+var day = guardia.getFecha().getDate();
+var year = guardia.getFecha().getFullYear();
 
     return day + "/" + month +"/" + year;
    }
