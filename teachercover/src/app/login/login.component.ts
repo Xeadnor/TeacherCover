@@ -76,8 +76,8 @@ const prueba = (await this.profesorService.getDataFromEmail(emailLogin)).subscri
   newProf.setIdField(profesor[0]["idFIeld"]);
   newProf.setHorarioGuardia(profesor[0]["horarioGuardias"]);
   newProf.setHorarioGuardiaApoyo(profesor[0]["horarioGuardiasApoyo"]);
-
-  if(newProf.getValidate() == 0){
+  console.log(newProf);
+  if(newProf.getValidate() != 1){
     this.changepassword = true;
     this.nombreProfesor = newProf.getName();
     this.idFieldProfesor = newProf.getIdField();
