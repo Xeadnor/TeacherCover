@@ -33,7 +33,6 @@ export class HistorialGuardiasComponent implements OnInit {
     
    }
    getDateFormat(guardia : Guardia): String{
-    console.log(guardia.getFecha())
     var month = guardia.getFecha().getMonth() +1; //months from 1-12
 var day = guardia.getFecha().getDate();
 var year = guardia.getFecha().getFullYear();
@@ -62,7 +61,7 @@ var year = guardia.getFecha().getFullYear();
     this.mostrarTabla = true;
     this.guardiaService.getGuardias().subscribe(guardias => {
       guardias.forEach((guardia) => {
-        console.log(guardia);
+  
         this.datos.push(new Guardia(guardia["diaSemana"],new Date(guardia["fecha"]),guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["nombreProfesor"],guardia["profesor"]));
       })
     this.dataSource = new MatTableDataSource<Guardia>(this.datos);

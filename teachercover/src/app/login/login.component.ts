@@ -70,13 +70,12 @@ const prueba = (await this.profesorService.getDataFromEmail(emailLogin)).subscri
   newProf.setIdProfesor(profesor[0]["id"]);
   newProf.setName(profesor[0]["name"]);
   newProf.setEmail(profesor[0]["email"]);
-  newProf.setHorasGuardais(profesor[0]["horasGuardias"]);
+  newProf.setHorasGuardias(profesor[0]["horasGuardias"]);
   newProf.setRole(profesor[0]["role"]);
   newProf.setValidate(profesor[0]["validate"]);
   newProf.setIdField(profesor[0]["idFIeld"]);
   newProf.setHorarioGuardia(profesor[0]["horarioGuardias"]);
   newProf.setHorarioGuardiaApoyo(profesor[0]["horarioGuardiasApoyo"]);
-  console.log(newProf);
   if(newProf.getValidate() != 1){
     this.changepassword = true;
     this.nombreProfesor = newProf.getName();

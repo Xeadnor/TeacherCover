@@ -16,6 +16,10 @@ export class AuthService {
     return this.auth.signInWithEmailAndPassword(user, pass);
   }
 
+  registrar (email:string){
+    return this.auth.createUserWithEmailAndPassword(email, "IESinfanta23");
+  }
+
   changePassword(pass:string){
     const auth = getAuth();
 

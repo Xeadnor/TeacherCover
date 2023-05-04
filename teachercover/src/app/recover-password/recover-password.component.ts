@@ -39,17 +39,18 @@ export class RecoverPasswordComponent {
   if(email.length > 0){
     if(regex.test(email)){
 
-      let prueba = this.profesorService.confirmEmail();
+      let prueba = this.profesorService.getDataFromEmail(email);
+      
       (await prueba).forEach(doc => {
-        if(doc.data()["email"] == email){
+       if(doc.length > 0){
           // send email
-          this.auth.sendResetPassword(email)
-          this.router.navigate(['']);
-          this.toastr.success("Compruebe su correo electronico para reestablecer su contraseña","Codigo enviado",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
-        }else{
-          this.toastr.error("El correo introducido no existe, comprueba que esta bien escrito","No existe ningun correo asi",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
+      this.auth.sendResetPassword(email)
+        this.router.navigate(['']);
+      this.toastr.success("Compruebe su correo electronico para reestablecer su contraseña","Codigo enviado",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
+       }else{
+        this.toastr.error("El correo introducido no existe, comprueba que esta bien escrito","No existe ningun correo asi",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
+       }
 
-        }
     })
 
 

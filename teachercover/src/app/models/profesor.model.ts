@@ -1,13 +1,13 @@
 export class Profesor {
-    idProfesor: Number;
-    name: String;
-    email: String;
-    horasGuardias: Number
-    role: String
-    validate: Number
-    idField: String
-    horarioGuardias: Map<String, Number>
-    horarioGuardiasApoyo: Map<String, Number>
+    id: number;
+    name: string;
+    email: string;
+    horasGuardias: number
+    role: string
+    validate: number
+    idField: string
+    horarioGuardias: Map<string, number>
+    horarioGuardiasApoyo: Map<string, number>
     constructor() {
     }
 
@@ -21,7 +21,7 @@ export class Profesor {
         return this.idField;
     }
     getIdProfesor() {
-        return this.idProfesor;
+        return this.id;
     }
     getRole() {
         return this.role;
@@ -40,31 +40,31 @@ export class Profesor {
     }
 
 
-    setHorarioGuardia(horarioGuardias: Map<String, Number>) {
+    setHorarioGuardia(horarioGuardias: Map<string, number>) {
         this.horarioGuardias = horarioGuardias
     }
-    setHorarioGuardiaApoyo(horarioGuardiasApoyo: Map<String, Number>) {
+    setHorarioGuardiaApoyo(horarioGuardiasApoyo: Map<string, number>) {
         this.horarioGuardiasApoyo = horarioGuardiasApoyo
     }
-    setName(name: String) {
+    setName(name: string) {
         this.name = name;
     }
-    setIdProfesor(Id: Number) {
-        this.idProfesor = Id;
+    setIdProfesor(Id: number) {
+        this.id = Id;
     }
-    setHorasGuardais(horasGuardias: Number) {
+    setHorasGuardias(horasGuardias: number) {
         this.horasGuardias = horasGuardias;
     }
-    setEmail(email: String) {
+    setEmail(email: string) {
         this.email = email;
     }
-    setRole(Role: String) {
+    setRole(Role: string) {
         this.role = Role;
     }
-    setValidate(validate: Number) {
+    setValidate(validate: number) {
         this.validate = validate;
     }
-    setIdField(idField: String) {
+    setIdField(idField: string) {
         this.idField = idField;
     }
 }
