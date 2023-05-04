@@ -17,6 +17,12 @@ export class GuardiaService {
     return collectionData(guardiaref, {idField:"idField"}) as Observable<Guardia[]>;
   }
 
+  getGuardiasByUser(idProf: number){
+    const profesorRef = collection(this.firestore,"guardias");
+    const populationQuery = query(profesorRef, where("profesor", "==", idProf));
+    return collectionData(populationQuery, {idField:"idFIeld"});
+  }
+
 
   getGuardiasOfProfesor(idProfesor:number): Observable<Guardia[]>{
     //! por implementar

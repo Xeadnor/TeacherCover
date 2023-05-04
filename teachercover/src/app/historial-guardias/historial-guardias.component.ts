@@ -13,6 +13,7 @@ import {distinct, filter, map, mergeMap, startWith, toArray} from 'rxjs/operator
 import { GuardiaService } from 'app/services/guardia.service';
 import { Guardia } from 'app/models/guardia.model';
 import { DateAdapter } from '@angular/material/core';
+import { Profesor } from 'app/models/profesor.model';
 
 
 @Component({
@@ -56,23 +57,45 @@ var year = guardia.getFecha().getFullYear();
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   ngOnInit() {
-
-
-    this.mostrarTabla = true;
-    this.guardiaService.getGuardias().subscribe(guardias => {
-      guardias.forEach((guardia) => {
+    let userJson = sessionStorage.getItem('profesor');
+    let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
+    console.log(profesor["role"]);
+    if(profesor["role"] == "User"){
+      
+      this.mostrarTabla = true;
+      this.guardiaService.getGuardiasByUser(profesor["id"]).subscribe(guardias => {
+        guardias.forEach((guardia) => {
+    
+          this.datos.push(new Guardia(guardia["diaSemana"],new Date(guardia["fecha"]),guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["nombreProfesor"],guardia["profesor"]));
+        })
+      this.dataSource = new MatTableDataSource<Guardia>(this.datos);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
   
-        this.datos.push(new Guardia(guardia["diaSemana"],new Date(guardia["fecha"]),guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["nombreProfesor"],guardia["profesor"]));
-      })
-    this.dataSource = new MatTableDataSource<Guardia>(this.datos);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+      this.searchFormInit();
+      /* Filter predicate used for filtering table per different columns
+      *  */
+      this.dataSource.filterPredicate = this.getFilterPredicate()
+      });
 
-    this.searchFormInit();
-    /* Filter predicate used for filtering table per different columns
-    *  */
-    this.dataSource.filterPredicate = this.getFilterPredicate()
-    });
+    }else{
+      this.mostrarTabla = true;
+      this.guardiaService.getGuardias().subscribe(guardias => {
+        guardias.forEach((guardia) => {
+    
+          this.datos.push(new Guardia(guardia["diaSemana"],new Date(guardia["fecha"]),guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["nombreProfesor"],guardia["profesor"]));
+        })
+      this.dataSource = new MatTableDataSource<Guardia>(this.datos);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+  
+      this.searchFormInit();
+      /* Filter predicate used for filtering table per different columns
+      *  */
+      this.dataSource.filterPredicate = this.getFilterPredicate()
+      });
+
+    }
 
     this.dataSource = new MatTableDataSource<Guardia>(this.datos);
     this.dataSource.paginator = this.paginator;
