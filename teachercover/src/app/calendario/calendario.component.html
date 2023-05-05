@@ -1,21 +1,21 @@
 
   <div class="row">
     <div class="col-6 col-md-3 p-1">
-      Horas de guardia <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="gray " class="bi bi-circle-fill" viewBox="0 0 20 20">
+      Horas de guardia <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="lightblue " class="bi bi-circle-fill border border-1 border-dark rounded-circle" viewBox="0 0 20 20">
+        <circle cx="10" cy="10" r="10"/>
+      </svg>
+    </div>
+    <div class="col-6 col-md-3 p-1 ">
+      Horas de guardia de apoyo <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="khaki " class="bi bi-circle-fill border border-1 border-dark rounded-circle" viewBox="0 0 20 20">
         <circle cx="10" cy="10" r="10"/>
       </svg>
     </div>
     <div class="col-6 col-md-3 p-1">
-      Guardias ya hechas <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green " class="bi bi-circle-fill" viewBox="0 0 20 20">
+      Guardia completada <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green " class="bi bi-circle-fill border border-1 border-dark rounded-circle" viewBox="0 0 20 20">
         <circle cx="10" cy="10" r="10"/>
       </svg>
     </div>
-    <div class="col-6 col-md-3 p-1">
-      Guardia sin asignar <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="orange " class="bi bi-circle-fill" viewBox="0 0 20 20">
-        <circle cx="10" cy="10" r="10"/>
-      </svg>
-    </div>
-    <div class="col-6 col-md-3 p-1">    Guardia por realizar <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="blue " class="bi bi-circle-fill" viewBox="0 0 20 20">
+    <div class="col-6 col-md-3 p-1">    Guardia por realizar <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="blue " class="bi bi-circle-fill border border-1 border-dark rounded-circle" viewBox="0 0 20 20">
       <circle cx="10" cy="10" r="10"/>
     </svg>
   </div>
@@ -23,9 +23,9 @@
   </div>
 
   <div class="row">
-    <div *ngFor="let date of datesInWeek; let indexDay = index" fxLayout="column" class="date col-6 col-md-4">
+    <div *ngFor="let date of datesInWeek" fxLayout="column" class="date col-6 col-md-4">
       <div class="title" style="font-size:14px"> {{getDateFormat(date)}}</div>
-      <div class="item" *ngFor="let hour of hours; let indexHour = index" fxLayout [style.background]="someFunction( indexHour + 8)" [ngStyle]="getActualHour(indexHour + 8)" >
+      <div class="item" *ngFor="let hour of hours; let indexHour = index" fxLayout [ngStyle]="existsMeeting(indexHour + 8)">
        
         <div class="col-12 text-center ms-1">
             <p class="m-0" style="font-size:16px">{{hour}}</p>

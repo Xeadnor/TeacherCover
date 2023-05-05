@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Guardia } from '../models/guardia.model';
 import { UtilsService } from '../services/utils.service';
 import { GuardiaService } from '../services/guardia.service';
+import { Profesor } from 'app/models/profesor.model';
+import { ProfesorService } from 'app/services/profesor.service';
 
 @Component({
   selector: 'app-calendario',
@@ -12,6 +14,8 @@ export class CalendarioComponent {
   meetings: Guardia[] = [
 
   ]
+  horarioGuardias : Map<String,Number>;
+  horarioGuardiasApoyo : Map<String,Number>;
   datesInWeek: Date[] = [];
   daysWeek = [
     'Domingo',
@@ -39,9 +43,9 @@ export class CalendarioComponent {
   ];
   day: Date;
   hours: string[] = [];
-  constructor(private utilsService: UtilsService, private guardiaService: GuardiaService) { }
+  constructor(private utilsService: UtilsService, private guardiaService: GuardiaService,private profesorService: ProfesorService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.datesInWeek = this.utilsService.getDay(new Date());
     this.day = new Date();
     this.hours = [
@@ -53,9 +57,14 @@ export class CalendarioComponent {
       '12:20',
       '13:15',
     ]
-    this.guardiaService.getGuardias().subscribe(guardias => {
-      guardias.forEach(guardia => this.meetings.push(new Guardia(guardia["diaSemana"],new Date(guardia["fecha"]),guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["nombreProfesor"],guardia["profesor"])));
-    });
+    let userJson = sessionStorage.getItem('profesor');
+    let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
+    let email = profesor["email"]
+    const prueba = (await this.profesorService.getDataFromEmail(email)).subscribe(profesor =>{
+      this.horarioGuardias = profesor[0]["horarioGuardias"];
+      this.horarioGuardiasApoyo = profesor[0]["horarioGuardiasApoyo"]
+    }
+    );
   }
 
   getDateFormat(date: Date): string {
@@ -66,42 +75,109 @@ export class CalendarioComponent {
   }
 
   getMeeting(hora: number): string {
-    let thisDay = this.day.getDay();
-    const meeting = this.meetings.find(
-      (el: Guardia) => el.diaSemana === thisDay && el.hora === hora
-    );
+    let tipo = ""
+    let dia = new Date();
+    let day = dia.getDay();
 
-    return meeting ? meeting.descripcion : ' ';
-  }
-
-  existsMeeting(hora: number): boolean {
-    let thisDay = this.day.getDay();
-    const meeting = this.meetings.find(
-      (el: Guardia) => el.diaSemana === thisDay && el.hora === hora
-    );
-    return meeting ? true : false;
-  }
-
-  someFunction(hora: number) {
-    let thisDay = this.day.getDay();
-    const meeting = this.meetings.find(
-      (el: Guardia) => el.diaSemana === thisDay && el.hora === hora
-    )?.estado;
-    if (meeting) {
-      if (meeting == "Finalizada") {
-        return "rgb(47, 224, 83)";
-      } else if (meeting == "Pendiente") {
-        return "rgb(255, 251, 10)"
-      } else {
-        return "lightblue";
+    Object.entries(this.horarioGuardias || {}).forEach(([key, value]) => {
+      let dia = 0
+      switch (key) {
+        case "lunes": {
+          dia = 1
+          break;
+        }
+        case "martes": {
+          dia = 2
+          break;
+        }
+        case "miercoles": {
+          dia = 3
+          break;
+        }
+        case "jueves": {
+          dia = 4
+          break;
+        }
+        case "viernes": {
+          dia = 5
+          break;
+        }
+        default: {
+          //statements; 
+          break;
+        }
       }
-    } else {
-      return "";
-    }
+
+
+      if (day == dia && hora == value){
+        tipo = "Guardia ordinaria";
+      }
+    });
+
+    Object.entries(this.horarioGuardiasApoyo || {}).forEach(([key, value]) => {
+      let dia = 0
+      switch (key) {
+        case "lunes": {
+          dia = 1
+          break;
+        }
+        case "martes": {
+          dia = 2
+          break;
+        }
+        case "miercoles": {
+          dia = 3
+          break;
+        }
+        case "jueves": {
+          dia = 4
+          break;
+        }
+        case "viernes": {
+          dia = 5
+          break;
+        }
+        default: {
+          //statements; 
+          break;
+        }
+      }
+
+
+      if (day == dia && hora == value){
+        tipo = "Guardia de apoyo";
+      }
+    });
+
+    return tipo
   }
-  getActualHour(hora: number) {
+
+
+
+  // someFunction(hora: number) {
+  //   let thisDay = this.day.getDay();
+  //   const meeting = this.meetings.find(
+  //     (el: Guardia) => el.diaSemana === thisDay && el.hora === hora
+  //   )?.estado;
+  //   if (meeting) {
+  //     if (meeting == "Finalizada") {
+  //       return "rgb(47, 224, 83)";
+  //     } else if (meeting == "Pendiente") {
+  //       return "rgb(255, 251, 10)"
+  //     } else {
+  //       return "lightblue";
+  //     }
+  //   } else {
+  //     return "";
+  //   }
+  // }
+  existsMeeting( hora: number){
+    let fijada = {};
+    let dia = new Date();
+    let day = dia.getDay();
     let thisHour = this.day.getHours();
     let thisMinutes = this.day.getMinutes();
+    let estamosEnHora = false;
       if(thisHour == 8 && thisMinutes <25){
         thisHour = 7;
       }else if(thisHour == 9 && thisMinutes < 20){
@@ -127,14 +203,111 @@ export class CalendarioComponent {
       }
 
     if(thisHour == hora){
-      return {"border-color":"orange","border-width":"2.5px"};
+  
+      fijada = {"border-color":"orange","border-width":"2.5px"};
+      estamosEnHora = true;
 
     }else{
-      return {"border-color":"grey"};
+      fijada = {"border-color":"grey"};
       
     }
-  
 
+
+
+
+
+    Object.entries(this.horarioGuardias || {}).forEach(([key, value]) => {
+      let dia = 0
+      switch (key) {
+        case "lunes": {
+          dia = 1
+          break;
+        }
+        case "martes": {
+          dia = 2
+          break;
+        }
+        case "miercoles": {
+          dia = 3
+          break;
+        }
+        case "jueves": {
+          dia = 4
+          break;
+        }
+        case "viernes": {
+          dia = 5
+          break;
+        }
+        default: {
+          //statements; 
+          break;
+        }
+      }
+
+
+      if (day == dia && hora == value){
+        if(estamosEnHora == true){
+
+          
+          fijada = {"background-color":"lightblue","border-color":"orange","border-width":"2.5px"};
+        }else{
+
+
+          fijada = {"background-color":"lightblue","border":"1px solid rgb(91,91,248"};
+          
+        }
+      }
+    });
+
+    Object.entries(this.horarioGuardiasApoyo || {}).forEach(([key, value]) => {
+      let dia = 0
+      switch (key) {
+        case "lunes": {
+          dia = 1
+          break;
+        }
+        case "martes": {
+          dia = 2
+          break;
+        }
+        case "miercoles": {
+          dia = 3
+          break;
+        }
+        case "jueves": {
+          dia = 4
+          break;
+        }
+        case "viernes": {
+          dia = 5
+          break;
+        }
+        default: {
+          //statements; 
+          break;
+        }
+      }
+
+
+      if (day == dia && hora == value){
+        if(estamosEnHora == true){
+
+          
+          fijada = {"background-color":"khaki","border-color":"orange","border-width":"2.5px"};
+        }else{
+
+
+          fijada = {"background-color":"khaki","border":"1px solid rgb(91,91,248"};
+
+        }
+      }
+    });
+
+
+    return fijada;
   }
+
+
 
 }

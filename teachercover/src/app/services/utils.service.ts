@@ -8,7 +8,7 @@ export class UtilsService {
 
   convertUTCDateToLocalDate(date: Date) {
     var localDateTime = new Date(
-      date.getTime() - date.getTimezoneOffset() * 60 * 1000
+      date.getTime() 
     );
     return localDateTime;
   }
@@ -27,12 +27,14 @@ export class UtilsService {
 
   getDaysOfWeek(date: Date) {
     const currentDayInWeek = date.getDay();
+
     const diffToStartWeek =
       date.getDate() - currentDayInWeek + (currentDayInWeek == 0 ? -6 : 1);
 
     const dateInLocalDateTime = this.convertUTCDateToLocalDate(
       new Date(date.setDate(diffToStartWeek))
     );
+
 
     const datesInWeek = [dateInLocalDateTime];
 
@@ -42,6 +44,7 @@ export class UtilsService {
       );
       datesInWeek.push(dateInLocalDateTime);
     }
+ 
 
     return datesInWeek;
   }

@@ -1,15 +1,15 @@
-import {Component, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
-import {MatPaginatorModule} from '@angular/material/paginator'
-import {OnInit,AfterViewInit } from '@angular/core';
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { OnInit, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomPaginator } from './CustomPaginator';
 import { MatSort } from '@angular/material/sort';
 import { FormGroup } from '@angular/forms';
-import {ChangeDetectionStrategy} from '@angular/core';
-import {FormControl,Validators} from '@angular/forms';
-import {from, Observable} from 'rxjs';
-import {distinct, filter, map, mergeMap, startWith, toArray} from 'rxjs/operators';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { from, Observable } from 'rxjs';
+import { distinct, filter, map, mergeMap, startWith, toArray } from 'rxjs/operators';
 import { GuardiaService } from 'app/services/guardia.service';
 import { Guardia } from 'app/models/guardia.model';
 import { DateAdapter } from '@angular/material/core';
@@ -27,22 +27,22 @@ import { Profesor } from 'app/models/profesor.model';
 })
 export class HistorialGuardiasComponent implements OnInit {
 
-  columnas: string[] = ['idGuardia','fecha', 'nombreProfesor', 'curso',"aula","descripcion","dia","estado"];
-  constructor( private guardiaService: GuardiaService,private dateAdapter: DateAdapter<Date>) {
-    this.dateAdapter.setLocale('es'); 
+  columnas: string[] = ['idGuardia', 'fecha', 'nombreProfesor', 'curso', "aula", "descripcion", "dia", "estado"];
+  constructor(private guardiaService: GuardiaService, private dateAdapter: DateAdapter<Date>) {
+    this.dateAdapter.setLocale('es');
     this.dateAdapter.getFirstDayOfWeek()
-    
-   }
-   getDateFormat(guardia : Guardia): String{
-    var month = guardia.getFecha().getMonth() +1; //months from 1-12
-var day = guardia.getFecha().getDate();
-var year = guardia.getFecha().getFullYear();
 
-    return day + "/" + month +"/" + year;
-   }
+  }
+  getDateFormat(guardia: Guardia): String {
+    var month = guardia.getFecha().getMonth() + 1; //months from 1-12
+    var day = guardia.getFecha().getDate();
+    var year = guardia.getFecha().getFullYear();
+
+    return day + "/" + month + "/" + year;
+  }
 
   datos: Guardia[] = [];
-  dataSource:any;
+  dataSource: any;
   mostrarTabla: boolean;
   public searchForm: FormGroup;
   public idGuardia = '';
@@ -59,40 +59,38 @@ var year = guardia.getFecha().getFullYear();
   ngOnInit() {
     let userJson = sessionStorage.getItem('profesor');
     let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
-    console.log(profesor["role"]);
-    if(profesor["role"] == "User"){
-      
+
+    if (profesor["role"] == "User") {
+
       this.mostrarTabla = true;
       this.guardiaService.getGuardiasByUser(profesor["id"]).subscribe(guardias => {
         guardias.forEach((guardia) => {
-    
-          this.datos.push(new Guardia(guardia["diaSemana"],new Date(guardia["fecha"]),guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["nombreProfesor"],guardia["profesor"]));
+
+          this.datos.push(new Guardia(guardia["diaSemana"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"]));
         })
-      this.dataSource = new MatTableDataSource<Guardia>(this.datos);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-  
-      this.searchFormInit();
-      /* Filter predicate used for filtering table per different columns
-      *  */
-      this.dataSource.filterPredicate = this.getFilterPredicate()
+        this.dataSource = new MatTableDataSource<Guardia>(this.datos);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
+        this.searchFormInit();
+
+        this.dataSource.filterPredicate = this.getFilterPredicate()
       });
 
-    }else{
+    } else {
       this.mostrarTabla = true;
       this.guardiaService.getGuardias().subscribe(guardias => {
         guardias.forEach((guardia) => {
-    
-          this.datos.push(new Guardia(guardia["diaSemana"],new Date(guardia["fecha"]),guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"],guardia["nombreProfesor"],guardia["profesor"]));
+
+          this.datos.push(new Guardia(guardia["diaSemana"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"]));
         })
-      this.dataSource = new MatTableDataSource<Guardia>(this.datos);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-  
-      this.searchFormInit();
-      /* Filter predicate used for filtering table per different columns
-      *  */
-      this.dataSource.filterPredicate = this.getFilterPredicate()
+        this.dataSource = new MatTableDataSource<Guardia>(this.datos);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
+        this.searchFormInit();
+
+        this.dataSource.filterPredicate = this.getFilterPredicate()
       });
 
     }
@@ -101,10 +99,9 @@ var year = guardia.getFecha().getFullYear();
     this.dataSource.paginator = this.paginator;
 
     this.searchFormInit();
-    /* Filter predicate used for filtering table per different columns
-    *  */
+
     this.dataSource.filterPredicate = this.getFilterPredicate()
- 
+
   }
   searchFormInit() {
     this.searchForm = new FormGroup({
@@ -139,7 +136,7 @@ var year = guardia.getFecha().getFullYear();
 
       // Fetch data from row
       const columnIdGuardia = row.idGuardia;
-      const columnFecha= row.fecha;
+      const columnFecha = row.fecha;
       const columnProfesor = row.nombreProfesor;
       const columnCurso = row.curso;
       const columnAula = row.aula;
@@ -178,7 +175,7 @@ var year = guardia.getFecha().getFullYear();
       return matchFilter.every(Boolean);
     };
   }
-  
+
   public doFilter = (event: Event) => {
     this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLocaleLowerCase();
   }
@@ -206,7 +203,7 @@ var year = guardia.getFecha().getFullYear();
 
 
     // create string of our searching values and split if by '$'
-    const filterValue =this.idGuardia + '$' + this.fecha +'$'+ this.nombreProfesor + '$' + this.curso + '$' + this.aula + '$' + this.descripcion + '$' + this.dia + '$' + this.estado;
+    const filterValue = this.idGuardia + '$' + this.fecha + '$' + this.nombreProfesor + '$' + this.curso + '$' + this.aula + '$' + this.descripcion + '$' + this.dia + '$' + this.estado;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

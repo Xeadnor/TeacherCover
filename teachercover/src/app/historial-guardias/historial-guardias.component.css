@@ -13,14 +13,17 @@
     flex-grow: 1;
   
 }
+.ellipsis{
+    overflow: hidden,
 
+}
 td , th {
     white-space: nowrap;
     word-wrap: break-word;
     max-width: 150px;
 }
 ::ng-deep .mat-mdc-text-field-wrapper {
-    height: 40px !important;
+    height: 35px !important;
 }
 ::ng-deep .mat-mdc-form-field-flex {
     margin-top: -7px !important;
@@ -30,7 +33,7 @@ td , th {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    min-height: 56px;
+    min-height: 46px;
     padding: 0 8px;
     flex-wrap: wrap-reverse;
     width: 100%;

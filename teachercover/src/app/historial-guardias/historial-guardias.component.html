@@ -8,9 +8,9 @@
       <ng-container matColumnDef="idGuardia" sticky>
 
         <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline" >
             <input type="text" aria-label="idGuardia" matInput formControlName="idGuardia"
-              (keyup)="applyFilter()" placeholder="Buscar por id">
+              (keyup)="applyFilter()" placeholder="Buscar por..." >
           </mat-form-field>
           <p mat-sort-header>idGuardia</p>
         </th>
@@ -21,12 +21,12 @@
       <ng-container matColumnDef="fecha">
 
         <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
             <input matInput
             formControlName="fecha"
             [matDatepicker]="picker"
             (dateInput)="applyFilter()"
-            placeholder="Buscar por fecha">
+            placeholder="Buscar por...">
      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
      <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -38,9 +38,9 @@
 
       <ng-container matColumnDef="nombreProfesor">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
             <input type="text" aria-label="nombreProfesor" matInput formControlName="nombreProfesor"
-              (keyup)="applyFilter()" placeholder="Buscar por Profesor">
+              (keyup)="applyFilter()" placeholder="Buscar por..." >
           </mat-form-field>
           <p mat-sort-header>Profesor</p>
         </th>
@@ -49,9 +49,9 @@
 
       <ng-container matColumnDef="curso">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
             <input type="text" aria-label="curso" matInput formControlName="curso" (keyup)="applyFilter()"
-              placeholder="Buscar por curso">
+              placeholder="Buscar por...">
           </mat-form-field>
           <p mat-sort-header>Curso</p>
 
@@ -62,9 +62,9 @@
 
       <ng-container matColumnDef="aula">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
             <input type="text" aria-label="aula" matInput formControlName="aula" (keyup)="applyFilter()"
-              placeholder="Buscar por aula">
+              placeholder="Buscar por...">
           </mat-form-field>
           <p mat-sort-header>Aula</p>
 
@@ -74,9 +74,9 @@
 
       <ng-container matColumnDef="descripcion">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
             <input type="text" aria-label="descripcion" matInput formControlName="descripcion" (keyup)="applyFilter()"
-              placeholder="Buscar por descripcion">
+              placeholder="Buscar por...">
           </mat-form-field>
           <p mat-sort-header>Descripción</p>
 
@@ -86,9 +86,9 @@
 
       <ng-container matColumnDef="dia">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
             <input type="text" aria-label="dia" matInput formControlName="dia" (keyup)="applyFilter()"
-              placeholder="Buscar por día">
+              placeholder="Buscar por...">
           </mat-form-field>
           <p mat-sort-header>Día</p>
 
@@ -98,9 +98,9 @@
 
       <ng-container matColumnDef="estado">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 50px;" appearance="outline">
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
             <input type="text" aria-label="estado" matInput formControlName="estado" (keyup)="applyFilter()"
-              placeholder="Buscar por estado">
+              placeholder="Buscar por...">
           </mat-form-field>
           <p mat-sort-header>Estado</p>
 
@@ -119,5 +119,5 @@
     </div>
   </form>
 </div>
-<mat-paginator class="mat-elevation-z8 fixed" [pageSizeOptions]="[10, 20, 50]"
+<mat-paginator class="mat-elevation-z8 fixed" [pageSizeOptions]="[10, 20, 40]"
   style="background-color:#e7e0ff;"></mat-paginator>
