@@ -72,6 +72,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { HistorialProfesoresComponent } from './historial-profesores/historial-profesores.component';
 
 
 
@@ -86,6 +87,8 @@ const appRoutes: Routes = [
       { path: "historial", component: HistorialGuardiasComponent},
       { path: "calendarioSemanal", component: CalendarioSemanalComponent},
       { path: "crearProfesor", component: CrearProfesorComponent},
+      { path: "historialProfesores", component: HistorialProfesoresComponent},
+
     ]
   },
   {path:"recover-password",component: RecoverPasswordComponent},
@@ -106,6 +109,7 @@ const appRoutes: Routes = [
     CrearProfesorComponent,
     RecoverPasswordComponent,
     PagenotfoundComponent,
+    HistorialProfesoresComponent,
   ],
   imports: [
     MatTableModule,
