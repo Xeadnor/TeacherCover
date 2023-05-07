@@ -33,7 +33,6 @@ export class HistorialGuardiasComponent implements OnInit {
 
   }
   getDateFormat(guardia: Guardia): String {
-    console.log(guardia.getFecha());
     var month = guardia.getFecha().getMonth() + 1; //months from 1-12
     var day = guardia.getFecha().getDate();
     var year = guardia.getFecha().getFullYear();
@@ -59,8 +58,6 @@ export class HistorialGuardiasComponent implements OnInit {
   ngOnInit() {
     let userJson = sessionStorage.getItem('profesor');
     let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
-    console.log(profesor["role"]);
-    console.log(profesor["id"]);
 
     if (profesor["role"] == "User") {
 
@@ -71,7 +68,6 @@ export class HistorialGuardiasComponent implements OnInit {
          
         })
         this.dataSource = new MatTableDataSource<Guardia>(this.datos);
-        console.log(this.datos);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
 
@@ -84,7 +80,6 @@ export class HistorialGuardiasComponent implements OnInit {
       this.mostrarTabla = true;
       this.guardiaService.getGuardias().subscribe(guardias => {
         guardias.forEach((guardia) => {
-          console.log(guardia);
           this.datos.push(new Guardia(guardia["diaSemana"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"],guardia["idField"]));
           
         })
