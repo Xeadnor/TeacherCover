@@ -28,7 +28,7 @@ import { AuthService } from 'app/services/auth.service';
   ]
 })
 export class HistorialProfesoresComponent implements OnInit{
-  columnas: string[] = ['id', 'email', 'name', 'horasGuardias', "role", "validate"];
+  columnas: string[] = ['id', 'email', 'name', 'horasGuardias', "role", "validate","opciones"];
   rol: string;
   constructor(private router: Router,private profesorService: ProfesorService,private guardiaService: GuardiaService, private toastr: ToastrService, private auth: AuthService) { };
   datos: Profesor[] = [];
@@ -83,6 +83,12 @@ export class HistorialProfesoresComponent implements OnInit{
 
     this.dataSource.filterPredicate = this.getFilterPredicate()
 
+  }
+  dialogEditar(): void {
+    console.log("modal para editar");
+  }
+  dialogEliminar(): void {
+    console.log("modal para eliminar");
   }
   searchFormInit() {
     this.searchForm = new FormGroup({

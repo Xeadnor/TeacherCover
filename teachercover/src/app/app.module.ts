@@ -77,7 +77,6 @@ import { HistorialProfesoresComponent } from './historial-profesores/historial-p
 
 
 
-
 const appRoutes: Routes = [
   {path:"",component: LoginComponent},
   {
@@ -110,6 +109,7 @@ const appRoutes: Routes = [
     RecoverPasswordComponent,
     PagenotfoundComponent,
     HistorialProfesoresComponent,
+
   ],
   imports: [
     MatTableModule,
@@ -172,6 +172,7 @@ const appRoutes: Routes = [
 
   ],
   providers: [MatDatepickerModule ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }
