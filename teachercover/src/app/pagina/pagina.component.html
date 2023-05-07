@@ -4,7 +4,7 @@
 
     <div class="row p-0 m-0 mb-3">
 
-        <div class="d-none d-lg-block flex-shrink-0 p-3 colorcito col-2 bordes" style="min-height: 850px;">
+        <div class="shadow d-none d-lg-block flex-shrink-0 p-3 colorcito col-2 bordes" style="min-height: 850px;">
             <p class="d-flex align-items-center pb-3 mb-3 mt-3 text-decoration-none border-bottom">
               <img class="bi me-2" width="30" height="24" src="favicon.ico"/>
               <span class="fs-5 fw-semibold">Menú</span>
@@ -57,9 +57,9 @@
 
 
           <div class="bg-light col-12 d-lg-none">
-          <div class="row colorcito mt-0 mb-3 justify-content-between">
+          <div class="row  colorcito mt-0 mb-3 justify-content-between">
             <div class="col-2 p-0">
-              <p class="d-flex align-items-center mb-2 mt-2 text-decoration-none border-bottom">
+              <p class="shadow d-flex align-items-center mb-2 mt-2 text-decoration-none border-bottom">
                 <img class="bi me-2" width="30" height="24" src="favicon.ico"/>
                 <span class="fs-5 fw-semibold">Menú</span>
               </p>
@@ -90,14 +90,14 @@
                   <li><a href="#" class="link-dark rounded">Prox...</a></li>
                 </ul>
               </div>
-              
+
             </div>
 
 
             <!-- OPCIONES DEL ADMINISTRADOR -->
             <div class="col-3 text-center p-0" *ngIf="rolAdmin" >
-              
-           
+
+
                    <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 pt-1" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="true">
                      Admin
                    </button>
@@ -111,8 +111,8 @@
                      </ul>
                    </div>
 
-              
-            </div>      
+
+            </div>
           </div>
           </div>
 
@@ -139,9 +139,12 @@
             <div class="row" *ngIf="!mostrarDatos">
               <div class="col">
               <div class="row float-end ">
-                <button class="border border-dark rounded-datos2 colorcito" (click)="showDatos()">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                <button class="flecha shadow border border-bottom rounded-datos2 colorcito" (click)="showDatos()">
+                  <!-- <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
                     <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                  </svg> -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
                   </svg>
 
                 </button>
@@ -150,7 +153,7 @@
 
               </div>
             </div>
-            <div *ngIf="mostrarDatos" class="row colorcito mt-0  p-2 m-0 m-lg-2 rounded-datos">
+            <div *ngIf="mostrarDatos" class="row shadow colorcito mt-0 p-2 m-0 m-lg-2 rounded-datos">
               <div   class="row justify-content-around pe-0">
                 <div class="col-11 pe-0 border border-2 border-dark border-top-0 border-end-0 border-start-0">
                   <h5 class="">Panel de informacion de : {{ nombreUsuario }}</h5>
@@ -181,8 +184,9 @@
                       </table>
             </div>
 
+            <div class="dividor d-none d-lg-block mt-3" style="background-color: #e7fdff;" ></div>
 
-            <div class="row colorcito mt-4 p-0 m-0 m-lg-2 p-lg-2 rounded-datos mb-0">
+            <div class="row shadow colorcito mt-8 p-0 m-0 m-lg-2 p-lg-2 rounded-datos mb-0">
               <router-outlet ></router-outlet>
          </div>
 

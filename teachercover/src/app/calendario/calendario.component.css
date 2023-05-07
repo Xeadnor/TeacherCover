@@ -1,8 +1,8 @@
 
 
-  
+
   .title {
-    background-color: grey;
+    background-color: rgb(134, 91, 175);
     color: white;
     border-radius: 5px;
     font-size: 12px;
@@ -10,7 +10,7 @@
     text-align: center;
     margin-top:20px;
   }
-  
+
   .item {
     padding: 10px 5px;
     background-color: rgb(235, 234, 234);

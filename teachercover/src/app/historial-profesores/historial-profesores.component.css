@@ -11,7 +11,7 @@
 
   mat-accordion {
     flex-grow: 1;
-  
+
 }
 .ellipsis{
     overflow: hidden,
@@ -39,3 +39,6 @@ td , th {
     width: 100%;
   }
 
+.paginado{
+  box-shadow: none !important;
+}
