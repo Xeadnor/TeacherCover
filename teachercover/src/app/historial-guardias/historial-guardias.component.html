@@ -2,7 +2,7 @@
 
   <form [formGroup]="searchForm" class="search__form">
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="mostrarTabla" #tabla1
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 centradoColumnas" *ngIf="mostrarTabla" #tabla1
       style="background-color:#d1c4fd" matSort>
 
       <ng-container matColumnDef="idGuardia" sticky>
@@ -113,10 +113,10 @@
         <td mat-cell *matCellDef="let guardia">
           <ul class="list-inline m-0">
             <li class="list-inline-item">
-                <button  class="btn btn-success btn-sm rounded-0" (click)="dialogEditar()" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
+                <button  class="btn editar btn-sm rounded-1" (click)="dialogEditar()" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
             </li>
             <li class="list-inline-item">
-                <button class="btn btn-danger btn-sm rounded-0"  (click)="dialogEliminar()" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+                <button class="btn eliminar btn-sm rounded-1"  (click)="dialogEliminar()" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
             </li>
         </ul>
         </td>

@@ -155,18 +155,18 @@
             </div>
             <div *ngIf="mostrarDatos" class="row shadow colorcito mt-0 p-2 m-0 m-lg-2 rounded-datos">
               <div   class="row justify-content-around pe-0">
-                <div class="col-11 pe-0 border border-2 border-dark border-top-0 border-end-0 border-start-0">
-                  <h5 class="">Panel de informacion de : {{ nombreUsuario }}</h5>
+                <div class="col-11 pe-0 border border-2 border-secondary border-top-0 border-end-0 border-start-0">
+                  <h5 class="" style="font-weight:400;">Panel de informacion de : <span style="color:rgb(241, 137, 17); font-size:x-large; font-weight: bolder;">{{ nombreUsuario }}</span></h5>
 
                 </div>
-                <div class="col-1 ps-0 pe-0 border border-2 border-dark border-top-0 border-end-0 border-start-0">
+                <div class="col-1 ps-0 pe-0 border border-2 border-secondary border-top-0 border-end-0 border-start-0">
                   <button type="button" class="p-1 btn-close float-end border border-2  btn-danger  rounded-circle" style="background-color:rgba(123, 0, 255, 0.734);border-color:rgb(123, 0, 255)!important" (click)="hideDatos()" aria-label="Close"></button>
 
                 </div>
               </div>
                     <table class="table">
                         <thead>
-                          <tr class="text-center">
+                          <tr class="text-center" >
                             <th class="col-2">Rol</th>
                             <th class="col-2">Guardias Realizadas</th>
                             <th class="col-2">-</th>
@@ -174,7 +174,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr class="text-center">
+                          <tr class="text-center ">
                             <th>{{ rol }}</th>
                             <td>{{ horasGuardias }} horas</td>
                             <td>-</td>

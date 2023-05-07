@@ -42,3 +42,28 @@ td , th {
   .paginado{
     box-shadow: none !important;
   }
+
+
+  .editar{
+    background-color:rgb(147, 86, 204);
+    color: white;
+  }
+
+  .editar:hover, .editar:focus{
+    background-color:white;
+    color: rgb(147, 86, 204);
+  }
+
+  .eliminar{
+    background-color:rgb(235, 140, 31);
+    color: white;
+  }
+
+  .eliminar:hover, .eliminar:focus{
+    background-color:white;
+    color: rgb(235, 140, 31);
+  }
+
+  .centradoColumnas{
+    text-align: center !important;
+  }
