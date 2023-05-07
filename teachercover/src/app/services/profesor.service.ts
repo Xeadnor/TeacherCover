@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collection, collectionData, setDoc } from '@angular/fire/firestore';
 import { Profesor } from '../models/profesor.model';
 import { Observable } from 'rxjs';
-import { query, where, getDocs, getFirestore, orderBy, limit } from "firebase/firestore";
+import { query, where, getDocs, getFirestore, orderBy, limit, deleteDoc } from "firebase/firestore";
 import { doc, updateDoc } from "firebase/firestore";
 
 @Injectable({
@@ -18,6 +18,16 @@ export class ProfesorService {
     const profesorRef = collection(this.firestore,"profesores");
     return collectionData(profesorRef, {idField:"idField"}) as Observable<Profesor[]>;
   }
+
+  deleteProfesor(idField: string){
+    const db = getFirestore();
+
+const docRef = doc(db, "profesores", idField);
+
+deleteDoc(docRef)
+
+  }
+  
 
    async getDataFromEmail(email: String){
     const profesorRef = collection(this.firestore,"profesores");

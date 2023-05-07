@@ -51,6 +51,7 @@ export class HistorialProfesoresComponent implements OnInit{
     if (profesor["role"] == "User") {
         this.router.navigate(["/pagina/calendario"]);
     } else {
+      console.log("prueba");
       this.mostrarTabla = true;
       this.profesorService.getProfesors().subscribe(profesores => {
         profesores.forEach((profesor) => {
@@ -61,11 +62,13 @@ export class HistorialProfesoresComponent implements OnInit{
           prof.setHorasGuardias(profesor["horasGuardias"]);
           prof.setRole(profesor["role"]);
           prof.setValidate(profesor["validate"]);
+          prof.setIdField(profesor["idField"]);
 
 
-          this.datos.push(prof);
+          if (!this.datos.find(item => item.id === prof.getIdProfesor())) { // search by id
+            this.datos.push(prof);
+          }
         })
-        this.dataSource = new MatTableDataSource<Profesor>(this.datos);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
 
@@ -84,11 +87,20 @@ export class HistorialProfesoresComponent implements OnInit{
     this.dataSource.filterPredicate = this.getFilterPredicate()
 
   }
-  dialogEditar(): void {
+  dialogEditar(profesor: Profesor): void {
     console.log("modal para editar");
   }
-  dialogEliminar(): void {
-    console.log("modal para eliminar");
+  dialogEliminar(profesor:Profesor): void {
+    //!  COMPROBRAR TAMBIEN CON UN MODAL PARA CONFIRMAR LA ELIMINACION.
+    this.datos = this.datos.filter(function(el) { return el.id != profesor.getIdProfesor(); }); 
+    this.datos.splice(profesor.getIdProfesor(), 1 );
+   this.profesorService.deleteProfesor(profesor.getIdField())
+   this.dataSource = new MatTableDataSource<Profesor>(this.datos);
+
+   this.toastr.success("Se ha borrado con exito el profesor: " + profesor.getName(),"Profesor borrado",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
+
+
+
   }
   searchFormInit() {
     this.searchForm = new FormGroup({

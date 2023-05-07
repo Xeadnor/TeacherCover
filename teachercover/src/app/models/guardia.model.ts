@@ -10,9 +10,10 @@ export class Guardia {
   curso: string;
   nombreProfesor: string;
   profesor: number;
+  idField: string
 
-  constructor(diaSemana?: number,fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number) {
-    if (diaSemana && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor && fecha) {
+  constructor(diaSemana?: number,fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number,idField?: string) {
+    if (diaSemana && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor && fecha && idField) {
       this.idGuardia = idGuardia
       this.estado = estado
       this.fecha = fecha;
@@ -33,6 +34,9 @@ export class Guardia {
   getDia() {
     return this.dia
   }
+  getIdField() {
+    return this.idField;
+}
   getNombreProfesor() {
     return this.nombreProfesor
   }
@@ -61,7 +65,9 @@ export class Guardia {
     return this.estado;
   }
 
-
+  setIdField(idField: string) {
+    this.idField = idField;
+}
   setFecha(fecha:Date){
     this.fecha = fecha;
   }

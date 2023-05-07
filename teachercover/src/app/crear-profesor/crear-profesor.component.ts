@@ -119,6 +119,7 @@ export class CrearProfesorComponent implements OnInit {
           let prueba = this.profesorService.getDataFromEmail(email);
           
           (await prueba).forEach(doc => {
+            console.log()
            if(doc.length > 0){
             if(this.registro){
 
@@ -129,7 +130,8 @@ export class CrearProfesorComponent implements OnInit {
             this.createTeacherForm.markAsPristine();
             this.createTeacherForm.markAsUntouched();
              let newId = this.profesorService.getNewId(); 
-             newId.then((id) =>{
+             newId.then(async (id) =>{
+               this.registro = true;
               //profesor creado
               profesor.setIdProfesor(id);
               profesor.setName(nombreProfe);
@@ -137,8 +139,8 @@ export class CrearProfesorComponent implements OnInit {
               profesor.setHorarioGuardia(horasGuardia);
               profesor.setHorarioGuardiaApoyo(horasGuardiaApoyo);
               this.profesorService.addProfesor(profesor);
-              this.auth.registrar(email);
-              this.registro = true;
+              
+              await this.auth.registrar(email)
               this.f.resetForm();
               this.toastr.success("Se ha registrado con exito el profesor en la base de datos","Profesor creado",{timeOut:3000,closeButton:true,positionClass:"toast-bottom-center"})
         

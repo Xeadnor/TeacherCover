@@ -33,6 +33,7 @@ export class HistorialGuardiasComponent implements OnInit {
 
   }
   getDateFormat(guardia: Guardia): String {
+    console.log(guardia.getFecha());
     var month = guardia.getFecha().getMonth() + 1; //months from 1-12
     var day = guardia.getFecha().getDate();
     var year = guardia.getFecha().getFullYear();
@@ -58,16 +59,19 @@ export class HistorialGuardiasComponent implements OnInit {
   ngOnInit() {
     let userJson = sessionStorage.getItem('profesor');
     let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
+    console.log(profesor["role"]);
+    console.log(profesor["id"]);
 
     if (profesor["role"] == "User") {
 
       this.mostrarTabla = true;
       this.guardiaService.getGuardiasByUser(profesor["id"]).subscribe(guardias => {
         guardias.forEach((guardia) => {
-
-          this.datos.push(new Guardia(guardia["diaSemana"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"]));
+          this.datos.push(new Guardia(guardia["diaSemana"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"],guardia["idFIeld"]));
+         
         })
         this.dataSource = new MatTableDataSource<Guardia>(this.datos);
+        console.log(this.datos);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
 
@@ -80,8 +84,9 @@ export class HistorialGuardiasComponent implements OnInit {
       this.mostrarTabla = true;
       this.guardiaService.getGuardias().subscribe(guardias => {
         guardias.forEach((guardia) => {
-
-          this.datos.push(new Guardia(guardia["diaSemana"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"]));
+          console.log(guardia);
+          this.datos.push(new Guardia(guardia["diaSemana"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"],guardia["idField"]));
+          
         })
         this.dataSource = new MatTableDataSource<Guardia>(this.datos);
         this.dataSource.sort = this.sort;
@@ -102,11 +107,13 @@ export class HistorialGuardiasComponent implements OnInit {
     this.dataSource.filterPredicate = this.getFilterPredicate()
 
   }
-  dialogEditar(): void {
+  dialogEditar(guardia:Guardia): void {
     console.log("modal para editar");
+    console.log(guardia)
   }
-  dialogEliminar(): void {
+  dialogEliminar(guardia:Guardia): void {
     console.log("modal para eliminar");
+    console.log(guardia)
   }
   searchFormInit() {
     this.searchForm = new FormGroup({
