@@ -1,8 +1,8 @@
-<div style="overflow-x:auto;" class="p-1 text-center">
+<div style="overflow-x:auto;" class="p-1">
 
     <form [formGroup]="searchForm" class="search__form">
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 text-center " *ngIf="mostrarTabla" #tabla1
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="mostrarTabla" #tabla1
         style="background-color:#d1c4fd" matSort>
 
         <ng-container matColumnDef="id" sticky>
@@ -56,7 +56,7 @@
         </ng-container>
 
         <ng-container matColumnDef="role">
-          <th mat-header-cell *matHeaderCellDef class="">
+          <th mat-header-cell *matHeaderCellDef>
             <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
               <input type="text" aria-label="role" matInput formControlName="role" (keyup)="applyFilter()"
                 placeholder="Buscar por...">
@@ -67,8 +67,8 @@
           <td mat-cell *matCellDef="let profesor" class="text-center"> {{profesor.role}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="validate" >
-          <th mat-header-cell *matHeaderCellDef class="">
+        <ng-container matColumnDef="validate">
+          <th mat-header-cell *matHeaderCellDef>
             <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
               <input type="text" aria-label="validate" matInput formControlName="validate" (keyup)="applyFilter()"
                 placeholder="Buscar por...">

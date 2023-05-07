@@ -2,7 +2,7 @@
 
   <form [formGroup]="searchForm" class="search__form">
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 centradoColumnas" *ngIf="mostrarTabla" #tabla1
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="mostrarTabla" #tabla1
       style="background-color:#d1c4fd" matSort>
 
       <ng-container matColumnDef="idGuardia" sticky>
