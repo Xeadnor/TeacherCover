@@ -14,8 +14,7 @@ import { GuardiaService } from 'app/services/guardia.service';
 import { Guardia } from 'app/models/guardia.model';
 import { DateAdapter } from '@angular/material/core';
 import { Profesor } from 'app/models/profesor.model';
-
-
+import { MatDialog } from '@angular/material/dialog';
 @Component({
 
   selector: 'app-historial-guardias',
@@ -27,8 +26,8 @@ import { Profesor } from 'app/models/profesor.model';
 })
 export class HistorialGuardiasComponent implements OnInit {
 
-  columnas: string[] = ['idGuardia', 'fecha', 'nombreProfesor', 'curso', "aula", "descripcion", "dia", "estado"];
-  constructor(private guardiaService: GuardiaService, private dateAdapter: DateAdapter<Date>) {
+  columnas: string[] = ['idGuardia', 'fecha', 'nombreProfesor', 'curso', "aula", "descripcion", "dia", "estado","opciones"];
+  constructor(private guardiaService: GuardiaService, private dateAdapter: DateAdapter<Date>,public dialogo: MatDialog) {
     this.dateAdapter.setLocale('es');
     this.dateAdapter.getFirstDayOfWeek()
 
@@ -102,6 +101,12 @@ export class HistorialGuardiasComponent implements OnInit {
 
     this.dataSource.filterPredicate = this.getFilterPredicate()
 
+  }
+  dialogEditar(): void {
+    console.log("modal para editar");
+  }
+  dialogEliminar(): void {
+    console.log("modal para eliminar");
   }
   searchFormInit() {
     this.searchForm = new FormGroup({
