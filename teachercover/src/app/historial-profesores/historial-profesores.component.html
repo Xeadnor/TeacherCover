@@ -88,7 +88,7 @@
                   <button  class="btn btn-success editar btn-sm rounded-0" (click)="dialogEditar(profesor)" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
               </li>
               <li class="list-inline-item">
-                  <button class="btn btn-danger eliminar btn-sm rounded-0"  (click)="dialogEliminar(profesor)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+                  <button class="btn btn-danger eliminar btn-sm rounded-0" [disabled]="comprobarAdmin(profesor)"  (click)="dialogEliminar(profesor)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
               </li>
           </ul>
           </td>
