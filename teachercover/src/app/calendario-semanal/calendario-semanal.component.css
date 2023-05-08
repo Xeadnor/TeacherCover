@@ -2,17 +2,18 @@
 .date {
     width: 20%;
   }
-  
+
   .title {
     background-color: rgb(134, 91, 175);
     color: white;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: 15px;
+    font-weight: bold;
     padding: 10px 0;
     text-align: center;
     margin-top:20px;
   }
-  
+
   .item {
     padding: 10px 5px;
     background-color: rgb(235, 234, 234);
