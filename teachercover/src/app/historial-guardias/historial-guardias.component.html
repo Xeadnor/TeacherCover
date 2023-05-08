@@ -108,6 +108,18 @@
         <td mat-cell *matCellDef="let guardia"> {{guardia.estado}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="profesorCubierto">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
+            <input type="text" aria-label="profesorCubierto" matInput formControlName="profesorCubierto" (keyup)="applyFilter()"
+              placeholder="Buscar por...">
+          </mat-form-field>
+          <p mat-sort-header>Profesor cubierto</p>
+
+        </th>
+        <td mat-cell *matCellDef="let guardia"> {{guardia.profesorCubierto}} </td>
+      </ng-container>
+
       <ng-container matColumnDef="opciones">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>
         <td mat-cell *matCellDef="let guardia">
