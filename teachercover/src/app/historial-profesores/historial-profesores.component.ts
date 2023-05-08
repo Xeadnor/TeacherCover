@@ -113,6 +113,13 @@ export class HistorialProfesoresComponent implements OnInit{
 
     });
   }
+  comprobarAdmin(profesor : Profesor){
+      if(profesor.getRole() =="Admin"){
+        return true;
+      }else{
+        return false;
+      }
+  }
   getFilterPredicate() {
     return (row: Profesor, filters: string) => {
       // split string per '$' to array
