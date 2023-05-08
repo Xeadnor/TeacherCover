@@ -4,6 +4,7 @@ import { UtilsService } from '../services/utils.service';
 import { GuardiaService } from '../services/guardia.service';
 import { Profesor } from 'app/models/profesor.model';
 import { ProfesorService } from 'app/services/profesor.service';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendario',
@@ -43,7 +44,11 @@ export class CalendarioComponent {
   ];
   day: Date;
   hours: string[] = [];
-  constructor(private utilsService: UtilsService, private guardiaService: GuardiaService,private profesorService: ProfesorService) { }
+  someSubscription: any;
+  constructor(private utilsService: UtilsService, private guardiaService: GuardiaService,private profesorService: ProfesorService,private router: Router,private route: ActivatedRoute) {
+
+    setInterval(()=> { this.reloadCurrentRoute() }, 20000);
+  }
 
   async ngOnInit() {
     this.datesInWeek = this.utilsService.getDay(new Date());
@@ -65,7 +70,56 @@ export class CalendarioComponent {
       this.horarioGuardiasApoyo = profesor[0]["horarioGuardiasApoyo"]
     }
     );
+
   }
+
+
+    reloadCurrentRoute() {
+      console.log("hola")
+      let dia = new Date();
+      let thisHour = dia.getHours();
+      let thisMinutes = dia.getMinutes();
+        if(thisHour == 8 && thisMinutes == 25){
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate(['./'],{relativeTo: this.route})
+        }else if(thisHour == 9 && thisMinutes == 20){
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate(['./'],{relativeTo: this.route})
+        }
+        else if(thisHour == 10 && thisMinutes == 15){
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate(['./'],{relativeTo: this.route})
+        }
+        else if(thisHour == 11 && thisMinutes  == 5){
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate(['./'],{relativeTo: this.route})
+        }
+        else if(thisHour == 11 && thisMinutes == 30){
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate(['./'],{relativeTo: this.route})
+        }
+        else if(thisHour == 12 && thisMinutes == 20){
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate(['./'],{relativeTo: this.route})
+        }
+        else if(thisHour == 13 && thisMinutes ==15){
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate(['./'],{relativeTo: this.route})
+        }
+        else if(thisHour == 14 && thisMinutes == 5){
+                 this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate(['./'],{relativeTo: this.route})
+        }
+  }
+
 
   getDateFormat(date: Date): string {
     const dayInWeek = this.daysWeek[date.getDay()];
@@ -192,13 +246,13 @@ export class CalendarioComponent {
       else if(thisHour == 11 && thisMinutes >30){
         thisHour = 12;
       }
-      else if(thisHour == 12 && thisMinutes >20){
+      else if(thisHour == 12 && thisMinutes >= 20){
         thisHour = 13;
       }
-      else if(thisHour == 13 && thisMinutes >15){
+      else if(thisHour == 13 && thisMinutes >=15){
         thisHour = 14;
       }
-      else if(thisHour == 14 && thisMinutes >5){
+      else if(thisHour == 14 && thisMinutes >=5){
         thisHour = 15;
       }
 

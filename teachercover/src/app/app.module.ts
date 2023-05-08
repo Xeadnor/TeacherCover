@@ -88,7 +88,7 @@ const appRoutes: Routes = [
       { path: "crearProfesor", component: CrearProfesorComponent},
       { path: "historialProfesores", component: HistorialProfesoresComponent},
 
-    ]
+    ],
   },
   {path:"recover-password",component: RecoverPasswordComponent},
   {path:"**",component : PagenotfoundComponent}
@@ -162,7 +162,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    RouterModule.forRoot(appRoutes,{enableTracing: false}),
+    RouterModule.forRoot(appRoutes,{enableTracing: false, onSameUrlNavigation : "reload"}),
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
