@@ -14,7 +14,8 @@
 
 }
 .ellipsis{
-    overflow: hidden,
+  white-space: nowrap !important;
+  overflow: hidden !important;
 
 }
 td , th {
