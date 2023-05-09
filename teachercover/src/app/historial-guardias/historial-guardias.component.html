@@ -72,6 +72,18 @@
         <td mat-cell *matCellDef="let guardia"> {{guardia.aula}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="horaGuardia">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
+            <input type="text" aria-label="horaGuardia" matInput formControlName="horaGuardia" (keyup)="applyFilter()"
+              placeholder="Buscar por...">
+          </mat-form-field>
+          <p mat-sort-header>Hora de la guardia</p>
+
+        </th>
+        <td mat-cell *matCellDef="let guardia"> {{ guardia.horaGuardia }} </td>
+      </ng-container>
+
       <ng-container matColumnDef="descripcion">
         <th mat-header-cell *matHeaderCellDef>
           <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
