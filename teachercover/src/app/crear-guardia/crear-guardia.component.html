@@ -1,0 +1,70 @@
+<div class="row">
+  <form [formGroup]="createOnCallForm" #f="ngForm" (ngSubmit)="createOnCall()" #localForm="ngForm">
+    <h5 class="m-2">Datos de la guardia</h5>
+    <hr class="hr" />
+    <div class="row m-2 mt-4">
+      <div class="form-outline form-white col-12 col-sm-4">
+        <label class="form-label" for="nombreProf">Nombre del profesor a cubrir</label>
+        <input type="text" id="nombreProf" class="form-control form-control-lg" formControlName="nombreProf" [class.is-invalid]="localForm.submitted && createOnCallForm.get('nombreProf')?.invalid" />
+        <div class="invalid-feedback">
+         Nombre del profesor a cubir es un campo obligatorio
+        </div>
+      </div>
+
+      <div class="form-outline form-white col-12 col-sm-4 ">
+        <label class="form-label" for="horaGuardia">Día de la Guardia</label><br>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Seleccionar fecha">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="form-outline form-white col-12 col-sm-4 ">
+        <label class="form-label" for="horaGuardia">Hora de la Guardia</label><br>
+        <select class="form-select">
+          <!-- (change)="changeLunesGuardia($event)" formControlName="lunesGuardia" [class.is-invalid]="localForm.submitted && createTeacherForm.get('lunesGuardia')?.invalid" -->
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="8">Primera hora</option>
+          <option value="9">Segunda hora</option>
+          <option value="10">Tercera hora</option>
+          <option value="11">Recreo</option>
+          <option value="12">Cuarta hora</option>
+          <option value="13">Quinta hora</option>
+          <option value="14">Sexta hora</option>
+        </select>
+        <div class="invalid-feedback">
+          Hora de la guardia es un campo obligatorio
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <div class="row m-2">
+      <div class="form-outline form-white col-12 col-sm-4">
+        <label class="form-label" for="aulaGuardia">Aula de la guardia</label>
+        <input type="text" id="aulaGuardia" class="form-control form-control-lg" formControlName="aulaGuardia" [class.is-invalid]="localForm.submitted && createOnCallForm.get('aulaGuardia')?.invalid" />
+        <div class="invalid-feedback">
+         Aula de la guardia es un campo obligatorio
+        </div>
+      </div>
+
+      <div class="form-outline form-white col-12 col-sm-6">
+        <label class="form-label" for="infoGuardia">Información adicional</label>
+        <textarea type="text" id="infoGuardia" class="form-control form-control-lg" formControlName="infoGuardia" > Añade aquí información relevante de la guardia</textarea>
+      </div>
+
+    </div>
+
+    <div class="form-outline form-white col-12 col-sm-4 mt-2">
+
+    </div>
+
+    <div class="text-center mt-4">
+      <button class="btn botonLogin btn-lg px-4 text-center" type="submit"> Crear guardia</button>
+    </div>
+
+  </form>
+</div>

@@ -10,7 +10,7 @@ import { doc, updateDoc } from "firebase/firestore";
 })
 export class ProfesorService {
 
-  
+
   constructor(private firestore: Firestore) { }
 
 
@@ -27,7 +27,7 @@ const docRef = doc(db, "profesores", idField);
 deleteDoc(docRef)
 
   }
-  
+
 
    async getDataFromEmail(email: String){
     const profesorRef = collection(this.firestore,"profesores");
@@ -37,14 +37,14 @@ deleteDoc(docRef)
   async getNewId(): Promise<number>{
     let newId = 0;
     const db = getFirestore();
-    
-    const q = query(collection(db, "profesores"), orderBy("id", "desc"), limit(1));
-const querySnapshot = await getDocs(q);
-querySnapshot.forEach((doc) => {
 
-  newId = doc.data()["id"] + 1;
-});
-return newId;
+    const q = query(collection(db, "profesores"), orderBy("id", "desc"), limit(1));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+
+      newId = doc.data()["id"] + 1;
+    });
+    return newId;
   }
 
   async confirmEmail(){
@@ -69,7 +69,7 @@ return newId;
     const data = {
       validate : 1,
     }
-    
+
     setDoc(profesorRef,data, { merge:true})
     .then(docRef => {
     })
@@ -82,17 +82,17 @@ return newId;
     updateCode(idField: String, code : String) {
       const db = getFirestore();
       const profesorRef = doc(db,"profesores",idField.toString());
-  
+
       const data = {
         code: code,
       }
-      
+
       setDoc(profesorRef,data, { merge:true})
       .then(docRef => {
       })
       .catch(error =>{
       })
-  
+
       }
 
 
@@ -124,15 +124,15 @@ return newId;
         }
 
 
-    
+
        addDoc(dbRef, data)
        .then(docRef => {
        })
        .catch(error => {
        })
-    
+
       }
-    
+
     }
 
 

@@ -62,6 +62,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { CrearProfesorComponent } from './crear-profesor/crear-profesor.component';
+import { CrearGuardiaComponent } from './crear-guardia/crear-guardia.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 
 
@@ -77,6 +78,7 @@ import { HistorialProfesoresComponent } from './historial-profesores/historial-p
 
 
 
+
 const appRoutes: Routes = [
   {path:"",component: LoginComponent},
   {
@@ -86,6 +88,7 @@ const appRoutes: Routes = [
       { path: "historial", component: HistorialGuardiasComponent},
       { path: "calendarioSemanal", component: CalendarioSemanalComponent},
       { path: "crearProfesor", component: CrearProfesorComponent},
+      { path: "crearGuardia", component: CrearGuardiaComponent},
       { path: "historialProfesores", component: HistorialProfesoresComponent},
 
     ],
@@ -109,6 +112,7 @@ const appRoutes: Routes = [
     RecoverPasswordComponent,
     PagenotfoundComponent,
     HistorialProfesoresComponent,
+    CrearGuardiaComponent,
 
   ],
   imports: [

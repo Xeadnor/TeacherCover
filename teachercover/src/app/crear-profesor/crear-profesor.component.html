@@ -1,211 +1,229 @@
 <div class="row">
-
-
-    <form [formGroup]="createTeacherForm" #f="ngForm" (ngSubmit)="createTeacher()" #localForm="ngForm">
-      <h5 class="m-2">Datos del profesor</h5>
-      <div class="row m-2 mt-4">
-        <div class="form-outline form-white col-12 col-sm-6">
-          <label class="form-label" for="nombreProf">Nombre del profesor</label>
-          <input type="text" id="nombreProf" class="form-control form-control-lg" formControlName="nombreProf" [class.is-invalid]="localForm.submitted && createTeacherForm.get('nombreProf')?.invalid" />
-          <div class="invalid-feedback">
-           Nombre del profesor es un campo obligatorio
-          </div>
+  <form [formGroup]="createTeacherForm" #f="ngForm" (ngSubmit)="createTeacher()" #localForm="ngForm">
+    <h5 class="m-2">Datos del profesor</h5>
+    <div class="row m-2 mt-4">
+      <div class="form-outline form-white col-12 col-sm-6">
+        <label class="form-label" for="nombreProf">Nombre del profesor</label>
+        <input type="text" id="nombreProf" class="form-control form-control-lg" formControlName="nombreProf"
+          [class.is-invalid]="localForm.submitted && createTeacherForm.get('nombreProf')?.invalid" />
+        <div class="invalid-feedback">
+          Nombre del profesor es un campo obligatorio
         </div>
-        <div class="form-outline form-white col-12 col-sm-6">
-          <label class="form-label" for="email">Email</label>
-          <input type="email" id="email" class="form-control form-control-lg" formControlName="email" [class.is-invalid]="localForm.submitted && createTeacherForm.get('email')?.invalid" />
-          <div class="invalid-feedback">
-            Email es un campo obligatorio
-          </div>
+      </div>
+      <div class="form-outline form-white col-12 col-sm-6">
+        <label class="form-label" for="email">Email</label>
+        <input type="email" id="email" class="form-control form-control-lg" formControlName="email"
+          [class.is-invalid]="localForm.submitted && createTeacherForm.get('email')?.invalid" />
+        <div class="invalid-feedback">
+          Email es un campo obligatorio
         </div>
+      </div>
+    </div>
 
+    <hr class="hr" />
+    <h5 class="m-2">Creación horario de guardias</h5>
+    <div class="row m-2">
+      <div class="form-outline form-white col-12 col-sm-4 mt-2">
+        <label class="form-label" for="lunesGuardia">Lunes</label><br>
+        <select class="form-select" (change)="changeLunesGuardia($event)" formControlName="lunesGuardia"
+          [class.is-invalid]="localForm.submitted && createTeacherForm.get('lunesGuardia')?.invalid">
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="0" selected>No tiene guardia</option>
+          <option value="8">Primera hora</option>
+          <option value="9">Segunda hora</option>
+          <option value="10">Tercera hora</option>
+          <option value="11">Recreo</option>
+          <option value="12">Cuarta hora</option>
+          <option value="13">Quinta hora</option>
+          <option value="14">Sexta hora</option>
+        </select>
+        <div class="invalid-feedback">
+          Horario guardia lunes es un campo obligatorio
+        </div>
       </div>
 
-        <hr class="hr" />
-        <h5 class="m-2">Creación horario de guardias</h5>
-        <div class="row m-2">
-          <div class="form-outline form-white col-12 col-sm-4 mt-2">
-            <label class="form-label" for="lunesGuardia">Lunes</label><br>
-            <select class="form-select" (change)="changeLunesGuardia($event)" formControlName="lunesGuardia" [class.is-invalid]="localForm.submitted && createTeacherForm.get('lunesGuardia')?.invalid">
-              <option value="" disabled selected>Seleccionar</option>
-              <option value="0" selected>No tiene guardia</option>
-              <option value="8">Primera hora</option>
-              <option value="9">Segunda hora</option>
-              <option value="10">Tercera hora</option>
-              <option value="11">Recreo</option>
-              <option value="12">Cuarta hora</option>
-              <option value="13">Quinta hora</option>
-              <option value="14">Sexta hora</option>
-            </select>
-            <div class="invalid-feedback">
-            Horario guardia lunes es un campo obligatorio
-            </div>
-          </div>
-          <div class="form-outline form-white col-12 col-sm-4 mt-2">
-            <label class="form-label" for="martesGuardia">Martes</label><br>
-            <select class="form-select" (change)="changeMartesGuardia($event)" formControlName="martesGuardia" [class.is-invalid]="localForm.submitted && createTeacherForm.get('martesGuardia')?.invalid">
-              <option value="" disabled selected>Seleccionar</option>
-              <option value="0" selected>No tiene guardia</option>
-              <option value="8">Primera hora</option>
-              <option value="9">Segunda hora</option>
-              <option value="10">Tercera hora</option>
-              <option value="11">Recreo</option>
-              <option value="12">Cuarta hora</option>
-              <option value="13">Quinta hora</option>
-              <option value="14">Sexta hora</option>
-            </select>
-            <div class="invalid-feedback">
-            Horario guardia martes es un campo obligatorio
-            </div>
-          </div>
-          <div class="form-outline form-white col-12 col-sm-4 mt-2">
-            <label class="form-label" for="miercolesGuardia">Miercoles</label><br>
-            <select class="form-select" (change)="changeMiercolesGuardia($event)" formControlName="miercolesGuardia" [class.is-invalid]="localForm.submitted && createTeacherForm.get('miercolesGuardia')?.invalid">
-              <option value="" disabled selected>Seleccionar</option>
-              <option value="0" selected>No tiene guardia</option>
-              <option value="8">Primera hora</option>
-              <option value="9">Segunda hora</option>
-              <option value="10">Tercera hora</option>
-              <option value="11">Recreo</option>
-              <option value="12">Cuarta hora</option>
-              <option value="13">Quinta hora</option>
-              <option value="14">Sexta hora</option>
-            </select>
-            <div class="invalid-feedback">
-            Horario guardia miercoles es un campo obligatorio
-            </div>
-          </div>
-          <div class="form-outline form-white col-12 col-sm-4 mt-2 mt-sm-3">
-            <label class="form-label" for="juevesGuardia">Jueves</label><br>
-            <select class="form-select" (change)="changeJuevesGuardia($event)" formControlName="juevesGuardia" [class.is-invalid]="localForm.submitted && createTeacherForm.get('juevesGuardia')?.invalid">
-              <option value="" disabled selected>Seleccionar</option>
-              <option value="0" selected>No tiene guardia</option>
-              <option value="8">Primera hora</option>
-              <option value="9">Segunda hora</option>
-              <option value="10">Tercera hora</option>
-              <option value="11">Recreo</option>
-              <option value="12">Cuarta hora</option>
-              <option value="13">Quinta hora</option>
-              <option value="14">Sexta hora</option>
-            </select>
-            <div class="invalid-feedback">
-            Horario guardia jueves es un campo obligatorio
-            </div>
-          </div>
-          <div class="form-outline form-white col-12 col-sm-4  mt-2 mt-sm-3">
-            <label class="form-label" for="viernesGuardia">Viernes</label><br>
-            <select class="form-select" (change)="changeViernesGuardia($event)" formControlName="viernesGuardia" [class.is-invalid]="localForm.submitted && createTeacherForm.get('viernesGuardia')?.invalid">
-              <option value="" disabled selected>Seleccionar</option>
-              <option value="0" selected>No tiene guardia</option>
-              <option value="8">Primera hora</option>
-              <option value="9">Segunda hora</option>
-              <option value="10">Tercera hora</option>
-              <option value="11">Recreo</option>
-              <option value="12">Cuarta hora</option>
-              <option value="13">Quinta hora</option>
-              <option value="14">Sexta hora</option>
-            </select>
-            <div class="invalid-feedback">
-            Horario guardia viernes es un campo obligatorio
-            </div>
-          </div>
+      <div class="form-outline form-white col-12 col-sm-4 mt-2">
+        <label class="form-label" for="martesGuardia">Martes</label><br>
+        <select class="form-select" (change)="changeMartesGuardia($event)" formControlName="martesGuardia"
+          [class.is-invalid]="localForm.submitted && createTeacherForm.get('martesGuardia')?.invalid">
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="0" selected>No tiene guardia</option>
+          <option value="8">Primera hora</option>
+          <option value="9">Segunda hora</option>
+          <option value="10">Tercera hora</option>
+          <option value="11">Recreo</option>
+          <option value="12">Cuarta hora</option>
+          <option value="13">Quinta hora</option>
+          <option value="14">Sexta hora</option>
+        </select>
+        <div class="invalid-feedback">
+          Horario guardia martes es un campo obligatorio
         </div>
-        <hr class="hr" />
-        <h5 class="m-2">Creación horario de guardias de apoyo</h5>
-        <div class="row m-2">
-          <div class="form-outline form-white col-12 col-sm-4 mt-2">
-            <label class="form-label" for="lunesGuardiaApoyo">Lunes</label><br>
-            <select class="form-select" (change)="changeLunesGuardiaApoyo($event)" formControlName="lunesGuardiaApoyo" [class.is-invalid]="localForm.submitted && createTeacherForm.get('lunesGuardiaApoyo')?.invalid">
-              <option value="" disabled selected>Seleccionar</option>
-              <option value="0" selected>No tiene guardia</option>
-              <option value="8">Primera hora</option>
-              <option value="9">Segunda hora</option>
-              <option value="10">Tercera hora</option>
-              <option value="11">Recreo</option>
-              <option value="12">Cuarta hora</option>
-              <option value="13">Quinta hora</option>
-              <option value="14">Sexta hora</option>
-            </select>
-            <div class="invalid-feedback">
-            Horario guardia apoyo lunes es un campo obligatorio
-            </div>
-          </div>
-          <div class="form-outline form-white col-12 col-sm-4 mt-2">
-            <label class="form-label" for="martesGuardiaApoyo">Martes</label><br>
-            <select class="form-select" (change)="changeMartesGuardiaApoyo($event)" formControlName="martesGuardiaApoyo" [class.is-invalid]="localForm.submitted && createTeacherForm.get('martesGuardiaApoyo')?.invalid">
-              <option value="" disabled selected>Seleccionar</option>
-              <option value="0" selected>No tiene guardia</option>
-              <option value="8">Primera hora</option>
-              <option value="9">Segunda hora</option>
-              <option value="10">Tercera hora</option>
-              <option value="11">Recreo</option>
-              <option value="12">Cuarta hora</option>
-              <option value="13">Quinta hora</option>
-              <option value="14">Sexta hora</option>
-            </select>
-            <div class="invalid-feedback">
-            Horario guardia apoyo martes es un campo obligatorio
-            </div>
-          </div>
-          <div class="form-outline form-white col-12 col-sm-4 mt-2">
-            <label class="form-label" for="miercolesGuardiaApoyo">Miercoles</label><br>
-            <select class="form-select" (change)="changeMiercolesGuardiaApoyo($event)" formControlName="miercolesGuardiaApoyo" [class.is-invalid]="localForm.submitted && createTeacherForm.get('miercolesGuardiaApoyo')?.invalid">
-              <option value="" disabled selected>Seleccionar</option>
-              <option value="0" selected>No tiene guardia</option>
-              <option value="8">Primera hora</option>
-              <option value="9">Segunda hora</option>
-              <option value="10">Tercera hora</option>
-              <option value="11">Recreo</option>
-              <option value="12">Cuarta hora</option>
-              <option value="13">Quinta hora</option>
-              <option value="14">Sexta hora</option>
-            </select>
-            <div class="invalid-feedback">
-            Horario guardia apoyo miercoles es un campo obligatorio
-            </div>
-          </div>
-          <div class="form-outline form-white col-12 col-sm-4 mt-2 mt-sm-3">
-            <label class="form-label" for="juevesGuardiaApoyo">Jueves</label><br>
-            <select class="form-select" (change)="changeJuevesGuardiaApoyo($event)" formControlName="juevesGuardiaApoyo" [class.is-invalid]="localForm.submitted && createTeacherForm.get('juevesGuardiaApoyo')?.invalid">
-              <option value="" disabled selected>Seleccionar</option>
-              <option value="0" selected>No tiene guardia</option>
-              <option value="8">Primera hora</option>
-              <option value="9">Segunda hora</option>
-              <option value="10">Tercera hora</option>
-              <option value="11">Recreo</option>
-              <option value="12">Cuarta hora</option>
-              <option value="13">Quinta hora</option>
-              <option value="14">Sexta hora</option>
-            </select>
-            <div class="invalid-feedback">
-            Horario guardia apoyo jueves es un campo obligatorio
-            </div>
-          </div>
-          <div class="form-outline form-white col-12 col-sm-4  mt-2 mt-sm-3">
-            <label class="form-label" for="viernesGuardiaApoyo">Viernes</label><br>
-            <select class="form-select" (change)="changeViernesGuardiaApoyo($event)" formControlName="viernesGuardiaApoyo" [class.is-invalid]="localForm.submitted && createTeacherForm.get('viernesGuardiaApoyo')?.invalid">
-              <option value="" disabled selected>Seleccionar</option>
-              <option value="0" selected>No tiene guardia</option>
-              <option value="8">Primera hora</option>
-              <option value="9">Segunda hora</option>
-              <option value="10">Tercera hora</option>
-              <option value="11">Recreo</option>
-              <option value="12">Cuarta hora</option>
-              <option value="13">Quinta hora</option>
-              <option value="14">Sexta hora</option>
-            </select>
-            <div class="invalid-feedback">
-            Horario guardia apoyo viernes es un campo obligatorio
-            </div>
-          </div>
+      </div>
+
+      <div class="form-outline form-white col-12 col-sm-4 mt-2">
+        <label class="form-label" for="miercolesGuardia">Miercoles</label><br>
+        <select class="form-select" (change)="changeMiercolesGuardia($event)" formControlName="miercolesGuardia"
+          [class.is-invalid]="localForm.submitted && createTeacherForm.get('miercolesGuardia')?.invalid">
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="0" selected>No tiene guardia</option>
+          <option value="8">Primera hora</option>
+          <option value="9">Segunda hora</option>
+          <option value="10">Tercera hora</option>
+          <option value="11">Recreo</option>
+          <option value="12">Cuarta hora</option>
+          <option value="13">Quinta hora</option>
+          <option value="14">Sexta hora</option>
+        </select>
+        <div class="invalid-feedback">
+          Horario guardia miercoles es un campo obligatorio
         </div>
+      </div>
 
-        <div class="text-center mt-4">
-
-          <button class="btn botonLogin btn-lg px-4 text-center" type="submit" > Crear profesor</button>
+      <div class="form-outline form-white col-12 col-sm-4 mt-2 mt-sm-3">
+        <label class="form-label" for="juevesGuardia">Jueves</label><br>
+        <select class="form-select" (change)="changeJuevesGuardia($event)" formControlName="juevesGuardia"
+          [class.is-invalid]="localForm.submitted && createTeacherForm.get('juevesGuardia')?.invalid">
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="0" selected>No tiene guardia</option>
+          <option value="8">Primera hora</option>
+          <option value="9">Segunda hora</option>
+          <option value="10">Tercera hora</option>
+          <option value="11">Recreo</option>
+          <option value="12">Cuarta hora</option>
+          <option value="13">Quinta hora</option>
+          <option value="14">Sexta hora</option>
+        </select>
+        <div class="invalid-feedback">
+          Horario guardia jueves es un campo obligatorio
         </div>
-      </form>
+      </div>
 
+      <div class="form-outline form-white col-12 col-sm-4  mt-2 mt-sm-3">
+        <label class="form-label" for="viernesGuardia">Viernes</label><br>
+        <select class="form-select" (change)="changeViernesGuardia($event)" formControlName="viernesGuardia"
+          [class.is-invalid]="localForm.submitted && createTeacherForm.get('viernesGuardia')?.invalid">
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="0" selected>No tiene guardia</option>
+          <option value="8">Primera hora</option>
+          <option value="9">Segunda hora</option>
+          <option value="10">Tercera hora</option>
+          <option value="11">Recreo</option>
+          <option value="12">Cuarta hora</option>
+          <option value="13">Quinta hora</option>
+          <option value="14">Sexta hora</option>
+        </select>
+        <div class="invalid-feedback">
+          Horario guardia viernes es un campo obligatorio
+        </div>
+      </div>
 
+    </div>
 
+    <hr class="hr" />
+    <h5 class="m-2">Creación horario de guardias de apoyo</h5>
+    <div class="row m-2">
+      <div class="form-outline form-white col-12 col-sm-4 mt-2">
+        <label class="form-label" for="lunesGuardiaApoyo">Lunes</label><br>
+        <select class="form-select" (change)="changeLunesGuardiaApoyo($event)" formControlName="lunesGuardiaApoyo"
+          [class.is-invalid]="localForm.submitted && createTeacherForm.get('lunesGuardiaApoyo')?.invalid">
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="0" selected>No tiene guardia</option>
+          <option value="8">Primera hora</option>
+          <option value="9">Segunda hora</option>
+          <option value="10">Tercera hora</option>
+          <option value="11">Recreo</option>
+          <option value="12">Cuarta hora</option>
+          <option value="13">Quinta hora</option>
+          <option value="14">Sexta hora</option>
+        </select>
+        <div class="invalid-feedback">
+          Horario guardia apoyo lunes es un campo obligatorio
+        </div>
+      </div>
+
+      <div class="form-outline form-white col-12 col-sm-4 mt-2">
+        <label class="form-label" for="martesGuardiaApoyo">Martes</label><br>
+        <select class="form-select" (change)="changeMartesGuardiaApoyo($event)" formControlName="martesGuardiaApoyo"
+          [class.is-invalid]="localForm.submitted && createTeacherForm.get('martesGuardiaApoyo')?.invalid">
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="0" selected>No tiene guardia</option>
+          <option value="8">Primera hora</option>
+          <option value="9">Segunda hora</option>
+          <option value="10">Tercera hora</option>
+          <option value="11">Recreo</option>
+          <option value="12">Cuarta hora</option>
+          <option value="13">Quinta hora</option>
+          <option value="14">Sexta hora</option>
+        </select>
+        <div class="invalid-feedback">
+          Horario guardia apoyo martes es un campo obligatorio
+        </div>
+      </div>
+
+      <div class="form-outline form-white col-12 col-sm-4 mt-2">
+        <label class="form-label" for="miercolesGuardiaApoyo">Miercoles</label><br>
+        <select class="form-select" (change)="changeMiercolesGuardiaApoyo($event)"
+          formControlName="miercolesGuardiaApoyo"
+          [class.is-invalid]="localForm.submitted && createTeacherForm.get('miercolesGuardiaApoyo')?.invalid">
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="0" selected>No tiene guardia</option>
+          <option value="8">Primera hora</option>
+          <option value="9">Segunda hora</option>
+          <option value="10">Tercera hora</option>
+          <option value="11">Recreo</option>
+          <option value="12">Cuarta hora</option>
+          <option value="13">Quinta hora</option>
+          <option value="14">Sexta hora</option>
+        </select>
+        <div class="invalid-feedback">
+          Horario guardia apoyo miercoles es un campo obligatorio
+        </div>
+      </div>
+
+      <div class="form-outline form-white col-12 col-sm-4 mt-2 mt-sm-3">
+        <label class="form-label" for="juevesGuardiaApoyo">Jueves</label><br>
+        <select class="form-select" (change)="changeJuevesGuardiaApoyo($event)" formControlName="juevesGuardiaApoyo"
+          [class.is-invalid]="localForm.submitted && createTeacherForm.get('juevesGuardiaApoyo')?.invalid">
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="0" selected>No tiene guardia</option>
+          <option value="8">Primera hora</option>
+          <option value="9">Segunda hora</option>
+          <option value="10">Tercera hora</option>
+          <option value="11">Recreo</option>
+          <option value="12">Cuarta hora</option>
+          <option value="13">Quinta hora</option>
+          <option value="14">Sexta hora</option>
+        </select>
+        <div class="invalid-feedback">
+          Horario guardia apoyo jueves es un campo obligatorio
+        </div>
+      </div>
+
+      <div class="form-outline form-white col-12 col-sm-4  mt-2 mt-sm-3">
+        <label class="form-label" for="viernesGuardiaApoyo">Viernes</label><br>
+        <select class="form-select" (change)="changeViernesGuardiaApoyo($event)" formControlName="viernesGuardiaApoyo"
+          [class.is-invalid]="localForm.submitted && createTeacherForm.get('viernesGuardiaApoyo')?.invalid">
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="0" selected>No tiene guardia</option>
+          <option value="8">Primera hora</option>
+          <option value="9">Segunda hora</option>
+          <option value="10">Tercera hora</option>
+          <option value="11">Recreo</option>
+          <option value="12">Cuarta hora</option>
+          <option value="13">Quinta hora</option>
+          <option value="14">Sexta hora</option>
+        </select>
+        <div class="invalid-feedback">
+          Horario guardia apoyo viernes es un campo obligatorio
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-4">
+      <button class="btn botonLogin btn-lg px-4 text-center" type="submit"> Crear profesor</button>
+    </div>
+
+  </form>
 </div>
