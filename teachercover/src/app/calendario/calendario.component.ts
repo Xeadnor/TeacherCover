@@ -127,14 +127,20 @@ export class CalendarioComponent {
           siguienteHora.setMinutes(5)
           siguienteHora.setSeconds(0)
           siguienteHora.setMilliseconds(0)
-        }
+        }else{
+          siguienteHora.setHours(dia.getHours()+1)
 
+        }
+        console.log(siguienteHora.getTime() - dia.getTime())
         setTimeout(() => {
           this.router.routeReuseStrategy.shouldReuseRoute = () => false;
           this.router.onSameUrlNavigation = 'reload';
           this.router.navigate(['./'],{relativeTo: this.route})
           let v = this.mostrarAlerta(siguienteHora.getHours());
-      this.toastr.info("En esta hora tiene una guardia de apoyo, compruebe sus datos","Hora de guardia de apoyo",{timeOut:5000,closeButton:true,positionClass:"toast-top-right"})
+           if(v){
+
+             this.toastr.info("En esta hora tiene una guardia de apoyo, compruebe sus datos","Hora de guardia de apoyo",{timeOut:5000,closeButton:true,positionClass:"toast-top-right"})
+           }
 
     
 
