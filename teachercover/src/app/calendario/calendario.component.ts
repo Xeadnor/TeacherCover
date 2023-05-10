@@ -5,6 +5,7 @@ import { GuardiaService } from '../services/guardia.service';
 import { Profesor } from 'app/models/profesor.model';
 import { ProfesorService } from 'app/services/profesor.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-calendario',
@@ -45,9 +46,8 @@ export class CalendarioComponent {
   day: Date;
   hours: string[] = [];
   someSubscription: any;
-  constructor(private utilsService: UtilsService, private guardiaService: GuardiaService,private profesorService: ProfesorService,private router: Router,private route: ActivatedRoute) {
+  constructor(private utilsService: UtilsService,private toastr: ToastrService, private guardiaService: GuardiaService,private profesorService: ProfesorService,private router: Router,private route: ActivatedRoute) {
 
-    setInterval(()=> { this.reloadCurrentRoute() }, 20000);
   }
 
   async ngOnInit() {
@@ -71,53 +71,75 @@ export class CalendarioComponent {
     }
     );
 
+    this.reloadCurrentRoute()
+
   }
 
 
     reloadCurrentRoute() {
-      console.log("hola")
       let dia = new Date();
       let thisHour = dia.getHours();
       let thisMinutes = dia.getMinutes();
-        if(thisHour == 8 && thisMinutes == 25){
+      let siguienteHora = new Date();
+        if(thisHour <= 8 && thisMinutes < 25){
+          siguienteHora.setHours(8)
+          siguienteHora.setMinutes(25)
+          siguienteHora.setSeconds(0)
+          siguienteHora.setMilliseconds(0)
+        }else if((thisHour == 9 && thisMinutes < 20)  || (thisHour == 8 && thisMinutes >=25)){
+          siguienteHora.setHours(9)
+          siguienteHora.setMinutes(20)
+          siguienteHora.setSeconds(0)
+          siguienteHora.setMilliseconds(0)
+        }
+        else if((thisHour == 9 && thisMinutes >= 15) || (thisHour == 10 && thisMinutes < 15)){
+          siguienteHora.setHours(10)
+          siguienteHora.setMinutes(15)
+          siguienteHora.setSeconds(0)
+          siguienteHora.setMilliseconds(0)
+        }
+        else if((thisHour == 10 && thisMinutes  >= 15)||(thisHour == 11 && thisMinutes  < 5)){
+          siguienteHora.setHours(11)
+          siguienteHora.setMinutes(5)
+          siguienteHora.setSeconds(0)
+          siguienteHora.setMilliseconds(0)
+        }
+        else if((thisHour == 11 && thisMinutes  >= 5)||(thisHour == 11 && thisMinutes  < 30)){
+          siguienteHora.setHours(11)
+          siguienteHora.setMinutes(30)
+          siguienteHora.setSeconds(0)
+          siguienteHora.setMilliseconds(0)
+        }
+        else if((thisHour == 11 && thisMinutes  >= 30)||(thisHour == 12 && thisMinutes  < 20)){
+          siguienteHora.setHours(12)
+          siguienteHora.setMinutes(20)
+          siguienteHora.setSeconds(0)
+          siguienteHora.setMilliseconds(0)
+        }
+        else if((thisHour == 12 && thisMinutes  >= 20)||(thisHour == 13 && thisMinutes  < 15)){
+          siguienteHora.setHours(13)
+          siguienteHora.setMinutes(15)
+          siguienteHora.setSeconds(0)
+          siguienteHora.setMilliseconds(0)
+        }
+        else if((thisHour == 13 && thisMinutes  >= 15)||(thisHour == 14 && thisMinutes  < 5)){
+          siguienteHora.setHours(14)
+          siguienteHora.setMinutes(5)
+          siguienteHora.setSeconds(0)
+          siguienteHora.setMilliseconds(0)
+        }
+
+        setTimeout(() => {
           this.router.routeReuseStrategy.shouldReuseRoute = () => false;
           this.router.onSameUrlNavigation = 'reload';
           this.router.navigate(['./'],{relativeTo: this.route})
-        }else if(thisHour == 9 && thisMinutes == 20){
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate(['./'],{relativeTo: this.route})
-        }
-        else if(thisHour == 10 && thisMinutes == 15){
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate(['./'],{relativeTo: this.route})
-        }
-        else if(thisHour == 11 && thisMinutes  == 5){
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate(['./'],{relativeTo: this.route})
-        }
-        else if(thisHour == 11 && thisMinutes == 30){
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate(['./'],{relativeTo: this.route})
-        }
-        else if(thisHour == 12 && thisMinutes == 20){
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate(['./'],{relativeTo: this.route})
-        }
-        else if(thisHour == 13 && thisMinutes ==15){
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate(['./'],{relativeTo: this.route})
-        }
-        else if(thisHour == 14 && thisMinutes == 5){
-                 this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate(['./'],{relativeTo: this.route})
-        }
+          let v = this.mostrarAlerta(siguienteHora.getHours());
+      this.toastr.info("En esta hora tiene una guardia de apoyo, compruebe sus datos","Hora de guardia de apoyo",{timeOut:5000,closeButton:true,positionClass:"toast-top-right"})
+
+    
+
+        }, siguienteHora.getTime() - dia.getTime());
+
   }
 
 
@@ -200,31 +222,13 @@ export class CalendarioComponent {
 
       if (day == dia && hora == value){
         tipo = "Guardia de apoyo";
+
       }
     });
 
     return tipo
   }
 
-
-
-  // someFunction(hora: number) {
-  //   let thisDay = this.day.getDay();
-  //   const meeting = this.meetings.find(
-  //     (el: Guardia) => el.diaSemana === thisDay && el.hora === hora
-  //   )?.estado;
-  //   if (meeting) {
-  //     if (meeting == "Finalizada") {
-  //       return "rgb(47, 224, 83)";
-  //     } else if (meeting == "Pendiente") {
-  //       return "rgb(255, 251, 10)"
-  //     } else {
-  //       return "lightblue";
-  //     }
-  //   } else {
-  //     return "";
-  //   }
-  // }
   existsMeeting( hora: number){
     let fijada = {};
     let dia = new Date();
@@ -361,6 +365,148 @@ export class CalendarioComponent {
 
     return fijada;
   }
+
+
+
+  mostrarAlerta( hora: number){
+    let valor = false;
+    let dia = new Date();
+    let day = dia.getDay();
+    let thisHour = this.day.getHours();
+    let thisMinutes = this.day.getMinutes();
+    let estamosEnHora = false;
+      if(thisHour == 8 && thisMinutes <25){
+        thisHour = 7;
+      }else if(thisHour == 9 && thisMinutes < 20){
+        thisHour = 8;
+      }
+      else if(thisHour == 10 && thisMinutes <15){
+        thisHour = 9;
+      }
+      else if(thisHour == 11 && thisMinutes <5){
+        thisHour = 10;
+      }
+      else if(thisHour == 11 && thisMinutes >30){
+        thisHour = 12;
+      }
+      else if(thisHour == 12 && thisMinutes >= 20){
+        thisHour = 13;
+      }
+      else if(thisHour == 13 && thisMinutes >=15){
+        thisHour = 14;
+      }
+      else if(thisHour == 14 && thisMinutes >=5){
+        thisHour = 15;
+      }
+
+    if(thisHour == hora){
+      estamosEnHora = true;
+
+    }else{
+      
+    }
+
+
+
+
+
+    Object.entries(this.horarioGuardias || {}).forEach(([key, value]) => {
+      let dia = 0
+      switch (key) {
+        case "lunes": {
+          dia = 1
+          break;
+        }
+        case "martes": {
+          dia = 2
+          break;
+        }
+        case "miercoles": {
+          dia = 3
+          break;
+        }
+        case "jueves": {
+          dia = 4
+          break;
+        }
+        case "viernes": {
+          dia = 5
+          break;
+        }
+        default: {
+          //statements; 
+          break;
+        }
+      }
+
+
+      if (day == dia && hora == value){
+        if(estamosEnHora == true){
+
+          
+          valor = true;
+        }else{
+          
+        }
+      }
+    });
+
+    Object.entries(this.horarioGuardiasApoyo || {}).forEach(([key, value]) => {
+      let dia = 0
+      switch (key) {
+        case "lunes": {
+          dia = 1
+          break;
+        }
+        case "martes": {
+          dia = 2
+          break;
+        }
+        case "miercoles": {
+          dia = 3
+          break;
+        }
+        case "jueves": {
+          dia = 4
+          break;
+        }
+        case "viernes": {
+          dia = 5
+          break;
+        }
+        default: {
+          //statements; 
+          break;
+        }
+      }
+
+
+      if (day == dia && hora == value){
+        if(estamosEnHora == true){
+
+          
+          valor = true;
+        }else{
+
+
+        }
+      }
+    });
+
+
+    return valor;
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

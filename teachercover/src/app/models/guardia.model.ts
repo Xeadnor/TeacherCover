@@ -1,5 +1,5 @@
 export class Guardia {
-  diaSemana: number
+  horaGuardia: string
   fecha: Date;
   dia: string;
   hora: number;
@@ -11,23 +11,28 @@ export class Guardia {
   nombreProfesor: string;
   profesor: number;
   idField: string
+  profesorCubierto: string
 
-  constructor(diaSemana?: number,fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number,idField?: string) {
-    if (diaSemana && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor && fecha && idField) {
+  constructor(horaGuardia?: string,fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number,idField?: string,profesorCubierto?:string) {
+    if (horaGuardia && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor && fecha && idField && profesorCubierto) {
       this.idGuardia = idGuardia
       this.estado = estado
       this.fecha = fecha;
       this.hora = hora
-      this.diaSemana = diaSemana
+      this.horaGuardia = horaGuardia
       this.dia = dia
       this.descripcion = descripcion
       this.aula = aula
       this.profesor = profesor
       this.nombreProfesor = nombreProfesor
       this.curso = curso
+      this.profesorCubierto = profesorCubierto
     }
   }
 
+  getProfesorCubierto(){
+    return this.profesorCubierto;
+  }
   getFecha(){
     return this.fecha;
   }
@@ -58,13 +63,16 @@ export class Guardia {
   getDescripcion() {
     return this.descripcion;
   }
-  getDiaSemana() {
-    return this.diaSemana;
+  getHoraGuardia() {
+    return this.horaGuardia;
   }
   getEstado() {
     return this.estado;
   }
 
+  setProfesorCubierto(profesorCubierto:string){
+    this.profesorCubierto = profesorCubierto;
+  }
   setIdField(idField: string) {
     this.idField = idField;
 }
@@ -95,8 +103,8 @@ export class Guardia {
   setDescripcion(descripcion: string) {
     this.descripcion = descripcion;
   }
-  setDiaSemana(diaSemana: number) {
-    this.diaSemana = diaSemana
+  setHoraGuardia(horaGuardia: string) {
+    this.horaGuardia = horaGuardia
   }
   setEstado(estado: string) {
     this.estado = estado
