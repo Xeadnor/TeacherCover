@@ -88,7 +88,7 @@ export class HistorialProfesoresComponent implements OnInit{
 
   }
   dialogEditar(profesor: Profesor): void {
-    console.log("modal para editar");
+    this.router.navigate(['/pagina/editarProfesor', profesor["idField"]]);
   }
   dialogEliminar(profesor:Profesor): void {
     //!  COMPROBRAR TAMBIEN CON UN MODAL PARA CONFIRMAR LA ELIMINACION.

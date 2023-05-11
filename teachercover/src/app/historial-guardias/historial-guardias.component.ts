@@ -105,7 +105,7 @@ export class HistorialGuardiasComponent implements OnInit {
 
   }
   dialogEditar(guardia: Guardia): void {
-    console.log("modal para editar");
+    //this.router.navigate(['/product-details', id]);
     console.log(guardia)
   }
   dialogEliminar(guardia: Guardia): void {

@@ -74,6 +74,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { HistorialProfesoresComponent } from './historial-profesores/historial-profesores.component';
+import { EditarProfesorComponent } from './editar-profesor/editar-profesor.component';
 
 
 
@@ -90,6 +91,8 @@ const appRoutes: Routes = [
       { path: "crearProfesor", component: CrearProfesorComponent},
       { path: "crearGuardia", component: CrearGuardiaComponent},
       { path: "historialProfesores", component: HistorialProfesoresComponent},
+      { path: "editarProfesor/:id", component: EditarProfesorComponent},
+
 
     ],
   },
@@ -113,6 +116,7 @@ const appRoutes: Routes = [
     PagenotfoundComponent,
     HistorialProfesoresComponent,
     CrearGuardiaComponent,
+    EditarProfesorComponent,
 
   ],
   imports: [
