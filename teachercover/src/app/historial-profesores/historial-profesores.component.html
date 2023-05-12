@@ -85,10 +85,10 @@
           <td mat-cell *matCellDef="let profesor">
             <ul class="list-inline m-0">
               <li class="list-inline-item">
-                  <button  class="btn editar btn-sm rounded-1" (click)="dialogEditar(profesor)" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
+                  <button  class="btn editar btn-sm rounded-1"(click)="dialogEditar(profesor)" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
               </li>
               <li class="list-inline-item">
-                  <button class="btn eliminar btn-sm rounded-1"  (click)="dialogEliminar(profesor)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+                  <button class="btn eliminar btn-sm rounded-1" [disabled]="comprobarAdmin(profesor)" (click)="dialogEliminar(profesor)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
               </li>
           </ul>
           </td>

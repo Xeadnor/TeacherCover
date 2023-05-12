@@ -23,20 +23,7 @@
             </ul>
           </div>
         </li>
-        <li class="mb-1">
-          <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-            data-bs-target="#dashboard-collapse" aria-expanded="false">
-            Proximamente...
-          </button>
-          <div class="collapse" id="dashboard-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li><a href="#" class="link-dark rounded">Prox...</a></li>
-              <li><a href="#" class="link-dark rounded">Prox...</a></li>
-              <li><a href="#" class="link-dark rounded">Prox...</a></li>
-              <li><a href="#" class="link-dark rounded">Prox...</a></li>
-            </ul>
-          </div>
-        </li>
+
         <!-- OPCIONES DEL ADMINISTRADOR -->
         <li class="mb-1" *ngIf="rolAdmin">
           <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
@@ -69,7 +56,7 @@
           </p>
         </div>
 
-        <div class="col-3 text-center p-0">
+        <div class="col-4 text-center p-0">
           <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 p-0 pt-1"
             data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
             Inicio
@@ -84,25 +71,11 @@
           </div>
 
         </div>
-        <div class="col-3 text-center p-0">
-          <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 pt-1" data-bs-toggle="collapse"
-            data-bs-target="#dashboard-collapse" aria-expanded="true">
-            Prox...
-          </button>
-          <div class="collapse" id="dashboard-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li><a href="#" class="link-dark rounded">Prox...</a></li>
-              <li><a href="#" class="link-dark rounded">Prox...</a></li>
-              <li><a href="#" class="link-dark rounded">Prox...</a></li>
-              <li><a href="#" class="link-dark rounded">Prox...</a></li>
-            </ul>
-          </div>
 
-        </div>
 
 
         <!-- OPCIONES DEL ADMINISTRADOR -->
-        <div class="col-3 text-center p-0" *ngIf="rolAdmin">
+        <div class="col-4 text-center p-0 me-5" *ngIf="rolAdmin">
 
           <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 pt-1" data-bs-toggle="collapse"
             data-bs-target="#account-collapse" aria-expanded="true">

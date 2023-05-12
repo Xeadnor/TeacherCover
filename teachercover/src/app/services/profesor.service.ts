@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collection, collectionData, setDoc } from '@angular/fire/firestore';
 import { Profesor } from '../models/profesor.model';
 import { Observable } from 'rxjs';
-import { query, where, getDocs, getFirestore, orderBy, limit, deleteDoc } from "firebase/firestore";
+import { query, where, getDocs, getFirestore, orderBy, limit, deleteDoc, getDoc } from "firebase/firestore";
 import { doc, updateDoc } from "firebase/firestore";
 
 @Injectable({
@@ -56,9 +56,9 @@ deleteDoc(docRef)
 
   async getATeacherFromId(idField : String){
     const db = getFirestore();
-    const profesorRef = collection(db,"profesores", idField.toString());
-    const docSnap = await getDocs(profesorRef);
-    return docSnap;
+    const profesorRef = doc(db,"profesores", idField.toString());
+    const docSnap = await getDoc(profesorRef);
+    return docSnap.data();
 
   }
 
@@ -94,6 +94,41 @@ deleteDoc(docRef)
       })
 
       }
+
+      updateTeacher(profesor: Profesor) {
+        const db = getFirestore();
+        const profesorRef = doc(db,"profesores",profesor.getIdField());
+  
+        const data = {
+          validate: profesor.getValidate(),
+          horasGuardias: profesor.gethorasGuardias(),
+          id: profesor.getIdProfesor(),
+          role: profesor.getRole(),
+          name: profesor.getName(),
+          email: profesor.getEmail(),
+          horarioGuardias : {
+            lunes: (profesor.getHorarioGuardias().get("lunes")!),
+            martes: (profesor.getHorarioGuardias().get("martes")!),
+            miercoles: (profesor.getHorarioGuardias().get("miercoles")!),
+            jueves: (profesor.getHorarioGuardias().get("jueves")!),
+            viernes:(profesor.getHorarioGuardias().get("viernes")!),
+          },
+          horarioGuardiasApoyo : {
+            lunes: (profesor.getHorarioGuardiasApoyo().get("lunes")!),
+            martes: (profesor.getHorarioGuardiasApoyo().get("martes")!),
+            miercoles: (profesor.getHorarioGuardiasApoyo().get("miercoles")!),
+            jueves: (profesor.getHorarioGuardiasApoyo().get("jueves")!),
+            viernes:(profesor.getHorarioGuardiasApoyo().get("viernes")!),
+          },
+        }
+  
+        setDoc(profesorRef,data, { merge:true})
+        .then(docRef => {
+        })
+        .catch(error =>{
+        })
+  
+        }
 
 
       addProfesor(profesor : Profesor){

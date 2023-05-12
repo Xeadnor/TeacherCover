@@ -5,10 +5,9 @@ html,body {
     height: 100% !important;
 	margin: 0;
   }
-  app-root {
-    display: block;
-    height: 100%;
-  }
+:host {
+    height: 100%
+}
 .toast-container .ngx-toastr {
     width:300px !important;
     }

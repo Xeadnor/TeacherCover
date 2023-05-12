@@ -122,7 +122,7 @@ export class CrearProfesorComponent implements OnInit {
             if (this.registro) {
 
             } else {
-              this.toastr.error("El correo introducido ya esta registrado", "Correo ya usado", { timeOut: 3000, closeButton: true, positionClass: "toast-bottom-center" })
+              this.toastr.error("El correo introducido ya esta registrado", "Correo ya usado", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
             }
           } else {
             this.createTeacherForm.markAsPristine();
@@ -140,18 +140,18 @@ export class CrearProfesorComponent implements OnInit {
 
               await this.auth.registrar(email)
               this.f.resetForm();
-              this.toastr.success("Se ha registrado con éxito el profesor en la base de datos", "Profesor creado", { timeOut: 3000, closeButton: true, positionClass: "toast-bottom-center" })
+              this.toastr.success("Se ha registrado con éxito el profesor en la base de datos", "Profesor creado", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
             });
           }
         })
       } else {
         //correo invalido
-        this.toastr.error("El correo no cumple el formato correcto", "Correo no válido", { timeOut: 3000, closeButton: true, positionClass: "toast-bottom-center" })
+        this.toastr.error("El correo no cumple el formato correcto", "Correo no válido", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
       }
 
     } else {
       //campos obligatorios
-      this.toastr.error("Se han de rellenar todos los campos", "Campos vacíos", { timeOut: 3000, closeButton: true, positionClass: "toast-bottom-center" })
+      this.toastr.error("Se han de rellenar todos los campos", "Campos vacíos", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
     }
   }
 
