@@ -14,10 +14,11 @@ import { GuardiaService } from 'app/services/guardia.service';
 import { Guardia } from 'app/models/guardia.model';
 import { DateAdapter } from '@angular/material/core';
 import { Profesor } from 'app/models/profesor.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProfesorService } from 'app/services/profesor.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'app/services/auth.service';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-historial-profesores',
@@ -30,10 +31,11 @@ import { AuthService } from 'app/services/auth.service';
 export class HistorialProfesoresComponent implements OnInit{
   columnas: string[] = ['id', 'email', 'name', 'horasGuardias', "role", "validate","opciones"];
   rol: string;
-  constructor(private router: Router,private profesorService: ProfesorService,private guardiaService: GuardiaService, private toastr: ToastrService, private auth: AuthService) { };
+  constructor(private route: ActivatedRoute,public dialog: MatDialog,private router: Router,private profesorService: ProfesorService,private guardiaService: GuardiaService, private toastr: ToastrService, private auth: AuthService) { };
   datos: Profesor[] = [];
   dataSource: any;
   mostrarTabla: boolean;
+  profesorEliminar : Profesor;
   public searchForm: FormGroup;
   public id = '';
   public email = '';
@@ -41,17 +43,18 @@ export class HistorialProfesoresComponent implements OnInit{
   public horasGuardias = '';
   public role = '';
   public validate = '';
+  public bootstrap: any;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   ngOnInit() {
+    this.profesorEliminar = new Profesor();
     let userJson = sessionStorage.getItem('profesor');
     let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
 
     if (profesor["role"] == "User") {
         this.router.navigate(["/pagina/calendario"]);
     } else {
-      console.log("prueba");
       this.mostrarTabla = true;
       this.profesorService.getProfesors().subscribe(profesores => {
         profesores.forEach((profesor) => {
@@ -90,16 +93,26 @@ export class HistorialProfesoresComponent implements OnInit{
   dialogEditar(profesor: Profesor): void {
     this.router.navigate(['/pagina/editarProfesor', profesor["idField"]]);
   }
-  dialogEliminar(profesor:Profesor): void {
-    //!  COMPROBRAR TAMBIEN CON UN MODAL PARA CONFIRMAR LA ELIMINACION.
-    this.datos = this.datos.filter(function(el) { return el.id != profesor.getIdProfesor(); }); 
-    this.datos.splice(profesor.getIdProfesor(), 1 );
-   this.profesorService.deleteProfesor(profesor.getIdField())
-   this.dataSource = new MatTableDataSource<Profesor>(this.datos);
-
-   this.toastr.success("Se ha borrado con exito el profesor: " + profesor.getName(),"Profesor borrado",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
-
-
+  dialogEliminar(profesor: Profesor){
+    this.profesorEliminar = profesor;
+    var myModal: any = new (window as any).bootstrap.Modal(
+      document.getElementById("modalDelete")
+   );
+   myModal.show()
+  }
+  eliminarProfesor(){
+    console.log(this.profesorEliminar);
+    (window as any).bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDelete')).hide()
+    let profesor: Profesor;
+    profesor = this.profesorEliminar;
+   this.datos = this.datos.filter(function(el) { return el.id != profesor.getIdProfesor(); }); 
+   this.datos.splice(profesor.getIdProfesor(), 1 );
+   console.log(profesor.getIdField());
+  this.profesorService.deleteProfesor(profesor.getIdField())
+  this.dataSource = new MatTableDataSource<Profesor>(this.datos);
+  this.toastr.success("Se ha borrado con exito el profesor: " + profesor.getName(),"Profesor borrado",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
+  this.router.navigate(["/pagina/historialProfesores"]);
+     
 
   }
   searchFormInit() {
@@ -120,6 +133,7 @@ export class HistorialProfesoresComponent implements OnInit{
         return false;
       }
   }
+  
   getFilterPredicate() {
     return (row: Profesor, filters: string) => {
       // split string per '$' to array

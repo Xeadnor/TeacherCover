@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./editar-profesor.component.css']
 })
 export class EditarProfesorComponent implements OnInit, OnDestroy {
+  emailAdmin: String;
   editTeacherForm: FormGroup;
   rol: String;
   guardiaLunes: number;
@@ -35,6 +36,7 @@ export class EditarProfesorComponent implements OnInit, OnDestroy {
     this.registro = false;
     let userJson = sessionStorage.getItem('profesor');
     let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
+    this.emailAdmin = profesor["email"]
     this.rol = profesor["role"]
     if (this.rol != "Admin") {
       this.router.navigate(["/pagina/calendario"]);
@@ -165,11 +167,14 @@ export class EditarProfesorComponent implements OnInit, OnDestroy {
               console.log(this.profesor);
 
               this.profesorService.updateTeacher(this.profesor);
-              sessionStorage.clear();
-              sessionStorage.setItem('profesor', JSON.stringify(this.profesor))
-              this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-              this.router.onSameUrlNavigation = 'reload';
-              this.router.navigate(['./'],{relativeTo: this.route})
+              if(this.emailAdmin == this.profesor.getEmail()){
+                sessionStorage.clear();
+                sessionStorage.setItem('profesor', JSON.stringify(this.profesor))
+                this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+                this.router.onSameUrlNavigation = 'reload';
+                this.router.navigate(['./'],{relativeTo: this.route})
+
+              }
               this.toastr.success("Se han guardado con éxito los nuevos datos del profesor", "Profesor creado", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
               this.router.navigate(["../pagina/historialProfesores"]);
         

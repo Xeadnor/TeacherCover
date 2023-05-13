@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Profesor } from 'app/models/profesor.model';
 import { AuthService } from 'app/services/auth.service';
 import { ProfesorService } from 'app/services/profesor.service';
@@ -27,7 +27,7 @@ export class CrearProfesorComponent implements OnInit {
   registro: boolean;
 
 
-  constructor(private router: Router, private profesorService: ProfesorService, private toastr: ToastrService, private auth: AuthService) { };
+  constructor(private route: ActivatedRoute,private router: Router, private profesorService: ProfesorService, private toastr: ToastrService, private auth: AuthService) { };
 
   @ViewChild('f') f: NgForm
   ngOnInit(): void {
@@ -137,10 +137,12 @@ export class CrearProfesorComponent implements OnInit {
               profesor.setHorarioGuardia(horasGuardia);
               profesor.setHorarioGuardiaApoyo(horasGuardiaApoyo);
               this.profesorService.addProfesor(profesor);
-
-              await this.auth.registrar(email)
-              this.f.resetForm();
               this.toastr.success("Se ha registrado con éxito el profesor en la base de datos", "Profesor creado", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
+              await this.auth.registrar(email).then(()=>{
+                window.location.reload();
+
+              }
+              )
             });
           }
         })
