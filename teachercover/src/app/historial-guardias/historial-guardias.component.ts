@@ -112,6 +112,15 @@ export class HistorialGuardiasComponent implements OnInit {
     console.log("modal para eliminar");
     console.log(guardia)
   }
+  comprobarAdmin(){
+    let userJson = sessionStorage.getItem('profesor');
+    let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
+    if(profesor["role"] =="Admin"){
+      return false;
+    }else{
+      return true;
+    }
+}
   searchFormInit() {
     this.searchForm = new FormGroup({
       idGuardia: new FormControl(''),
