@@ -26,7 +26,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class HistorialGuardiasComponent implements OnInit {
 
-  columnas: string[] = ['idGuardia', 'fecha', 'nombreProfesor', 'curso', "aula", "horaGuardia", "descripcion", "dia", "estado", "profesorCubierto", "opciones"];
+  columnas: string[] = ['idGuardia', 'fecha', 'nombreProfesor', 'curso', "aula", "horaGuardia", "descripcion", "dia", "estado", "profesorCubierto","tipo", "opciones"];
   constructor(private guardiaService: GuardiaService, private dateAdapter: DateAdapter<Date>, public dialogo: MatDialog) {
     this.dateAdapter.setLocale('es');
     this.dateAdapter.getFirstDayOfWeek()
@@ -54,6 +54,7 @@ export class HistorialGuardiasComponent implements OnInit {
   public estado = '';
   public profesorCubierto = '';
   public horaGuardia = '';
+  public tipo = '';
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -66,7 +67,7 @@ export class HistorialGuardiasComponent implements OnInit {
       this.mostrarTabla = true;
       this.guardiaService.getGuardiasByUser(profesor["id"]).subscribe(guardias => {
         guardias.forEach((guardia) => {
-          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idFIeld"], guardia["profesorCubierto"]));
+          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idFIeld"], guardia["profesorCubierto"],guardia["tipo"]));
 
         })
         this.dataSource = new MatTableDataSource<Guardia>(this.datos);
@@ -82,7 +83,7 @@ export class HistorialGuardiasComponent implements OnInit {
       this.mostrarTabla = true;
       this.guardiaService.getGuardias().subscribe(guardias => {
         guardias.forEach((guardia) => {
-          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idField"], guardia["profesorCubierto"]));
+          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idField"], guardia["profesorCubierto"],guardia["tipo"]));
 
         })
         this.dataSource = new MatTableDataSource<Guardia>(this.datos);
@@ -133,6 +134,7 @@ export class HistorialGuardiasComponent implements OnInit {
       estado: new FormControl(''),
       profesorCubierto: new FormControl(''),
       horaGuardia: new FormControl(''),
+      tipo:new FormControl(''),
 
 
     });
@@ -151,6 +153,8 @@ export class HistorialGuardiasComponent implements OnInit {
       const dia = filterArray[7];
       const estado = filterArray[8];
       const profesorCubierto = filterArray[9];
+      const tipo = filterArray[10];
+
 
 
 
@@ -167,6 +171,7 @@ export class HistorialGuardiasComponent implements OnInit {
       const columnDia = row.dia;
       const columnEstado = row.estado;
       const columnProfesorCubierto = row.profesorCubierto;
+      const columnTipo = row.tipo;
 
 
 
@@ -181,6 +186,8 @@ export class HistorialGuardiasComponent implements OnInit {
       const customFilterDI = columnDia.toString().toLowerCase().includes(dia);
       const customFilterES = columnEstado.toLowerCase().includes(estado);
       const customFilterPC = columnProfesorCubierto.toLowerCase().includes(profesorCubierto);
+      const customFilterTI = columnTipo.toLowerCase().includes(tipo);
+
 
 
 
@@ -196,6 +203,8 @@ export class HistorialGuardiasComponent implements OnInit {
       matchFilter.push(customFilterDI);
       matchFilter.push(customFilterES);
       matchFilter.push(customFilterPC);
+      matchFilter.push(customFilterTI);
+
 
 
 
@@ -221,6 +230,8 @@ export class HistorialGuardiasComponent implements OnInit {
     const di = this.searchForm.get('dia')!.value;
     const es = this.searchForm.get('estado')!.value;
     const pc = this.searchForm.get('profesorCubierto')!.value;
+    const ti = this.searchForm.get('tipo')!.value;
+
 
 
 
@@ -234,12 +245,14 @@ export class HistorialGuardiasComponent implements OnInit {
     this.dia = di === null ? '' : di;
     this.estado = es === null ? '' : es;
     this.profesorCubierto = pc === null ? '' : pc;
+    this.tipo = ti === null ? '' : ti;
+
 
 
 
 
     // create string of our searching values and split if by '$'
-    const filterValue = this.idGuardia + '$' + this.fecha + '$' + this.nombreProfesor + '$' + this.curso + '$' + this.aula + '$' + this.horaGuardia + '$'+ this.descripcion + '$' + this.dia + '$' + this.estado + '$' + this.profesorCubierto;
+    const filterValue = this.idGuardia + '$' + this.fecha + '$' + this.nombreProfesor + '$' + this.curso + '$' + this.aula + '$' + this.horaGuardia + '$'+ this.descripcion + '$' + this.dia + '$' + this.estado + '$' + this.profesorCubierto + '$' + this.tipo;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
