@@ -46,6 +46,7 @@ export class CalendarioComponent {
   day: Date;
   hours: string[] = [];
   botonFichar: boolean;
+  tipoGuardia: string;
   constructor(private utilsService: UtilsService,private toastr: ToastrService, private guardiaService: GuardiaService,private profesorService: ProfesorService,private router: Router,private route: ActivatedRoute) {
 
   }
@@ -70,13 +71,12 @@ export class CalendarioComponent {
       this.horarioGuardiasApoyo = profesor[0]["horarioGuardiasApoyo"]
     }
     );
-
     this.reloadCurrentRoute()
-
   }
 
 
     reloadCurrentRoute() {
+      this.tipoGuardia = "nada";
       let dia = new Date();
       let thisHour = dia.getHours();
       let thisMinutes = dia.getMinutes();
@@ -162,14 +162,16 @@ export class CalendarioComponent {
           else if(siguienteHora.getHours() == 14 && siguienteHora.getMinutes() >=5){
             siguienteHora.setHours(15);
           }
+          console.log(this.tipoGuardia)
           this.router.routeReuseStrategy.shouldReuseRoute = () => false;
           this.router.onSameUrlNavigation = 'reload';
           this.router.navigate(['./'],{relativeTo: this.route})
-          let v = this.mostrarAlerta(siguienteHora.getHours());
-           if(v == "guardia"){
+          this.tipoGuardia = this.mostrarAlerta(siguienteHora.getHours());
+          console.log(this.tipoGuardia)
+           if(this.tipoGuardia == "guardia"){
 
              this.toastr.info("En esta hora tiene una guardia, compruebe sus datos","Hora de guardia",{timeOut:10000,closeButton:true,positionClass:"toast-top-right"})
-            }else if(v == "apoyo"){
+            }else if(this.tipoGuardia == "apoyo"){
               this.toastr.info("En esta hora tiene una guardia de apoyo, compruebe sus datos","Hora de guardia de apoyo",{timeOut:10000,closeButton:true,positionClass:"toast-top-right"})
             }
             this.reloadCurrentRoute();
@@ -348,7 +350,7 @@ export class CalendarioComponent {
 
       if (day == dia && hora == value){
         if(estamosEnHora == true){
-
+          this.tipoGuardia = "guardia";
       this.botonFichar = true;
           fijada = {"background-color":"lightblue","border-color":"orange","border-width":"2.5px"};
         }else{
@@ -394,11 +396,12 @@ export class CalendarioComponent {
       if (day == dia && hora == value){
         if(estamosEnHora == true){
 
-          
+          this.botonFichar = true;
+          this.tipoGuardia = "apoyo";
           fijada = {"background-color":"khaki","border-color":"orange","border-width":"2.5px"};
         }else{
 
-
+          this.botonFichar = false;
           fijada = {"background-color":"khaki","border":"1px solid rgb(91,91,248"};
 
         }
@@ -412,7 +415,7 @@ export class CalendarioComponent {
 
 
   mostrarAlerta( hora: number){
-    let valor = "nada";
+     let valor = "nada";
     let dia = new Date();
     let day = dia.getDay();
     let thisHour = this.day.getHours();
@@ -547,7 +550,10 @@ export class CalendarioComponent {
 
 
 
+  seleccionarGuardia(){
+    this.router.navigate(['/pagina/seleccionarGuardia',this.tipoGuardia]);
 
+  }
 
 
 

@@ -101,7 +101,6 @@ export class EditarProfesorComponent implements OnInit, OnDestroy {
 
        }) 
     });
-    console.log(this.profesor);
   }
   changehorasGuardias(e:any){
     if(e.target.value < 0){

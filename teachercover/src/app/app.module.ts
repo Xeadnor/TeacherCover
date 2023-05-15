@@ -75,6 +75,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { HistorialProfesoresComponent } from './historial-profesores/historial-profesores.component';
 import { EditarProfesorComponent } from './editar-profesor/editar-profesor.component';
+import { SeleccionarGuardiaComponent } from './seleccionar-guardia/seleccionar-guardia.component';
 
 
 
@@ -92,6 +93,8 @@ const appRoutes: Routes = [
       { path: "crearGuardia", component: CrearGuardiaComponent},
       { path: "historialProfesores", component: HistorialProfesoresComponent},
       { path: "editarProfesor/:id", component: EditarProfesorComponent},
+      { path: "seleccionarGuardia/:tipo", component: SeleccionarGuardiaComponent},
+
 
 
     ],
@@ -117,6 +120,7 @@ const appRoutes: Routes = [
     HistorialProfesoresComponent,
     CrearGuardiaComponent,
     EditarProfesorComponent,
+    SeleccionarGuardiaComponent,
 
   ],
   imports: [
