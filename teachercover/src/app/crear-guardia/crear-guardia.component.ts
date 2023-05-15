@@ -16,13 +16,21 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class CrearGuardiaComponent implements OnInit {
   createOnCallForm: FormGroup;
-  rol: String;
-  nombreProf: String;
+  rol: string;
+  idGuardia: number;
+  profesorCubierto: string;
   guardiaFecha: Date;
+  diaGuardia: string;
   guardiaHora: number;
-  aulaGuardia: String;
-  infoGuardia: String;
-
+  horaGuardia: string;
+  aulaGuardia: string;
+  infoGuardia: string;
+  cursoGuardia: string;
+  letraCurso: string;
+  nombreProfesor: string;
+  profesor: number;
+  tipo:string;
+  estado: string;
 
   constructor(private router: Router, private guardiaService: GuardiaService, private toastr: ToastrService) { };
 
@@ -39,18 +47,46 @@ export class CrearGuardiaComponent implements OnInit {
 
 
     this.createOnCallForm = new FormGroup({
-      nombreProf: new FormControl("", Validators.required),
-      horaGuardia: new FormControl("", Validators.required),
+      profesorCubierto: new FormControl("", Validators.required),
+      guardiaFecha: new FormControl("", Validators.required),
+      guardiaHora: new FormControl("", Validators.required),
       aulaGuardia: new FormControl("", Validators.required),
-      infoGuardia: new FormControl("", Validators.required)
-
+      infoGuardia: new FormControl(),
+      cursoGuardia: new FormControl("", Validators.required),
+      letraCurso:new FormControl("", Validators.required)
     }, { updateOn: "submit" });
   }
 
 
   async createOnCall() {
-    let nombreProfe = this.createOnCallForm.controls["nombreProf"].value;
-    //TODO pendiente crear guardia
+    let nombreProfe = this.createOnCallForm.controls["profesorCubierto"].value;
+    if (nombreProfe.length > 0 && this.guardiaFecha && this.guardiaHora && this.aulaGuardia.length>0 && this.cursoGuardia && this.letraCurso) {
+        let guardia = new Guardia();
+        let prueba = this.guardiaService.checkIfExistOnCall(nombreProfe, this.guardiaFecha, this.guardiaHora);
+
+        (await prueba).forEach(doc => {
+          if (doc.length > 0) {
+            this.createOnCallForm.markAsPristine();
+            this.createOnCallForm.markAsUntouched();
+            let newId = this.guardiaService.getNewId();
+            newId.then(async (id) => {
+              guardia.setIdGuardia(id);
+              guardia.setProfesorCubierto(nombreProfe);
+              guardia.setFecha(this.guardiaFecha);
+              guardia.setHora(this.guardiaHora);
+              guardia.setAula(this.aulaGuardia);
+              guardia.setCurso(this.cursoGuardia);
+              guardia.setLetra(this.letraCurso);
+              this.guardiaService.addGuardia(guardia);
+              this.toastr.success("Se ha registrado con éxito la guardia en la base de datos", "Guardia creado", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
+              window.location.reload();
+            });
+          }
+        })
+
+    } else {
+      this.toastr.error("Se han de rellenar todos los campos", "Campos vacíos", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
+    }
   }
 
 }

@@ -8,14 +8,15 @@ export class Guardia {
   idGuardia: number;
   aula: string;
   curso: string;
+  letra: string;
   nombreProfesor: string;
   profesor: number;
-  idField: string
-  profesorCubierto: string
-  tipo: string
+  idField: string;
+  profesorCubierto: string;
+  tipo: string;
 
-  constructor(horaGuardia?: string,fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number,idField?: string,profesorCubierto?:string,tipo?:string) {
-    if (horaGuardia && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor && fecha && idField && profesorCubierto&& tipo) {
+  constructor(horaGuardia?: string, fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, letra?: string, nombreProfesor?: string, profesor?: number, idField?: string, profesorCubierto?:string, tipo?:string) {
+    if (horaGuardia && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && letra && nombreProfesor && fecha && idField && profesorCubierto&& tipo) {
       this.idGuardia = idGuardia
       this.estado = estado
       this.fecha = fecha;
@@ -27,6 +28,7 @@ export class Guardia {
       this.profesor = profesor
       this.nombreProfesor = nombreProfesor
       this.curso = curso
+      this.letra =letra
       this.profesorCubierto = profesorCubierto
       this.tipo = tipo
 
@@ -57,6 +59,9 @@ export class Guardia {
   }
   getCurso() {
     return this.curso
+  }
+  getLetra() {
+    return this.letra
   }
   getAula() {
     return this.aula
@@ -97,6 +102,9 @@ export class Guardia {
   }
   setCurso(curso: string) {
     this.curso = curso
+  }
+  setLetra(letra: string) {
+    this.letra = letra
   }
   setNombreProfesor(nombreProfesor: string) {
     this.nombreProfesor = nombreProfesor

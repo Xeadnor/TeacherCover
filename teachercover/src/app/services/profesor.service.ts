@@ -22,9 +22,9 @@ export class ProfesorService {
   deleteProfesor(idField: string){
     const db = getFirestore();
 
-const docRef = doc(db, "profesores", idField);
+    const docRef = doc(db, "profesores", idField);
 
-deleteDoc(docRef)
+    deleteDoc(docRef)
 
   }
 
@@ -98,7 +98,7 @@ deleteDoc(docRef)
       updateTeacher(profesor: Profesor) {
         const db = getFirestore();
         const profesorRef = doc(db,"profesores",profesor.getIdField());
-  
+
         const data = {
           validate: profesor.getValidate(),
           horasGuardias: profesor.gethorasGuardias(),
@@ -121,13 +121,13 @@ deleteDoc(docRef)
             viernes:(profesor.getHorarioGuardiasApoyo().get("viernes")!),
           },
         }
-  
+
         setDoc(profesorRef,data, { merge:true})
         .then(docRef => {
         })
         .catch(error =>{
         })
-  
+
         }
 
 
