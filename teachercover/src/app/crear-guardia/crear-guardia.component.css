@@ -10,3 +10,13 @@
   color: rgb(255, 182, 23);
   border-color: rgb(255, 182, 23);
 }
+
+
+mat-form-field {
+  width: 100% !important;
+  height: 70px;
+}
+
+.alto{
+  height: 48px;
+}
