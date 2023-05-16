@@ -14,7 +14,7 @@
           <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" #localForm="ngForm">
             <div class="form-outline form-white m-4 me-5 ms-5 mt-0">
               <label class="form-label" for="emailLogin">Correo electronico</label>
-              <input type="email" id="emailLogin" class="form-control form-control-lg" formControlName="emailLogin" [class.is-invalid]="localForm.submitted && formLogin.get('name')?.invalid" />
+              <input type="email" id="emailLogin" class="form-control form-control-lg" formControlName="emailLogin" [class.is-invalid]="localForm.submitted && formLogin.get('emailLogin')?.invalid" />
               <div class="invalid-feedback">
                 Correo electronico es un campo obligatorio
               </div>

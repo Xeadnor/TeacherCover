@@ -43,6 +43,13 @@ export class GuardiaService {
 
   }
 
+  getGuardiasPendientes(){
+    const guardiaRef = collection(this.firestore,"guardias");
+    const populationQuery = query(guardiaRef, where("estado", "==", "Pendiente"));
+    return collectionData(populationQuery, {idField:"idFIeld"});
+
+  }
+
   //debe haber un método que compruebe si esxiste una guardia para esa fecha y esa hora de ese profesor
     checkIfExistOnCall(nombreProf:string, fecha: Date, hora: number ){
       const guardiaRef = collection(this.firestore,"guardias");

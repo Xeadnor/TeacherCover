@@ -93,7 +93,7 @@ const appRoutes: Routes = [
       { path: "crearGuardia", component: CrearGuardiaComponent},
       { path: "historialProfesores", component: HistorialProfesoresComponent},
       { path: "editarProfesor/:id", component: EditarProfesorComponent},
-      { path: "seleccionarGuardia/:tipo", component: SeleccionarGuardiaComponent},
+      { path: "seleccionarGuardia/:tipo/:hora", component: SeleccionarGuardiaComponent},
 
 
 
