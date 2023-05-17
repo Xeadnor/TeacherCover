@@ -68,7 +68,7 @@ export class HistorialGuardiasComponent implements OnInit {
       this.guardiaService.getGuardiasByUser(profesor["id"]).subscribe(guardias => {
         guardias.forEach((guardia) => {
           if (!this.datos.find(item => item.idGuardia === guardia["idGuardia"])) { // search by id
-            this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idFIeld"], guardia["profesorCubierto"],guardia["tipo"]));
+            this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["letra"], guardia["nombreProfesor"], guardia["profesor"], guardia["idFIeld"], guardia["profesorCubierto"],guardia["tipo"]));
 
           }
 
@@ -87,7 +87,7 @@ export class HistorialGuardiasComponent implements OnInit {
       this.guardiaService.getGuardias().subscribe(guardias => {
         guardias.forEach((guardia) => {
           console.log("hola");
-          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idField"], guardia["profesorCubierto"],guardia["tipo"]));
+          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["letra"], guardia["profesor"], guardia["idField"], guardia["profesorCubierto"],guardia["tipo"]));
 
         })
         this.dataSource = new MatTableDataSource<Guardia>(this.datos);
@@ -125,7 +125,8 @@ export class HistorialGuardiasComponent implements OnInit {
     }else{
       return true;
     }
-}
+  }
+
   searchFormInit() {
     this.searchForm = new FormGroup({
       idGuardia: new FormControl(''),

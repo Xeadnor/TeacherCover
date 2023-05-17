@@ -60,7 +60,11 @@ export class CrearGuardiaComponent implements OnInit {
 
   async createOnCall() {
     let nombreProfe = this.createOnCallForm.controls["profesorCubierto"].value;
-    if (nombreProfe.length > 0 && this.guardiaFecha && this.guardiaHora && this.aulaGuardia.length>0 && this.cursoGuardia && this.letraCurso) {
+    let aula= this.createOnCallForm.controls["aulaGuardia"].value;
+    let date= this.createOnCallForm.controls["guardiaFecha"].value;
+    console.log(nombreProfe + "-------------")
+    console.log(date.length) //! no me coge el valor del datepicker, seguir probando
+    if (nombreProfe.length > 0 && date.length > 0 && this.guardiaHora && aula.length>0 && this.cursoGuardia && this.letraCurso) {
         let guardia = new Guardia();
         let prueba = this.guardiaService.checkIfExistOnCall(nombreProfe, this.guardiaFecha, this.guardiaHora);
 
@@ -74,11 +78,11 @@ export class CrearGuardiaComponent implements OnInit {
               guardia.setProfesorCubierto(nombreProfe);
               guardia.setFecha(this.guardiaFecha);
               guardia.setHora(this.guardiaHora);
-              guardia.setAula(this.aulaGuardia);
+              guardia.setAula(aula);
               guardia.setCurso(this.cursoGuardia);
               guardia.setLetra(this.letraCurso);
               this.guardiaService.addGuardia(guardia);
-              this.toastr.success("Se ha registrado con éxito la guardia en la base de datos", "Guardia creado", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
+              this.toastr.success("Se ha registrado con éxito la guardia en la base de datos", "Guardia creada", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
               window.location.reload();
             });
           }

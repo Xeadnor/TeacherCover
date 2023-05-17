@@ -4,8 +4,8 @@
     <hr class="hr" />
     <div class="row m-2 mt-4">
       <div class="form-outline form-white col-12 col-md-4">
-        <label class="form-label" for="nombreProf">Nombre del profesor a cubrir</label>
-        <input type="text" id="nombreProf" class="form-control form-control-lg" formControlName="nombreProf" [class.is-invalid]="localForm.submitted && createOnCallForm.get('nombreProf')?.invalid" />
+        <label class="form-label" for="profesorCubierto">Nombre del profesor a cubrir</label>
+        <input type="text" id="profesorCubierto" class="form-control form-control-lg" formControlName="profesorCubierto" [class.is-invalid]="localForm.submitted && createOnCallForm.get('profesorCubierto')?.invalid" />
         <div class="invalid-feedback">
          Nombre del profesor a cubir es un campo obligatorio
         </div>
@@ -22,8 +22,8 @@
 
       <div class="form-outline form-white col-12 col-md-4 ">
         <label class="form-label" for="horaGuardia">Hora de la Guardia</label><br>
-        <select class="form-select alto">
-          <!-- (change)="changeLunesGuardia($event)" formControlName="lunesGuardia" [class.is-invalid]="localForm.submitted && createTeacherForm.get('lunesGuardia')?.invalid" -->
+        <select class="form-select alto"
+          formControlName="guardiaHora" [class.is-invalid]="localForm.submitted && createOnCallForm.get('guardiaHora')?.invalid">
           <option value="" disabled selected>Seleccionar</option>
           <option value="8">Primera hora</option>
           <option value="9">Segunda hora</option>
@@ -58,9 +58,9 @@
 
       <div class="form-outline form-white col-12 col-md-2">
 
-        <label class="form-label" for="aulaGuardia">Curso</label>
-        <select class="form-select alto">
-          <!-- (change)="changeLunesGuardia($event)" formControlName="lunesGuardia" [class.is-invalid]="localForm.submitted && createTeacherForm.get('lunesGuardia')?.invalid" -->
+        <label class="form-label" for="cursoGuardia">Curso</label>
+        <select class="form-select alto"
+          formControlName="cursoGuardia" [class.is-invalid]="localForm.submitted && createOnCallForm.get('cursoGuardia')?.invalid">
           <option value="" disabled selected>Seleccionar</option>
           <option value="1">1º ESO</option>
           <option value="2">2º ESO</option>
@@ -89,9 +89,9 @@
 
       <div class="form-outline form-white col-12 col-md-2">
 
-        <label class="form-label" for="aulaGuardia">Letra</label>
-        <select class="form-select alto">
-          <!-- (change)="changeLunesGuardia($event)" formControlName="lunesGuardia" [class.is-invalid]="localForm.submitted && createTeacherForm.get('lunesGuardia')?.invalid" -->
+        <label class="form-label" for="letraCurso">Letra</label>
+        <select class="form-select alto"
+        formControlName="letraCurso" [class.is-invalid]="localForm.submitted && createOnCallForm.get('letraCurso')?.invalid">>
           <option value="" disabled selected>Seleccionar</option>
           <option value="A">A</option>
           <option value="B">B</option>
