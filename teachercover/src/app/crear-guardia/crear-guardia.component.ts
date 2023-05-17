@@ -80,7 +80,6 @@ export class CrearGuardiaComponent implements OnInit {
               guardia.setHora(this.guardiaHora);
               guardia.setAula(aula);
               guardia.setCurso(this.cursoGuardia);
-              guardia.setLetra(this.letraCurso);
               this.guardiaService.addGuardia(guardia);
               this.toastr.success("Se ha registrado con éxito la guardia en la base de datos", "Guardia creada", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
               window.location.reload();

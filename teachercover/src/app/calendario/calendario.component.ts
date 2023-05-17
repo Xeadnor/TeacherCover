@@ -47,6 +47,8 @@ export class CalendarioComponent {
   hours: string[] = [];
   botonFichar: boolean;
   tipoGuardia: string;
+  horaGuardia: string;
+   estamosEnFichar:boolean
   constructor(private utilsService: UtilsService,private toastr: ToastrService, private guardiaService: GuardiaService,private profesorService: ProfesorService,private router: Router,private route: ActivatedRoute) {
 
   }
@@ -76,6 +78,7 @@ export class CalendarioComponent {
 
 
     reloadCurrentRoute() {
+      this.estamosEnFichar = false;
       this.tipoGuardia = "nada";
       let dia = new Date();
       let thisHour = dia.getHours();
@@ -162,12 +165,10 @@ export class CalendarioComponent {
           else if(siguienteHora.getHours() == 14 && siguienteHora.getMinutes() >=5){
             siguienteHora.setHours(15);
           }
-          console.log(this.tipoGuardia)
           this.router.routeReuseStrategy.shouldReuseRoute = () => false;
           this.router.onSameUrlNavigation = 'reload';
           this.router.navigate(['./'],{relativeTo: this.route})
           this.tipoGuardia = this.mostrarAlerta(siguienteHora.getHours());
-          console.log(this.tipoGuardia)
            if(this.tipoGuardia == "guardia"){
 
              this.toastr.info("En esta hora tiene una guardia, compruebe sus datos","Hora de guardia",{timeOut:10000,closeButton:true,positionClass:"toast-top-right"})
@@ -351,18 +352,20 @@ export class CalendarioComponent {
       if (day == dia && hora == value){
         if(estamosEnHora == true){
           this.tipoGuardia = "guardia";
+          this.horaGuardia = hora.toString();
+          this.estamosEnFichar = true;
+          
       this.botonFichar = true;
           fijada = {"background-color":"lightblue","border-color":"orange","border-width":"2.5px"};
         }else{
-
           this.botonFichar = false;
 
           fijada = {"background-color":"lightblue","border":"1px solid rgb(91,91,248"};
           
         }
+
       }
     });
-
     Object.entries(this.horarioGuardiasApoyo || {}).forEach(([key, value]) => {
       let dia = 0
       switch (key) {
@@ -395,13 +398,18 @@ export class CalendarioComponent {
 
       if (day == dia && hora == value){
         if(estamosEnHora == true){
+          this.horaGuardia = hora.toString();
 
           this.botonFichar = true;
           this.tipoGuardia = "apoyo";
           fijada = {"background-color":"khaki","border-color":"orange","border-width":"2.5px"};
         }else{
 
-          this.botonFichar = false;
+
+          if(this.estamosEnFichar == true){
+          }else{
+            this.botonFichar = false;
+          }
           fijada = {"background-color":"khaki","border":"1px solid rgb(91,91,248"};
 
         }
@@ -491,7 +499,7 @@ export class CalendarioComponent {
       if (day == dia && thisHour == value){
         if(estamosEnHora == true){
       this.botonFichar = true;
-          valor = "guardia";
+        
         }else{
       this.botonFichar = false;
         }
@@ -551,7 +559,7 @@ export class CalendarioComponent {
 
 
   seleccionarGuardia(){
-    this.router.navigate(['/pagina/seleccionarGuardia',this.tipoGuardia]);
+    this.router.navigate(['/pagina/seleccionarGuardia',this.tipoGuardia,this.horaGuardia]);
 
   }
 
