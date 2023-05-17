@@ -64,15 +64,15 @@ export class GuardiaService {
     const dbRef = collection(db, "guardias");
 
     const data = {
-      aula: "B-23",
-      curso: "4ºESO-A",
-      descripcion: "prueba",
+      aula: guardia.getAula(),
+      curso: guardia.getCurso(),
+      descripcion: guardia.getDescripcion(),
       dia: "Viernes",
       diaSemana: 3,
       estado: "Finalizado",
       hora: 13,
-      idGuardia: 4,
-      nombreProfesor: "Pablo",
+      idGuardia: guardia.getIdField(),
+      nombreProfesor: guardia.getProfesorCubierto(),
       profesor:3,
     };
 

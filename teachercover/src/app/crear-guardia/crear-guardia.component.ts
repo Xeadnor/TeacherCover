@@ -8,6 +8,8 @@ import { GuardiaService } from 'app/services/guardia.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { DateAdapter } from '@angular/material/core';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-crear-guardia',
@@ -32,7 +34,10 @@ export class CrearGuardiaComponent implements OnInit {
   tipo:string;
   estado: string;
 
-  constructor(private router: Router, private guardiaService: GuardiaService, private toastr: ToastrService) { };
+  constructor(private router: Router, private guardiaService: GuardiaService, private toastr: ToastrService, private dateAdapter: DateAdapter<Date>) {
+    this.dateAdapter.setLocale('es');
+    this.dateAdapter.getFirstDayOfWeek()
+   };
 
 
   @ViewChild('f') f : NgForm
@@ -57,16 +62,35 @@ export class CrearGuardiaComponent implements OnInit {
     }, { updateOn: "submit" });
   }
 
+  changeHoraGuardia(e:any){
+    this.guardiaHora = e.target.value
+  }
+
+  changeCursoGuardia(e:any){
+    this.cursoGuardia = e.target.value
+  }
+
+  changeLetraCurso(e:any){
+    this.letraCurso = e.target.value
+  }
 
   async createOnCall() {
     let nombreProfe = this.createOnCallForm.controls["profesorCubierto"].value;
     let aula= this.createOnCallForm.controls["aulaGuardia"].value;
-    let date= this.createOnCallForm.controls["guardiaFecha"].value;
-    console.log(nombreProfe + "-------------")
-    console.log(date.length) //! no me coge el valor del datepicker, seguir probando
-    if (nombreProfe.length > 0 && date.length > 0 && this.guardiaHora && aula.length>0 && this.cursoGuardia && this.letraCurso) {
+    let dateSelectedMilisec= this.createOnCallForm.get("guardiaFecha")?.value;
+    const fecha = new Date(dateSelectedMilisec);
+    const fechaFormateada = fecha.toLocaleDateString('es-ES');
+
+    console.log(this.guardiaHora + " ---- hora")
+    console.log(aula.length + " ---- aula")
+    console.log(this.cursoGuardia + " ---- curso")
+    console.log(this.letraCurso + " ---- letra")
+    console.log(fecha + "fechaRaw")
+
+    if (nombreProfe.length > 0 && fechaFormateada.length > 0 && this.guardiaHora && aula.length>0 && this.cursoGuardia && this.letraCurso) {
+
         let guardia = new Guardia();
-        let prueba = this.guardiaService.checkIfExistOnCall(nombreProfe, this.guardiaFecha, this.guardiaHora);
+        let prueba = this.guardiaService.checkIfExistOnCall(nombreProfe, fecha , this.guardiaHora );
 
         (await prueba).forEach(doc => {
           if (doc.length > 0) {
@@ -76,10 +100,10 @@ export class CrearGuardiaComponent implements OnInit {
             newId.then(async (id) => {
               guardia.setIdGuardia(id);
               guardia.setProfesorCubierto(nombreProfe);
-              guardia.setFecha(this.guardiaFecha);
+              guardia.setFecha(fecha);
               guardia.setHora(this.guardiaHora);
               guardia.setAula(aula);
-              guardia.setCurso(this.cursoGuardia);
+              guardia.setCurso(this.cursoGuardia + " " + this.letraCurso);
               this.guardiaService.addGuardia(guardia);
               this.toastr.success("Se ha registrado con éxito la guardia en la base de datos", "Guardia creada", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
               window.location.reload();

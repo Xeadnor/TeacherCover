@@ -12,18 +12,19 @@
       </div>
 
       <div class="form-outline form-white col-12 col-md-4 ">
-        <label class="form-label" for="horaGuardia">Día de la Guardia</label><br>
+        <label class="form-label" for="guardiaFecha">Día de la Guardia</label><br>
         <mat-form-field>
-          <input matInput [matDatepicker]="picker"  placeholder="Seleccionar fecha">
+          <input matInput formControlName="guardiaFecha" [matDatepicker]="picker" >
+          <mat-hint>Seleccionar fecha</mat-hint>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker #picker ></mat-datepicker>
         </mat-form-field>
       </div>
 
       <div class="form-outline form-white col-12 col-md-4 ">
         <label class="form-label" for="horaGuardia">Hora de la Guardia</label><br>
         <select class="form-select alto"
-          formControlName="guardiaHora" [class.is-invalid]="localForm.submitted && createOnCallForm.get('guardiaHora')?.invalid">
+          formControlName="guardiaHora" (change)="changeHoraGuardia($event)" [class.is-invalid]="localForm.submitted && createOnCallForm.get('guardiaHora')?.invalid">
           <option value="" disabled selected>Seleccionar</option>
           <option value="8">Primera hora</option>
           <option value="9">Segunda hora</option>
@@ -53,14 +54,14 @@
 
       <div class="form-outline form-white col-12 col-md-4">
         <label class="form-label" for="infoGuardia">Información adicional</label>
-        <textarea rows="1" type="text" id="infoGuardia" class="form-control form-control-lg" formControlName="infoGuardia" > Añade aquí información relevante de la guardia</textarea>
+        <textarea rows="1" type="text" id="infoGuardia" class="form-control form-control-lg" formControlName="infoGuardia" ></textarea>
       </div>
 
       <div class="form-outline form-white col-12 col-md-2">
 
         <label class="form-label" for="cursoGuardia">Curso</label>
         <select class="form-select alto"
-          formControlName="cursoGuardia" [class.is-invalid]="localForm.submitted && createOnCallForm.get('cursoGuardia')?.invalid">
+          formControlName="cursoGuardia" (change)="changeCursoGuardia($event)" [class.is-invalid]="localForm.submitted && createOnCallForm.get('cursoGuardia')?.invalid">
           <option value="" disabled selected>Seleccionar</option>
           <option value="1">1º ESO</option>
           <option value="2">2º ESO</option>
@@ -91,7 +92,7 @@
 
         <label class="form-label" for="letraCurso">Letra</label>
         <select class="form-select alto"
-        formControlName="letraCurso" [class.is-invalid]="localForm.submitted && createOnCallForm.get('letraCurso')?.invalid">>
+        formControlName="letraCurso" (change)="changeLetraCurso($event)" [class.is-invalid]="localForm.submitted && createOnCallForm.get('letraCurso')?.invalid">>
           <option value="" disabled selected>Seleccionar</option>
           <option value="A">A</option>
           <option value="B">B</option>
