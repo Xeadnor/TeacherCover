@@ -43,9 +43,9 @@ export class GuardiaService {
 
   }
 
-  getGuardiasPendientes(){
+  getGuardiasPendientes(dia: String,hora: number){
     const guardiaRef = collection(this.firestore,"guardias");
-    const populationQuery = query(guardiaRef, where("estado", "==", "Pendiente"));
+    const populationQuery = query(guardiaRef, where("estado", "==", "Pendiente"), where("fecha","==",dia), where("hora","==",hora));
     return collectionData(populationQuery, {idField:"idFIeld"});
 
   }

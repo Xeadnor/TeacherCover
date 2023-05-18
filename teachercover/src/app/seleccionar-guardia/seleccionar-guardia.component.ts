@@ -22,18 +22,33 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy  {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
        this.tipoGuardia =params['tipo']; 
-       this.hora =params['hora']; 
-       this.guardiaService.getGuardiasPendientes().subscribe(guardias => {
+       this.hora =params['hora'];
+       let day = new Date();
+       let dia = day.getFullYear() + "/" + this.getMonthofToday(day.getMonth()) + "/" + day.getDate(); 
+       this.guardiaService.getGuardiasPendientes(dia,parseInt(this.hora)).subscribe(guardias => {
         guardias.forEach((guardia) => {
           this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idFIeld"], guardia["profesorCubierto"],guardia["tipo"]));
 
         })
       });
       console.log(this.datos);
+      console.log(dia);
     });
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  getMonthofToday(mes: number){
+    let numeroMes = mes + 1;
+    let devolverMes;
+    if(numeroMes < 10){
+      devolverMes = "0" + numeroMes;
+    }else{
+      devolverMes = numeroMes;
+    }
+
+    return devolverMes;
   }
 }
