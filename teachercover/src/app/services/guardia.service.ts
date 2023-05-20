@@ -47,33 +47,52 @@ export class GuardiaService {
     const guardiaRef = collection(this.firestore,"guardias");
     const populationQuery = query(guardiaRef, where("estado", "==", "Pendiente"), where("fecha","==",dia), where("hora","==",hora));
     return collectionData(populationQuery, {idField:"idFIeld"});
-
   }
 
   //debe haber un método que compruebe si esxiste una guardia para esa fecha y esa hora de ese profesor
-    checkIfExistOnCall(nombreProf:string, fecha: Date, hora: number ){
-      const guardiaRef = collection(this.firestore,"guardias");
-      const populationQuery = query(guardiaRef, where("profesorCubierto", "==", nombreProf), where("fecha", "==", fecha), where("hora", "==", hora) );
-      return collectionData(populationQuery, {idField:"idFIeld"});
-    }
+  checkIfExistOnCall(nombreProf:string, fecha: Date, hora: number ){
+    const guardiaRef = collection(this.firestore,"guardias");
+    const populationQuery = query(guardiaRef, where("profesorCubierto", "==", nombreProf), where("fecha", "==", fecha), where("hora", "==", hora) );
+    return collectionData(populationQuery, {idField:"idFIeld"});
+  }
 
   //debe haber un método que calcule la última id para añadir la siguiente id a la guardia
 
   addGuardia(guardia : Guardia){
     const db = getFirestore();
-    const dbRef = collection(db, "guardias");
+    const dbRef = collection(db, "pruebas");
+    const fechaFormateada = guardia.getFecha().toLocaleDateString('es-ES');
+
+    // const data = {
+    //   aula: guardia.getAula(),
+    //   curso: guardia.getCurso(),
+    //   descripcion: guardia.getDescripcion(),
+    //   dia: guardia.getDia(),
+    //   estado: guardia.getEstado(),
+    //   fecha: fechaFormateada,
+    //   hora: guardia.getHora(),
+    //   horaGuardia: guardia.getHoraGuardia(),
+    //   idGuardia: guardia.getIdField(),
+    //   nombreProfesor: guardia.getNombreProfesor(),
+    //   profesor:guardia.getProfesor(),
+    //   profesorCubierto:guardia.getProfesorCubierto(),
+    //   tipo: guardia.getTipo()
+    // };
 
     const data = {
-      aula: guardia.getAula(),
-      curso: guardia.getCurso(),
-      descripcion: guardia.getDescripcion(),
-      dia: "Viernes",
-      diaSemana: 3,
-      estado: "Finalizado",
-      hora: 13,
-      idGuardia: guardia.getIdField(),
-      nombreProfesor: guardia.getProfesorCubierto(),
-      profesor:3,
+      aula: "PRUEBA",
+      curso: "PRUEBA",
+      descripcion: "PRUEBA",
+      dia: "PRUEBA",
+      estado: "PRUEBA",
+      fecha: "PRUEBA",
+      hora: 1,
+      horaGuardia: "PRUEBA",
+      idGuardia: 1,
+      nombreProfesor: "PRUEBA",
+      profesor:1,
+      profesorCubierto:"PRUEBA",
+      tipo: 1
     };
 
    addDoc(dbRef, data)

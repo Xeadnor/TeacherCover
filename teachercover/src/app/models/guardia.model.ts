@@ -48,7 +48,7 @@ export class Guardia {
   }
   getIdField() {
     return this.idField;
-}
+  }
   getNombreProfesor() {
     return this.nombreProfesor
   }
@@ -87,7 +87,7 @@ export class Guardia {
   setIdField(idField: string) {
     this.idField = idField;
 }
-  setFecha(fecha:Date){
+  setFecha(fecha: Date){
     this.fecha = fecha;
   }
   setDia(dia: string) {
@@ -99,7 +99,7 @@ export class Guardia {
   setCurso(curso: string) {
     this.curso = curso
   }
- 
+
   setNombreProfesor(nombreProfesor: string) {
     this.nombreProfesor = nombreProfesor
   }

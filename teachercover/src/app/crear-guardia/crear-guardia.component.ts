@@ -74,6 +74,45 @@ export class CrearGuardiaComponent implements OnInit {
     this.letraCurso = e.target.value
   }
 
+  //TODO mirar si hay alguna forma de obtener el valor del select del formulario y ahorrarse esto
+  obtenerTextoHora(hora: number): string{
+    let texto= ""
+    switch (hora) {
+      case 8:
+        texto="Primera hora"
+        break;
+      case 9:
+        texto="Segunda hora"
+        break;
+      case 10:
+        texto="Tercera hora"
+        break;
+      case 11:
+        texto="Recreo"
+        break;
+      case 12:
+        texto="Cuarta hora"
+        break;
+      case 13:
+        texto="Quinta hora"
+        break;
+      case 14:
+        texto="Sexta hora"
+        break;
+      default:
+        break;
+    }
+    return texto ;
+  }
+
+  obtenerDiaSemana(fecha: Date): string {
+    const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const indiceDia = fecha.getDay();
+    return diasSemana[indiceDia];
+  }
+
+
+
   async createOnCall() {
     let nombreProfe = this.createOnCallForm.controls["profesorCubierto"].value;
     let aula= this.createOnCallForm.controls["aulaGuardia"].value;
@@ -91,6 +130,8 @@ export class CrearGuardiaComponent implements OnInit {
 
         let guardia = new Guardia();
         let prueba = this.guardiaService.checkIfExistOnCall(nombreProfe, fecha , this.guardiaHora );
+        let descripcion="";
+        this.infoGuardia!= null ? descripcion=this.infoGuardia : descripcion="Sin información adicional";
 
         (await prueba).forEach(doc => {
           if (doc.length > 0) {
@@ -99,11 +140,18 @@ export class CrearGuardiaComponent implements OnInit {
             let newId = this.guardiaService.getNewId();
             newId.then(async (id) => {
               guardia.setIdGuardia(id);
-              guardia.setProfesorCubierto(nombreProfe);
+              guardia.setEstado("Pendiente");
               guardia.setFecha(fecha);
               guardia.setHora(this.guardiaHora);
+              guardia.setHoraGuardia(this.obtenerTextoHora(this.guardiaHora));
+              guardia.setDia(this.obtenerDiaSemana(fecha));
+              guardia.setDescripcion(descripcion);
               guardia.setAula(aula);
+              guardia.setProfesor(1);
+              guardia.setNombreProfesor("");
               guardia.setCurso(this.cursoGuardia + " " + this.letraCurso);
+              guardia.setProfesorCubierto(nombreProfe);
+              guardia.setTipo("Pendiente");
               this.guardiaService.addGuardia(guardia);
               this.toastr.success("Se ha registrado con éxito la guardia en la base de datos", "Guardia creada", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
               window.location.reload();
