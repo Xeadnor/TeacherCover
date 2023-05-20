@@ -32,13 +32,13 @@ export class HistorialGuardiasComponent implements OnInit {
     this.dateAdapter.getFirstDayOfWeek()
 
   }
-  // getDateFormat(guardia: Guardia): String {
-  //   var month = guardia.getFecha().getMonth() + 1; //months from 1-12
-  //   var day = guardia.getFecha().getDate();
-  //   var year = guardia.getFecha().getFullYear();
+  getDateFormat(guardia: Guardia): String {
+    var month = guardia.getFecha().getMonth() + 1; //months from 1-12
+    var day = guardia.getFecha().getDate();
+    var year = guardia.getFecha().getFullYear();
 
-  //   return day + "/" + month + "/" + year;
-  // }
+    return day + "/" + month + "/" + year;
+  }
 
   datos: Guardia[] = [];
   dataSource: any;

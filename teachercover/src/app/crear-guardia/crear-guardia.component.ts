@@ -134,7 +134,8 @@ export class CrearGuardiaComponent implements OnInit {
         this.infoGuardia!= null ? descripcion=this.infoGuardia : descripcion="Sin información adicional";
 
         (await prueba).forEach(doc => {
-          if (doc.length > 0) {
+          console.log(doc)
+          if (doc.length == 0) {
             this.createOnCallForm.markAsPristine();
             this.createOnCallForm.markAsUntouched();
             let newId = this.guardiaService.getNewId();
@@ -156,6 +157,8 @@ export class CrearGuardiaComponent implements OnInit {
               this.toastr.success("Se ha registrado con éxito la guardia en la base de datos", "Guardia creada", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
               window.location.reload();
             });
+          }else{
+            this.toastr.error("Ya existe una gaurdia con los mismos parámetros", "Guardia existente", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
           }
         })
 
