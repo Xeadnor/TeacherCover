@@ -79,8 +79,8 @@ export class CalendarioComponent {
 
     reloadCurrentRoute() {
       this.estamosEnFichar = false;
-      this.tipoGuardia = "nada";
       let dia = new Date();
+      this.tipoGuardia = "nada";
       let thisHour = dia.getHours();
       let thisMinutes = dia.getMinutes();
       let siguienteHora = new Date();
@@ -169,12 +169,14 @@ export class CalendarioComponent {
           this.router.onSameUrlNavigation = 'reload';
           this.router.navigate(['./'],{relativeTo: this.route})
           this.tipoGuardia = this.mostrarAlerta(siguienteHora.getHours());
+          console.log(this.tipoGuardia);
            if(this.tipoGuardia == "guardia"){
 
              this.toastr.info("En esta hora tiene una guardia, compruebe sus datos","Hora de guardia",{timeOut:10000,closeButton:true,positionClass:"toast-top-right"})
             }else if(this.tipoGuardia == "apoyo"){
               this.toastr.info("En esta hora tiene una guardia de apoyo, compruebe sus datos","Hora de guardia de apoyo",{timeOut:10000,closeButton:true,positionClass:"toast-top-right"})
             }
+            
             this.reloadCurrentRoute();
 
     
@@ -499,6 +501,7 @@ export class CalendarioComponent {
       if (day == dia && thisHour == value){
         if(estamosEnHora == true){
       this.botonFichar = true;
+      valor = "guardia";
         
         }else{
       this.botonFichar = false;
