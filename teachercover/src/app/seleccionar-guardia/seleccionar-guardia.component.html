@@ -1,14 +1,23 @@
 
+<div class="px-3 pt-2 row">
+  Selección de guardia para el dia {{diaA }} en  segunda hora siendo de apoyo
+</div>
     <div class="row p-1" style="min-height: 500px;">
 
-        <div class="col-4 "  *ngFor="let guardia of datos">
+        <div class="col-12 col-sm-6 col-md-4 mt-3 "  *ngFor="let guardia of datos">
           <div class="card border shadow p-2 colorMorado">
             <div class="card-block">
               <h4 class="card-title ">Estado de la guardia: <span [ngStyle]="estiloEstado(guardia)">{{ calcularEstado(guardia)}}</span></h4>
               <h6 class="card-subtitle text-muted">Número de guardia: {{guardia.idGuardia}}</h6>
-              <p class="card-text p-y-1">Profesor a cubrir: {{guardia.profesorCubierto}}</p>
-              <a href="#" class="card-link">link</a>
-              <a href="#" class="card-link">Second link</a>
+              <p class="card-text p-y-1">Profesor a cubrir: <span class="fw-bold">{{guardia.profesorCubierto}}</span></p>
+              <div class="row">
+                <div class="col-12">Aula: <span class="fw-bold">{{guardia.aula}}</span></div>
+                <div class="col-12">Curso: <span class="fw-bold">{{guardia.curso}}</span></div>
+                <div class="col-12 mt-2">Informacíon adicional:<br> <span class="fw-bold">{{guardia.descripcion}}</span></div>
+
+              </div>
+              <hr class="">
+              <button class="btn btn-primary">Hacer guardia</button>
             </div>
           </div>
         </div>

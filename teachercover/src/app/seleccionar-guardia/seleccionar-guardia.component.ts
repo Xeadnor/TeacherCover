@@ -17,7 +17,7 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy  {
   tipoGuardia: string;
   hora: string;
   datos: Guardia[] = [];
-
+  diaA : String;
   constructor(private guardiaService: GuardiaService,private route: ActivatedRoute,private router: Router, private profesorService: ProfesorService, private toastr: ToastrService, private auth: AuthService) { };
 
   ngOnInit() {
@@ -27,6 +27,7 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy  {
        this.tipoGuardia =params['tipo']; 
        this.hora =params['hora'];
        var day = new Date();
+       this.diaA =  day.getFullYear() + "/" + this.getMonthofToday(day.getMonth()) + "/" + day.getDate(); 
        let thisHour = day.getHours();
        if(day.getHours() == 8 && day.getMinutes() <25){
          thisHour = 7;
@@ -75,7 +76,7 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy  {
   }
   calcularEstado(guardia:Guardia){
     if(guardia.estado == "Finalizada"){
-      return "Ocupada"
+      return " Asignada "
     }else{
       return "Disponible"
     }
