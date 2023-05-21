@@ -78,7 +78,8 @@ export class GuardiaService {
       nombreProfesor: guardia.getNombreProfesor(),
       profesor:guardia.getProfesor(),
       profesorCubierto:guardia.getProfesorCubierto(),
-      tipo: guardia.getTipo()
+      tipo: guardia.getTipo(),
+      incidencia: guardia.getIncidencia(),
     };
    addDoc(dbRef, data)
    .then(docRef => {

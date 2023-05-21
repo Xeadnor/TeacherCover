@@ -13,9 +13,10 @@ export class Guardia {
   idField: string;
   profesorCubierto: string;
   tipo: string;
+  incidencia: boolean;
 
-  constructor(horaGuardia?: string, fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number, idField?: string, profesorCubierto?:string, tipo?:string) {
-    if (horaGuardia && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor && fecha && idField && profesorCubierto&& tipo) {
+  constructor(horaGuardia?: string, fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number, idField?: string, profesorCubierto?:string, tipo?:string, incidencia?:boolean) {
+    if (horaGuardia && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor && fecha && idField && profesorCubierto && tipo) {
       this.idGuardia = idGuardia
       this.estado = estado
       this.fecha = fecha;
@@ -31,9 +32,12 @@ export class Guardia {
       this.tipo = tipo
 
     }
+    this.incidencia = incidencia!;
   }
 
-
+  getIncidencia(){
+    return this.incidencia;
+  }
   getTipo(){
     return this.tipo;
   }
@@ -80,6 +84,9 @@ export class Guardia {
 
   setTipo(tipo:string){
     this.tipo = tipo;
+  }
+  setIncidencia(incidencia:boolean){
+    this.incidencia = incidencia
   }
   setProfesorCubierto(profesorCubierto:string){
     this.profesorCubierto = profesorCubierto;

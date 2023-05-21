@@ -253,6 +253,7 @@ export class CrearGuardiaComponent implements OnInit {
               guardia.setCurso(this.obtenerTextoCurso(this.cursoGuardia) + " " + this.obtenerTextoLetra(this.letraCurso));
               guardia.setProfesorCubierto(nombreProfe);
               guardia.setTipo("Pendiente");
+              guardia.setIncidencia(false);
               let dia = fecha.getFullYear() + "/" + this.getMonthofToday(fecha.getMonth()) + "/" + fecha.getDate(); 
               this.guardiaService.addGuardia(guardia,dia);
               this.toastr.success("Se ha registrado con éxito la guardia en la base de datos", "Guardia creada", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
