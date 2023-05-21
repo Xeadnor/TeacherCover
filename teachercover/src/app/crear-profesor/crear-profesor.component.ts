@@ -117,7 +117,6 @@ export class CrearProfesorComponent implements OnInit {
         let prueba = this.profesorService.getDataFromEmail(email);
 
         (await prueba).forEach(doc => {
-          console.log()
           if (doc.length > 0) {
             if (this.registro) {
 

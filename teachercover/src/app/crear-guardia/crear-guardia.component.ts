@@ -74,29 +74,29 @@ export class CrearGuardiaComponent implements OnInit {
     this.letraCurso = e.target.value
   }
 
-  //TODO mirar si hay alguna forma de obtener el valor del select del formulario y ahorrarse esto
-  obtenerTextoHora(hora: number): string{
+  //TODO mirar si hay alguna forma de obtener el valor del select del formulario y ahorrarse estos switch
+  obtenerTextoHora(hora: string): string{
     let texto= ""
     switch (hora) {
-      case 8:
+      case "8":
         texto="Primera hora"
         break;
-      case 9:
+      case "9":
         texto="Segunda hora"
         break;
-      case 10:
+      case "10":
         texto="Tercera hora"
         break;
-      case 11:
+      case "11":
         texto="Recreo"
         break;
-      case 12:
+      case "12":
         texto="Cuarta hora"
         break;
-      case 13:
+      case "13":
         texto="Quinta hora"
         break;
-      case 14:
+      case "14":
         texto="Sexta hora"
         break;
       default:
@@ -105,13 +105,105 @@ export class CrearGuardiaComponent implements OnInit {
     return texto ;
   }
 
+  obtenerTextoCurso(curso: string): string{
+    let texto= ""
+    switch (curso) {
+      case "1":
+        texto="1º ESO-"
+        break;
+      case "2":
+        texto="2º ESO-"
+        break;
+      case "3":
+        texto="3º ESO-"
+        break;
+      case "4":
+        texto="4º ESO-"
+        break;
+      case "1B":
+        texto="1º Bachiller-"
+        break;
+      case "2B":
+        texto="2º Bachiller-"
+        break;
+      case "1FPB":
+        texto="1º FP Básica-"
+        break;
+      case "2FPB":
+        texto="2º FP Básica-"
+        break;
+      case "1SMR":
+        texto="1º FPGM - SMR-"
+        break;
+      case "2SMR":
+        texto="2º FPGM - SMR-"
+        break;
+      case "1TEGU":
+        texto="1º FPGM - TEGU-"
+        break;
+      case "2TEGU":
+        texto="2º FPGM - TEGU-"
+        break;
+      case "1DAW":
+        texto="1º FPGS - DAW"
+        break;
+      case "2DAW":
+        texto="2º FPGS - DAW"
+        break;
+      case "1DAM":
+        texto="1º FPGS - DAM"
+        break;
+      case "2DAM":
+        texto="2º FPGS - DAM"
+        break;
+      case "1TSEAS":
+        texto="1º FPGS - TSEAS-"
+        break;
+      case "2TSEAS":
+        texto="2º FPGS - TSEAS-"
+        break;
+      default:
+        break;
+    }
+    return texto ;
+  }
+
+    obtenerTextoLetra(letra: string): string{
+      let texto= ""
+      switch (letra) {
+        case "A":
+        case "B":
+        case "C":
+        case "D":
+          texto=letra
+          break;
+        case "Du":
+          texto="Dual"
+          break;
+        case "Di":
+          texto="Diurno"
+          break;
+        case "V":
+          texto="Vespertino"
+          break;
+        case "U":
+          texto="Curso línea única"
+          break;
+        default:
+          break;
+      }
+      return texto ;
+    }
+
   obtenerDiaSemana(fecha: Date): string {
     const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     const indiceDia = fecha.getDay();
     return diasSemana[indiceDia];
   }
 
+  refrescarFormulario(){
 
+  }
 
   async createOnCall() {
     let nombreProfe = this.createOnCallForm.controls["profesorCubierto"].value;
@@ -120,21 +212,14 @@ export class CrearGuardiaComponent implements OnInit {
     const fecha = new Date(dateSelectedMilisec);
     const fechaFormateada = fecha.toLocaleDateString('es-ES');
 
-    console.log(this.guardiaHora + " ---- hora")
-    console.log(aula.length + " ---- aula")
-    console.log(this.cursoGuardia + " ---- curso")
-    console.log(this.letraCurso + " ---- letra")
-    console.log(fecha + "fechaRaw")
-
     if (nombreProfe.length > 0 && fechaFormateada.length > 0 && this.guardiaHora && aula.length>0 && this.cursoGuardia && this.letraCurso) {
 
         let guardia = new Guardia();
         let prueba = this.guardiaService.checkIfExistOnCall(nombreProfe, fecha , this.guardiaHora );
         let descripcion="";
-        this.infoGuardia!= null ? descripcion=this.infoGuardia : descripcion="Sin información adicional";
+        descripcion = this.createOnCallForm.controls["infoGuardia"] != undefined ? this.createOnCallForm.controls["infoGuardia"].value : "Sin información adicional";
 
         (await prueba).forEach(doc => {
-          console.log(doc)
           if (doc.length == 0) {
             this.createOnCallForm.markAsPristine();
             this.createOnCallForm.markAsUntouched();
@@ -144,26 +229,32 @@ export class CrearGuardiaComponent implements OnInit {
               guardia.setEstado("Pendiente");
               guardia.setFecha(fecha);
               guardia.setHora(this.guardiaHora);
-              guardia.setHoraGuardia(this.obtenerTextoHora(this.guardiaHora));
+              guardia.setHoraGuardia(this.obtenerTextoHora("" + this.guardiaHora));
               guardia.setDia(this.obtenerDiaSemana(fecha));
               guardia.setDescripcion(descripcion);
               guardia.setAula(aula);
               guardia.setProfesor(1);
-              guardia.setNombreProfesor("");
-              guardia.setCurso(this.cursoGuardia + " " + this.letraCurso);
+              guardia.setNombreProfesor("Sin asignar");
+              guardia.setCurso(this.obtenerTextoCurso(this.cursoGuardia) + " " + this.obtenerTextoLetra(this.letraCurso));
               guardia.setProfesorCubierto(nombreProfe);
               guardia.setTipo("Pendiente");
+
               this.guardiaService.addGuardia(guardia);
               this.toastr.success("Se ha registrado con éxito la guardia en la base de datos", "Guardia creada", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
-              window.location.reload();
+              setTimeout(() => {
+                // Recargar la página
+                window.location.reload();
+              }, 3000);
+
             });
+
           }else{
             this.toastr.error("Ya existe una gaurdia con los mismos parámetros", "Guardia existente", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
           }
         })
 
     } else {
-      this.toastr.error("Se han de rellenar todos los campos", "Campos vacíos", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
+      this.toastr.error("Se han de rellenar todos los campos obligatorios", "Campos vacíos", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
     }
   }
 

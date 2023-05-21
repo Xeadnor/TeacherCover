@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, setDoc } from '@angular/fire/firestore';
 import { Guardia } from '../models/guardia.model';
 import { Observable } from 'rxjs';
 import { query, where, getDocs, getFirestore, orderBy, limit } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,7 @@ export class GuardiaService {
     const dbRef = collection(db, "guardias");
     const fechaFormateada = guardia.getFecha().toLocaleDateString('es-ES');
 
+
     const data = {
       aula: guardia.getAula(),
       curso: guardia.getCurso(),
@@ -80,27 +82,12 @@ export class GuardiaService {
       profesorCubierto:guardia.getProfesorCubierto(),
       tipo: guardia.getTipo()
     };
-
-    // const data = {
-    //   aula: "PRUEBA",
-    //   curso: "PRUEBA",
-    //   descripcion: "PRUEBA",
-    //   dia: "PRUEBA",
-    //   estado: "PRUEBA",
-    //   fecha: "PRUEBA",
-    //   hora: 1,
-    //   horaGuardia: "PRUEBA",
-    //   idGuardia: 1,
-    //   nombreProfesor: "PRUEBA",
-    //   profesor:1,
-    //   profesorCubierto:"PRUEBA",
-    //   tipo: 1
-    // };
-
    addDoc(dbRef, data)
    .then(docRef => {
+
    })
    .catch(error => {
+    console.log(error)
    })
 
   }
