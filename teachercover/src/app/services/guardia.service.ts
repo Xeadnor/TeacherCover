@@ -61,11 +61,9 @@ export class GuardiaService {
 
 
 
-  addGuardia(guardia : Guardia){
+  addGuardia(guardia : Guardia,dia: String){
     const db = getFirestore();
     const dbRef = collection(db, "guardias");
-    const fechaFormateada = guardia.getFecha().toLocaleDateString('es-ES');
-
 
     const data = {
       aula: guardia.getAula(),
@@ -73,8 +71,8 @@ export class GuardiaService {
       descripcion: guardia.getDescripcion(),
       dia: guardia.getDia(),
       estado: guardia.getEstado(),
-      fecha: fechaFormateada,
-      hora: guardia.getHora(),
+      fecha: dia,
+      hora: Number(guardia.getHora()),
       horaGuardia: guardia.getHoraGuardia(),
       idGuardia: guardia.getIdGuardia(),
       nombreProfesor: guardia.getNombreProfesor(),

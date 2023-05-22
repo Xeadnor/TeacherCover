@@ -14,7 +14,7 @@
       <div class="form-outline form-white col-12 col-md-4 ">
         <label class="form-label" for="guardiaFecha">Día de la Guardia</label><br>
         <mat-form-field>
-          <input matInput formControlName="guardiaFecha" [matDatepicker]="picker" >
+          <input matInput formControlName="guardiaFecha" [matDatepicker]="picker" (click)="picker.open()" (keydown)="false" >
           <mat-hint>Seleccionar fecha</mat-hint>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker ></mat-datepicker>

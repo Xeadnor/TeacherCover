@@ -200,6 +200,17 @@ export class CrearGuardiaComponent implements OnInit {
     const indiceDia = fecha.getDay();
     return diasSemana[indiceDia];
   }
+  getMonthofToday(mes: number){
+    let numeroMes = mes + 1;
+    let devolverMes;
+    if(numeroMes < 10){
+      devolverMes = "0" + numeroMes;
+    }else{
+      devolverMes = numeroMes;
+    }
+
+    return devolverMes;
+  }
 
   refrescarFormulario(){
 
@@ -216,8 +227,8 @@ export class CrearGuardiaComponent implements OnInit {
 
         let guardia = new Guardia();
         let prueba = this.guardiaService.checkIfExistOnCall(nombreProfe, fecha , this.guardiaHora );
-        let descripcion="";
-        descripcion = this.createOnCallForm.controls["infoGuardia"] != undefined ? this.createOnCallForm.controls["infoGuardia"].value : "Sin información adicional";
+        let descripcion= this.createOnCallForm.controls["infoGuardia"].value;
+      
 
         (await prueba).forEach(doc => {
           if (doc.length == 0) {
@@ -231,6 +242,10 @@ export class CrearGuardiaComponent implements OnInit {
               guardia.setHora(this.guardiaHora);
               guardia.setHoraGuardia(this.obtenerTextoHora("" + this.guardiaHora));
               guardia.setDia(this.obtenerDiaSemana(fecha));
+              console.log(descripcion);
+              if(descripcion == null){
+                descripcion = "No hay información adicional"
+              }
               guardia.setDescripcion(descripcion);
               guardia.setAula(aula);
               guardia.setProfesor(1);
@@ -238,8 +253,8 @@ export class CrearGuardiaComponent implements OnInit {
               guardia.setCurso(this.obtenerTextoCurso(this.cursoGuardia) + " " + this.obtenerTextoLetra(this.letraCurso));
               guardia.setProfesorCubierto(nombreProfe);
               guardia.setTipo("Pendiente");
-
-              this.guardiaService.addGuardia(guardia);
+              let dia = fecha.getFullYear() + "/" + this.getMonthofToday(fecha.getMonth()) + "/" + fecha.getDate(); 
+              this.guardiaService.addGuardia(guardia,dia);
               this.toastr.success("Se ha registrado con éxito la guardia en la base de datos", "Guardia creada", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
               setTimeout(() => {
                 // Recargar la página
