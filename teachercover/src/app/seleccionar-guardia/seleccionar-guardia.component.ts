@@ -73,6 +73,28 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy  {
   ngOnChanges(changes: SimpleChanges){
 
   }
+  calcularEstado(guardia:Guardia){
+    if(guardia.estado == "Finalizada"){
+      return "Ocupada"
+    }else{
+      return "Disponible"
+    }
+
+  }
+  estiloEstado(guardia:Guardia){
+    let color = {};
+    if(guardia.estado == "Finalizada"){
+      color = {"color":"red"};
+
+    }else{
+      color = {"color":"green"};
+
+    }
+
+    return color;
+  }
+
+  
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
