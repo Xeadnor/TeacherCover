@@ -17,7 +17,9 @@
 
               </div>
               <hr class="">
-              <button class="btn btn-primary">Hacer guardia</button>
+              <button class="btn btn-primary" [disabled]="comprobarGuardiaBoton(guardia)">Hacer guardia</button>
+              <div class="col-12 mt-3" *ngIf="seleccionada(guardia)">Guardia seleccionada por: <span class="fw-bold">{{guardia.nombreProfesor}}</span></div>
+
             </div>
           </div>
         </div>

@@ -94,6 +94,29 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy  {
 
     return color;
   }
+  comprobarGuardiaBoton(guardia:Guardia){
+    if(guardia.estado == "Finalizada"){
+      return true;
+
+    }else{
+     return false;
+
+    }
+
+
+  }
+
+  seleccionada(guardia:Guardia){
+    if(guardia.nombreProfesor == "Sin asignar"){
+      return false;
+
+    }else{
+     return true;
+
+    }
+
+
+  }
 
   
   ngOnDestroy() {
