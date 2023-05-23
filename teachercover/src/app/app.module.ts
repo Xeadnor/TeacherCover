@@ -76,6 +76,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { HistorialProfesoresComponent } from './historial-profesores/historial-profesores.component';
 import { EditarProfesorComponent } from './editar-profesor/editar-profesor.component';
 import { SeleccionarGuardiaComponent } from './seleccionar-guardia/seleccionar-guardia.component';
+import { EditarGuardiaComponent } from './editar-guardia/editar-guardia.component';
 
 
 
@@ -93,6 +94,7 @@ const appRoutes: Routes = [
       { path: "crearGuardia", component: CrearGuardiaComponent},
       { path: "historialProfesores", component: HistorialProfesoresComponent},
       { path: "editarProfesor/:id", component: EditarProfesorComponent},
+      { path: "editarGuardia/:idGuardia", component: EditarGuardiaComponent},
       { path: "seleccionarGuardia/:tipo/:hora", component: SeleccionarGuardiaComponent},
 
 
@@ -121,6 +123,7 @@ const appRoutes: Routes = [
     CrearGuardiaComponent,
     EditarProfesorComponent,
     SeleccionarGuardiaComponent,
+    EditarGuardiaComponent,
 
   ],
   imports: [

@@ -4,11 +4,17 @@
     <hr class="hr" />
     <div class="row m-2 mt-4">
       <div class="form-outline form-white col-12 col-md-4">
-        <label class="form-label" for="profesorCubierto">Nombre del profesor a cubrir</label>
-        <input type="text" id="profesorCubierto" class="form-control form-control-lg" formControlName="profesorCubierto" [class.is-invalid]="localForm.submitted && createOnCallForm.get('profesorCubierto')?.invalid" />
-        <div class="invalid-feedback">
-         Nombre del profesor a cubir es un campo obligatorio
-        </div>
+        <label class="form-label" for="profesorCubierto">Nombre del profesor a cubrir</label><br>
+            <mat-form-field class="example-form-field">
+              <mat-select (selectionChange)="changeNombreProfe($event)" formControlName="profesorCubierto" [class.is-invalid]="localForm.submitted && createOnCallForm.get('profesorCubierto')?.invalid">
+                <input placeholder="Buscar..."  type="text" (keyup)="onKey($event)" class="example-input form-control form-control-lg">
+                <mat-option *ngFor="let profe of nombresProfes"  [value]="profe">{{profe}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+            <div *ngIf="faltaNombre" class="mensajeError">
+              Nombre del profesor a cubir es un campo obligatorio
+             </div>
       </div>
 
       <div class="form-outline form-white col-12 col-md-4 ">
@@ -45,11 +51,17 @@
 
     <div class="row m-2">
       <div class="form-outline form-white col-12 col-md-4">
-        <label class="form-label" for="aulaGuardia">Aula de la guardia</label>
-        <input type="text" id="aulaGuardia" class="form-control form-control-lg" formControlName="aulaGuardia" [class.is-invalid]="localForm.submitted && createOnCallForm.get('aulaGuardia')?.invalid" />
-        <div class="invalid-feedback">
-         Aula de la guardia es un campo obligatorio
-        </div>
+        <label class="form-label" for="aulaGuardia">Aula de guardia</label><br>
+            <mat-form-field class="example-form-field">
+              <mat-select (selectionChange)="changeAula($event)" formControlName="aulaGuardia" [class.is-invalid]="localForm.submitted && createOnCallForm.get('aulaGuardia')?.invalid">
+                <input placeholder="Buscar..."  type="text" (keyup)="onKeyAula($event)" class="example-input form-control form-control-lg">
+                <mat-option *ngFor="let aula of aulasFiltradas"  [value]="aula">{{aula}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+            <div *ngIf="faltaAula" class="mensajeError">
+              Aula de guardia  es un campo obligatorio
+             </div>
       </div>
 
       <div class="form-outline form-white col-12 col-md-4">
@@ -94,14 +106,8 @@
         <select class="form-select alto"
         formControlName="letraCurso" (change)="changeLetraCurso($event)" [class.is-invalid]="localForm.submitted && createOnCallForm.get('letraCurso')?.invalid">>
           <option value="" disabled selected>Seleccionar</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
-          <option value="Du">Dual</option>
-          <option value="Di">Diurno</option>
-          <option value="V">Vespertino</option>
-          <option value="U">Curso línea única</option>
+          <option *ngFor="let letra of letras" value="{{letra}}">{{letra}}</option>
+
         </select>
         <div class="invalid-feedback">
           Hora de la guardia es un campo obligatorio
@@ -114,7 +120,7 @@
 
 
     <div class="text-center mt-5">
-      <button class="btn botonLogin btn-lg px-4 text-center" type="submit"> Crear guardia</button>
+      <button class="btn botonLogin btn-lg px-4 text-center" (click)="comprobaciones()" type="submit"> Crear guardia</button>
     </div>
 
   </form>

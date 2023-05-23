@@ -1,0 +1,129 @@
+<div class="row">
+    <form [formGroup]="createOnCallForm" #f="ngForm" (ngSubmit)="createOnCall()" #localForm="ngForm">
+      <h5 class="m-2">Datos de la guardia</h5>
+      <hr class="hr" />
+      <div class="row m-2 mt-4">
+        <div class="form-outline form-white col-12 col-md-4">
+          <label class="form-label" for="profesorCubierto">Nombre del profesor a cubrir</label>
+          <input type="text" id="profesorCubierto"  class="form-control form-control-lg" formControlName="profesorCubierto" [class.is-invalid]="localForm.submitted && createOnCallForm.get('profesorCubierto')?.invalid" />
+          <div class="invalid-feedback">
+           Nombre del profesor a cubir es un campo obligatorio
+          </div>
+        </div>
+        
+        <div class="form-outline form-white col-12 col-md-4 ">
+          <label class="form-label" for="guardiaFecha">Día de la Guardia</label><br>
+          <mat-form-field>
+            <input matInput formControlName="guardiaFecha" [matDatepicker]="picker" (click)="picker.open()" (keydown)="false" >
+            <mat-hint>Seleccionar fecha</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker ></mat-datepicker>
+          </mat-form-field>
+        </div>
+  
+        <div class="form-outline form-white col-12 col-md-4 ">
+          <label class="form-label" for="horaGuardia">Hora de la Guardia</label><br>
+          <select class="form-select alto"
+            formControlName="guardiaHora" (change)="changeHoraGuardia($event)" [class.is-invalid]="localForm.submitted && createOnCallForm.get('guardiaHora')?.invalid">
+            <option value="" disabled selected>Seleccionar</option>
+            <option value="8">Primera hora</option>
+            <option value="9">Segunda hora</option>
+            <option value="10">Tercera hora</option>
+            <option value="11">Recreo</option>
+            <option value="12">Cuarta hora</option>
+            <option value="13">Quinta hora</option>
+            <option value="14">Sexta hora</option>
+          </select>
+          <div class="invalid-feedback">
+            Hora de la guardia es un campo obligatorio
+          </div>
+        </div>
+  
+  
+  
+      </div>
+  
+      <div class="row m-2">
+        <div class="form-outline form-white col-12 col-md-4">
+          <label class="form-label" for="aulaGuardia">Aula de la guardia</label>
+          <input type="text" id="aulaGuardia" class="form-control form-control-lg" formControlName="aulaGuardia" [class.is-invalid]="localForm.submitted && createOnCallForm.get('aulaGuardia')?.invalid" />
+          <div class="invalid-feedback">
+           Aula de la guardia es un campo obligatorio
+          </div>
+        </div>
+  
+        <div class="form-outline form-white col-12 col-md-4">
+          <label class="form-label" for="infoGuardia">Información adicional</label>
+          <textarea rows="1" type="text" id="infoGuardia" class="form-control form-control-lg" formControlName="infoGuardia" ></textarea>
+        </div>
+  
+        <div class="form-outline form-white col-12 col-md-2">
+  
+          <label class="form-label" for="cursoGuardia">Curso</label>
+          <select class="form-select alto"
+            formControlName="cursoGuardia" (change)="changeCursoGuardia($event)" [class.is-invalid]="localForm.submitted && createOnCallForm.get('cursoGuardia')?.invalid">
+            <option value="" disabled selected>Seleccionar</option>
+            <option value="1">1º ESO</option>
+            <option value="2">2º ESO</option>
+            <option value="3">3º ESO</option>
+            <option value="4">4º ESO</option>
+            <option value="1B">1º Bachiller</option>
+            <option value="2B">2º Bachiller</option>
+            <option value="1FPB">1º FP Básica</option>
+            <option value="2FPB">2º FP Básica</option>
+            <option value="1SMR">1º FPGM - SMR</option>
+            <option value="2SMR">2º FPGM - SMR</option>
+            <option value="1TEGU">1º FPGM - TEGU</option>
+            <option value="2TEGU">2º FPGM - TEGU</option>
+            <option value="1DAW">1º FPGS - DAW</option>
+            <option value="2DAW">2º FPGS - DAW</option>
+            <option value="1DAM">1º FPGS - DAM</option>
+            <option value="2DAM">2º FPGS - DAM</option>
+            <option value="1TSEAS">1º FPGS - TSEAS</option>
+            <option value="2TSEAS">2º FPGS - TSEAS</option>
+          </select>
+          <div class="invalid-feedback">
+            Hora de la guardia es un campo obligatorio
+          </div>
+  
+        </div>
+  
+        <div class="form-outline form-white col-12 col-md-2">
+  
+          <label class="form-label" for="letraCurso">Letra</label>
+          <select class="form-select alto"
+          formControlName="letraCurso" (change)="changeLetraCurso($event)" [class.is-invalid]="localForm.submitted && createOnCallForm.get('letraCurso')?.invalid">>
+            <option value="" disabled selected>Seleccionar</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="Du">Dual</option>
+            <option value="Di">Diurno</option>
+            <option value="V">Vespertino</option>
+            <option value="U">Curso línea única</option>
+          </select>
+          <div class="invalid-feedback">
+            Hora de la guardia es un campo obligatorio
+          </div>
+  
+        </div>
+  
+  
+      </div>
+
+      <div class="row m-2">
+        <div class="form-outline form-white col-12 col-md-4">
+            <label class="form-label" for="infoGuardia">Informar incidencia</label>
+            <textarea rows="1" type="text" id="infoGuardia" class="form-control form-control-lg" formControlName="infoGuardia" ></textarea>
+          </div>
+      </div>
+  
+  
+      <div class="text-center mt-5">
+        <button class="btn botonLogin btn-lg px-4 text-center" type="submit"> Actualizar guardia</button>
+      </div>
+  
+    </form>
+  </div>
+  

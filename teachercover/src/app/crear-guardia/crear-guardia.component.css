@@ -15,7 +15,25 @@ mat-form-field {
   width: 100% !important;
   height: 70px;
 }
-
+.mensajeError{
+  margin-top:-1.5em;
+  font-size:.875em;
+  color:#dc3545;;
+}
 .alto{
   height: 48px;
 }
+
+p {
+  font-family: Lato;
+}
+
+.example-form-field {
+  width: 300px;
+}
+
+.example-input {
+  background: #e3dada;
+  height: 50px;
+}
+
