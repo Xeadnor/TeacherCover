@@ -101,13 +101,11 @@ export class HistorialProfesoresComponent implements OnInit{
    myModal.show()
   }
   eliminarProfesor(){
-    console.log(this.profesorEliminar);
     (window as any).bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDelete')).hide()
     let profesor: Profesor;
     profesor = this.profesorEliminar;
    this.datos = this.datos.filter(function(el) { return el.id != profesor.getIdProfesor(); }); 
    this.datos.splice(profesor.getIdProfesor(), 1 );
-   console.log(profesor.getIdField());
   this.profesorService.deleteProfesor(profesor.getIdField())
   this.dataSource = new MatTableDataSource<Profesor>(this.datos);
   this.toastr.success("Se ha borrado con exito el profesor: " + profesor.getName(),"Profesor borrado",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})

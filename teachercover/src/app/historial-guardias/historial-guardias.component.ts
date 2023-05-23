@@ -114,8 +114,6 @@ export class HistorialGuardiasComponent implements OnInit {
 
   }
   dialogEliminar(guardia: Guardia): void {
-    console.log("modal para eliminar");
-    console.log(guardia)
   }
   comprobarAdmin(){
     let userJson = sessionStorage.getItem('profesor');

@@ -54,6 +54,7 @@ export class CrearGuardiaComponent implements OnInit {
   ngOnInit(): void {
     this.faltaNombre = false;
     this.profesorService.getProfesors().subscribe(profesores => {
+      this.profes.splice(0)
       profesores.forEach((profesor) => {
         if (profesor["role"] != "Admin") {
           this.profes.push(profesor["name"]);
@@ -63,10 +64,13 @@ export class CrearGuardiaComponent implements OnInit {
       })
     });
     this.generalService.getAulas().subscribe(aulas => {
+      this.aulas.splice(0)
       aulas.forEach((aula) => {
+   
         this.aulas.push(aula["nombre"]);
 
       })
+      this.aulas.sort();
     });
     let userJson = sessionStorage.getItem('profesor');
     let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
@@ -112,7 +116,7 @@ export class CrearGuardiaComponent implements OnInit {
 
   changeCursoGuardia(e: any) {
     this.cursoGuardia = e.target.value
-    console.log(this.cursoGuardia);
+  
     this.letras.splice(0);
     if (this.cursoGuardia == "1" || this.cursoGuardia == "2" ||
       this.cursoGuardia == "3" || this.cursoGuardia == "4" ||
@@ -342,7 +346,7 @@ export class CrearGuardiaComponent implements OnInit {
               guardia.setHora(this.guardiaHora);
               guardia.setHoraGuardia(this.obtenerTextoHora("" + this.guardiaHora));
               guardia.setDia(this.obtenerDiaSemana(fecha));
-              console.log(descripcion);
+    
               if (descripcion == null) {
                 descripcion = "No hay información adicional"
               }

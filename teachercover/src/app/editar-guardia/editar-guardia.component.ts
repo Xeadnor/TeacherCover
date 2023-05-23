@@ -251,7 +251,7 @@ export class EditarGuardiaComponent implements OnInit {
               guardia.setHora(this.guardiaHora);
               guardia.setHoraGuardia(this.obtenerTextoHora("" + this.guardiaHora));
               guardia.setDia(this.obtenerDiaSemana(fecha));
-              console.log(descripcion);
+          
               if(descripcion == null){
                 descripcion = "No hay información adicional"
               }

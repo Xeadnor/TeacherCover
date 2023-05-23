@@ -163,7 +163,6 @@ export class EditarProfesorComponent implements OnInit, OnDestroy {
               this.profesor.setHorasGuardias(horasGuardias);
               this.profesor.setHorarioGuardia(horarioGuardia);
               this.profesor.setHorarioGuardiaApoyo(horasGuardiaApoyo);
-              console.log(this.profesor);
 
               this.profesorService.updateTeacher(this.profesor);
               if(this.emailAdmin == this.profesor.getEmail()){
