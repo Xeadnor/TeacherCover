@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collection, collectionData, setDoc } from '@angular/fire/firestore';
 import { Guardia } from '../models/guardia.model';
 import { Observable } from 'rxjs';
-import { query, where, getDocs, getFirestore, orderBy, limit } from "firebase/firestore";
+import { query, where, getDocs, getFirestore, orderBy, limit, getDoc } from "firebase/firestore";
 import { doc, updateDoc } from "firebase/firestore";
 
 @Injectable({
@@ -58,8 +58,13 @@ export class GuardiaService {
   }
 
 
+ async getAGuardiaFromId(idField : String){
+    const db = getFirestore();
+    const guardiasRef = doc(db,"guardias", idField.toString());
+    const docSnap = await getDoc(guardiasRef);
+    return docSnap.data();
 
-
+  }
 
   addGuardia(guardia : Guardia,dia: String){
     const db = getFirestore();
@@ -80,6 +85,7 @@ export class GuardiaService {
       profesorCubierto:guardia.getProfesorCubierto(),
       tipo: guardia.getTipo(),
       incidencia: guardia.getIncidencia(),
+      incidenciaTexto: guardia.getIncidenciaTexto(),
     };
    addDoc(dbRef, data)
    .then(docRef => {
@@ -90,5 +96,41 @@ export class GuardiaService {
    })
 
   }
+
+
+
+
+
+  updateGuardia(guardia : Guardia,dia: String){
+    const db = getFirestore();
+    const dbRef = doc(db, "guardias",guardia.getIdField());
+
+    const data = {
+      aula: guardia.getAula(),
+      curso: guardia.getCurso(),
+      descripcion: guardia.getDescripcion(),
+      dia: guardia.getDia(),
+      estado: guardia.getEstado(),
+      fecha: dia,
+      hora: Number(guardia.getHora()),
+      horaGuardia: guardia.getHoraGuardia(),
+      idGuardia: guardia.getIdGuardia(),
+      nombreProfesor: guardia.getNombreProfesor(),
+      profesor:guardia.getProfesor(),
+      profesorCubierto:guardia.getProfesorCubierto(),
+      tipo: guardia.getTipo(),
+      incidencia: guardia.getIncidencia(),
+      incidenciaTexto: guardia.getIncidenciaTexto(),
+    };
+    setDoc(dbRef,data, { merge:true})
+   .then(docRef => {
+
+   })
+   .catch(error => {
+    console.log(error)
+   })
+
+  }
+
 
 }

@@ -131,6 +131,8 @@ export class CrearGuardiaComponent implements OnInit {
       this.letras.push("Dual")
       this.letras.push("Diurno")
       this.letras.push("Vespertino")
+      this.letras.push("Curso línea única")
+
 
     }
 
@@ -219,16 +221,16 @@ export class CrearGuardiaComponent implements OnInit {
         texto = "2º FPGM - TEGU-"
         break;
       case "1DAW":
-        texto = "1º FPGS - DAW"
+        texto = "1º FPGS - DAW-"
         break;
       case "2DAW":
-        texto = "2º FPGS - DAW"
+        texto = "2º FPGS - DAW-"
         break;
       case "1DAM":
-        texto = "1º FPGS - DAM"
+        texto = "1º FPGS - DAM-"
         break;
       case "2DAM":
-        texto = "2º FPGS - DAM"
+        texto = "2º FPGS - DAM-"
         break;
       case "1TSEAS":
         texto = "1º FPGS - TSEAS-"
@@ -251,16 +253,16 @@ export class CrearGuardiaComponent implements OnInit {
       case "D":
         texto = letra
         break;
-      case "Du":
+      case "Dual":
         texto = "Dual"
         break;
-      case "Di":
+      case "Diurno":
         texto = "Diurno"
         break;
-      case "V":
+      case "Vespertino":
         texto = "Vespertino"
         break;
-      case "U":
+      case "Curso línea única":
         texto = "Curso línea única"
         break;
       default:
@@ -284,6 +286,16 @@ export class CrearGuardiaComponent implements OnInit {
     }
 
     return devolverMes;
+  }
+  getDayofToday(dia: number) {
+    let devolverDia;
+    if (dia < 10) {
+      devolverDia = "0" + dia;
+    } else {
+      devolverDia = dia;
+    }
+
+    return devolverDia;
   }
 
   refrescarFormulario() {
@@ -354,16 +366,17 @@ export class CrearGuardiaComponent implements OnInit {
               guardia.setAula(aula);
               guardia.setProfesor(1);
               guardia.setNombreProfesor("Sin asignar");
-              guardia.setCurso(this.obtenerTextoCurso(this.cursoGuardia) + " " + this.obtenerTextoLetra(this.letraCurso));
+              guardia.setCurso(this.obtenerTextoCurso(this.cursoGuardia) + "" + this.obtenerTextoLetra(this.letraCurso));
               guardia.setProfesorCubierto(nombreProfe);
               guardia.setTipo("Pendiente");
               guardia.setIncidencia(false);
-              let dia = fecha.getFullYear() + "/" + this.getMonthofToday(fecha.getMonth()) + "/" + fecha.getDate();
+              guardia.setIncidenciaTexto("Sin incidencia")
+              let dia = fecha.getFullYear() + "/" + this.getMonthofToday(fecha.getMonth()) + "/" + this.getDayofToday(fecha.getDate());
               this.guardiaService.addGuardia(guardia, dia);
               this.toastr.success("Se ha registrado con éxito la guardia en la base de datos", "Guardia creada", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
               setTimeout(() => {
                 // Recargar la página
-                window.location.reload();
+              window.location.reload();
               }, 3000);
 
             });

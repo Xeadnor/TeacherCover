@@ -69,7 +69,7 @@ export class HistorialGuardiasComponent implements OnInit {
       this.guardiaService.getGuardiasByUser(profesor["id"]).subscribe(guardias => {
         this.datos.splice(0)
         guardias.forEach((guardia) => {
-          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idFIeld"], guardia["profesorCubierto"],guardia["tipo"],guardia["incidencia"]));
+          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idFIeld"], guardia["profesorCubierto"],guardia["tipo"],guardia["incidencia"],guardia["incidenciaTexto"]));
 
         })
 
@@ -87,7 +87,7 @@ export class HistorialGuardiasComponent implements OnInit {
       this.guardiaService.getGuardias().subscribe(guardias => {
         this.datos.splice(0)
         guardias.forEach((guardia) => {
-          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idField"], guardia["profesorCubierto"],guardia["tipo"],guardia["incidencia"]));
+          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idField"], guardia["profesorCubierto"],guardia["tipo"],guardia["incidencia"],guardia["incidenciaTexto"]));
 
         })
         this.dataSource = new MatTableDataSource<Guardia>(this.datos);
@@ -110,7 +110,8 @@ export class HistorialGuardiasComponent implements OnInit {
 
   }
   dialogEditar(guardia: Guardia): void {
-    this.router.navigate(['/pagina/editarGuardia', guardia["idGuardia"]]);
+
+    this.router.navigate(['/pagina/editarGuardia', guardia["idField"]]);
 
   }
   dialogEliminar(guardia: Guardia): void {
@@ -176,7 +177,7 @@ export class HistorialGuardiasComponent implements OnInit {
       const columnEstado = row.estado;
       const columnProfesorCubierto = row.profesorCubierto;
       const columnTipo = row.tipo;
-      const columnIncidencia = row.incidencia;
+      const columnIncidencia = row.incidencia? "Si" : "No";
 
 
 

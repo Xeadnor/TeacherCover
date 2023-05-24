@@ -14,15 +14,17 @@ export class Guardia {
   profesorCubierto: string;
   tipo: string;
   incidencia: boolean;
+  incidenciaTexto : string;
 
-  constructor(horaGuardia?: string, fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number, idField?: string, profesorCubierto?:string, tipo?:string, incidencia?:boolean) {
-    if (horaGuardia && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor && fecha && idField && profesorCubierto && tipo) {
+  constructor(horaGuardia?: string, fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number, idField?: string, profesorCubierto?:string, tipo?:string, incidencia?:boolean, incidenciaTexto?:string) {
+    if (horaGuardia && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor && fecha && idField && profesorCubierto && tipo && incidenciaTexto) {
       this.idGuardia = idGuardia
       this.estado = estado
       this.fecha = fecha;
       this.hora = hora
       this.horaGuardia = horaGuardia
       this.dia = dia
+      this.idField = idField
       this.descripcion = descripcion
       this.aula = aula
       this.profesor = profesor
@@ -30,6 +32,7 @@ export class Guardia {
       this.curso = curso
       this.profesorCubierto = profesorCubierto
       this.tipo = tipo
+      this.incidenciaTexto = incidenciaTexto;
 
     }
     this.incidencia = incidencia!;
@@ -37,6 +40,9 @@ export class Guardia {
 
   getIncidencia(){
     return this.incidencia;
+  }
+  getIncidenciaTexto(){
+    return this.incidenciaTexto;
   }
   getTipo(){
     return this.tipo;
@@ -87,6 +93,9 @@ export class Guardia {
   }
   setIncidencia(incidencia:boolean){
     this.incidencia = incidencia
+  }
+  setIncidenciaTexto(incidenciaTexto:string){
+    this.incidenciaTexto = incidenciaTexto
   }
   setProfesorCubierto(profesorCubierto:string){
     this.profesorCubierto = profesorCubierto;
