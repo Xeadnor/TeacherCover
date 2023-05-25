@@ -38,12 +38,13 @@ export class EditarProfesorComponent implements OnInit, OnDestroy {
     let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
     this.emailAdmin = profesor["email"]
     this.rol = profesor["role"]
+
     if (this.rol != "Admin") {
       this.router.navigate(["/pagina/calendario"]);
     }
 
     this.editTeacherForm = new FormGroup({
-      nombreProf: new FormControl("", Validators.required),
+      nombreProf: new FormControl({value:"",disabled:true}, Validators.required),
       horasGuardias: new FormControl("", Validators.required),
       lunesGuardia: new FormControl("", Validators.required),
       martesGuardia: new FormControl("", Validators.required),

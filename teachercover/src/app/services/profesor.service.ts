@@ -19,6 +19,31 @@ export class ProfesorService {
     return collectionData(profesorRef, {idField:"idField"}) as Observable<Profesor[]>;
   }
 
+  async removeGuardia(id: number){
+
+    const db = getFirestore();
+    let number  = 0
+    let idField = "";
+    const q = query(collection(db, "profesores"),where("id", "==",id));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+
+       number = doc.data()["horasGuardias"];
+       idField = doc.id;
+
+
+    });
+
+      const profesorRef = doc(db,"profesores",idField);
+
+        const data = {
+          horasGuardias: number - 1
+        }
+
+      setDoc(profesorRef,data, { merge:true})
+
+  }
+
   deleteProfesor(idField: string){
     const db = getFirestore();
 
@@ -46,6 +71,7 @@ export class ProfesorService {
     });
     return newId;
   }
+
 
   async confirmEmail(){
     const db = getFirestore();

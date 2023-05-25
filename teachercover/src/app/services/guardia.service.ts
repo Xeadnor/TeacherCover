@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collection, collectionData, setDoc } from '@angular/fire/firestore';
 import { Guardia } from '../models/guardia.model';
 import { Observable } from 'rxjs';
-import { query, where, getDocs, getFirestore, orderBy, limit, getDoc } from "firebase/firestore";
+import { query, where, getDocs, getFirestore, orderBy, limit, getDoc, deleteDoc } from "firebase/firestore";
 import { doc, updateDoc } from "firebase/firestore";
 
 @Injectable({
@@ -36,7 +36,14 @@ export class GuardiaService {
     });
     return newId;
   }
+  deleteGuardia(idField: string){
+    const db = getFirestore();
 
+    const docRef = doc(db, "guardias", idField);
+
+    deleteDoc(docRef)
+
+  }
   getGuardiasOfProfesor(idProfesor:number): Observable<Guardia[]>{
     //! por implementar
     const guardiaref = collection(this.firestore,"guardias");

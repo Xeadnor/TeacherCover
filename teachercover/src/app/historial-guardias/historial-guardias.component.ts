@@ -16,6 +16,8 @@ import { DateAdapter } from '@angular/material/core';
 import { Profesor } from 'app/models/profesor.model';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ProfesorService } from 'app/services/profesor.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
 
   selector: 'app-historial-guardias',
@@ -28,7 +30,7 @@ import { Router } from '@angular/router';
 export class HistorialGuardiasComponent implements OnInit {
 
   columnas: string[] = ['idGuardia', 'fecha', 'nombreProfesor', 'curso', "aula", "horaGuardia", "descripcion", "dia", "estado", "profesorCubierto","tipo","incidencia", "opciones"];
-  constructor(private router: Router,private guardiaService: GuardiaService, private dateAdapter: DateAdapter<Date>, public dialogo: MatDialog) {
+  constructor(private toastr: ToastrService,private profesorService: ProfesorService,private router: Router,private guardiaService: GuardiaService, private dateAdapter: DateAdapter<Date>, public dialogo: MatDialog) {
     this.dateAdapter.setLocale('es');
     this.dateAdapter.getFirstDayOfWeek()
 
@@ -56,6 +58,7 @@ export class HistorialGuardiasComponent implements OnInit {
   public horaGuardia = '';
   public tipo = '';
   public incidencia = '';
+  guardiaEliminar : Guardia;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -114,7 +117,30 @@ export class HistorialGuardiasComponent implements OnInit {
     this.router.navigate(['/pagina/editarGuardia', guardia["idField"]]);
 
   }
-  dialogEliminar(guardia: Guardia): void {
+  dialogEliminar(guardia: Guardia){
+    this.guardiaEliminar = guardia;
+    var myModal: any = new (window as any).bootstrap.Modal(
+      document.getElementById("modalDelete")
+   );
+   myModal.show()
+  }
+  eliminarGuardia(){
+    (window as any).bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDelete')).hide()
+    let guardia: Guardia;
+    guardia = this.guardiaEliminar;
+  this.datos = this.datos.filter(function(el) { return el.idGuardia != guardia.getIdGuardia(); }); 
+   this.datos.splice(guardia.getIdGuardia(), 1 );
+  this.guardiaService.deleteGuardia(guardia.getIdField())
+  if(guardia.getEstado() != "Finalizada"){
+
+  }else{
+    this.profesorService.removeGuardia(guardia.getProfesor());
+  }
+  this.dataSource = new MatTableDataSource<Guardia>(this.datos);
+  this.toastr.success("Se ha borrado con exito la guardia: " + guardia.getIdField(),"Guardia borrada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
+  this.router.navigate(["/pagina/historial"]);
+     
+
   }
   comprobarAdmin(){
     let userJson = sessionStorage.getItem('profesor');

@@ -3,7 +3,7 @@
   <form [formGroup]="searchForm" class="search__form">
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="mostrarTabla" #tabla1
-      style="background-color:#d1c4fd" matSort>
+      style="background-color:#d1c4fd" matSort matSortActive="idGuardia" matSortDirection="desc" matSortDisableClear>
 
       <ng-container matColumnDef="idGuardia" sticky>
 
@@ -184,3 +184,23 @@
 </div>
 <mat-paginator class="mat-elevation-z8 paginado fixed" [pageSizeOptions]="[10, 20, 40]"
   style="background-color:#d1c4fd;"></mat-paginator>
+
+
+
+  <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Confirmación de acción.</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        ¿Esta seguro que desea eliminar a este usuario? Sera una acción irreversible
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button  class="btn btn-danger" (click)="eliminarGuardia()"> Eliminar usuario</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -3,11 +3,11 @@
     <form [formGroup]="searchForm" class="search__form">
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="mostrarTabla" #tabla1
-        style="background-color:#d1c4fd" matSort>
+        style="background-color:#d1c4fd" matSort matSortActive="id" matSortDirection="desc" matSortDisableClear>
 
         <ng-container matColumnDef="id" sticky>
 
-          <th mat-header-cell *matHeaderCellDef>
+          <th mat-header-cell *matHeaderCellDef matSortDirection="asc">
             <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline" >
               <input type="text" aria-label="id" matInput formControlName="id"
                 (keyup)="applyFilter()" placeholder="Buscar por..." >

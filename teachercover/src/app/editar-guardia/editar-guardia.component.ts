@@ -54,7 +54,8 @@ export class EditarGuardiaComponent implements OnInit {
       aulaGuardia: new FormControl("", Validators.required),
       infoGuardia: new FormControl(),
       cursoGuardia: new FormControl("", Validators.required),
-      letraCurso:new FormControl("", Validators.required)
+      letraCurso:new FormControl("", Validators.required),
+      incidencia:new FormControl("", Validators.required)
     }, { updateOn: "submit" });
 
     this.mostrados = true;
@@ -106,34 +107,57 @@ export class EditarGuardiaComponent implements OnInit {
 
 
 
-      if (this.rol != "Admin" || this.guardiaEditandose.getEstado() == "Finalizada") {
+      if (this.rol == "Admin" && this.guardiaEditandose.getEstado() == "Finalizada") {
+        let fecha = this.guardiaEditandose.getFecha().toString().replaceAll("/","-");
+
+        let  prueba = this.guardiaEditandose.getCurso().split("-");
+
+        let letra = prueba[prueba.length-1].trim()
+        let numCurso = ""
+     
+     
+        if(prueba.length > 2){
+         numCurso  = prueba[0].charAt(0) + prueba[1].trim()
+
+        }else{
+         if(prueba[0].length == 5){
+           numCurso = prueba[0].charAt(0)
+         }else if(prueba[0].length == 12){
+           numCurso = prueba[0].charAt(0) + "B"
+
+         }else{
+           numCurso = prueba[0].charAt(0) + "FPB"
+           
+         }
+        }
+
         this.createOnCallForm = new FormGroup({
-          profesorCubierto: new FormControl({value:"Rocio",disabled:true}, Validators.required),
-          guardiaFecha: new FormControl({value:"23/04/2023",disabled:true}, Validators.required),
-          guardiaHora: new FormControl({value:"10",disabled:true}, Validators.required),
-          aulaGuardia: new FormControl({value:"B-03",disabled:true}, Validators.required),
-          infoGuardia: new FormControl(),
-          cursoGuardia: new FormControl({value:"4",disabled:true}, Validators.required),
-          letraCurso:new FormControl({value:"A",disabled:true}, Validators.required)
+          profesorCubierto: new FormControl({value:this.guardiaEditandose.getProfesorCubierto(),disabled:true}, Validators.required),
+          guardiaFecha: new FormControl({value:fecha,disabled:true}, Validators.required),
+          guardiaHora: new FormControl({value:this.guardiaEditandose.getHora(),disabled:true}, Validators.required),
+          aulaGuardia: new FormControl({value:this.guardiaEditandose.getAula(),disabled:true}, Validators.required),
+          infoGuardia: new FormControl({value:this.guardiaEditandose.getDescripcion(), disabled:true}),
+          cursoGuardia: new FormControl({value:numCurso,disabled:true}, Validators.required),
+          letraCurso:new FormControl({value:letra,disabled:true}, Validators.required),
+      incidencia:new FormControl({value:this.guardiaEditandose.getIncidenciaTexto(),disabled:true}, Validators.required)
+
         }, { updateOn: "submit" });
     
-        }else{
+        }else if(this.rol == "Admin" && this.guardiaEditandose.getEstado() == "Pendiente"){
           let fecha = this.guardiaEditandose.getFecha().toString().replaceAll("/","-");
 
          let  prueba = this.guardiaEditandose.getCurso().split("-");
-         console.log(this.guardiaEditandose.getCurso());
 
-            console.log(prueba);
          let letra = prueba[prueba.length-1].trim()
          let numCurso = ""
-      
+         console.log(prueba[0].length)
          if(prueba.length > 2){
           numCurso  = prueba[0].charAt(0) + prueba[1].trim()
 
          }else{
           if(prueba[0].length == 5){
             numCurso = prueba[0].charAt(0)
-          }else if(prueba[0].length == 6){
+          }else if(prueba[0].length == 12){
             numCurso = prueba[0].charAt(0) + "B"
 
           }else{
@@ -151,9 +175,47 @@ export class EditarGuardiaComponent implements OnInit {
             aulaGuardia: new FormControl(this.guardiaEditandose.getAula(), Validators.required),
             infoGuardia: new FormControl(this.guardiaEditandose.getDescripcion()),
             cursoGuardia: new FormControl(numCurso, Validators.required),
-            letraCurso:new FormControl(letra, Validators.required)
+            letraCurso:new FormControl(letra, Validators.required),
+      incidencia:new FormControl({value:this.guardiaEditandose.getIncidenciaTexto(),disabled:true}, Validators.required)
+
           }, { updateOn: "submit" });
     
+        }else{
+          let fecha = this.guardiaEditandose.getFecha().toString().replaceAll("/","-");
+
+          let  prueba = this.guardiaEditandose.getCurso().split("-");
+ 
+          let letra = prueba[prueba.length-1].trim()
+          let numCurso = ""
+          console.log(prueba[0].length)
+          if(prueba.length > 2){
+           numCurso  = prueba[0].charAt(0) + prueba[1].trim()
+ 
+          }else{
+           if(prueba[0].length == 5){
+             numCurso = prueba[0].charAt(0)
+           }else if(prueba[0].length == 12){
+             numCurso = prueba[0].charAt(0) + "B"
+ 
+           }else{
+             numCurso = prueba[0].charAt(0) + "FPB"
+             
+           }
+          }
+ 
+           console.log(fecha);
+           this.changeCursoGuardiaInicio(numCurso);
+           this.createOnCallForm = new FormGroup({
+            profesorCubierto: new FormControl({value:this.guardiaEditandose.getProfesorCubierto(),disabled:true}, Validators.required),
+            guardiaFecha: new FormControl({value:fecha,disabled:true}, Validators.required),
+            guardiaHora: new FormControl({value:this.guardiaEditandose.getHora(),disabled:true}, Validators.required),
+            aulaGuardia: new FormControl({value:this.guardiaEditandose.getAula(),disabled:true}, Validators.required),
+            infoGuardia: new FormControl({value:this.guardiaEditandose.getDescripcion(), disabled:true}),
+            cursoGuardia: new FormControl({value:numCurso,disabled:true}, Validators.required),
+            letraCurso:new FormControl({value:letra,disabled:true}, Validators.required),
+        incidencia:new FormControl(this.guardiaEditandose.getIncidenciaTexto(), Validators.required)
+ 
+           }, { updateOn: "submit" });
         }
       
         });
@@ -422,6 +484,21 @@ export class EditarGuardiaComponent implements OnInit {
       this.guardiaEditandose.setCurso(this.obtenerTextoCurso(this.createOnCallForm.controls["cursoGuardia"].value) + "" + this.obtenerTextoLetra(this.createOnCallForm.controls["letraCurso"].value));
 
      this.guardiaService.updateGuardia(this.guardiaEditandose,dia);
+    }else if(this.rol == "Admin" && this.guardiaEditandose.estado == "Finalizada"){
+
+    }else{
+      if(this.createOnCallForm.controls["incidencia"].value != "Sin incidencia"){
+        let dateSelectedMilisec = this.createOnCallForm.get("guardiaFecha")?.value;
+        const fecha = new Date(dateSelectedMilisec);
+        let dia = fecha.getFullYear() + "/" + this.getMonthofToday(fecha.getMonth()) + "/" + this.getDayofToday(fecha.getDate());
+  
+      this.guardiaEditandose.setIncidenciaTexto(this.createOnCallForm.controls["incidencia"].value); 
+  
+      this.guardiaEditandose.setIncidencia(true);
+       this.guardiaService.updateGuardia(this.guardiaEditandose,dia);
+       
+      }
+   
     }
 
 
