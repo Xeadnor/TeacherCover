@@ -125,7 +125,7 @@ export class EditarGuardiaComponent implements OnInit {
          if(prueba[0].length == 6){
            numCurso = prueba[0].charAt(0)
          }else if(prueba[0].length == 12){
-          if(prueba[0].charAt(prueba[0].length) ==  "r"){
+          if(prueba[0].charAt(prueba[0].length -1) ==  "r"){
             numCurso = prueba[0].charAt(0) + "B"
           }else{
            numCurso = prueba[0].charAt(0) + "FPB"
@@ -133,10 +133,10 @@ export class EditarGuardiaComponent implements OnInit {
           }
          }
         }
+       
         this.changeCursoGuardiaInicio(numCurso);
 
-        console.log(this.guardiaEditandose.getProfesorCubierto());
-        console.log(this.profes);
+  
         this.createOnCallForm = new FormGroup({
           profesorCubierto: new FormControl({value:this.guardiaEditandose.getIdProfesorCubierto(),disabled:true}, Validators.required),
           guardiaFecha: new FormControl({value:fecha,disabled:true}, Validators.required),
@@ -164,7 +164,7 @@ export class EditarGuardiaComponent implements OnInit {
          if(prueba[0].length == 6){
           numCurso = prueba[0].charAt(0)
         }else if(prueba[0].length == 12){
-         if(prueba[0].charAt(prueba[0].length) ==  "r"){
+         if(prueba[0].charAt(prueba[0].length -1) ==  "r"){
            numCurso = prueba[0].charAt(0) + "B"
          }else{
           numCurso = prueba[0].charAt(0) + "FPB"
@@ -172,8 +172,8 @@ export class EditarGuardiaComponent implements OnInit {
          }
         }
          }
-
-                  
+         console.log(prueba)
+         console.log(prueba[0].charAt(prueba[0].length -1));      
           this.changeCursoGuardiaInicio(numCurso);
           this.createOnCallForm = new FormGroup({
             profesorCubierto: new FormControl(this.guardiaEditandose.getIdProfesorCubierto(), Validators.required),
@@ -202,7 +202,7 @@ export class EditarGuardiaComponent implements OnInit {
          if(prueba[0].length == 6){
           numCurso = prueba[0].charAt(0)
         }else if(prueba[0].length == 12){
-         if(prueba[0].charAt(prueba[0].length) ==  "r"){
+         if(prueba[0].charAt(prueba[0].length-1) ==  "r"){
            numCurso = prueba[0].charAt(0) + "B"
          }else{
           numCurso = prueba[0].charAt(0) + "FPB"
@@ -497,6 +497,7 @@ export class EditarGuardiaComponent implements OnInit {
       this.guardiaEditandose.setCurso(this.obtenerTextoCurso(this.createOnCallForm.controls["cursoGuardia"].value) + "" + this.obtenerTextoLetra(this.createOnCallForm.controls["letraCurso"].value));
       this.guardiaEditandose.setIdProfesorCubierto(this.idProfesorCubierto);
      this.guardiaService.updateGuardia(this.guardiaEditandose,dia);
+  this.toastr.success("Se han actualizado con exito la guardia : " + this.guardiaEditandose.getIdGuardia(),"Guardia editada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
     }else if(this.rol == "Admin" && this.guardiaEditandose.estado == "Finalizada"){
 
     }else{

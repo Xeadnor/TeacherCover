@@ -109,10 +109,22 @@ export class HistorialProfesoresComponent implements OnInit{
   this.profesorService.deleteProfesor(profesor.getIdField())
   this.dataSource = new MatTableDataSource<Profesor>(this.datos);
   this.toastr.success("Se ha borrado con exito el profesor: " + profesor.getName(),"Profesor borrado",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
-  this.router.navigate(["/pagina/historialProfesores"]);
-     
+    
+
+  var myModal: any = new (window as any).bootstrap.Modal(
+    document.getElementById("modalDeleteGuardias")
+ );
+ myModal.show()
+  }
+
+  eliminarGuardias(){
+    console.log(this.profesorEliminar.getIdProfesor());
+    (window as any).bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDeleteGuardias')).hide()
+    this.profesorService.deleteGuardias(this.profesorEliminar);
+  this.toastr.success("Se han eliminado todas las guardias de : " + this.profesorEliminar.getName(),"Guardias borradas",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
 
   }
+
   searchFormInit() {
     this.searchForm = new FormGroup({
       id: new FormControl(''),

@@ -106,6 +106,16 @@ export class ProfesorService {
 
     }
 
+    async deleteGuardias(profesor: Profesor){
+    const db = getFirestore();
+
+      const q = query(collection(db, "guardias"),where("profesor", "==",profesor.getIdProfesor()));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach(async (doc) => {
+       
+          this.guardiaService.deleteGuardia(doc.id);
+      });
+    }
 
     updateCode(idField: String, code : String) {
       const db = getFirestore();
@@ -153,15 +163,7 @@ export class ProfesorService {
        setDoc(profesorRef,data, { merge:true})
         .then(async docRef => {
 
-          const q = query(collection(db, "guardias"),where("idProfesorCubierto", "==",profesor.getIdProfesor()));
-          const querySnapshot = await getDocs(q);
-          querySnapshot.forEach(async (doc) => {
-              let guardia = new Guardia();
-              guardia.setIdField(doc.id);
-              guardia.setProfesorCubierto(profesor.getName())
-          
-            this.guardiaService.updateGuardiaName(guardia)
-          });
+
 
 
           const q2 = query(collection(db, "guardias"),where("profesor", "==",profesor.getIdProfesor()));
