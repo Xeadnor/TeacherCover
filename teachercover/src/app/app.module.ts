@@ -96,9 +96,6 @@ const appRoutes: Routes = [
       { path: "editarProfesor/:id", component: EditarProfesorComponent},
       { path: "editarGuardia/:idGuardia", component: EditarGuardiaComponent},
       { path: "seleccionarGuardia/:tipo/:hora", component: SeleccionarGuardiaComponent},
-
-
-
     ],
   },
   {path:"recover-password",component: RecoverPasswordComponent},
@@ -123,7 +120,7 @@ const appRoutes: Routes = [
     CrearGuardiaComponent,
     EditarProfesorComponent,
     SeleccionarGuardiaComponent,
-    EditarGuardiaComponent,
+    EditarGuardiaComponent
 
   ],
   imports: [

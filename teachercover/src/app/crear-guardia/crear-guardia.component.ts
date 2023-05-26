@@ -66,7 +66,7 @@ export class CrearGuardiaComponent implements OnInit {
     this.generalService.getAulas().subscribe(aulas => {
       this.aulas.splice(0)
       aulas.forEach((aula) => {
-   
+
         this.aulas.push(aula["nombre"]);
 
       })
@@ -116,7 +116,7 @@ export class CrearGuardiaComponent implements OnInit {
 
   changeCursoGuardia(e: any) {
     this.cursoGuardia = e.target.value
-  
+
     this.letras.splice(0);
     if (this.cursoGuardia == "1" || this.cursoGuardia == "2" ||
       this.cursoGuardia == "3" || this.cursoGuardia == "4" ||
@@ -358,7 +358,7 @@ export class CrearGuardiaComponent implements OnInit {
               guardia.setHora(this.guardiaHora);
               guardia.setHoraGuardia(this.obtenerTextoHora("" + this.guardiaHora));
               guardia.setDia(this.obtenerDiaSemana(fecha));
-    
+
               if (descripcion == null) {
                 descripcion = "No hay información adicional"
               }
@@ -377,7 +377,7 @@ export class CrearGuardiaComponent implements OnInit {
               setTimeout(() => {
                 // Recargar la página
               window.location.reload();
-              }, 3000);
+              }, 1500);
 
             });
 
