@@ -32,12 +32,13 @@ export class CrearGuardiaComponent implements OnInit {
   cursoGuardia: string;
   letraCurso: string;
   nombreProfesor: string;
+  idProfesorCubierto: number;
   profesor: number;
   tipo: string;
   faltaNombre: boolean;
   faltaAula: boolean;
   estado: string;
-  profes: string[] = [];
+  profes: Profesor[] = [];
   aulas: string[] = [];
   letras: string[] = []
 
@@ -57,7 +58,7 @@ export class CrearGuardiaComponent implements OnInit {
       this.profes.splice(0)
       profesores.forEach((profesor) => {
         if (profesor["role"] != "Admin") {
-          this.profes.push(profesor["name"]);
+          this.profes.push(profesor);
 
         }
 
@@ -100,7 +101,7 @@ export class CrearGuardiaComponent implements OnInit {
   search(value: string) {
     let filter = value.toLowerCase();
     return this.profes.filter(option =>
-      option.toLowerCase().startsWith(filter)
+      option.name.toLowerCase().startsWith(filter)
     );
   }
 
@@ -138,8 +139,13 @@ export class CrearGuardiaComponent implements OnInit {
 
   }
   changeNombreProfe(e: any) {
+    this.idProfesorCubierto = e.value;
+    for(let profe of this.profes){
+      if(e.value == profe.id){
+        this.nombreProfesor = profe.name;
 
-    this.nombreProfesor = e.value
+      }
+    }
   }
   changeAula(e: any) {
 
@@ -352,14 +358,18 @@ export class CrearGuardiaComponent implements OnInit {
             this.createOnCallForm.markAsUntouched();
             let newId = this.guardiaService.getNewId();
             newId.then(async (id) => {
+              if(id == 0){
+                id++
+              }
               guardia.setIdGuardia(id);
               guardia.setEstado("Pendiente");
               guardia.setFecha(fecha);
+              guardia.setIdProfesorCubierto(this.idProfesorCubierto);
               guardia.setHora(this.guardiaHora);
               guardia.setHoraGuardia(this.obtenerTextoHora("" + this.guardiaHora));
               guardia.setDia(this.obtenerDiaSemana(fecha));
-
-              if (descripcion == null) {
+    
+              if (descripcion == null || descripcion.length == 0) {
                 descripcion = "No hay información adicional"
               }
               guardia.setDescripcion(descripcion);

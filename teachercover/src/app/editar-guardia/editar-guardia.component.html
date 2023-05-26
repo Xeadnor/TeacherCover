@@ -8,7 +8,7 @@
             <mat-form-field class="example-form-field">
               <mat-select (selectionChange)="changeNombreProfe($event)" formControlName="profesorCubierto" [class.is-invalid]="localForm.submitted && createOnCallForm.get('profesorCubierto')?.invalid">
                 <input placeholder="Buscar..."  type="text" (keyup)="onKey($event)" class="example-input form-control form-control-lg">
-                <mat-option *ngFor="let profe of nombresProfes"  [value]="profe">{{profe}}</mat-option>
+                <mat-option *ngFor="let profe of nombresProfes"  [value]="profe.id">{{profe.name}}</mat-option>
               </mat-select>
             </mat-form-field>
             

@@ -61,7 +61,8 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy  {
        this.guardiaService.getGuardiasPendientes(dia,parseInt(this.hora)).subscribe(guardias => {
         this.datos.splice(0)
         guardias.forEach((guardia) => {
-          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idFIeld"], guardia["profesorCubierto"],guardia["tipo"]));
+          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"],guardia["idProfesorCubierto"], guardia["idFIeld"], guardia["profesorCubierto"],guardia["tipo"],guardia["incidencia"],guardia["incidenciaTexto"]));
+         
 
         })
       });

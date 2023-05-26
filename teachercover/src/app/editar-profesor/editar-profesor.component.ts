@@ -44,7 +44,7 @@ export class EditarProfesorComponent implements OnInit, OnDestroy {
     }
 
     this.editTeacherForm = new FormGroup({
-      nombreProf: new FormControl({value:"",disabled:true}, Validators.required),
+      nombreProf: new FormControl("", Validators.required),
       horasGuardias: new FormControl("", Validators.required),
       lunesGuardia: new FormControl("", Validators.required),
       martesGuardia: new FormControl("", Validators.required),

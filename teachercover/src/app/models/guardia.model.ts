@@ -10,14 +10,15 @@ export class Guardia {
   curso: string;
   nombreProfesor: string;
   profesor: number;
+  idProfesorCubierto: number;
   idField: string;
   profesorCubierto: string;
   tipo: string;
   incidencia: boolean;
   incidenciaTexto : string;
 
-  constructor(horaGuardia?: string, fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number, idField?: string, profesorCubierto?:string, tipo?:string, incidencia?:boolean, incidenciaTexto?:string) {
-    if (horaGuardia && dia && hora && descripcion && estado && idGuardia && aula && profesor && curso && nombreProfesor && fecha && idField && profesorCubierto && tipo && incidenciaTexto) {
+  constructor(horaGuardia?: string, fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number,idProfesorCubierto?:number, idField?: string, profesorCubierto?:string, tipo?:string, incidencia?:boolean, incidenciaTexto?:string) {
+    if (horaGuardia && dia && hora && descripcion && estado && idGuardia && aula && profesor && idProfesorCubierto && curso && nombreProfesor && fecha && idField && profesorCubierto && tipo && incidenciaTexto) {
       this.idGuardia = idGuardia
       this.estado = estado
       this.fecha = fecha;
@@ -28,6 +29,7 @@ export class Guardia {
       this.descripcion = descripcion
       this.aula = aula
       this.profesor = profesor
+      this.idProfesorCubierto = idProfesorCubierto;
       this.nombreProfesor = nombreProfesor
       this.curso = curso
       this.profesorCubierto = profesorCubierto
@@ -64,6 +66,9 @@ export class Guardia {
   }
   getProfesor() {
     return this.profesor
+  }
+  getIdProfesorCubierto(){
+    return this.idProfesorCubierto
   }
   getCurso() {
     return this.curso
@@ -108,6 +113,9 @@ export class Guardia {
   }
   setDia(dia: string) {
     this.dia = dia
+  }
+  setIdProfesorCubierto(idProfesorCubierto:number){
+    this.idProfesorCubierto = idProfesorCubierto;
   }
   setProfesor(profesor: number) {
     this.profesor = profesor

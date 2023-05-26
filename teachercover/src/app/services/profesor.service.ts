@@ -4,6 +4,8 @@ import { Profesor } from '../models/profesor.model';
 import { Observable } from 'rxjs';
 import { query, where, getDocs, getFirestore, orderBy, limit, deleteDoc, getDoc } from "firebase/firestore";
 import { doc, updateDoc } from "firebase/firestore";
+import { GuardiaService } from './guardia.service';
+import { Guardia } from 'app/models/guardia.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ import { doc, updateDoc } from "firebase/firestore";
 export class ProfesorService {
 
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore, private guardiaService: GuardiaService) { }
 
 
   getProfesors(): Observable<Profesor[]>{
@@ -121,7 +123,7 @@ export class ProfesorService {
 
       }
 
-      updateTeacher(profesor: Profesor) {
+       updateTeacher(profesor: Profesor) {
         const db = getFirestore();
         const profesorRef = doc(db,"profesores",profesor.getIdField());
 
@@ -148,8 +150,30 @@ export class ProfesorService {
           },
         }
 
-        setDoc(profesorRef,data, { merge:true})
-        .then(docRef => {
+       setDoc(profesorRef,data, { merge:true})
+        .then(async docRef => {
+
+          const q = query(collection(db, "guardias"),where("idProfesorCubierto", "==",profesor.getIdProfesor()));
+          const querySnapshot = await getDocs(q);
+          querySnapshot.forEach(async (doc) => {
+              let guardia = new Guardia();
+              guardia.setIdField(doc.id);
+              guardia.setProfesorCubierto(profesor.getName())
+          
+            this.guardiaService.updateGuardiaName(guardia)
+          });
+
+
+          const q2 = query(collection(db, "guardias"),where("profesor", "==",profesor.getIdProfesor()));
+          const querySnapshot2 = await getDocs(q2);
+          querySnapshot2.forEach(async (doc) => {
+              let guardia = new Guardia();
+              guardia.setIdField(doc.id);
+              guardia.setNombreProfesor(profesor.getName())
+          
+            this.guardiaService.updateGuardiaNameT(guardia)
+          });
+
         })
         .catch(error =>{
         })

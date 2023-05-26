@@ -31,11 +31,12 @@ export class EditarGuardiaComponent implements OnInit {
   letraCurso: string;
   nombreProfesor: string;
   profesor: number;
+  idProfesorCubierto: number;
   tipo: string;
   faltaNombre: boolean;
   faltaAula: boolean;
   estado: string;
-  profes: string[] = [];
+  profes: Profesor[] = [];
   aulas: string[] = [];
   letras: string[] = []
   private sub: any;
@@ -64,7 +65,7 @@ export class EditarGuardiaComponent implements OnInit {
       this.profes.splice(0)
       profesores.forEach((profesor) => {
         if (profesor["role"] != "Admin") {
-          this.profes.push(profesor["name"]);
+          this.profes.push(profesor);
 
         }
 
@@ -102,6 +103,7 @@ export class EditarGuardiaComponent implements OnInit {
       this.guardiaEditandose.setNombreProfesor(value!["nombreProfesor"]);
       this.guardiaEditandose.setProfesor(value!["profesor"]);
       this.guardiaEditandose.setTipo(value!["tipo"]);
+      this.guardiaEditandose.setIdProfesorCubierto(value!["idProfesorCubierto"])
 
 
 
@@ -115,24 +117,28 @@ export class EditarGuardiaComponent implements OnInit {
         let letra = prueba[prueba.length-1].trim()
         let numCurso = ""
      
-     
+        
         if(prueba.length > 2){
          numCurso  = prueba[0].charAt(0) + prueba[1].trim()
 
         }else{
-         if(prueba[0].length == 5){
+         if(prueba[0].length == 6){
            numCurso = prueba[0].charAt(0)
          }else if(prueba[0].length == 12){
-           numCurso = prueba[0].charAt(0) + "B"
-
-         }else{
+          if(prueba[0].charAt(prueba[0].length) ==  "r"){
+            numCurso = prueba[0].charAt(0) + "B"
+          }else{
            numCurso = prueba[0].charAt(0) + "FPB"
-           
+
+          }
          }
         }
+        this.changeCursoGuardiaInicio(numCurso);
 
+        console.log(this.guardiaEditandose.getProfesorCubierto());
+        console.log(this.profes);
         this.createOnCallForm = new FormGroup({
-          profesorCubierto: new FormControl({value:this.guardiaEditandose.getProfesorCubierto(),disabled:true}, Validators.required),
+          profesorCubierto: new FormControl({value:this.guardiaEditandose.getIdProfesorCubierto(),disabled:true}, Validators.required),
           guardiaFecha: new FormControl({value:fecha,disabled:true}, Validators.required),
           guardiaHora: new FormControl({value:this.guardiaEditandose.getHora(),disabled:true}, Validators.required),
           aulaGuardia: new FormControl({value:this.guardiaEditandose.getAula(),disabled:true}, Validators.required),
@@ -150,26 +156,27 @@ export class EditarGuardiaComponent implements OnInit {
 
          let letra = prueba[prueba.length-1].trim()
          let numCurso = ""
-         console.log(prueba[0].length)
          if(prueba.length > 2){
           numCurso  = prueba[0].charAt(0) + prueba[1].trim()
 
          }else{
-          if(prueba[0].length == 5){
-            numCurso = prueba[0].charAt(0)
-          }else if(prueba[0].length == 12){
-            numCurso = prueba[0].charAt(0) + "B"
+          
+         if(prueba[0].length == 6){
+          numCurso = prueba[0].charAt(0)
+        }else if(prueba[0].length == 12){
+         if(prueba[0].charAt(prueba[0].length) ==  "r"){
+           numCurso = prueba[0].charAt(0) + "B"
+         }else{
+          numCurso = prueba[0].charAt(0) + "FPB"
 
-          }else{
-            numCurso = prueba[0].charAt(0) + "FPB"
-            
-          }
+         }
+        }
          }
 
-          console.log(fecha);
+                  
           this.changeCursoGuardiaInicio(numCurso);
           this.createOnCallForm = new FormGroup({
-            profesorCubierto: new FormControl(this.guardiaEditandose.getProfesorCubierto(), Validators.required),
+            profesorCubierto: new FormControl(this.guardiaEditandose.getIdProfesorCubierto(), Validators.required),
             guardiaFecha: new FormControl(fecha, Validators.required),
             guardiaHora: new FormControl(this.guardiaEditandose.getHora(), Validators.required),
             aulaGuardia: new FormControl(this.guardiaEditandose.getAula(), Validators.required),
@@ -187,26 +194,27 @@ export class EditarGuardiaComponent implements OnInit {
  
           let letra = prueba[prueba.length-1].trim()
           let numCurso = ""
-          console.log(prueba[0].length)
           if(prueba.length > 2){
            numCurso  = prueba[0].charAt(0) + prueba[1].trim()
  
           }else{
-           if(prueba[0].length == 5){
-             numCurso = prueba[0].charAt(0)
-           }else if(prueba[0].length == 12){
-             numCurso = prueba[0].charAt(0) + "B"
- 
-           }else{
-             numCurso = prueba[0].charAt(0) + "FPB"
-             
-           }
+          
+         if(prueba[0].length == 6){
+          numCurso = prueba[0].charAt(0)
+        }else if(prueba[0].length == 12){
+         if(prueba[0].charAt(prueba[0].length) ==  "r"){
+           numCurso = prueba[0].charAt(0) + "B"
+         }else{
+          numCurso = prueba[0].charAt(0) + "FPB"
+
+         }
+        }
           }
  
-           console.log(fecha);
+           
            this.changeCursoGuardiaInicio(numCurso);
            this.createOnCallForm = new FormGroup({
-            profesorCubierto: new FormControl({value:this.guardiaEditandose.getProfesorCubierto(),disabled:true}, Validators.required),
+            profesorCubierto: new FormControl({value:this.guardiaEditandose.getIdProfesorCubierto(),disabled:true}, Validators.required),
             guardiaFecha: new FormControl({value:fecha,disabled:true}, Validators.required),
             guardiaHora: new FormControl({value:this.guardiaEditandose.getHora(),disabled:true}, Validators.required),
             aulaGuardia: new FormControl({value:this.guardiaEditandose.getAula(),disabled:true}, Validators.required),
@@ -243,7 +251,7 @@ export class EditarGuardiaComponent implements OnInit {
   search(value: string) {
     let filter = value.toLowerCase();
     return this.profes.filter(option =>
-      option.toLowerCase().startsWith(filter)
+      option.name.toLowerCase().startsWith(filter)
     );
   }
 
@@ -304,8 +312,13 @@ export class EditarGuardiaComponent implements OnInit {
 
   }
   changeNombreProfe(e: any) {
+    this.idProfesorCubierto = e.value;
+    for(let profe of this.profes){
+      if(e.value == profe.id){
+        this.nombreProfesor = profe.name;
 
-    this.nombreProfesor = e.value
+      }
+    }
   }
   changeAula(e: any) {
 
@@ -477,12 +490,12 @@ export class EditarGuardiaComponent implements OnInit {
       const fecha = new Date(dateSelectedMilisec);
       let dia = fecha.getFullYear() + "/" + this.getMonthofToday(fecha.getMonth()) + "/" + this.getDayofToday(fecha.getDate());
 
-      this.guardiaEditandose.setProfesorCubierto( this.createOnCallForm.controls["profesorCubierto"].value);
+      this.guardiaEditandose.setProfesorCubierto(this.nombreProfesor);
     this.guardiaEditandose.setAula( this.createOnCallForm.controls["aulaGuardia"].value);
      this.guardiaEditandose.setHora( this.createOnCallForm.controls["guardiaHora"].value);
      this.guardiaEditandose.setDescripcion( this.createOnCallForm.controls["infoGuardia"].value);
       this.guardiaEditandose.setCurso(this.obtenerTextoCurso(this.createOnCallForm.controls["cursoGuardia"].value) + "" + this.obtenerTextoLetra(this.createOnCallForm.controls["letraCurso"].value));
-
+      this.guardiaEditandose.setIdProfesorCubierto(this.idProfesorCubierto);
      this.guardiaService.updateGuardia(this.guardiaEditandose,dia);
     }else if(this.rol == "Admin" && this.guardiaEditandose.estado == "Finalizada"){
 

@@ -93,6 +93,7 @@ export class GuardiaService {
       tipo: guardia.getTipo(),
       incidencia: guardia.getIncidencia(),
       incidenciaTexto: guardia.getIncidenciaTexto(),
+      idProfesorCubierto: guardia.getIdProfesorCubierto()
     };
    addDoc(dbRef, data)
    .then(docRef => {
@@ -111,7 +112,8 @@ export class GuardiaService {
   updateGuardia(guardia : Guardia,dia: String){
     const db = getFirestore();
     const dbRef = doc(db, "guardias",guardia.getIdField());
-
+      console.log("e?")
+      console.log(guardia.getIdProfesorCubierto());
     const data = {
       aula: guardia.getAula(),
       curso: guardia.getCurso(),
@@ -128,6 +130,9 @@ export class GuardiaService {
       tipo: guardia.getTipo(),
       incidencia: guardia.getIncidencia(),
       incidenciaTexto: guardia.getIncidenciaTexto(),
+      idProfesorCubierto: Number(guardia.getIdProfesorCubierto())
+      
+
     };
     setDoc(dbRef,data, { merge:true})
    .then(docRef => {
@@ -139,5 +144,43 @@ export class GuardiaService {
 
   }
 
+  updateGuardiaName(guardia : Guardia){
+    const db = getFirestore();
+    const dbRef = doc(db, "guardias",guardia.getIdField());
+
+    
+
+    const data = {
+      profesorCubierto: guardia.getProfesorCubierto(),
+    };
+    setDoc(dbRef,data, { merge:true})
+   
+   .then(docRef => {
+   
+   })
+   .catch(error => {
+    console.log(error)
+   })
+
+  }
+  updateGuardiaNameT(guardia : Guardia){
+    const db = getFirestore();
+    const dbRef = doc(db, "guardias",guardia.getIdField());
+
+    
+
+    const data = {
+      nombreProfesor: guardia.getNombreProfesor(),
+    };
+    setDoc(dbRef,data, { merge:true})
+   
+   .then(docRef => {
+   
+   })
+   .catch(error => {
+    console.log(error)
+   })
+
+  }
 
 }

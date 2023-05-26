@@ -72,7 +72,7 @@ export class HistorialGuardiasComponent implements OnInit {
       this.guardiaService.getGuardiasByUser(profesor["id"]).subscribe(guardias => {
         this.datos.splice(0)
         guardias.forEach((guardia) => {
-          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idFIeld"], guardia["profesorCubierto"],guardia["tipo"],guardia["incidencia"],guardia["incidenciaTexto"]));
+          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"],guardia["idProfesorCubierto"], guardia["idFIeld"], guardia["profesorCubierto"],guardia["tipo"],guardia["incidencia"],guardia["incidenciaTexto"]));
 
         })
 
@@ -90,7 +90,7 @@ export class HistorialGuardiasComponent implements OnInit {
       this.guardiaService.getGuardias().subscribe(guardias => {
         this.datos.splice(0)
         guardias.forEach((guardia) => {
-          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"], guardia["idField"], guardia["profesorCubierto"],guardia["tipo"],guardia["incidencia"],guardia["incidenciaTexto"]));
+          this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"],guardia["idProfesorCubierto"], guardia["idField"], guardia["profesorCubierto"],guardia["tipo"],guardia["incidencia"],guardia["incidenciaTexto"]));
 
         })
         this.dataSource = new MatTableDataSource<Guardia>(this.datos);
@@ -137,7 +137,7 @@ export class HistorialGuardiasComponent implements OnInit {
     this.profesorService.removeGuardia(guardia.getProfesor());
   }
   this.dataSource = new MatTableDataSource<Guardia>(this.datos);
-  this.toastr.success("Se ha borrado con exito la guardia: " + guardia.getIdField(),"Guardia borrada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
+  this.toastr.success("Se ha borrado con exito la guardia: " + guardia.getIdGuardia(),"Guardia borrada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
   this.router.navigate(["/pagina/historial"]);
      
 
