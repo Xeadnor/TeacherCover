@@ -22,9 +22,9 @@ import { ToastrService } from 'ngx-toastr';
   ]
 })
 export class ListarIncidenciasComponent {
-  columnas: string[] = ['idIncidencia', 'idGuardia', 'fecha', 'nombreProfesor','profesorCubierto', 'curso', 'aula', 'horaGuardia', 'incidenciaTexto'];
+  columnas: string[] = ['idIncidencia', 'idGuardia', 'fecha', 'nombreProfesor', 'profesorCubierto', 'curso', 'aula', 'horaGuardia', 'incidenciaTexto', 'opciones'];
   rol: string;
-  constructor(private route: ActivatedRoute,public dialog: MatDialog,private router: Router,private profesorService: ProfesorService,private guardiaService: GuardiaService, private toastr: ToastrService, private auth: AuthService) { };
+  constructor(private route: ActivatedRoute, public dialog: MatDialog, private router: Router, private profesorService: ProfesorService, private guardiaService: GuardiaService, private toastr: ToastrService, private auth: AuthService) { };
   datos: Guardia[] = [];
   dataSource: any;
   mostrarTabla: boolean;
@@ -43,18 +43,17 @@ export class ListarIncidenciasComponent {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   ngOnInit() {
-    console.log("holiiiiiiiiiiiiiiiiiiiiiii")
     let userJson = sessionStorage.getItem('profesor');
     let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
-
     if (profesor["role"] == "User") {
-        this.router.navigate(["/pagina/calendario"]);
+      this.router.navigate(["/pagina/calendario"]);
     } else {
       this.mostrarTabla = true;
       this.guardiaService.getGuardias().subscribe(guardias => {
         guardias.forEach((guardia) => {
-          console.log(guardia, "guaardiaaaaaa")
-          if(guardia.incidencia){
+          if (guardia.incidencia) {
+            console.log(guardia, "guaardiaaaaaa trueeee")
+
             let guard = new Guardia();
             guard.setIdGuardia(guardia["idGuardia"]);
             guard.setFecha(guardia["fecha"]);
@@ -68,12 +67,18 @@ export class ListarIncidenciasComponent {
             if (!this.datos.find(item => item.idGuardia === guard.getIdGuardia())) { // search by id
               this.datos.push(guard);
             }
+          } else {
+            console.log("GUARDIA SIN INCIDENCIA")
           }
 
-
         })
+        console.log(this.dataSource, "datasoruceeeeeeeeeeeeeeeeeee 0")
+
         this.dataSource.sort = this.sort;
+        console.log(this.sort, "datasoruceeeeeeeeeeeeeeeeeee 1")
         this.dataSource.paginator = this.paginator;
+        console.log(this.paginator, "datasoruceeeeeeeeeeeeeeeeeee 2")
+
 
         this.searchFormInit();
 
@@ -96,7 +101,7 @@ export class ListarIncidenciasComponent {
       idIncidencia: new FormControl(''),
       idGuardia: new FormControl(''),
       fecha: new FormControl(''),
-      nombreProfesor : new FormControl(''),
+      nombreProfesor: new FormControl(''),
       profesorCubierto: new FormControl(''),
       curso: new FormControl(''),
       aula: new FormControl(''),
@@ -175,7 +180,7 @@ export class ListarIncidenciasComponent {
       const customFilterPC = columnProfesorCubierto.toString().toLowerCase().includes(profesorCubierto);
       const customFilterCU = columncurso.toLowerCase().includes(curso);
       const customFilterAU = columnAula.toString().toLowerCase().includes(aula);
-      const customFilterHG= columnHoraGuardia.toString().toLowerCase().includes(horaGuardia);
+      const customFilterHG = columnHoraGuardia.toString().toLowerCase().includes(horaGuardia);
       const customFilterIT = columnIncidenciaTexto.toString().toLowerCase().includes(incidenciaTexto);
 
 

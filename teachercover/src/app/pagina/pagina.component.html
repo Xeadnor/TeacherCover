@@ -3,7 +3,7 @@
 
   <div class="row p-0 m-0 mb-3">
 
-    <div class="shadow d-none d-lg-block flex-shrink-0 p-3 colorcito col-2 bordes" >
+    <div class="shadow d-none d-lg-block flex-shrink-0 p-3 colorcito col-2 bordes">
       <p class="d-flex align-items-center pb-3 mb-3 mt-3 text-decoration-none border-bottom">
         <img class="bi me-2" width="30" height="24" src="favicon.ico" />
         <span class="fs-5 fw-semibold">Menú</span>
@@ -11,12 +11,12 @@
       <ul class="list-unstyled ps-0">
         <li class="mb-1">
 
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li><a href="#" [routerLink]="['./calendario']" class="link-dark rounded">Día actual</a></li>
-              <li><a href="#" [routerLink]="['./historial']" class="link-dark rounded">Historial</a></li>
-              <li><a href="#" [routerLink]="['./calendarioSemanal']" class="link-dark rounded">Calendario semanal</a>
-              </li>
-              </ul>
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" [routerLink]="['./calendario']" class="link-dark rounded">Día actual</a></li>
+            <li><a href="#" [routerLink]="['./historial']" class="link-dark rounded">Historial</a></li>
+            <li><a href="#" [routerLink]="['./calendarioSemanal']" class="link-dark rounded">Calendario semanal</a>
+            </li>
+          </ul>
 
         </li>
 
@@ -130,22 +130,22 @@
               (click)="hideDatos()" aria-label="Close"></button>
           </div>
         </div>
-          <table class="table" style="border:none">
-            <thead>
-              <tr class="text-center">
-                <th class="col-2">Rol</th>
-                <th class="col-2">Guardias Realizadas</th>
-                <th class="col-2">Notificaciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="text-center">
-                <th>{{ rol }}</th>
-                <td>{{ horasGuardias }} horas</td>
-                <td>Ninguna</td>
-              </tr>
-            </tbody>
-          </table>
+        <table class="table" style="border:none">
+          <thead>
+            <tr class="text-center">
+              <th class="col-2">Rol</th>
+              <th class="col-2">Guardias Realizadas</th>
+              <th class="col-2">Notificaciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center">
+              <th>{{ rol }}</th>
+              <td>{{ horasGuardias }} horas</td>
+              <td>Ninguna</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <div class="dividor mt-3" style="background-color: #e7fdff;"></div>

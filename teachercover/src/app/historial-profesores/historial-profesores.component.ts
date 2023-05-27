@@ -1,24 +1,16 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
-import { MatPaginatorModule } from '@angular/material/paginator'
-import { OnInit, AfterViewInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { CustomPaginator } from '../historial-guardias/CustomPaginator';
 import { MatSort } from '@angular/material/sort';
-import { FormGroup } from '@angular/forms';
-import { ChangeDetectionStrategy } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { from, Observable } from 'rxjs';
-import { distinct, filter, map, mergeMap, startWith, toArray } from 'rxjs/operators';
-import { GuardiaService } from 'app/services/guardia.service';
-import { Guardia } from 'app/models/guardia.model';
-import { DateAdapter } from '@angular/material/core';
-import { Profesor } from 'app/models/profesor.model';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Profesor } from 'app/models/profesor.model';
+import { AuthService } from 'app/services/auth.service';
+import { GuardiaService } from 'app/services/guardia.service';
 import { ProfesorService } from 'app/services/profesor.service';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'app/services/auth.service';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { CustomPaginator } from '../historial-guardias/CustomPaginator';
 
 @Component({
   selector: 'app-historial-profesores',
@@ -28,14 +20,14 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
     { provide: MatPaginatorIntl, useValue: CustomPaginator() }
   ]
 })
-export class HistorialProfesoresComponent implements OnInit{
-  columnas: string[] = ['id', 'email', 'name', 'horasGuardias', "role", "validate","opciones"];
+export class HistorialProfesoresComponent implements OnInit {
+  columnas: string[] = ['id', 'email', 'name', 'horasGuardias', "role", "validate", "opciones"];
   rol: string;
-  constructor(private route: ActivatedRoute,public dialog: MatDialog,private router: Router,private profesorService: ProfesorService,private guardiaService: GuardiaService, private toastr: ToastrService, private auth: AuthService) { };
+  constructor(private route: ActivatedRoute, public dialog: MatDialog, private router: Router, private profesorService: ProfesorService, private guardiaService: GuardiaService, private toastr: ToastrService, private auth: AuthService) { };
   datos: Profesor[] = [];
   dataSource: any;
   mostrarTabla: boolean;
-  profesorEliminar : Profesor;
+  profesorEliminar: Profesor;
   public searchForm: FormGroup;
   public id = '';
   public email = '';
@@ -53,7 +45,7 @@ export class HistorialProfesoresComponent implements OnInit{
     let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
 
     if (profesor["role"] == "User") {
-        this.router.navigate(["/pagina/calendario"]);
+      this.router.navigate(["/pagina/calendario"]);
     } else {
       this.mostrarTabla = true;
       this.profesorService.getProfesors().subscribe(profesores => {
@@ -93,35 +85,35 @@ export class HistorialProfesoresComponent implements OnInit{
   dialogEditar(profesor: Profesor): void {
     this.router.navigate(['/pagina/editarProfesor', profesor["idField"]]);
   }
-  dialogEliminar(profesor: Profesor){
+  dialogEliminar(profesor: Profesor) {
     this.profesorEliminar = profesor;
     var myModal: any = new (window as any).bootstrap.Modal(
       document.getElementById("modalDelete")
-   );
-   myModal.show()
+    );
+    myModal.show()
   }
-  eliminarProfesor(){
+  eliminarProfesor() {
     (window as any).bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDelete')).hide()
     let profesor: Profesor;
     profesor = this.profesorEliminar;
-   this.datos = this.datos.filter(function(el) { return el.id != profesor.getIdProfesor(); });
-   this.datos.splice(profesor.getIdProfesor(), 1 );
-  this.profesorService.deleteProfesor(profesor.getIdField())
-  this.dataSource = new MatTableDataSource<Profesor>(this.datos);
-  this.toastr.success("Se ha borrado con exito el profesor: " + profesor.getName(),"Profesor borrado",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
+    this.datos = this.datos.filter(function (el) { return el.id != profesor.getIdProfesor(); });
+    this.datos.splice(profesor.getIdProfesor(), 1);
+    this.profesorService.deleteProfesor(profesor.getIdField())
+    this.dataSource = new MatTableDataSource<Profesor>(this.datos);
+    this.toastr.success("Se ha borrado con exito el profesor: " + profesor.getName(), "Profesor borrado", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
 
 
-  var myModal: any = new (window as any).bootstrap.Modal(
-    document.getElementById("modalDeleteGuardias")
- );
- myModal.show()
+    var myModal: any = new (window as any).bootstrap.Modal(
+      document.getElementById("modalDeleteGuardias")
+    );
+    myModal.show()
   }
 
-  eliminarGuardias(){
+  eliminarGuardias() {
     console.log(this.profesorEliminar.getIdProfesor());
     (window as any).bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDeleteGuardias')).hide()
     this.profesorService.deleteGuardias(this.profesorEliminar);
-  this.toastr.success("Se han eliminado todas las guardias de : " + this.profesorEliminar.getName(),"Guardias borradas",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
+    this.toastr.success("Se han eliminado todas las guardias de : " + this.profesorEliminar.getName(), "Guardias borradas", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
 
   }
 
@@ -129,19 +121,19 @@ export class HistorialProfesoresComponent implements OnInit{
     this.searchForm = new FormGroup({
       id: new FormControl(''),
       email: new FormControl(''),
-      name : new FormControl(''),
+      name: new FormControl(''),
       horasGuardias: new FormControl(''),
       role: new FormControl(''),
       validate: new FormControl(''),
 
     });
   }
-  comprobarAdmin(profesor : Profesor){
-      if(profesor.getRole() =="Admin"){
-        return true;
-      }else{
-        return false;
-      }
+  comprobarAdmin(profesor: Profesor) {
+    if (profesor.getRole() == "Admin") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   getFilterPredicate() {

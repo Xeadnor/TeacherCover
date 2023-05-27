@@ -15,9 +15,9 @@ export class Guardia {
   profesorCubierto: string;
   tipo: string;
   incidencia: boolean;
-  incidenciaTexto : string;
+  incidenciaTexto: string;
 
-  constructor(horaGuardia?: string, fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number,idProfesorCubierto?:number, idField?: string, profesorCubierto?:string, tipo?:string, incidencia?:boolean, incidenciaTexto?:string) {
+  constructor(horaGuardia?: string, fecha?: Date, dia?: string, hora?: number, descripcion?: string, estado?: string, idGuardia?: number, aula?: string, curso?: string, nombreProfesor?: string, profesor?: number, idProfesorCubierto?: number, idField?: string, profesorCubierto?: string, tipo?: string, incidencia?: boolean, incidenciaTexto?: string) {
     if (horaGuardia && dia && hora && descripcion && estado && idGuardia && aula && profesor && idProfesorCubierto && curso && nombreProfesor && fecha && idField && profesorCubierto && tipo && incidenciaTexto) {
       this.idGuardia = idGuardia
       this.estado = estado
@@ -40,19 +40,19 @@ export class Guardia {
     this.incidencia = incidencia!;
   }
 
-  getIncidencia(){
+  getIncidencia() {
     return this.incidencia;
   }
-  getIncidenciaTexto(){
+  getIncidenciaTexto() {
     return this.incidenciaTexto;
   }
-  getTipo(){
+  getTipo() {
     return this.tipo;
   }
-  getProfesorCubierto(){
+  getProfesorCubierto() {
     return this.profesorCubierto;
   }
-  getFecha(){
+  getFecha() {
     return this.fecha;
   }
   getDia() {
@@ -67,7 +67,7 @@ export class Guardia {
   getProfesor() {
     return this.profesor
   }
-  getIdProfesorCubierto(){
+  getIdProfesorCubierto() {
     return this.idProfesorCubierto
   }
   getCurso() {
@@ -93,28 +93,28 @@ export class Guardia {
     return this.estado;
   }
 
-  setTipo(tipo:string){
+  setTipo(tipo: string) {
     this.tipo = tipo;
   }
-  setIncidencia(incidencia:boolean){
+  setIncidencia(incidencia: boolean) {
     this.incidencia = incidencia
   }
-  setIncidenciaTexto(incidenciaTexto:string){
+  setIncidenciaTexto(incidenciaTexto: string) {
     this.incidenciaTexto = incidenciaTexto
   }
-  setProfesorCubierto(profesorCubierto:string){
+  setProfesorCubierto(profesorCubierto: string) {
     this.profesorCubierto = profesorCubierto;
   }
   setIdField(idField: string) {
     this.idField = idField;
-}
-  setFecha(fecha: Date){
+  }
+  setFecha(fecha: Date) {
     this.fecha = fecha;
   }
   setDia(dia: string) {
     this.dia = dia
   }
-  setIdProfesorCubierto(idProfesorCubierto:number){
+  setIdProfesorCubierto(idProfesorCubierto: number) {
     this.idProfesorCubierto = idProfesorCubierto;
   }
   setProfesor(profesor: number) {

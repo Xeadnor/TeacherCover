@@ -1,4 +1,4 @@
-<div style="overflow-x:auto;" >
+<div style="overflow-x:auto;">
 
   <form [formGroup]="searchForm" class="search__form">
 
@@ -8,29 +8,29 @@
       <ng-container matColumnDef="idIncidencia" sticky>
 
         <th mat-header-cell *matHeaderCellDef matSortDirection="asc">
-          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline" >
-            <input type="text" aria-label="idIncidencia" matInput formControlName="idIncidencia"
-              (keyup)="applyFilter()" placeholder="Buscar por..." >
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
+            <input type="text" aria-label="idIncidencia" matInput formControlName="idIncidencia" (keyup)="applyFilter()"
+              placeholder="Buscar por...">
           </mat-form-field>
           <p mat-sort-header>id Incidencia</p>
         </th>
-        <td ></td>
+        <td></td>
 
       </ng-container>
 
       <ng-container matColumnDef="idGuardia">
 
         <th mat-header-cell *matHeaderCellDef matSortDirection="asc">
-          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline" >
-            <input type="text" aria-label="idGuardia" matInput formControlName="idGuardia"
-              (keyup)="applyFilter()" placeholder="Buscar por..." >
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
+            <input type="text" aria-label="idGuardia" matInput formControlName="idGuardia" (keyup)="applyFilter()"
+              placeholder="Buscar por...">
           </mat-form-field>
           <p mat-sort-header>id Guardia</p>
         </th>
         <td mat-cell *matCellDef="let guardia"> {{guardia.idGuardia}} </td>
 
       </ng-container>
-      <ng-container matColumnDef="fecha" >
+      <ng-container matColumnDef="fecha">
         <th mat-header-cell *matHeaderCellDef style="max-width: 300px!important;">
           <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
             <input type="text" aria-label="fecha" matInput formControlName="fecha" (keyup)="applyFilter()"
@@ -43,11 +43,11 @@
 
       </ng-container>
 
-      <ng-container matColumnDef="nombreProfesor" >
+      <ng-container matColumnDef="nombreProfesor">
         <th mat-header-cell *matHeaderCellDef style="max-width: 300px!important;">
           <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
-            <input type="text" aria-label="nombreProfesor" matInput formControlName="nombreProfesor" (keyup)="applyFilter()"
-              placeholder="Buscar por...">
+            <input type="text" aria-label="nombreProfesor" matInput formControlName="nombreProfesor"
+              (keyup)="applyFilter()" placeholder="Buscar por...">
           </mat-form-field>
           <p mat-sort-header>Profesor de Guardia</p>
 
@@ -55,11 +55,11 @@
         <td mat-cell *matCellDef="let guardia" style="max-width: 300px!important;"> {{guardia.nombreProfesor}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="profesorCubierto" >
+      <ng-container matColumnDef="profesorCubierto">
         <th mat-header-cell *matHeaderCellDef style="max-width: 300px!important;">
           <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
-            <input type="text" aria-label="profesorCubierto" matInput formControlName="profesorCubierto" (keyup)="applyFilter()"
-              placeholder="Buscar por...">
+            <input type="text" aria-label="profesorCubierto" matInput formControlName="profesorCubierto"
+              (keyup)="applyFilter()" placeholder="Buscar por...">
           </mat-form-field>
           <p mat-sort-header>Profesor a cubrir</p>
 
@@ -68,7 +68,7 @@
       </ng-container>
 
 
-      <ng-container matColumnDef="curso" >
+      <ng-container matColumnDef="curso">
         <th mat-header-cell *matHeaderCellDef style="max-width: 300px!important;">
           <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
             <input type="text" aria-label="curso" matInput formControlName="curso" (keyup)="applyFilter()"
@@ -108,8 +108,8 @@
       <ng-container matColumnDef="incidenciaTexto">
         <th mat-header-cell *matHeaderCellDef>
           <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
-            <input type="text" aria-label="incidenciaTexto" matInput formControlName="incidenciaTexto" (keyup)="applyFilter()"
-              placeholder="Buscar por...">
+            <input type="text" aria-label="incidenciaTexto" matInput formControlName="incidenciaTexto"
+              (keyup)="applyFilter()" placeholder="Buscar por...">
           </mat-form-field>
           <p mat-sort-header class="mt-1">Descripción</p>
 
@@ -119,15 +119,17 @@
 
       <ng-container matColumnDef="opciones">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>
-        <td mat-cell *matCellDef="let profesor">
+        <td mat-cell *matCellDef="let guardia">
           <ul class="list-inline m-0">
             <li class="list-inline-item">
-                <button  class="btn editar btn-sm rounded-1" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-eye"></i></button>
+              <button class="btn editar btn-sm rounded-1" type="button" data-toggle="tooltip" data-placement="top"
+                title="Editar"><i class="fa fa-eye"></i></button>
             </li>
             <li class="list-inline-item">
-                <button class="btn eliminar btn-sm rounded-1" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+              <button class="btn eliminar btn-sm rounded-1" type="button" data-toggle="tooltip" data-placement="top"
+                title="Eliminar"><i class="fa fa-trash"></i></button>
             </li>
-        </ul>
+          </ul>
         </td>
       </ng-container>
 
@@ -141,4 +143,3 @@
 </div>
 <mat-paginator class="paginado mat-elevation-z8 shadow-none fixed" [pageSizeOptions]="[10, 20, 40]"
   style="background-color:#d1c4fd;"></mat-paginator>
-
