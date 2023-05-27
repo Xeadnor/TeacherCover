@@ -10,14 +10,14 @@
       </p>
       <ul class="list-unstyled ps-0">
         <li class="mb-1">
-          
+
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
               <li><a href="#" [routerLink]="['./calendario']" class="link-dark rounded">Día actual</a></li>
               <li><a href="#" [routerLink]="['./historial']" class="link-dark rounded">Historial</a></li>
               <li><a href="#" [routerLink]="['./calendarioSemanal']" class="link-dark rounded">Calendario semanal</a>
               </li>
-              </ul>           
-         
+              </ul>
+
         </li>
 
         <!-- OPCIONES DEL ADMINISTRADOR -->
@@ -32,6 +32,7 @@
               <li><a href="#" [routerLink]="['./crearGuardia']" class="link-dark rounded">Crear Guardia</a></li>
               <li><a href="#" [routerLink]="['./historialProfesores']" class="link-dark rounded">Historial
                   Profesores</a></li>
+              <li><a href="#" [routerLink]="['./listarIncidencias']" class="link-dark rounded">Incidencias</a></li>
 
             </ul>
           </div>
@@ -83,6 +84,7 @@
               <li><a href="#" [routerLink]="['./crearGuardia']" class="link-dark rounded">Crear Guardia</a></li>
               <li><a href="#" [routerLink]="['./historialProfesores']" class="link-dark rounded">Historial
                   Profesores</a></li>
+              <li><a href="#" [routerLink]="['./listarIncidencias']" class="link-dark rounded">Incidencias</a></li>
             </ul>
           </div>
 
@@ -124,28 +126,26 @@
           </div>
           <div class="col-1 ps-0 pe-0 border border-2 border-secondary border-top-0 border-end-0 border-start-0">
             <button type="button" class="p-1 btn-close float-end border border-2  btn-danger  rounded-circle"
-              style="background-color:rgba(123, 0, 255, 0.734);border-color:rgb(123, 0, 255)!important"
+              style="background-color:rgba(147, 63, 236, 0.671);border-color:rgb(134, 33, 241)!important"
               (click)="hideDatos()" aria-label="Close"></button>
           </div>
         </div>
-        <table class="table" style="border:none">
-          <thead>
-            <tr class="text-center">
-              <th class="col-2">Rol</th>
-              <th class="col-2">Guardias Realizadas</th>
-              <th class="col-2">-</th>
-              <th class="col-2">Notificaciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="text-center">
-              <th>{{ rol }}</th>
-              <td>{{ horasGuardias }} horas</td>
-              <td>-</td>
-              <td>Ninguna</td>
-            </tr>
-          </tbody>
-        </table>
+          <table class="table" style="border:none">
+            <thead>
+              <tr class="text-center">
+                <th class="col-2">Rol</th>
+                <th class="col-2">Guardias Realizadas</th>
+                <th class="col-2">Notificaciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <th>{{ rol }}</th>
+                <td>{{ horasGuardias }} horas</td>
+                <td>Ninguna</td>
+              </tr>
+            </tbody>
+          </table>
       </div>
 
       <div class="dividor mt-3" style="background-color: #e7fdff;"></div>

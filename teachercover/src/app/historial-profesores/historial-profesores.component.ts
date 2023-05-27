@@ -79,7 +79,7 @@ export class HistorialProfesoresComponent implements OnInit{
 
         this.dataSource.filterPredicate = this.getFilterPredicate()
       });
-      
+
     }
 
     this.dataSource = new MatTableDataSource<Profesor>(this.datos);
@@ -104,12 +104,12 @@ export class HistorialProfesoresComponent implements OnInit{
     (window as any).bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDelete')).hide()
     let profesor: Profesor;
     profesor = this.profesorEliminar;
-   this.datos = this.datos.filter(function(el) { return el.id != profesor.getIdProfesor(); }); 
+   this.datos = this.datos.filter(function(el) { return el.id != profesor.getIdProfesor(); });
    this.datos.splice(profesor.getIdProfesor(), 1 );
   this.profesorService.deleteProfesor(profesor.getIdField())
   this.dataSource = new MatTableDataSource<Profesor>(this.datos);
   this.toastr.success("Se ha borrado con exito el profesor: " + profesor.getName(),"Profesor borrado",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
-    
+
 
   var myModal: any = new (window as any).bootstrap.Modal(
     document.getElementById("modalDeleteGuardias")
@@ -143,7 +143,7 @@ export class HistorialProfesoresComponent implements OnInit{
         return false;
       }
   }
-  
+
   getFilterPredicate() {
     return (row: Profesor, filters: string) => {
       // split string per '$' to array
@@ -199,7 +199,7 @@ export class HistorialProfesoresComponent implements OnInit{
 
   applyFilter() {
     const id = this.searchForm.get('id')!.value;
-    const em = this.searchForm.get('email')!.value;
+    const em = this.searchForm.get('idGuardia')!.value;
     const na = this.searchForm.get('name')!.value;
     const ho = this.searchForm.get('horasGuardias')!.value;
     const ro = this.searchForm.get('role')!.value;

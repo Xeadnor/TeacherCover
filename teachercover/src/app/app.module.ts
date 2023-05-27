@@ -77,6 +77,7 @@ import { HistorialProfesoresComponent } from './historial-profesores/historial-p
 import { EditarProfesorComponent } from './editar-profesor/editar-profesor.component';
 import { SeleccionarGuardiaComponent } from './seleccionar-guardia/seleccionar-guardia.component';
 import { EditarGuardiaComponent } from './editar-guardia/editar-guardia.component';
+import { ListarIncidenciasComponent } from './listar-incidencias/listar-incidencias.component';
 
 
 
@@ -96,6 +97,7 @@ const appRoutes: Routes = [
       { path: "editarProfesor/:id", component: EditarProfesorComponent},
       { path: "editarGuardia/:idGuardia", component: EditarGuardiaComponent},
       { path: "seleccionarGuardia/:tipo/:hora", component: SeleccionarGuardiaComponent},
+      { path: "listarIncidencias", component: ListarIncidenciasComponent},
     ],
   },
   {path:"recover-password",component: RecoverPasswordComponent},
@@ -120,7 +122,8 @@ const appRoutes: Routes = [
     CrearGuardiaComponent,
     EditarProfesorComponent,
     SeleccionarGuardiaComponent,
-    EditarGuardiaComponent
+    EditarGuardiaComponent,
+    ListarIncidenciasComponent
 
   ],
   imports: [
