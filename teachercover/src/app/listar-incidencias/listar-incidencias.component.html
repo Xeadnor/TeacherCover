@@ -3,13 +3,24 @@
   <form [formGroup]="searchForm" class="search__form">
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="mostrarTabla" #tabla1
-      style="background-color:#d1c4fd" matSort matSortActive="id" matSortDirection="desc" matSortDisableClear>
+      style="background-color:#d1c4fd" matSort matSortActive="idIncidencia" matSortDirection="desc" matSortDisableClear>
 
+      <ng-container matColumnDef="idIncidencia" sticky>
 
+        <th mat-header-cell *matHeaderCellDef >
+          <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
+            <input type="text" aria-label="idIncidencia" matInput formControlName="idIncidencia" (keyup)="applyFilter()"
+              placeholder="Buscar por...">
+          </mat-form-field>
+          <p mat-sort-header>id Incidencia</p>
+        </th>
+        <td mat-cell *matCellDef="let guardia; let i = index ">{{i + 1 }}</td>
+
+      </ng-container>
 
       <ng-container matColumnDef="idGuardia">
 
-        <th mat-header-cell *matHeaderCellDef matSortDirection="asc">
+        <th mat-header-cell *matHeaderCellDef >
           <mat-form-field class="search__form_field mt-2" style="width: 100%;height: 40px;" appearance="outline">
             <input type="text" aria-label="idGuardia" matInput formControlName="idGuardia" (keyup)="applyFilter()"
               placeholder="Buscar por...">
@@ -123,7 +134,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columnas; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnas;" style="background-color:#e7e0ff;"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas" style="background-color:#e7e0ff;"></tr>
     </table>
     <div class="footer">
 

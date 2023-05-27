@@ -22,7 +22,7 @@ import { ToastrService } from 'ngx-toastr';
   ]
 })
 export class ListarIncidenciasComponent {
-  columnas: string[] = ['idGuardia', 'fecha', 'nombreProfesor','profesorCubierto', 'curso', 'aula', 'horaGuardia', 'incidenciaTexto'];
+  columnas: string[] = ['idIncidencia','idGuardia', 'fecha', 'nombreProfesor','profesorCubierto', 'curso', 'aula', 'horaGuardia', 'incidenciaTexto'];
   rol: string;
   constructor(private route: ActivatedRoute, public dialog: MatDialog, private router: Router, private profesorService: ProfesorService, private guardiaService: GuardiaService, private toastr: ToastrService, private auth: AuthService) { };
   datos: Guardia[] = [];
@@ -43,6 +43,7 @@ export class ListarIncidenciasComponent {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   ngOnInit() {
+    this.dataSource = new MatTableDataSource([]);
     let userJson = sessionStorage.getItem('profesor');
     let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
     if (profesor["role"] == "User") {
@@ -93,6 +94,7 @@ export class ListarIncidenciasComponent {
 
   searchFormInit() {
     this.searchForm = new FormGroup({
+      idIncidencia: new FormControl(''),
       idGuardia: new FormControl(''),
       fecha: new FormControl(''),
       nombreProfesor: new FormControl(''),
@@ -111,6 +113,7 @@ export class ListarIncidenciasComponent {
   }
 
   applyFilter() {
+    const idI = this.searchForm.get('idIncidencia')!.value;
     const idG = this.searchForm.get('idGuardia')!.value;
     const fe = this.searchForm.get('fecha')!.value;
     const np = this.searchForm.get('nombreProfesor')!.value;
@@ -122,7 +125,7 @@ export class ListarIncidenciasComponent {
 
 
 
-
+    this.idIncidencia = idI === null ? '' : idI;
     this.idGuardia = idG === null ? '' : idG;
     this.fecha = fe === null ? '' : fe;
     this.nombreProfesor = np === null ? '' : np;
@@ -134,7 +137,7 @@ export class ListarIncidenciasComponent {
 
 
     // create string of our searching values and split if by '$'
-    const filterValue =  this.idGuardia + '$' + this.fecha + '$' + this.nombreProfesor + '$' + this.profesorCubierto + '$' + this.curso;
+    const filterValue = this.idIncidencia + '$' + this.idGuardia + '$' + this.fecha + '$' + this.nombreProfesor + '$' + this.profesorCubierto + '$' + this.curso;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
@@ -142,19 +145,21 @@ export class ListarIncidenciasComponent {
     return (row: Guardia, filters: string) => {
       // split string per '$' to array
       const filterArray = filters.split('$');
-      const idGuardia = filterArray[0];
-      const fecha = filterArray[1];
-      const nombreProfesor = filterArray[2];
-      const profesorCubierto = filterArray[3];
-      const curso = filterArray[4];
-      const aula = filterArray[5];
-      const horaGuardia = filterArray[6];
-      const incidenciaTexto = filterArray[7];
+      const idIncidencia = filterArray[0];
+      const idGuardia = filterArray[1];
+      const fecha = filterArray[2];
+      const nombreProfesor = filterArray[3];
+      const profesorCubierto = filterArray[4];
+      const curso = filterArray[5];
+      const aula = filterArray[6];
+      const horaGuardia = filterArray[7];
+      const incidenciaTexto = filterArray[8];
 
 
       const matchFilter = [];
 
       // Fetch data from row
+      const columnIdIncidencia = this.idIncidencia;
       const columnIdGuardia = row.idGuardia;
       const columnFecha = row.fecha;
       const columnNombreProfesor = row.nombreProfesor;
@@ -166,6 +171,8 @@ export class ListarIncidenciasComponent {
 
 
       // verify fetching data by our searching values
+      const customFilterIC = columnIdIncidencia.toString().toLowerCase().includes(idIncidencia);
+
       const customFilterIDG = columnIdGuardia.toString().toLowerCase().includes(idGuardia);
       const customFilterFE = columnFecha.toString().toLowerCase().includes(fecha);
       const customFilterNP = columnNombreProfesor.toLowerCase().includes(nombreProfesor);
@@ -177,6 +184,7 @@ export class ListarIncidenciasComponent {
 
 
       // push boolean values into array
+      matchFilter.push(customFilterIC);
       matchFilter.push(customFilterIDG);
       matchFilter.push(customFilterFE);
       matchFilter.push(customFilterNP);
