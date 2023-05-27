@@ -191,7 +191,7 @@ export class HistorialProfesoresComponent implements OnInit {
 
   applyFilter() {
     const id = this.searchForm.get('id')!.value;
-    const em = this.searchForm.get('idGuardia')!.value;
+    const em = this.searchForm.get('email')!.value;
     const na = this.searchForm.get('name')!.value;
     const ho = this.searchForm.get('horasGuardias')!.value;
     const ro = this.searchForm.get('role')!.value;
