@@ -54,7 +54,6 @@ export class ListarIncidenciasComponent {
         this.datos.splice(0);
         guardias.forEach((guardia) => {
           if(guardia["incidencia"] == true){
-            console.log("hola")
             let guard = new Guardia();
             guard.setIdGuardia(guardia["idGuardia"]);
             guard.setFecha(guardia["fecha"]);
@@ -66,15 +65,11 @@ export class ListarIncidenciasComponent {
             guard.setIncidenciaTexto(guardia["incidenciaTexto"]);
               this.datos.push(guard);
           }
-          
+
 
         })
-        console.log(this.datos);
         this.dataSource.sort = this.sort;
-        console.log(this.sort, "datasoruceeeeeeeeeeeeeeeeeee 1")
         this.dataSource.paginator = this.paginator;
-        console.log(this.paginator, "datasoruceeeeeeeeeeeeeeeeeee 2")
-
 
         this.searchFormInit();
 
@@ -103,14 +98,13 @@ export class ListarIncidenciasComponent {
       aula: new FormControl(''),
       horaGuardia: new FormControl(''),
       incidenciaTexto: new FormControl('')
-
-
     });
   }
 
   public doFilter = (event: Event) => {
     this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLocaleLowerCase();
   }
+
 
   applyFilter() {
     const idI = this.searchForm.get('idIncidencia')!.value;
@@ -123,11 +117,14 @@ export class ListarIncidenciasComponent {
     const hg = this.searchForm.get('horaGuardia')!.value;
     const it = this.searchForm.get('incidenciaTexto')!.value;
 
+    console.log(idI, "idI incidencia")
+    console.log(idG, "idI guardia")
+
 
 
     this.idIncidencia = idI === null ? '' : idI;
     this.idGuardia = idG === null ? '' : idG;
-    this.fecha = fe === null ? '' : fe;
+    this.fecha = fe === null ? '' : fe.toString();;
     this.nombreProfesor = np === null ? '' : np;
     this.profesorCubierto = pc === null ? '' : pc;
     this.curso = cu === null ? '' : cu;
@@ -135,9 +132,14 @@ export class ListarIncidenciasComponent {
     this.horaGuardia = hg === null ? '' : hg;
     this.incidenciaTexto = it === null ? '' : it;
 
+    console.log(this.idIncidencia, "idincidencia")
+    console.log(this.idGuardia, "idGuardia")
+
+
+
 
     // create string of our searching values and split if by '$'
-    const filterValue = this.idIncidencia + '$' + this.idGuardia + '$' + this.fecha + '$' + this.nombreProfesor + '$' + this.profesorCubierto + '$' + this.curso;
+    const filterValue = this.idIncidencia + '$' + this.idGuardia + '$' + this.fecha + '$' + this.nombreProfesor + '$' + this.profesorCubierto + '$' + this.curso +  '$' + this.aula + '$' + this.horaGuardia + '$' + this.incidenciaTexto ;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
@@ -155,11 +157,11 @@ export class ListarIncidenciasComponent {
       const horaGuardia = filterArray[7];
       const incidenciaTexto = filterArray[8];
 
-
       const matchFilter = [];
 
       // Fetch data from row
-      const columnIdIncidencia = this.idIncidencia;
+
+      const columnIdIncidencia = Number(this.idIncidencia);
       const columnIdGuardia = row.idGuardia;
       const columnFecha = row.fecha;
       const columnNombreProfesor = row.nombreProfesor;
@@ -169,10 +171,14 @@ export class ListarIncidenciasComponent {
       const columnHoraGuardia = row.horaGuardia;
       const columnIncidenciaTexto = row.incidenciaTexto;
 
+      console.log(columnIdIncidencia, "column idIncidencia")
+      console.log(columnIdGuardia, "column idGuardia")
+      console.log(this.idIncidencia, "idIncidencia")
+      console.log(row.idGuardia, "row")
+
 
       // verify fetching data by our searching values
       const customFilterIC = columnIdIncidencia.toString().toLowerCase().includes(idIncidencia);
-
       const customFilterIDG = columnIdGuardia.toString().toLowerCase().includes(idGuardia);
       const customFilterFE = columnFecha.toString().toLowerCase().includes(fecha);
       const customFilterNP = columnNombreProfesor.toLowerCase().includes(nombreProfesor);
@@ -181,6 +187,10 @@ export class ListarIncidenciasComponent {
       const customFilterAU = columnAula.toString().toLowerCase().includes(aula);
       const customFilterHG = columnHoraGuardia.toString().toLowerCase().includes(horaGuardia);
       const customFilterIT = columnIncidenciaTexto.toString().toLowerCase().includes(incidenciaTexto);
+
+      console.log(customFilterIC, "custom filter idIncidencia")
+      console.log(customFilterIDG, "custom filter idGuardia")
+
 
 
       // push boolean values into array
@@ -194,13 +204,12 @@ export class ListarIncidenciasComponent {
       matchFilter.push(customFilterHG);
       matchFilter.push(customFilterIT);
 
-
-
-
+      console.log(matchFilter, "match filter array ")
 
       // return true if all values in array is true
       // else return false
       return matchFilter.every(Boolean);
     };
   }
+
 }

@@ -128,7 +128,7 @@ export class HistorialGuardiasComponent implements OnInit {
     (window as any).bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDelete')).hide()
     let guardia: Guardia;
     guardia = this.guardiaEliminar;
-  this.datos = this.datos.filter(function(el) { return el.idGuardia != guardia.getIdGuardia(); }); 
+  this.datos = this.datos.filter(function(el) { return el.idGuardia != guardia.getIdGuardia(); });
    this.datos.splice(guardia.getIdGuardia(), 1 );
   this.guardiaService.deleteGuardia(guardia.getIdField())
   if(guardia.getEstado() != "Finalizada"){
@@ -139,7 +139,7 @@ export class HistorialGuardiasComponent implements OnInit {
   this.dataSource = new MatTableDataSource<Guardia>(this.datos);
   this.toastr.success("Se ha borrado con exito la guardia: " + guardia.getIdGuardia(),"Guardia borrada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
   this.router.navigate(["/pagina/historial"]);
-     
+
 
   }
   comprobarAdmin(){
