@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/cor
 import { ActivatedRoute, Router } from '@angular/router';
 import { Guardia } from 'app/models/guardia.model';
 import { Profesor } from 'app/models/profesor.model';
+import { PaginaComponent } from 'app/pagina/pagina.component';
 import { AuthService } from 'app/services/auth.service';
 import { GuardiaService } from 'app/services/guardia.service';
 import { ProfesorService } from 'app/services/profesor.service';
@@ -15,13 +16,19 @@ import { ToastrService } from 'ngx-toastr';
 export class SeleccionarGuardiaComponent implements OnInit, OnDestroy  {
    private sub: any;
   tipoGuardia: string;
+  guardiaHacer : Guardia;
+  profesor : Profesor
+  elegido: boolean;
   hora: string;
   datos: Guardia[] = [];
   diaA : String;
+  noHayGuardias : boolean;
   constructor(private guardiaService: GuardiaService,private route: ActivatedRoute,private router: Router, private profesorService: ProfesorService, private toastr: ToastrService, private auth: AuthService) { };
 
   ngOnInit() {
-   
+  
+   this.noHayGuardias = false;
+   this.elegido = false;
 
     this.sub = this.route.params.subscribe(params => {
        this.tipoGuardia =params['tipo']; 
@@ -57,14 +64,24 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy  {
        }else{
 
        }
+       let userJson = sessionStorage.getItem('profesor');
+       this.profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
+       console.log(this.profesor["horasGuardias"])
        let dia = day.getFullYear() + "/" + this.getMonthofToday(day.getMonth()) + "/" + day.getDate(); 
        this.guardiaService.getGuardiasPendientes(dia,parseInt(this.hora)).subscribe(guardias => {
         this.datos.splice(0)
         guardias.forEach((guardia) => {
+            if(guardia["profesor"] == this.profesor["id"]){
+              this.elegido = true;
+            }
           this.datos.push(new Guardia(guardia["horaGuardia"], new Date(guardia["fecha"]), guardia["dia"], guardia["hora"], guardia["descripcion"], guardia["estado"], guardia["idGuardia"], guardia["aula"], guardia["curso"], guardia["nombreProfesor"], guardia["profesor"],guardia["idProfesorCubierto"], guardia["idFIeld"], guardia["profesorCubierto"],guardia["tipo"],guardia["incidencia"],guardia["incidenciaTexto"]));
          
 
         })
+
+        if(guardias.length == 0){
+          this.noHayGuardias = true;
+        }
       });
     
     });
@@ -96,7 +113,7 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy  {
     return color;
   }
   comprobarGuardiaBoton(guardia:Guardia){
-    if(guardia.estado == "Finalizada"){
+    if(guardia.estado == "Finalizada" || this.elegido){
       return true;
 
     }else{
@@ -106,6 +123,26 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy  {
 
 
   }
+  modalSeleccionar(guardia:Guardia){
+    this.guardiaHacer = guardia;
+    var myModal: any = new (window as any).bootstrap.Modal(
+      document.getElementById("seleccionarGuardia")
+   );
+   myModal.show()
+  }
+  hacerGuardia(){
+    (window as any).bootstrap.Modal.getOrCreateInstance(document.getElementById('seleccionarGuardia')).hide()
+    let guardia: Guardia;
+    guardia = this.guardiaHacer;
+    let num = this.profesor["horasGuardias"] + 1;
+    console.log(num);
+  this.guardiaService.hacerGuardia(guardia, this.profesor, this.tipoGuardia, num)
+  this.toastr.success("Se le ha asignado la guardia con número : " + guardia.getIdGuardia()+" ","Guardia seleccionada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
+  //window.location.reload();
+
+}
+
+
 
   seleccionada(guardia:Guardia){
     if(guardia.nombreProfesor == "Sin asignar"){

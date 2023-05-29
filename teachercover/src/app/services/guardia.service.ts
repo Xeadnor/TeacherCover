@@ -3,6 +3,7 @@ import { Firestore, addDoc, collection, collectionData, setDoc } from '@angular/
 import { deleteDoc, doc, getDoc, getDocs, getFirestore, limit, orderBy, query, where } from "firebase/firestore";
 import { Observable } from 'rxjs';
 import { Guardia } from '../models/guardia.model';
+import { Profesor } from 'app/models/profesor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -108,8 +109,7 @@ export class GuardiaService {
   updateGuardia(guardia: Guardia, dia: String) {
     const db = getFirestore();
     const dbRef = doc(db, "guardias", guardia.getIdField());
-    console.log("e?")
-    console.log(guardia.getIdProfesorCubierto());
+
     const data = {
       aula: guardia.getAula(),
       curso: guardia.getCurso(),
@@ -153,6 +153,33 @@ export class GuardiaService {
 
       .then(docRef => {
 
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+  }
+  hacerGuardia(guardia: Guardia, profesor: Profesor, tipo : String, num: number) {
+    const db = getFirestore();
+    const dbRef = doc(db, "guardias", guardia.getIdField());
+
+    console.log(num);
+    const data = {
+      estado: "Finalizada",
+      nombreProfesor: profesor["name"],
+      profesor: profesor["id"],
+      tipo: tipo,
+    };
+    setDoc(dbRef, data, { merge: true })
+      .then(docRef => {
+        console.log("peeee");
+        const profesorRef = doc(db,"profesores",profesor["idField"]);
+
+        const data = {
+          horasGuardias: num
+        }
+
+      setDoc(profesorRef,data, { merge:true})
       })
       .catch(error => {
         console.log(error)

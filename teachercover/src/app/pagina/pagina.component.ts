@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Profesor } from '../models/profesor.model';
 import { Guardia } from '../models/guardia.model';
+import { ProfesorService } from 'app/services/profesor.service';
 
 @Component({
   selector: 'app-pagina',
@@ -9,10 +10,10 @@ import { Guardia } from '../models/guardia.model';
   styleUrls: ['./pagina.component.css']
 })
 export class PaginaComponent implements OnInit {
-  constructor( private router: Router) {};
+  constructor( private router: Router,private route: ActivatedRoute, private profesorService: ProfesorService) {};
 
   rolAdmin: boolean
-  horasGuardias = "";
+  horasGuardias = 0;
   diaGuardia = "----";
   nombreUsuario = "";
   rol = "";
@@ -24,11 +25,15 @@ export class PaginaComponent implements OnInit {
     }else{
       let userJson = sessionStorage.getItem('profesor');
       let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
-      this.horasGuardias = profesor["horasGuardias"]
       this.rol = profesor["role"]
       this.diaGuardia = profesor["diaGuardia"]
       this.nombreUsuario = profesor["name"]
       this.mostrarDatos = true;
+      this.profesorService.getATeacherFromId(profesor["idField"]).then((value) =>{
+        this.horasGuardias = value!["horasGuardias"];
+      })
+
+    
       if(profesor["role"] == "User"){
         this.rolAdmin = false;
       }else{
@@ -42,6 +47,7 @@ export class PaginaComponent implements OnInit {
     }
   }
 
+  
   hideDatos(){
     this.mostrarDatos = false;
   }
