@@ -104,8 +104,7 @@ export class EditarGuardiaComponent implements OnInit {
       this.guardiaEditandose.setProfesor(value!["profesor"]);
       this.guardiaEditandose.setTipo(value!["tipo"]);
       this.guardiaEditandose.setIdProfesorCubierto(value!["idProfesorCubierto"])
-
-
+        this.nombreProfesor = value!["nombreProfesor"];
 
 
 
@@ -495,10 +494,12 @@ export class EditarGuardiaComponent implements OnInit {
      this.guardiaEditandose.setHora( this.createOnCallForm.controls["guardiaHora"].value);
      this.guardiaEditandose.setDescripcion( this.createOnCallForm.controls["infoGuardia"].value);
       this.guardiaEditandose.setCurso(this.obtenerTextoCurso(this.createOnCallForm.controls["cursoGuardia"].value) + "" + this.obtenerTextoLetra(this.createOnCallForm.controls["letraCurso"].value));
-      this.guardiaEditandose.setIdProfesorCubierto(this.idProfesorCubierto);
-     this.guardiaService.updateGuardia(this.guardiaEditandose,dia);
-  this.toastr.success("Se han actualizado con exito la guardia : " + this.guardiaEditandose.getIdGuardia(),"Guardia editada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
-    }else if(this.rol == "Admin" && this.guardiaEditandose.estado == "Finalizada"){
+      this.guardiaEditandose.setIdProfesorCubierto(this.createOnCallForm.controls["profesorCubierto"].value);
+      this.guardiaService.updateGuardia(this.guardiaEditandose,dia);
+
+      this.router.navigate(["../pagina/historial"]);
+  this.toastr.success("Se ha actualizado con exito la guardia : " + this.guardiaEditandose.getIdGuardia(),"Guardia editada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
+}else if(this.rol == "Admin" && this.guardiaEditandose.estado == "Finalizada"){
 
     }else{
       if(this.createOnCallForm.controls["incidencia"].value != "Sin incidencia"){
@@ -510,6 +511,8 @@ export class EditarGuardiaComponent implements OnInit {
   
       this.guardiaEditandose.setIncidencia(true);
        this.guardiaService.updateGuardia(this.guardiaEditandose,dia);
+       this.toastr.success("Se ha actualizado la incidencia de la guardia : " + this.guardiaEditandose.getIdGuardia(),"Guardia editada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
+       this.router.navigate(["../pagina/historial"]);
        
       }
    

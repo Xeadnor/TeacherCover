@@ -16,7 +16,7 @@
       <div class="item" *ngFor="let hour of hours; let indexHour = index" fxLayout  [ngStyle]="existsMeeting(indexDay + 1, indexHour + 8 )">
 
         <div class="col-12 text-center">
-            <p class="m-0" style="font-size:15px">{{hour}} {{getMeeting(indexDay + 1, indexHour + 8 )}}</p>
+            <p class="m-0" style="font-size:15px">{{hour}}</p>
             <!-- <p class="m-0" style="font-size:13px;">{{getMeeting(indexDay + 1, indexHour + 8 )}}</p> -->
         </div>
 
