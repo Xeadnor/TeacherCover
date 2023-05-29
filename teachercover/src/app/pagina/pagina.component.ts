@@ -19,7 +19,7 @@ export class PaginaComponent implements OnInit {
   rol = "";
   mostrarDatos : boolean
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if(sessionStorage.length == 0){
       this.router.navigate(['']);
     }else{
@@ -28,11 +28,12 @@ export class PaginaComponent implements OnInit {
       this.rol = profesor["role"]
       this.diaGuardia = profesor["diaGuardia"]
       this.nombreUsuario = profesor["name"]
-      this.mostrarDatos = true;
-      this.profesorService.getATeacherFromId(profesor["idField"]).then((value) =>{
-        this.horasGuardias = value!["horasGuardias"];
-      })
 
+      this.mostrarDatos = true;
+      const prueba = (await this.profesorService.getDataFromEmail(profesor["email"])).subscribe(profesor =>{
+        this.horasGuardias = profesor[0]["horasGuardias"];
+     
+      });
     
       if(profesor["role"] == "User"){
         this.rolAdmin = false;
