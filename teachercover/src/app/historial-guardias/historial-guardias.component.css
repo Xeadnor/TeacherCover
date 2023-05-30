@@ -67,3 +67,14 @@ td , th {
   .centradoColumnas{
     text-align: center !important;
   }
+
+
+.modal-title{
+  color: rgb(147, 86, 204)!important;
+}
+
+
+.modal-content{
+  background-color:rgb(190, 154, 224)!important;
+
+}

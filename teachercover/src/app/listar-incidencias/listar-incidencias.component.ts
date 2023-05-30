@@ -13,6 +13,8 @@ import { GuardiaService } from 'app/services/guardia.service';
 import { ProfesorService } from 'app/services/profesor.service';
 import { ToastrService } from 'ngx-toastr';
 
+
+
 @Component({
   selector: 'app-listar-incidencias',
   templateUrl: './listar-incidencias.component.html',
@@ -22,7 +24,7 @@ import { ToastrService } from 'ngx-toastr';
   ]
 })
 export class ListarIncidenciasComponent {
-  columnas: string[] = ['idIncidencia','idGuardia', 'fecha', 'nombreProfesor','profesorCubierto', 'curso', 'aula', 'horaGuardia', 'incidenciaTexto'];
+  columnas: string[] = ['idIncidencia','idGuardia', 'fecha', 'nombreProfesor','profesorCubierto', 'curso', 'aula', 'horaGuardia', 'incidenciaTexto', 'leerMas'];
   rol: string;
   constructor(private route: ActivatedRoute, public dialog: MatDialog, private router: Router, private profesorService: ProfesorService, private guardiaService: GuardiaService, private toastr: ToastrService, private auth: AuthService) { };
   datos: Guardia[] = [];
@@ -37,7 +39,7 @@ export class ListarIncidenciasComponent {
   public curso = '';
   public aula = '';
   public horaGuardia = '';
-  public incidenciaTexto = '';
+  public incidenciaTexto: string = '';
   public bootstrap: any;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -212,4 +214,17 @@ export class ListarIncidenciasComponent {
     };
   }
 
+
+  public leerMas(texto: string){
+
+    this.mostrarModal(texto)
+
+  }
+
+  public mostrarModal(texto: string){
+    this.incidenciaTexto = texto;
+    console.log(document.getElementsByClassName('modal-body')[0])
+    var myModal: any = new (window as any).bootstrap.Modal(document.getElementById('miModal'));
+    myModal.show()
+  }
 }

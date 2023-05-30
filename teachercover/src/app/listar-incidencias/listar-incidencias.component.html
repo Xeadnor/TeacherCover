@@ -116,13 +116,51 @@
         <td mat-cell *matCellDef="let guardia" style="max-width: 500px!important; padding: 10px;"> {{guardia.incidenciaTexto}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="leerMas">
+        <th mat-header-cell *matHeaderCellDef>Leer más</th>
+        <td mat-cell *matCellDef="let guardia">
+          <ul class="list-inline m-0">
+            <li class="list-inline-item">
+                <button  class="btn editar btn-sm rounded-1" (click)="leerMas(guardia.incidenciaTexto)" type="button" data-toggle="tooltip" data-placement="top" title="Leer más"><i class="fa fa-plus-circle"></i></button>
+            </li>
+        </ul>
+        </td>
+      </ng-container>
+
+
       <tr mat-header-row *matHeaderRowDef="columnas; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: columnas" style="background-color:#e7e0ff;"></tr>
     </table>
     <div class="footer">
 
+
+
+
+
     </div>
   </form>
+
+     <!-- modal para mostrar el texto de la incidencia -->
+    <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="miModalLabel">Incidencia</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+            </div>
+            <div class="modal-body" style="max-height: 300px; overflow-y: auto;">
+              {{incidenciaTexto}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn eliminar" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 <mat-paginator class="paginado mat-elevation-z8 shadow-none fixed" [pageSizeOptions]="[10, 20, 40]"
   style="background-color:#d1c4fd;"></mat-paginator>
+
+
