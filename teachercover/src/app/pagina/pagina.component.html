@@ -44,7 +44,7 @@
 
 
 
-    <div class="bg-light col-12 d-lg-none">
+    <div class="bg-light col-12 d-lg-none" *ngIf="!user">
       <div class="row  colorcito mt-0 mb-3 justify-content-start justify-content-md-between">
         <div class="col-2 p-0">
           <p class=" d-flex align-items-center mb-2 mt-2 text-decoration-none">
@@ -94,6 +94,37 @@
     </div>
 
 
+
+
+
+
+
+    <div class="bg-light col-12 d-lg-none" *ngIf="user">
+      <div class="row  colorcito mt-0 mb-3 justify-content-start">
+        <div class="col-2 p-0">
+          <p class=" d-flex align-items-center mb-2 mt-2 text-decoration-none">
+            <img class="bi me-2" width="30" height="24" src="favicon.ico" />
+            <span class="fs-5 fw-semibold">Menú</span>
+          </p>
+        </div>
+
+        <div class="col-4 text-center p-0 ms-4">
+          <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 p-0 pt-1"
+            data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+            Inicio
+          </button>
+          <div class="collapse" id="home-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#" [routerLink]="['./calendario']" class="link-dark rounded">Día actual</a></li>
+              <li><a href="#" [routerLink]="['./historial']" class="link-dark rounded">Historial</a></li>
+              <li><a href="#" [routerLink]="['./calendarioSemanal']" class="link-dark rounded">Calendario semanal</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
 
 

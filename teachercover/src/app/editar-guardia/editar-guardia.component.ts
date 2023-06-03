@@ -104,7 +104,7 @@ export class EditarGuardiaComponent implements OnInit {
       this.guardiaEditandose.setProfesor(value!["profesor"]);
       this.guardiaEditandose.setTipo(value!["tipo"]);
       this.guardiaEditandose.setIdProfesorCubierto(value!["idProfesorCubierto"])
-        this.nombreProfesor = value!["nombreProfesor"];
+        this.nombreProfesor = value!["profesorCubierto"];
 
 
 
@@ -171,8 +171,7 @@ export class EditarGuardiaComponent implements OnInit {
          }
         }
          }
-         console.log(prueba)
-         console.log(prueba[0].charAt(prueba[0].length -1));      
+
           this.changeCursoGuardiaInicio(numCurso);
           this.createOnCallForm = new FormGroup({
             profesorCubierto: new FormControl(this.guardiaEditandose.getIdProfesorCubierto(), Validators.required),
@@ -328,7 +327,6 @@ export class EditarGuardiaComponent implements OnInit {
     this.letraCurso = e.target.value
   }
 
-  //TODO mirar si hay alguna forma de obtener el valor del select del formulario y ahorrarse estos switch
   obtenerTextoHora(hora: string): string {
     let texto = ""
     switch (hora) {
@@ -495,7 +493,10 @@ export class EditarGuardiaComponent implements OnInit {
      this.guardiaEditandose.setDescripcion( this.createOnCallForm.controls["infoGuardia"].value);
       this.guardiaEditandose.setCurso(this.obtenerTextoCurso(this.createOnCallForm.controls["cursoGuardia"].value) + "" + this.obtenerTextoLetra(this.createOnCallForm.controls["letraCurso"].value));
       this.guardiaEditandose.setIdProfesorCubierto(this.createOnCallForm.controls["profesorCubierto"].value);
+      this.guardiaEditandose.setHoraGuardia(this.obtenerTextoHora(this.guardiaEditandose.getHora().toString()));
+      this.guardiaEditandose.setDia(this.obtenerDiaSemana(fecha));
       this.guardiaService.updateGuardia(this.guardiaEditandose,dia);
+     console.log(this.guardiaEditandose);
 
       this.router.navigate(["../pagina/historial"]);
   this.toastr.success("Se ha actualizado con exito la guardia : " + this.guardiaEditandose.getIdGuardia(),"Guardia editada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})

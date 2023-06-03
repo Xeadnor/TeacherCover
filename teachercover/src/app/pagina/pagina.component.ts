@@ -17,6 +17,7 @@ export class PaginaComponent implements OnInit {
   diaGuardia = "----";
   nombreUsuario = "";
   rol = "";
+  user: boolean
   mostrarDatos : boolean
 
   async ngOnInit(): Promise<void> {
@@ -26,6 +27,11 @@ export class PaginaComponent implements OnInit {
       let userJson = sessionStorage.getItem('profesor');
       let profesor = userJson !== null ? JSON.parse(userJson) : new Profesor();
       this.rol = profesor["role"]
+      if(this.rol == "Admin"){
+        this.user = false;
+      }else{
+        this.user = true;
+      }
       this.diaGuardia = profesor["diaGuardia"]
       this.nombreUsuario = profesor["name"]
 
