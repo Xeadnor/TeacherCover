@@ -206,4 +206,24 @@ export class GuardiaService {
 
   }
 
+  updateProfesorCubiertoN(guardia: Guardia) {
+    const db = getFirestore();
+    const dbRef = doc(db, "guardias", guardia.getIdField());
+
+
+
+    const data = {
+      profesorCubierto : guardia.getProfesorCubierto(),
+    };
+    setDoc(dbRef, data, { merge: true })
+
+      .then(docRef => {
+
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+  }
+
 }

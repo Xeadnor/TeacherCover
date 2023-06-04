@@ -176,6 +176,17 @@ export class ProfesorService {
             this.guardiaService.updateGuardiaNameT(guardia)
           });
 
+          const q3 = query(collection(db, "guardias"),where("idProfesorCubierto", "==",profesor.getIdProfesor()));
+          const querySnapshot3 = await getDocs(q3);
+          querySnapshot3.forEach(async (doc) => {
+              let guardia = new Guardia();
+              guardia.setIdField(doc.id);
+              guardia.setProfesorCubierto(profesor.getName())
+              console.log(guardia);
+          
+            this.guardiaService.updateProfesorCubiertoN(guardia)
+          });
+
         })
         .catch(error =>{
         })
