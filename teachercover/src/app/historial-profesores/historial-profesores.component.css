@@ -65,3 +65,13 @@ td , th {
   color: rgb(235, 140, 31);
 }
 
+
+.modal-title{
+  color: rgb(147, 86, 204)!important;
+}
+
+
+.modal-content{
+  background-color:rgb(190, 154, 224)!important;
+
+}
