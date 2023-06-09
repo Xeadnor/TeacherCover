@@ -16,7 +16,7 @@
 }
 
 .colorcito{
-    background-color: #d1c4fd;
+    background-color: #daceff;
     border-width:2px;
 }
 
@@ -114,8 +114,8 @@ body {
   .btn-toggle[aria-expanded="true"]::before {
     transform: rotate(90deg);
   }
-  
-  
+
+
 
   .btn-toggle-nav a {
     display: inline-flex;
@@ -138,4 +138,33 @@ body {
 
 
 
+
+  .fondo{
+    /* background-image:url("../../assets/fondo_logos3.png");*/
+    height: 100vh;
+    background-position:left;
+    background-size: cover;
+    background: rgb(74,44,106);
+    background: linear-gradient(0deg, rgba(74,44,106,0.927608543417367) 0%, rgba(212,170,255,1) 12%, rgba(213, 170, 255, 0.637) 100%);
+    align-content: flex-start;
+    min-height: 87vh;
+    max-height: 95vh;
+  }
+
+  .color{
+    background: rgba(212, 175, 248, 0);
+  }
+
+  .prefooter{
+    background: rgb(65,45,87);
+    background: linear-gradient(0deg, rgba(65,45,87,1) 0%, rgba(74,44,106,0.92) 100%);
+  }
+
+  @media only screen and (max-width: 992px) {
+
+    .fondo{
+      min-height: 111vh;
+      max-height: 128vh;
+    }
+  }
 

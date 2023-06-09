@@ -38,9 +38,9 @@ export class PaginaComponent implements OnInit {
       this.mostrarDatos = true;
       const prueba = (await this.profesorService.getDataFromEmail(profesor["email"])).subscribe(profesor =>{
         this.horasGuardias = profesor[0]["horasGuardias"];
-     
+        console.log(profesor[0], "profesooooorrrr")
       });
-    
+
       if(profesor["role"] == "User"){
         this.rolAdmin = false;
       }else{
@@ -54,7 +54,7 @@ export class PaginaComponent implements OnInit {
     }
   }
 
-  
+
   hideDatos(){
     this.mostrarDatos = false;
   }

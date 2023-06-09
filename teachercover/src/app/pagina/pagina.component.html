@@ -1,8 +1,9 @@
-<div class="dividor d-none d-lg-block" style="background-color: #e7fdff;"></div>
-<div class="container-fluid p-0 ">
 
-  <div class="row p-0 m-0 mb-3">
+<div class="container-fluid p-0" >
 
+  <div class="fondo row pt-3 m-0 pb-4" style="height: 100%!important;">
+
+    <!-- menu escritorio -->
     <div class="shadow d-none d-lg-block flex-shrink-0 p-3 colorcito col-2 bordes">
       <p class="d-flex align-items-center pb-3 mb-3 mt-3 text-decoration-none border-bottom">
         <img class="bi me-2" width="30" height="24" src="favicon.ico" />
@@ -42,18 +43,18 @@
 
 
 
+    <!-- Menú móvil admin-->
 
-
-    <div class="bg-light col-12 d-lg-none" *ngIf="!user">
-      <div class="row  colorcito mt-0 mb-3 justify-content-start justify-content-md-between">
-        <div class="col-2 p-0">
-          <p class=" d-flex align-items-center mb-2 mt-2 text-decoration-none">
+    <!-- <div class="color col-12 d-lg-none p-0" *ngIf="!user">
+      <div class=" row colorcito mt-0 justify-content-start justify-content-between ">
+        <div class="col-4 p-0">
+          <p class=" d-flex align-items-center justify-content-end ms-3 mt-2 text-decoration-none">
             <img class="bi me-2" width="30" height="24" src="favicon.ico" />
             <span class="fs-5 fw-semibold">Menú</span>
           </p>
-        </div>
+        </div> -->
 
-        <div class="col-4 text-center p-0">
+        <!-- <div class="col-4 text-center p-0">
           <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 p-0 pt-1"
             data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
             Inicio
@@ -67,12 +68,10 @@
             </ul>
           </div>
 
-        </div>
+        </div> -->
 
-
-
-        <!-- OPCIONES DEL ADMINISTRADOR -->
-        <div class="col-4 text-center p-0 me-5" *ngIf="rolAdmin">
+      <!-- OPCIONES DEL ADMINISTRADOR -->
+        <!-- <div class="col-4 text-center p-0 me-5" *ngIf="rolAdmin">
 
           <button class="btn btn-toggle align-items-center rounded collapsed mt-2 p-0 pt-1" data-bs-toggle="collapse"
             data-bs-target="#account-collapse" aria-expanded="true">
@@ -89,17 +88,60 @@
           </div>
 
 
+        </div> -->
+
+
+
+      <!-- </div>
+    </div> -->
+
+    <!-- ultimo menú movil para user y admin -->
+    <div class="color col-12 d-lg-none p-0 m-0" style="max-height: 10vh;">
+      <div class=" justify-content-center row colorcito m-0 mb-3">
+        <div class="col-4 p-0 me-2">
+          <p class=" d-flex align-items-center justify-content-end ms-3 mt-2 text-decoration-none">
+            <img class="bi me-2" width="30" height="24" src="favicon.ico" />
+            <span class="fs-5 fw-semibold">Menú</span>
+          </p>
         </div>
+        <div class="col-7 p-0 d-flex ms-2">
+
+            <div class="col nav-item dropdown p-0 d-flex justify-content-center align-items-center">
+              <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style="color: black;">
+              Inicio
+              </a>
+              <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" [routerLink]="['./calendario']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Día actual</a></li>
+              <li><a class="dropdown-item" href="#" [routerLink]="['./historial']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Historial</a></li>
+              <li><a class="dropdown-item" href="#" [routerLink]="['./calendarioSemanal']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Calendario semanal</a></li>
+              </ul>
+            </div>
+
+            <div class="col nav-item dropdown p-0 d-flex justify-content-center align-items-center" *ngIf="rolAdmin">
+              <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+                  Administrador
+              </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" [routerLink]="['./crearProfesor']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Crear Profesor</a></li>
+                    <li><a class="dropdown-item" href="#" [routerLink]="['./crearGuardia']" class="link-dark rounded" style="margin-left: 0.5em;text-decoration: none;">Crear Guardia</a></li>
+                    <li><a class="dropdown-item" href="#" [routerLink]="['./historialProfesores']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Historial Profesores</a></li>
+                    <li><a class="dropdown-item" href="#" [routerLink]="['./listarIncidencias']" class="link-dark rounded" style="margin-left: 0.5em;  text-decoration: none;">Incidencias</a></li>
+
+                </ul>
+            </div>
+
+        </div>
+
       </div>
-    </div>
+  </div>
 
 
 
 
 
+  <!-- menú movil user -->
 
-
-    <div class="bg-light col-12 d-lg-none" *ngIf="user">
+    <!-- <div class="bg-light col-12 d-lg-none" *ngIf="user">
       <div class="row  colorcito mt-0 mb-3 justify-content-start">
         <div class="col-2 p-0">
           <p class=" d-flex align-items-center mb-2 mt-2 text-decoration-none">
@@ -124,11 +166,11 @@
 
         </div>
       </div>
-    </div>
+    </div> -->
 
 
 
-
+  <!-- información del usuario -->
     <div class="col-12 col-lg-10 ">
       <div class="row" *ngIf="!mostrarDatos">
         <div class="col">
@@ -179,7 +221,7 @@
         </table>
       </div>
 
-      <div class="dividor mt-3" style="background-color: #e7fdff;"></div>
+      <div class="dividor mt-3" style="background-color: #e7fdff00;"></div>
 
       <div class="row shadow colorcito mt-8 p-1 m-0 m-lg-2 p-lg-2 rounded-datos mb-0">
         <router-outlet></router-outlet>
@@ -187,6 +229,6 @@
 
     </div>
   </div>
-  <div class="dividor d-none d-lg-block" style="background-color: #e7fdff;"></div>
+  <div class="dividor d-none d-lg-block prefooter"  style="height: 12vb;"></div>
 
 </div>
