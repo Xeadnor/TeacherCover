@@ -13,6 +13,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+      "allowedCommonJsDependencies": ["moment"],
+
             "outputPath": "dist/teachercover",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -41,7 +43,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
+                  "maximumWarning": "10kb",
                   "maximumError": "4kb"
                 }
               ],
