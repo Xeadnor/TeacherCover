@@ -25,7 +25,7 @@ export class CrearProfesorComponent implements OnInit {
   guardiaJuevesApoyo: number;
   guardiaViernesApoyo: number;
   registro: boolean;
-
+  creandoProfesor: boolean = false;
 
   constructor(private route: ActivatedRoute,private router: Router, private profesorService: ProfesorService, private toastr: ToastrService, private auth: AuthService) { };
 
@@ -124,6 +124,7 @@ export class CrearProfesorComponent implements OnInit {
               this.toastr.error("El correo introducido ya esta registrado", "Correo ya usado", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
             }
           } else {
+            this.creandoProfesor = true;
             this.createTeacherForm.markAsPristine();
             this.createTeacherForm.markAsUntouched();
             let newId = this.profesorService.getNewId();

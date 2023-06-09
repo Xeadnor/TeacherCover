@@ -120,7 +120,8 @@
 
 
     <div class="text-center mt-5">
-      <button class="btn botonLogin btn-lg px-4 text-center" (click)="comprobaciones()" type="submit"> Crear guardia</button>
+      
+      <button class="btn botonLogin btn-lg px-4 text-center" (click)="comprobaciones()" type="submit"><div class="spinner-border spinner-border-md" *ngIf="creandoGuardia"></div> Crear guardia</button>
     </div>
 
   </form>

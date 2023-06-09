@@ -145,7 +145,7 @@ body {
     background-position:left;
     background-size: cover;
     background: rgb(74,44,106);
-    background: linear-gradient(0deg, rgba(74,44,106,0.927608543417367) 0%, rgba(212,170,255,1) 12%, rgba(213, 170, 255, 0.637) 100%);
+    background: linear-gradient(0deg, rgba(111, 74, 151, 0.92) 0%, rgba(212,170,255,1) 12%, rgba(213, 170, 255, 0.637) 100%);
     align-content: flex-start;
     min-height: 87vh;
     max-height: 95vh;
@@ -157,7 +157,7 @@ body {
 
   .prefooter{
     background: rgb(65,45,87);
-    background: linear-gradient(0deg, rgba(65,45,87,1) 0%, rgba(74,44,106,0.92) 100%);
+    background: linear-gradient(0deg, rgba(65,45,87,1) 0%, rgba(111, 74, 151, 0.92) 100%);
   }
 
   @media only screen and (max-width: 992px) {

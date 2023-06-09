@@ -41,7 +41,7 @@ export class CrearGuardiaComponent implements OnInit {
   profes: Profesor[] = [];
   aulas: string[] = [];
   letras: string[] = []
-
+  creandoGuardia:boolean = false;
   nombresProfes = this.profes;
   aulasFiltradas = this.aulas;
 
@@ -354,6 +354,7 @@ export class CrearGuardiaComponent implements OnInit {
 
         (await prueba).forEach(doc => {
           if (doc.length == 0) {
+            this.creandoGuardia = true;
             this.createOnCallForm.markAsPristine();
             this.createOnCallForm.markAsUntouched();
             let newId = this.guardiaService.getNewId();
