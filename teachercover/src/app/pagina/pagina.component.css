@@ -141,14 +141,7 @@ body {
 
   .fondo{
     /* background-image:url("../../assets/fondo_logos3.png");*/
-    height: 100vh;
-    background-position:left;
-    background-size: cover;
-    background: rgb(74,44,106);
-    background: linear-gradient(0deg, rgba(111, 74, 151, 0.92) 0%, rgba(212,170,255,1) 12%, rgba(213, 170, 255, 0.637) 100%);
-    align-content: flex-start;
-    min-height: 87vh;
-    max-height: 95vh;
+    background-color: rgba(213, 170, 255, 0.637);
   }
 
   .color{
@@ -158,13 +151,5 @@ body {
   .prefooter{
     background: rgb(65,45,87);
     background: linear-gradient(0deg, rgba(65,45,87,1) 0%, rgba(111, 74, 151, 0.92) 100%);
-  }
-
-  @media only screen and (max-width: 992px) {
-
-    .fondo{
-      min-height: 111vh;
-      max-height: 128vh;
-    }
   }
 
