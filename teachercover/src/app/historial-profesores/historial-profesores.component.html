@@ -3,7 +3,7 @@
     <form [formGroup]="searchForm" class="search__form">
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="mostrarTabla" #tabla1
-        style="background-color:#d1c4fd" matSort matSortActive="id" matSortDirection="desc" matSortDisableClear>
+        style="background-color:#daceff" matSort matSortActive="id" matSortDirection="desc" matSortDisableClear>
 
         <ng-container matColumnDef="id" sticky>
 
@@ -103,7 +103,7 @@
     </form>
   </div>
   <mat-paginator class="paginado mat-elevation-z8 shadow-none fixed" [pageSizeOptions]="[10, 20, 40]"
-    style="background-color:#d1c4fd;"></mat-paginator>
+    style="background-color:#daceff;"></mat-paginator>
 
 
 
@@ -119,8 +119,8 @@
           ¿Esta seguro que desea eliminar a este usuario? Sera una acción irreversible.
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button  class="btn btn-danger" (click)="eliminarProfesor()"> Eliminar usuario</button>
+            <button type="button" class="btn editar" data-bs-dismiss="modal">Cancelar</button>
+            <button  class="btn eliminar" (click)="eliminarProfesor()"> Eliminar usuario</button>
           </div>
         </div>
       </div>

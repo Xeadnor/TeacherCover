@@ -110,24 +110,28 @@
               <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style="color: black;">
               Inicio
               </a>
-              <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" [routerLink]="['./calendario']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Día actual</a></li>
-              <li><a class="dropdown-item" href="#" [routerLink]="['./historial']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Historial</a></li>
-              <li><a class="dropdown-item" href="#" [routerLink]="['./calendarioSemanal']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Calendario semanal</a></li>
-              </ul>
+              <div class="dropdown-menu colorcito" style="border-color:rgb(131, 93, 167)">
+                <div><a class="dropdown-item" href="#" [routerLink]="['./calendario']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Día actual</a></div>
+                <div class="dropdown-divider"></div>
+                <div><a class="dropdown-item" href="#" [routerLink]="['./historial']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Historial</a></div>
+                <div class="dropdown-divider"></div>
+                <div><a class="dropdown-item" href="#" [routerLink]="['./calendarioSemanal']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Calendario semanal</a></div>
+              </div>
             </div>
 
-            <div class="col nav-item dropdown p-0 d-flex justify-content-center align-items-center" *ngIf="rolAdmin">
-              <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+            <div class="col dropdown p-0 d-flex justify-content-center align-items-center" *ngIf="rolAdmin">
+              <a class="nav-link dropdown-toggle p-0 " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
                   Administrador
               </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#" [routerLink]="['./crearProfesor']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Crear Profesor</a></li>
-                    <li><a class="dropdown-item" href="#" [routerLink]="['./crearGuardia']" class="link-dark rounded" style="margin-left: 0.5em;text-decoration: none;">Crear Guardia</a></li>
-                    <li><a class="dropdown-item" href="#" [routerLink]="['./historialProfesores']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Historial Profesores</a></li>
-                    <li><a class="dropdown-item" href="#" [routerLink]="['./listarIncidencias']" class="link-dark rounded" style="margin-left: 0.5em;  text-decoration: none;">Incidencias</a></li>
-
-                </ul>
+                <div class="dropdown-menu colorcito" style="border-color:rgb(131, 93, 167)">
+                    <div><a class="dropdown-item" href="#" [routerLink]="['./crearProfesor']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Crear Profesor</a></div>
+                    <div class="dropdown-divider"></div>
+                    <div><a class="dropdown-item" href="#" [routerLink]="['./crearGuardia']" class="link-dark rounded" style="margin-left: 0.5em;text-decoration: none;">Crear Guardia</a></div>
+                    <div class="dropdown-divider"></div>
+                    <div><a class="dropdown-item" href="#" [routerLink]="['./historialProfesores']" class="link-dark rounded" style="margin-left: 0.5em; text-decoration: none;">Historial Profesores</a></div>
+                    <div class="dropdown-divider"></div>
+                    <div><a class="dropdown-item" href="#" [routerLink]="['./listarIncidencias']" class="link-dark rounded" style="margin-left: 0.5em;  text-decoration: none;">Incidencias</a></div>
+                </div>
             </div>
 
         </div>
@@ -229,6 +233,6 @@
 
     </div>
   </div>
-  <div class="dividor d-none d-lg-block"  style="height: 12vb;background-color: rgba(213, 170, 255, 0.637);"></div>
+  <div class="dividor d-none d-lg-block"  style="height: 12vb;background-color: #cbbbff;"></div>
 
 </div>
