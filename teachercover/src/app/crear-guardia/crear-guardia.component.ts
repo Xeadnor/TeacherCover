@@ -382,7 +382,6 @@ export class CrearGuardiaComponent implements OnInit {
               guardia.setTipo("Pendiente");
               guardia.setIncidencia(false);
               guardia.setIncidenciaTexto("Sin incidencia")
-              console.log(guardia);
                let dia = fecha.getFullYear() + "/" + this.getMonthofToday(fecha.getMonth()) + "/" + this.getDayofToday(fecha.getDate());
                 this.guardiaService.addGuardia(guardia, dia);
                this.toastr.success("Se ha registrado con éxito la guardia en la base de datos", "Guardia creada", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })

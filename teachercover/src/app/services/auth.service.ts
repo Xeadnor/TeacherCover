@@ -33,7 +33,6 @@ export class AuthService {
   }
 
   sendResetPassword(email: string){
-    console.log("PEEEEEEEEE")
     this.auth.sendPasswordResetEmail(email).then(() => {
       
     }, error => {

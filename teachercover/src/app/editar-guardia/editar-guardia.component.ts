@@ -496,13 +496,12 @@ export class EditarGuardiaComponent implements OnInit {
       this.guardiaEditandose.setHoraGuardia(this.obtenerTextoHora(this.guardiaEditandose.getHora().toString()));
       this.guardiaEditandose.setDia(this.obtenerDiaSemana(fecha));
       this.guardiaService.updateGuardia(this.guardiaEditandose,dia);
-     console.log(this.guardiaEditandose);
 
       this.router.navigate(["../pagina/historial"]);
   this.toastr.success("Se ha actualizado con exito la guardia : " + this.guardiaEditandose.getIdGuardia(),"Guardia editada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
 }else if(this.rol == "Admin" && this.guardiaEditandose.estado == "Finalizada"){
   this.router.navigate(["../pagina/historial"]);
-  this.toastr.info("No se ha modificado ningun dato.","Guardia editada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
+  this.toastr.info("No se ha modificado ningun dato.","Guardia",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
     }else{
       if(this.createOnCallForm.controls["incidencia"].value != "Sin incidencia"){
         let dateSelectedMilisec = this.createOnCallForm.get("guardiaFecha")?.value;
@@ -516,6 +515,10 @@ export class EditarGuardiaComponent implements OnInit {
        this.toastr.success("Se ha actualizado la incidencia de la guardia : " + this.guardiaEditandose.getIdGuardia(),"Guardia editada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
        this.router.navigate(["../pagina/historial"]);
        
+      }else{
+  this.toastr.info("No se ha modificado ningun dato.","Guardia",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
+  this.router.navigate(["../pagina/historial"]);
+
       }
    
     }

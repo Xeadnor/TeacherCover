@@ -169,7 +169,7 @@ export class CalendarioComponent {
           this.router.onSameUrlNavigation = 'reload';
           this.router.navigate(['./'],{relativeTo: this.route})
           this.tipoGuardia = this.mostrarAlerta(siguienteHora.getHours());
-    
+          
            if(this.tipoGuardia == "guardia"){
 
              this.toastr.info("En esta hora tiene una guardia, compruebe sus datos","Hora de guardia",{timeOut:10000,closeButton:true,positionClass:"toast-top-right"})

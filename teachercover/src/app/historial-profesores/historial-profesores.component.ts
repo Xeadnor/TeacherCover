@@ -110,7 +110,6 @@ export class HistorialProfesoresComponent implements OnInit {
   }
 
   eliminarGuardias() {
-    console.log(this.profesorEliminar.getIdProfesor());
     (window as any).bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDeleteGuardias')).hide()
     this.profesorService.deleteGuardias(this.profesorEliminar);
     this.toastr.success("Se han eliminado todas las guardias de : " + this.profesorEliminar.getName(), "Guardias borradas", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })

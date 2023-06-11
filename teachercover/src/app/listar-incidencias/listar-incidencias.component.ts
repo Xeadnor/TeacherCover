@@ -119,8 +119,6 @@ export class ListarIncidenciasComponent {
     const hg = this.searchForm.get('horaGuardia')!.value;
     const it = this.searchForm.get('incidenciaTexto')!.value;
 
-    console.log(idI, "idI incidencia")
-    console.log(idG, "idI guardia")
 
 
 
@@ -134,8 +132,6 @@ export class ListarIncidenciasComponent {
     this.horaGuardia = hg === null ? '' : hg;
     this.incidenciaTexto = it === null ? '' : it;
 
-    console.log(this.idIncidencia, "idincidencia")
-    console.log(this.idGuardia, "idGuardia")
 
 
 
@@ -173,10 +169,6 @@ export class ListarIncidenciasComponent {
       const columnHoraGuardia = row.horaGuardia;
       const columnIncidenciaTexto = row.incidenciaTexto;
 
-      console.log(columnIdIncidencia, "column idIncidencia")
-      console.log(columnIdGuardia, "column idGuardia")
-      console.log(this.idIncidencia, "idIncidencia")
-      console.log(row.idGuardia, "row")
 
 
       // verify fetching data by our searching values
@@ -190,8 +182,6 @@ export class ListarIncidenciasComponent {
       const customFilterHG = columnHoraGuardia.toString().toLowerCase().includes(horaGuardia);
       const customFilterIT = columnIncidenciaTexto.toString().toLowerCase().includes(incidenciaTexto);
 
-      console.log(customFilterIC, "custom filter idIncidencia")
-      console.log(customFilterIDG, "custom filter idGuardia")
 
 
 
@@ -206,7 +196,6 @@ export class ListarIncidenciasComponent {
       matchFilter.push(customFilterHG);
       matchFilter.push(customFilterIT);
 
-      console.log(matchFilter, "match filter array ")
 
       // return true if all values in array is true
       // else return false
@@ -223,7 +212,6 @@ export class ListarIncidenciasComponent {
 
   public mostrarModal(texto: string){
     this.incidenciaTexto = texto;
-    console.log(document.getElementsByClassName('modal-body')[0])
     var myModal: any = new (window as any).bootstrap.Modal(document.getElementById('miModal'));
     myModal.show()
   }

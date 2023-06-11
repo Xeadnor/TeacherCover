@@ -182,7 +182,6 @@ export class ProfesorService {
               let guardia = new Guardia();
               guardia.setIdField(doc.id);
               guardia.setProfesorCubierto(profesor.getName())
-              console.log(guardia);
           
             this.guardiaService.updateProfesorCubiertoN(guardia)
           });

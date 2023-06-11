@@ -172,7 +172,6 @@ export class GuardiaService {
     };
     setDoc(dbRef, data, { merge: true })
       .then(docRef => {
-        console.log("peeee");
         const profesorRef = doc(db,"profesores",profesor["idField"]);
 
         const data = {

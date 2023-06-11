@@ -235,7 +235,6 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy {
     let guardia: Guardia;
     guardia = this.guardiaHacer;
     let num = this.profesor["horasGuardias"] + 1;
-    console.log(num);
     this.guardiaService.hacerGuardia(guardia, this.profesor, this.tipoGuardia, num)
     this.toastr.success("Se le ha asignado la guardia con número : " + guardia.getIdGuardia() + " ", "Guardia seleccionada", { timeOut: 3000, closeButton: true, positionClass: "toast-top-right" })
     //window.location.reload();
