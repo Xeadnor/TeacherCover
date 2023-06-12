@@ -501,7 +501,8 @@ export class EditarGuardiaComponent implements OnInit {
       this.router.navigate(["../pagina/historial"]);
   this.toastr.success("Se ha actualizado con exito la guardia : " + this.guardiaEditandose.getIdGuardia(),"Guardia editada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
 }else if(this.rol == "Admin" && this.guardiaEditandose.estado == "Finalizada"){
-
+  this.router.navigate(["../pagina/historial"]);
+  this.toastr.info("No se ha modificado ningun dato.","Guardia editada",{timeOut:3000,closeButton:true,positionClass:"toast-top-right"})
     }else{
       if(this.createOnCallForm.controls["incidencia"].value != "Sin incidencia"){
         let dateSelectedMilisec = this.createOnCallForm.get("guardiaFecha")?.value;
