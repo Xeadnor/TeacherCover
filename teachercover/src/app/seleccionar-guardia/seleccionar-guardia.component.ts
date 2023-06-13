@@ -40,7 +40,7 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy {
         this.espera()
       }
       var day = new Date();
-      this.diaA = day.getFullYear() + "/" + this.getMonthofToday(day.getMonth()) + "/" + day.getDate();
+      this.diaA = day.getDate() + "/" + this.getMonthofToday(day.getMonth()) + "/" + day.getFullYear();
       let thisHour = day.getHours();
       if (day.getHours() == 8 && day.getMinutes() < 25) {
         thisHour = 7;
