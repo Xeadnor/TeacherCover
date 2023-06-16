@@ -1,6 +1,6 @@
 
 <div class="px-3 pt-2 row">
-  Selección de guardia para el dia {{diaA }} en  segunda hora siendo de {{tipoGuardia == "guardia"? "guardia normal" : "apoyo"}}
+  Selección de guardia para el día {{diaA }} siendo {{tipoGuardia == "guardia"? "profesor de guardia" : "profesor de apoyo"}}
 </div>
     <div class="row p-1" *ngIf="!noHayGuardias" style="min-height: 500px;">
 
@@ -17,41 +17,41 @@
 
               </div>
               <hr class="">
-              <button class="btn btn-primary" [disabled]="comprobarGuardiaBoton(guardia)" (click)="modalSeleccionar(guardia)">Hacer guardia</button>
+              <button class="btn botonGuardia" [disabled]="comprobarGuardiaBoton(guardia)" (click)="modalSeleccionar(guardia)">Seleccionar guardia</button>
               <div class="col-12 mt-3" *ngIf="seleccionada(guardia)">Guardia seleccionada por: <span class="fw-bold">{{guardia.nombreProfesor}}</span> | Tipo : <span class="fw-bold">{{guardia.tipo}}</span></div>
 
             </div>
           </div>
         </div>
 
-        
+
       </div>
       <div class="d-flex align-items-center justify-content-center" *ngIf="noHayGuardias"  style="min-height: 500px">
         <div class="text-center">
           <div class="col-12 pe-0 justify-content-center">
             <h5 style="font-weight:400;color:rgb(241, 137, 17); font-size:45px; font-weight: bolder;">No hay guardias que realizar</h5>
           </div>
-            
+
         </div>
     </div>
 
 
 
 
-    
+
   <div class="modal fade" id="seleccionarGuardia" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
+      <div class="modal-content colorcito">
         <div class="modal-header">
           <h5 class="modal-title" id="staticBackdropLabel">Confirmación de guardia.</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        ¿Esta seguro que desea eliminar esta guardia? Sera una acción irreversible
+          Al confirmar la guardia se le asignará a su perfil
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button  class="btn btn-success" (click)="hacerGuardia()"> Hacer guardia</button>
+          <button type="button" class="btn editar" data-bs-dismiss="modal">Cancelar</button>
+          <button  class="btn eliminar" (click)="hacerGuardia()"> Realizar</button>
         </div>
       </div>
     </div>

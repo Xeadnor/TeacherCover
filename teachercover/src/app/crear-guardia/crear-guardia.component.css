@@ -1,11 +1,11 @@
-.botonLogin {
+.botonCrear {
   background-color: rgb(255, 182, 23);
   color: rgb(72, 33, 113);
   border-color: rgb(72, 33, 113);
 
 }
 
-.botonLogin:hover {
+.botonCrear:hover {
   background-color: rgb(72, 33, 113);
   color: rgb(255, 182, 23);
   border-color: rgb(255, 182, 23);

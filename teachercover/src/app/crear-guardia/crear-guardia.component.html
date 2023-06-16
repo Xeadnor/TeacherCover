@@ -11,7 +11,7 @@
                 <mat-option *ngFor="let profe of nombresProfes"  [value]="profe.id">{{profe.name}}</mat-option>
               </mat-select>
             </mat-form-field>
-            
+
             <div *ngIf="faltaNombre" class="mensajeError">
               Nombre del profesor a cubir es un campo obligatorio
              </div>
@@ -58,7 +58,7 @@
                 <mat-option *ngFor="let aula of aulasFiltradas"  [value]="aula">{{aula}}</mat-option>
               </mat-select>
             </mat-form-field>
-            
+
             <div *ngIf="faltaAula" class="mensajeError">
               Aula de guardia  es un campo obligatorio
              </div>
@@ -120,8 +120,8 @@
 
 
     <div class="text-center mt-5">
-      
-      <button class="btn botonLogin btn-lg px-4 text-center" (click)="comprobaciones()" type="submit"><div class="spinner-border spinner-border-md" *ngIf="creandoGuardia"></div> Crear guardia</button>
+
+      <button class="btn botonCrear btn-lg px-4 text-center" (click)="comprobaciones()" type="submit"><div class="spinner-border spinner-border-md" *ngIf="creandoGuardia"></div> Crear guardia</button>
     </div>
 
   </form>

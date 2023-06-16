@@ -1,3 +1,15 @@
 .navegador{
     background-color: rgb(72, 33, 113);
 }
+.colorcito{
+  background-color: #daceff;
+  border-width:2px;
+}
+
+.dropdown:hover{
+  background-color: rgb(44, 21, 70);
+}
+
+.dropdown-menu div:hover{
+  background-color: #cdbffa;
+}

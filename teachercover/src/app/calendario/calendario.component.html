@@ -33,7 +33,16 @@
 
     <!-- Meter comprobacion de tipo ngIf -->
     <div *ngIf="botonFichar" class=" col-6 col-md-8  d-flex align-items-center justify-content-center">
-      <button type="button" (click)="seleccionarGuardia()" class="btn btn-primary">Entrar al listado de guardias</button>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <p>Haga click en el botón para visualizar las guardias disponibles:</p>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <button type="button " (click)="seleccionarGuardia()" class="btn botonGuardias">Entrar al listado de guardias</button>
+        </div>
+
+      </div>
+
     </div>
   </div>
 

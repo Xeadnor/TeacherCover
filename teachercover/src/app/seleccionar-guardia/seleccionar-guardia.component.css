@@ -1,3 +1,54 @@
 .colorMorado{
     background-color: #dad0fa;
-  }
+}
+
+
+
+
+.botonGuardia {
+  background-color: rgb(255, 182, 23);
+  color: rgb(72, 33, 113);
+  border-color: rgb(72, 33, 113);
+
+}
+
+.botonGuardia:hover {
+  background-color: rgb(72, 33, 113);
+  color: rgb(255, 182, 23);
+  border-color: rgb(255, 182, 23);
+}
+
+
+.botonGuardia:disabled,
+.botonGuardia[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+
+.colorcito{
+  background-color: #daceff;
+  border-width:2px;
+}
+
+
+.editar{
+  background-color:rgb(147, 86, 204);
+  color: white;
+}
+
+.editar:hover, .editar:focus{
+  background-color:white;
+  color: rgb(147, 86, 204);
+}
+
+.eliminar{
+  background-color:rgb(235, 140, 31);
+  color: white;
+}
+
+.eliminar:hover, .eliminar:focus{
+  background-color:white;
+  color: rgb(235, 140, 31);
+}

@@ -19,3 +19,18 @@
     border: solid thin;
     border-color: grey;
   }
+
+
+
+  .botonGuardias {
+    background-color: rgb(255, 182, 23);
+    color: rgb(72, 33, 113);
+    border-color: rgb(72, 33, 113);
+
+  }
+
+  .botonGuardias:hover {
+    background-color: rgb(72, 33, 113);
+    color: rgb(255, 182, 23);
+    border-color: rgb(255, 182, 23);
+  }

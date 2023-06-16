@@ -20,6 +20,7 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy {
   profesor: Profesor
   elegido: boolean;
   hora: string;
+  horaTexto: string;
   datos: Guardia[] = [];
   diaA: String;
   soyApoyo: boolean;
@@ -157,10 +158,11 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy {
         siguienteHora.setMinutes(25)
         siguienteHora.setSeconds(0)
         siguienteHora.setMilliseconds(0)
+
         break;
 
       case "14":
-        
+
       if((thisMinutes >= 20 && thisHour == 13) || (thisHour == 14 && thisMinutes <5)){
         this.soyApoyo = true;
       }
@@ -168,10 +170,11 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy {
       siguienteHora.setMinutes(20)
       siguienteHora.setSeconds(0)
       siguienteHora.setMilliseconds(0)
+
         break;
 
       default:
-      
+
         break;
     }
     if(this.soyApoyo == false){
@@ -180,7 +183,7 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy {
         this.router.onSameUrlNavigation = 'reload';
         this.router.navigate(['./'],{relativeTo: this.route})
         this.toastr.info("Como profesor de apoyo ya tiene permitido elegir una guardia","Profesores de apoyo",{timeOut:5000,closeButton:true,positionClass:"toast-top-right"})
-        
+
       }, siguienteHora.getTime() - dia.getTime());
     }
   }
@@ -241,16 +244,13 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy {
 
 
 
+
   seleccionada(guardia: Guardia) {
     if (guardia.nombreProfesor == "Sin asignar") {
       return false;
-
     } else {
       return true;
-
     }
-
-
   }
 
 
@@ -266,7 +266,11 @@ export class SeleccionarGuardiaComponent implements OnInit, OnDestroy {
     } else {
       devolverMes = numeroMes;
     }
-
     return devolverMes;
   }
+
+
+
+
 }
+
